@@ -1,5 +1,0 @@
-Talk though together going thought the functional specification, Brandon haven't responded to any emails as of yet and wasn't at the meeting. 
-Decided on the next meeting for Thursday at 14:00. 
-Tasks to continue to learn UML and think of possible extra features. 
-We also decided to use draw.io for all the UML diagrams as it was the software that most people have used before. 
-We then talked about the issue with lectures microphones.
