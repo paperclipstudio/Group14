@@ -1,21 +1,25 @@
+# .github/workflows/convert-to-pdf.yml
+
+name: Docs to PDF
+# This workflow is triggered on pushes to the repository.
 on:
   push:
-    paths:
-      - 'Minutes/**'
-
-name: CreatePDFs
+    branches:
+      - master
 
 jobs:
-  makepdfs:
+  converttopdf:
+    name: Build PDF
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: mkrakowitzer/actions-makepdfs@master
-      if: github.ref == 'refs/heads/master'
-      with:
-        markdown_dir: Minutes
-        output_dir: Minutes/pdfs
-    - uses: actions/upload-artifact@v1
-      with:
-        name: platform-architecture-docs
-        path: tmp
+      - uses: actions/checkout@v2
+      - uses: baileyjm02/markdown-to-pdf@v1
+        with:
+          input_dir: Minutes
+          output_dir: Minutes/pdfs
+          # Default is true, can set to false to only get PDF files
+          build_html: false
+      - uses: actions/upload-artifact@v1
+        with:
+          name: docs
+          path: pdfs
