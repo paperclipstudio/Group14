@@ -3,7 +3,7 @@
 name: Docs to PDF
 # This workflow is triggered on pushes to the repository.
 on:
-  push:
+  [push]:
     branches:
       - master
 
@@ -21,5 +21,5 @@ jobs:
           build_html: false
       - uses: actions/upload-artifact@v1
         with:
-          name: docs
-          path: pdfs
+          name: Minutes
+          path: Minutes/pdfs
