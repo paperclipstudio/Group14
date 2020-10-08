@@ -17,5 +17,5 @@ jobs:
         output_dir: tmp
     - uses: actions/upload-artifact@v1
       with:
-        name: platform-architecture-docs
+        name: WeeklyMinutes
         path: tmp
