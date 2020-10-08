@@ -18,7 +18,3 @@ jobs:
           output_dir: Minutes/pdfs
           # Default is true, can set to false to only get PDF files
           build_html: false
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Minutes
-          path: Minutes/pdfs
