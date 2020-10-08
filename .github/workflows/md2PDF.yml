@@ -9,8 +9,8 @@ jobs:
   makepdfs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@2.3.3
-    - uses: mkrakowitzer/actions-makepdfs@1.2
+    - uses: actions/checkout@v2.3.3
+    - uses: mkrakowitzer/actions-makepdfs@v1.2
       if: github.ref == 'refs/heads/master'
       with:
         markdown_dir: Minutes
