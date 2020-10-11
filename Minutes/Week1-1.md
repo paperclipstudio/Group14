@@ -3,7 +3,7 @@
 ## Role call
 
 * Atif
-* ~Brandon~
+* ~~Brandon~~
 * Daniel
 * David
 * George

@@ -29,8 +29,5 @@
 
 ## Time of next meeting
 * 20:00 Sunday
-## Reason for unequal Contribution (Delete if equal)
-### Why they are low
-Brandon is still not replying.
-### How to catch up
-Join in with meetings.
+
+
