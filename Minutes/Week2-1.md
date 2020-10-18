@@ -3,8 +3,8 @@
 ## Role call
 
 * Atif
-* ~Brandon~
-* ~Daniel~ (Covid?)
+* ~~Brandon~~
+* ~~Daniel~~ (Covid?)
 * David
 * George
 * James
