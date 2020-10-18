@@ -1,4 +1,4 @@
-# Minutes for Week #Num#
+# Minutes for Week 2
 20:00 18/10/2020
 ## Role call
 
