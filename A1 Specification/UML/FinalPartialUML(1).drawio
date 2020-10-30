@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-30T10:19:34.186Z" agent="5.0 (Windows)" etag="JqJ3vBvTYbIxaxzhA1f4" version="13.8.6" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-30T10:27:19.461Z" agent="5.0 (Windows)" etag="P8HVZNPdvipI4gFItGgR" version="13.8.6" type="github">
   <diagram id="hc9EMMiAokFVV4D4Sd0b" name="Page-1">
     <mxGraphModel dx="868" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -44,49 +44,49 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-2" value="GameLogic" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="1" vertex="1">
-          <mxGeometry x="1830" y="60" width="350" height="372" as="geometry" />
+          <mxGeometry x="1830" y="60" width="580" height="372" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-8" value="- playerTurn: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="26" width="350" height="26" as="geometry" />
+          <mxGeometry y="26" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-304" value="- gamePhase: Phase " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="52" width="350" height="26" as="geometry" />
+          <mxGeometry y="52" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-3;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="78" width="350" height="8" as="geometry" />
+          <mxGeometry y="78" width="580" height="8" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-4" value="+ GameLogic(gameFile:String)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="86" width="350" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="r6h-WWT1z0xAQhpsZW0J-9" value="+ getLocationsToSlide():Coor[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="112" width="350" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="r6h-WWT1z0xAQhpsZW0J-11" value="+ getPossibleMoveDir():Coor[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="138" width="350" height="26" as="geometry" />
+          <mxGeometry y="86" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-12" value="+ getGamePhase(): Phase" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="164" width="350" height="26" as="geometry" />
+          <mxGeometry y="112" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-313" value="+ getSlideLocations(): Coor[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="190" width="350" height="26" as="geometry" />
+          <mxGeometry y="138" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-312" value="+ getMoveLocations(): Coor[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="216" width="350" height="26" as="geometry" />
+          <mxGeometry y="164" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-315" value="+ userMoveLocation(Coor): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="242" width="350" height="26" as="geometry" />
+          <mxGeometry y="190" width="580" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="uKZlA5nsA1Sk63bsIkFM-3" value="+ userSlideLocation(location:Coor):void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" vertex="1" parent="r6h-WWT1z0xAQhpsZW0J-2">
+          <mxGeometry y="216" width="580" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="uKZlA5nsA1Sk63bsIkFM-4" value="+ userActionCardChoice(location:Coor, card:ActionCard):void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" vertex="1" parent="r6h-WWT1z0xAQhpsZW0J-2">
+          <mxGeometry y="242" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-314" value="+ getActionCardLocation(): Coor[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="268" width="350" height="26" as="geometry" />
+          <mxGeometry y="268" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-10" value="+ getPlayableActionTiles(): ActionTile[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="294" width="350" height="26" as="geometry" />
+          <mxGeometry y="294" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-5" value="- incrementTurns(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="320" width="350" height="26" as="geometry" />
+          <mxGeometry y="320" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-13" value="- endGame(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;" parent="r6h-WWT1z0xAQhpsZW0J-2" vertex="1">
-          <mxGeometry y="346" width="350" height="26" as="geometry" />
+          <mxGeometry y="346" width="580" height="26" as="geometry" />
         </mxCell>
         <mxCell id="r6h-WWT1z0xAQhpsZW0J-320" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamondThin;startFill=0;startSize=20;endArrow=none;endFill=0;endSize=20;fontSize=20;spacing=0;spacingBottom=0;spacingTop=-3;verticalAlign=middle;" parent="1" source="r6h-WWT1z0xAQhpsZW0J-14" target="r6h-WWT1z0xAQhpsZW0J-26" edge="1">
           <mxGeometry relative="1" as="geometry">
