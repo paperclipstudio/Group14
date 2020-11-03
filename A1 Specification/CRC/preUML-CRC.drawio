@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-10-21T10:37:44.045Z" agent="5.0 (Windows)" etag="y5nvV6YVBEgswMiOhzXR" version="13.8.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-19T15:52:06.345Z" agent="5.0 (Windows)" etag="uiERdVZ1BQhDH6PAjdUv" version="13.8.0" type="github">
   <diagram id="jdQ8MMCzgzIyr_RG6TEl" name="Page-1">
-    <mxGraphModel dx="1422" dy="801" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="868" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -31,7 +31,7 @@
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-9" value="Tick (increate time unit)" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-8" vertex="1">
           <mxGeometry width="296" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-10" value="Silk Bag" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-8" vertex="1">
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-10" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-8" vertex="1">
           <mxGeometry x="296" width="124" height="30" as="geometry" />
         </mxCell>
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-11" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-1" vertex="1">
@@ -96,6 +96,63 @@
         </mxCell>
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-31" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-29" vertex="1">
           <mxGeometry x="296" width="124" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-89" value="Player" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="550" y="200" width="480" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-90" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
+          <mxGeometry y="30" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-91" value="Responsibilities" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-90" vertex="1">
+          <mxGeometry width="326" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-92" value="Collaborations" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-90" vertex="1">
+          <mxGeometry x="326" width="154" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-93" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
+          <mxGeometry y="60" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-94" value="Play a floor tile" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-93" vertex="1">
+          <mxGeometry width="326" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-95" value="Silk bag" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-93" vertex="1">
+          <mxGeometry x="326" width="154" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-96" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
+          <mxGeometry y="90" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-97" value="&lt;div&gt;Play a action tile&lt;br&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-96" vertex="1">
+          <mxGeometry width="326" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-98" value="Tile" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-96" vertex="1">
+          <mxGeometry x="326" width="154" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-102" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
+          <mxGeometry y="120" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-103" value="Move player piece" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-102" vertex="1">
+          <mxGeometry width="326" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-104" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-102" vertex="1">
+          <mxGeometry x="326" width="154" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-108" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
+          <mxGeometry y="150" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-109" value="Draw from the silk bag" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-108" vertex="1">
+          <mxGeometry width="326" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-110" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-108" vertex="1">
+          <mxGeometry x="326" width="154" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-111" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
+          <mxGeometry y="180" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-112" value="Slide floor tile" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-111" vertex="1">
+          <mxGeometry width="326" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tLHa-nuJV5bWE2vfmLjr-113" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-111" vertex="1">
+          <mxGeometry x="326" width="154" height="30" as="geometry" />
         </mxCell>
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-32" value="GameData" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" parent="1" vertex="1">
           <mxGeometry x="550" y="40" width="420" height="120" as="geometry" />
@@ -176,7 +233,7 @@
           <mxGeometry x="240" width="180" height="20" as="geometry" />
         </mxCell>
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-120" value="GameLogic" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" parent="1" vertex="1">
-          <mxGeometry x="570" y="520" width="420" height="200" as="geometry" />
+          <mxGeometry x="560" y="440" width="420" height="200" as="geometry" />
         </mxCell>
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-121" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-120" vertex="1">
           <mxGeometry y="30" width="420" height="30" as="geometry" />
@@ -222,69 +279,6 @@
         </mxCell>
         <mxCell id="tLHa-nuJV5bWE2vfmLjr-135" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-133" vertex="1">
           <mxGeometry x="304" width="116" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-89" value="Player" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;" parent="1" vertex="1">
-          <mxGeometry x="550" y="190" width="480" height="280" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-90" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
-          <mxGeometry y="30" width="480" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-91" value="Responsibilities" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-90" vertex="1">
-          <mxGeometry width="326" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-92" value="Collaborations" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-90" vertex="1">
-          <mxGeometry x="326" width="154" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-93" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
-          <mxGeometry y="60" width="480" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-94" value="Play a floor tile" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-93" vertex="1">
-          <mxGeometry width="326" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-95" value="Silk bag" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-93" vertex="1">
-          <mxGeometry x="326" width="154" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-96" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
-          <mxGeometry y="90" width="480" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-97" value="&lt;div&gt;Play a action tile&lt;br&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-96" vertex="1">
-          <mxGeometry width="326" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-98" value="Tile" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-96" vertex="1">
-          <mxGeometry x="326" width="154" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-102" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
-          <mxGeometry y="120" width="480" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-103" value="Move player piece" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-102" vertex="1">
-          <mxGeometry width="326" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-104" value="GameLogic" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-102" vertex="1">
-          <mxGeometry x="326" width="154" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-108" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
-          <mxGeometry y="150" width="480" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-109" value="Draw from the silk bag" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-108" vertex="1">
-          <mxGeometry width="326" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-110" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-108" vertex="1">
-          <mxGeometry x="326" width="154" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-111" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;align=left;" parent="tLHa-nuJV5bWE2vfmLjr-89" vertex="1">
-          <mxGeometry y="180" width="480" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-112" value="Slide floor tile" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-111" vertex="1">
-          <mxGeometry width="326" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tLHa-nuJV5bWE2vfmLjr-113" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;overflow=hidden;" parent="tLHa-nuJV5bWE2vfmLjr-111" vertex="1">
-          <mxGeometry x="326" width="154" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="2wGXx4MRbRgY41pzPLr4-2" value="History of the players last two moves" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="610" y="400" width="210" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="2wGXx4MRbRgY41pzPLr4-3" value="Inventory of the player" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="650" y="430" width="130" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
