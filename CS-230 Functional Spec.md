@@ -3,12 +3,14 @@
 ## Overview
 
 * 2-4 Player
-* Unique Theming
+* Unique Theming (Name and theme)
 * Advance Features that are not possible with physical board games
 * Many boards available to play
 * Players can save game state at any time
 * Message of the day pulled from http://cswebcat.swan.ac.uk
+* Play end when a player lands on the goal tile.
 * Extra Features
+* Save and load games.
 
 ## Overall idea and components
 
@@ -16,17 +18,18 @@
 
 * Tiles are all the same size
 
-* Two tile variations
+* Two main tile variations
+* Action tiles can be renamed
 
   * Action Tiles
     * Ice tiles
       * Choose a square on the board
-      * The 3x3 area around these tiles are now fixed tiles (frozen)
-      *  Lasts until at the start of your next turn
+      * The 3x3 area around these tiles are now fixed tiles including center(frozen)
+      * Lasts until at the start of your next turn
     * Fire tiles
       * Choose a square on the board
         * Can't be placed in such a way that a player piece is set on fire.
-      * The 3x3 area around these tiles are now on fire
+      * The 3x3 area around these tiles are now on fire including center
       * if on file they cannot be stepped on
       * Lasts until the end of your next turn
     * Double action tiles
@@ -77,6 +80,8 @@
   * known four starting positions
 
   * Each board is stored in its own simple ASCII file.
+  * Player pieces that are pushed off are placed on the oppesite side of the board
+  * tiles slid off are put in the silk bag
 
   * ```
     7,3  <- width  height
@@ -118,6 +123,7 @@
 
   * shows best players on each game board.
   * Don't show player that haven't played that board.
+  * lists in order of wins.
 
 ## Game play
 
@@ -144,6 +150,7 @@
    2. Up down left or right
    3. only if not on fire
    4. only if has connected path
+   5. only if there isn't a player there.
 4. End turn
    * The play move to the player to the left(?)
 
