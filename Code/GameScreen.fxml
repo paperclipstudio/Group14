@@ -13,8 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8.0.271" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -39,7 +38,7 @@
    <bottom>
       <ScrollPane fitToWidth="true" pannable="true" prefHeight="184.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
-            <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #555;">
+            <HBox id="cards" fx:id="cards" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #555;">
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
