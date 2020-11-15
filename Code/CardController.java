@@ -38,6 +38,7 @@ public class CardController implements Initializable {
 		image.setImage(newCard);
 	}
 
+
 	/***
 	 * adds a drop shadow to card
 	 * called when mouse is over card.

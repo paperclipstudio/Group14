@@ -13,45 +13,36 @@
 <?import javafx.scene.layout.Pane?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameScreenController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#onQuitButton" text="Quit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" text="Save"/>
+               <MenuItem mnemonicParsing="false" text="Load"/>
+               <MenuItem mnemonicParsing="false" onAction="#onQuitButton" text="Quit"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" text="About"/>
+           </Menu>
+       </MenuBar>
    </top>
    <center>
       <Canvas height="400.0" width="600.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <ScrollPane fitToWidth="true" pannable="true" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
-         <content>
-            <HBox id="cards" fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-background-color: #555;">
+       <ScrollPane fitToWidth="true" pannable="true" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+           <cursor>
+               <Cursor fx:constant="H_RESIZE"/>
+           </cursor>
+           <HBox id="cards" fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                 spacing="20.0" style="-fx-background-color: #555;">
                <opaqueInsets>
-                  <Insets top="25.0" />
+                   <Insets top="25.0"/>
                </opaqueInsets>
                <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
                </padding>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </HBox>
-         </content>
-         <cursor>
-            <Cursor fx:constant="H_RESIZE" />
-         </cursor>
-      </ScrollPane>
+               <Pane prefHeight="200.0" prefWidth="200.0"/>
+           </HBox>
+       </ScrollPane>
    </bottom>
    <left>
       <Button id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" text="AddCard" BorderPane.alignment="CENTER" />
