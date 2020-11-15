@@ -31,7 +31,7 @@ public class GameScreenController implements Initializable {
 		Node newCard = null;
 
 		try {
-			newCard = FXMLLoader.load(getClass().getResource("Card.fxml"));
+			newCard = FXMLLoader.load(getClass().getResource("FrontEnd\\Card.fxml"));
 		} catch (IOException e) {
 			System.out.println("Fail to load Card class due to:" + e.getCause());
 		}
