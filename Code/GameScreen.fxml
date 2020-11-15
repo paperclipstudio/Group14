@@ -25,7 +25,7 @@
        </MenuBar>
    </top>
    <center>
-      <Canvas height="400.0" width="600.0" BorderPane.alignment="CENTER" />
+      <Canvas width="600.0" height="400.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
        <ScrollPane fitToWidth="true" pannable="true" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
