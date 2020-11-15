@@ -3,17 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Text?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.Pane?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameScreenController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -21,7 +19,7 @@
             <items>
               <MenuItem mnemonicParsing="false" text="Save" />
                   <MenuItem mnemonicParsing="false" text="Load" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem mnemonicParsing="false" onAction="#onQuitButton" text="Quit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -36,47 +34,18 @@
       <Canvas height="400.0" width="600.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <ScrollPane fitToWidth="true" pannable="true" prefHeight="184.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" pannable="true" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
-            <HBox id="cards" fx:id="cards" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #555;">
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#456c90" height="120.0" stroke="BLACK" strokeDashOffset="10.0" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="4.0" width="120.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some tile." />
-                     </children>
-                  </StackPane>
-                  <StackPane layoutX="35.0" layoutY="35.0" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#456c90" height="120.0" stroke="BLACK" strokeDashOffset="10.0" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="4.0" width="120.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some tile." />
-                     </children>
-                  </StackPane>
-                  <StackPane layoutX="35.0" layoutY="35.0" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#456c90" height="120.0" stroke="BLACK" strokeDashOffset="10.0" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="4.0" width="120.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some tile." />
-                     </children>
-                  </StackPane>
-                  <StackPane layoutX="35.0" layoutY="35.0" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#456c90" height="120.0" stroke="BLACK" strokeDashOffset="10.0" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="4.0" width="120.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some tile." />
-                     </children>
-                  </StackPane>
-                  <StackPane layoutX="35.0" layoutY="35.0" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#456c90" height="120.0" stroke="BLACK" strokeDashOffset="10.0" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="4.0" width="120.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some tile." />
-                     </children>
-                  </StackPane>
-               </children>
+            <HBox id="cards" fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-background-color: #555;">
                <opaqueInsets>
                   <Insets top="25.0" />
                </opaqueInsets>
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </padding>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+               </children>
             </HBox>
          </content>
          <cursor>
@@ -84,4 +53,7 @@
          </cursor>
       </ScrollPane>
    </bottom>
+   <left>
+      <Button id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" text="AddCard" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>
