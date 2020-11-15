@@ -4,6 +4,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/***
+ * Main class for this app, starts the window and opens up the 'Start' window
+ * @author Christian Sanger
+ *
+ */
+
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -17,6 +23,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /***
+     * Only starts javaFX
+     * @param args doesn't use any arguments right now.
+     */
     public static void main(String[] args) {
         launch(args);
     }
