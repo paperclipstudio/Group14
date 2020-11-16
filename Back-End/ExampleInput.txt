@@ -1,6 +1,5 @@
 8 10
 9
-4
 Corner 0 0 0
 Corner 7 0 90
 Corner 7 9 180
@@ -17,7 +16,7 @@ Goal 4 5 0
 5 Ice 
 5 Backtrack 
 5 DoubleMove 
-0 0 Player
-7 0 Player
-0 9 Player
-7 9 Player
+0 0 Player1
+7 0 Player2
+0 9 Player3
+7 9 Player4
