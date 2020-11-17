@@ -1,3 +1,4 @@
+import sun.security.ssl.CookieExtension;
 
 public class Gameboard {
 
@@ -7,10 +8,10 @@ public class Gameboard {
     private Coordinate[] playerLocations;
     private Coordinate[] slideLocations;
     private ActionTileLocations[] actionTiles;
-    private Tile[][] tiles;
+    private Tile[][] boardTiles;
 
 
-    public Gameboard (int WIDTH, int HEIGHT) {
+    public Gameboard (int width, int height) {
         width = this.width;
         height = this.height;
     }
@@ -24,11 +25,22 @@ public class Gameboard {
     }
 
     public void playFloorTile (Coordinate slideLocation, FloorTile tileType, Rotation rotation){
-        Tile topLeft = tiles[0][height-1];
-        System.out.println(topLeft.getType());
+
+
+
+        //Tile topLeft = boardTiles[0][height-1];
+        //System.out.println(topLeft.getType());
+
     }
 
-    public void placeFixed(FloorTile tile, Coordinate location) {
-
+    public void placeFixedTile (FloorTile tile, int x, int y, int rotation) {
+        for (int i = 0; i < boardTiles.length; i++){
+            for (int j = 0; j < boardTiles[i].length; j++){
+                if (i == x && j == y){
+                    boardTiles[i][j] = tile;
+                    boardTiles[i][j].setRotation(rotation);
+                }
+            }
+        }
     }
 }
