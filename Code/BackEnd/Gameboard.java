@@ -6,8 +6,9 @@ public class Gameboard {
     private static int height;
     private static Coordinate goalCoor;
     private Coordinate[] playerLocations;
-    private slideLocations[] slideLocations;
+    private Coordinate[] slideLocations;
     private ActionTileLocations[] actionTiles;
+    private Tile[][] tiles;
 
 
     public Gameboard (int WIDTH, int HEIGHT) {
@@ -24,8 +25,11 @@ public class Gameboard {
     }
 
     public void playFloorTile (Coordinate slideLocation, FloorTile tileType, Rotation rotation){
+        Tile topLeft = tiles[0][height-1];
+        System.out.println(topLeft.getType());
+    }
 
-
+    public void placeFixed(FloorTile tile, Coordinate location) {
 
     }
 }
