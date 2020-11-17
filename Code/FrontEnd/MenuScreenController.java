@@ -19,11 +19,10 @@ public class MenuScreenController implements Initializable {
     @FXML
     private Button newGameButton;
 
-    WindowLoader wl;
+    private WindowLoader wl;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        wl = new WindowLoader(newGameButton);
     }
 
     /**
@@ -34,18 +33,22 @@ public class MenuScreenController implements Initializable {
     }
 
     public void onNewGame() {
+        wl = new WindowLoader(newGameButton);
         wl.load("GameSetup");
     }
 
     public void onLoadGame() {
+        wl = new WindowLoader(newGameButton);
         wl.load("LoadGame");
     }
 
     public void onSettings() {
+        wl = new WindowLoader(newGameButton);
         wl.load("Settings");
     }
 
     public void onPlayerProfiles() {
+        wl = new WindowLoader(newGameButton);
         wl.load("Profiles");
     }
 }
