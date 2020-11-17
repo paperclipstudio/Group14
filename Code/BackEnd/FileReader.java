@@ -1,5 +1,3 @@
-package BackEnd;
-
 /**
  * This class is a file reader class which will take in a given level file format text file, verify it
  * and create the gameboard, along with the fixed tiles in their correct locations, the players in their correct
@@ -14,27 +12,26 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class FileReader {
-/**
- The numOfFixedTiles attribute is based on the second line of the given level file format, which is used to
- accurately note how many fixed tiles will be placed on the gameboard.
-
- The lineCounter and playerCounter are two counters used in the iteration of each line of the file.
-
- The number of tile types and max number of players are both fixed, and are set to be final.
- */
+    /**
+     The numOfFixedTiles attribute is based on the second line of the given level file format, which is used to
+     accurately note how many fixed tiles will be placed on the gameboard.
+     The lineCounter and playerCounter are two counters used in the iteration of each line of the file.
+     The number of tile types and max number of players are both fixed, and are set to be final.
+     */
     private static int numOfFixedTiles;
     private static int lineCounter = 0;
     private static int playerCounter = 0;
     private static final int NUM_OF_TILE_TYPES = 7;
     private static final int MAX_NUM_OF_PLAYERS = 4;
-/**
- * This method takes in the given level format file, verifies it using the verifyFile method,
- * before checking each line of the file, creating the gameboard with the correct width and height,
- * with the fixed tiles and players in the correct locations, and populating the silk bag with the correct
- * amount and type of each floor or action tile.
- *
- * @param filename The name of the level file format text file.
- */
+    private static Gameboard gameboard;
+    /**
+     * This method takes in the given level format file, verifies it using the verifyFile method,
+     * before checking each line of the file, creating the gameboard with the correct width and height,
+     * with the fixed tiles and players in the correct locations, and populating the silk bag with the correct
+     * amount and type of each floor or action tile.
+     *
+     * @param filename The name of the level file format text file.
+     */
     public static void gameSetup (String filename) {
         Scanner in = verifyFile(filename);
         while (in.hasNextLine()) {
@@ -43,12 +40,14 @@ public class FileReader {
             lineCounter++;
             switch (lineArray[0]) {
                 case "Corner":
-                    BoardCornerTile boardCorner = constructBoardCornerTile(Integer.parseInt(lineArray[1]),
-                            Integer.parseInt(lineArray[2]), Integer.parseInt(lineArray[3]));
+                    FloorTile boardCornerTile = new FloorTile("Corner");
+                    gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]),Integer.parseInt(lineArray[2]),
+                            Integer.parseInt(lineArray[3]));
                     break;
                 case "Straight":
-                    BoardStraightTile boardStraight = constructBoardStraightTile(Integer.parseInt(lineArray[1]),
-                            Integer.parseInt(lineArray[2]), Integer.parseInt(lineArray[3]));
+                    FloorTile boardStraightTile = new FloorTile("Straight");
+                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]),
+                            Integer.parseInt(lineArray[3]));
                     break;
                 case "T-Shape":
                     BoardTShapeTile boardTShape = constructBoardTShapeTile(Integer.parseInt(lineArray[1]),
@@ -63,7 +62,7 @@ public class FileReader {
                 case 1:
                     int width = Integer.parseInt(lineArray[0]);
                     int height = Integer.parseInt(lineArray[1]);
-                    Gameboard gameboard = constructGameboard();
+                    gameboard = new Gameboard(width, height);
                     break;
                 case 2:
                     numOfFixedTiles = Integer.parseInt(lineArray[0]);
@@ -113,11 +112,11 @@ public class FileReader {
             }
         }
     }
-/**
- * This method takes in the given level format file, and checks to see that the file exists.
- * @param filename The name of the level file format text file.
- * @return in The scanner that iterates through the file.
- */
+    /**
+     * This method takes in the given level format file, and checks to see that the file exists.
+     * @param filename The name of the level file format text file.
+     * @return in The scanner that iterates through the file.
+     */
     public static Scanner verifyFile(String filename) {
         try {
             File input = new File(filename);
@@ -134,11 +133,11 @@ public class FileReader {
     private Gameboard constructGameboard() {
 
     }
-// This creates the tile for the bag.
+    // This creates the tile for the bag.
     private CornerTile constructCornerTile() {
 
     }
-// This creates the tile for the gameboard, with its relevant location and rotation
+    // This creates the tile for the gameboard, with its relevant location and rotation
     private BoardCornerTile constructBoardCornerTile(int x, int y, int rotation) {
 
     }
