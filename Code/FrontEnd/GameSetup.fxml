@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.SettingsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameSetupController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -41,10 +41,10 @@
                   </RadialGradient>
                </fill>
             </Text>
-            <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Game board" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" text="Number of Players" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" text="Number of Players" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
