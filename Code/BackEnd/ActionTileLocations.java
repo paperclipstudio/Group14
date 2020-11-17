@@ -1,3 +1,5 @@
+package BackEnd;
+
 public class ActionTileLocations {
 
     private ActionTile tileType;
