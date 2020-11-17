@@ -1,4 +1,3 @@
-package BackEnd;
 
 public class Board {
 	private int width;

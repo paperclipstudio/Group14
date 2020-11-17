@@ -40,23 +40,20 @@ public class FileReader {
             lineCounter++;
             switch (lineArray[0]) {
                 case "Corner":
-                    FloorTile boardCornerTile = new FloorTile("Corner");
-                    gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]),Integer.parseInt(lineArray[2]),
-                            Integer.parseInt(lineArray[3]));
+                    FloorTile boardCornerTile = new FloorTile("Corner", Integer.parseInt(lineArray[3]));
+                    gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]),Integer.parseInt(lineArray[2]));
                     break;
                 case "Straight":
-                    FloorTile boardStraightTile = new FloorTile("Straight");
-                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]),
-                            Integer.parseInt(lineArray[3]));
+                    FloorTile boardStraightTile = new FloorTile("Straight", Integer.parseInt(lineArray[3]));
+                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "T-Shape":
-                    BoardTShapeTile boardTShape = constructBoardTShapeTile(Integer.parseInt(lineArray[1]),
-                            Integer.parseInt(lineArray[2]), Integer.parseInt(lineArray[3]));
+                    FloorTile boardTShapeTile = new FloorTile("T-Shape", Integer.parseInt(lineArray[3]));
+                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "Goal":
-                    BoardGoalTile goal = constructGoalTile(Integer.parseInt(lineArray[1]),
-                            Integer.parseInt(lineArray[2]), Integer.parseInt(lineArray[3]));
-                    break;
+                    FloorTile goalTile = new FloorTile("Goal", Integer.parseInt(lineArray[3]));
+                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
             }
             switch (lineCounter) {
                 case 1:
@@ -70,19 +67,19 @@ public class FileReader {
                 case (numOfFixedTiles + playerCounter):
                     if (lineArray[1].equals("Corner")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            CornerTile cornerTile = constructCornerTile();
+                            FloorTile cornerTile = new FloorTile("Corner");
                         }
                     } else if (lineArray[1].equals("Straight")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            StraightTile straightTile = constructStraightTile();
+                            FloorTile straightTile = new FloorTile("Straight");
                         }
                     } else if (lineArray[1].equals("T-Shape")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            TShapeTile tShapeTile = constructTShapeTile();
+                            FloorTile tShapeTile = new FloorTile("T-Shape");
                         }
                     } else if (lineArray[1].equals("Fire")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            TShapeTile tShapeTile = constructTShapeTile();
+                            FloorTile cornerTile = new FloorTile("Corner");
                         }
                     } else if (lineArray[1].equals("Ice")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
