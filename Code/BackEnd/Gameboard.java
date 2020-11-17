@@ -12,6 +12,17 @@ public class Gameboard {
     public Gameboard (int width, int height) {
         width = this.width;
         height = this.height;
+        Coordinate locationOne = new Coordinate(0, -1);
+        Coordinate locationTwo = new Coordinate(-1, -0);
+        Coordinate locationThree = new Coordinate(-1, height-1);
+        Coordinate locationFour = new Coordinate(width, height-1);
+        Coordinate locationFive = new Coordinate(width, 0);
+
+        slideLocations[0] = locationOne;
+        slideLocations[1] = locationTwo;
+        slideLocations[2] = locationThree;
+        slideLocations[3] = locationFour;
+        slideLocations[4] = locationFive;
     }
 
     public Coordinate getPlayerPos (int player){
@@ -22,9 +33,24 @@ public class Gameboard {
         this.playerLocations[player] = position;
     }
 
-    public void playFloorTile (Coordinate slideLocation, FloorTile tileType, Rotation rotation){
+    public void playFloorTile (Coordinate location, FloorTile tileType){
 
-
+        for (int i = 0; i < slideLocations.length; i++){
+            if (slideLocations[i].getX() == location.getX() && slideLocations[i].getY() == location.getY()){
+                if (location.getX() == -1){
+                    //move everything to the right.
+                }
+                else if (location.getX() == width){
+                    //move everything to the left.
+                }
+                else if (location.getY() == -1){
+                    //move everything up
+                }
+                else{
+                    //move everything down
+                }
+            }
+        }
 
         //Tile topLeft = boardTiles[0][height-1];
         //System.out.println(topLeft.getType());
