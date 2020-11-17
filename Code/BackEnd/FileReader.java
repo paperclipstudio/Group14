@@ -2,9 +2,9 @@
  * This class is a file reader class which will take in a given level file format text file, verify it
  * and create the gameboard, along with the fixed tiles in their correct locations, the players in their correct
  * locations, and the amount and type of each floor/action tile that will populate the silk bag.
+ *
  * @author Atif Ishaq and Joshua Oladitan.
  * @version 1.0
- *
  */
 
 import java.io.File;
@@ -24,6 +24,7 @@ public class FileReader {
     private static final int NUM_OF_TILE_TYPES = 7;
     private static final int MAX_NUM_OF_PLAYERS = 4;
     private static Gameboard gameboard;
+
     /**
      * This method takes in the given level format file, verifies it using the verifyFile method,
      * before checking each line of the file, creating the gameboard with the correct width and height,
@@ -32,7 +33,7 @@ public class FileReader {
      *
      * @param filename The name of the level file format text file.
      */
-    public static void gameSetup (String filename) {
+    public static void gameSetup(String filename) {
         Scanner in = verifyFile(filename);
         while (in.hasNextLine()) {
             String line = in.nextLine();
@@ -41,7 +42,7 @@ public class FileReader {
             switch (lineArray[0]) {
                 case "Corner":
                     FloorTile boardCornerTile = new FloorTile("Corner", Integer.parseInt(lineArray[3]));
-                    gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]),Integer.parseInt(lineArray[2]));
+                    gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "Straight":
                     FloorTile boardStraightTile = new FloorTile("Straight", Integer.parseInt(lineArray[3]));
@@ -55,60 +56,57 @@ public class FileReader {
                     FloorTile goalTile = new FloorTile("Goal", Integer.parseInt(lineArray[3]));
                     gameboard.placeFixedTile(goalTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
             }
-            switch (lineCounter) {
-                case 1:
-                    int width = Integer.parseInt(lineArray[0]);
-                    int height = Integer.parseInt(lineArray[1]);
-                    gameboard = new Gameboard(width, height);
-                    break;
-                case 2:
-                    numOfFixedTiles = Integer.parseInt(lineArray[0]);
-                    break;
-                case (numOfFixedTiles + playerCounter):
-                    if (lineArray[1].equals("Corner")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            FloorTile cornerTile = new FloorTile("Corner");
-                        }
-                    } else if (lineArray[1].equals("Straight")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            FloorTile straightTile = new FloorTile("Straight");
-                        }
-                    } else if (lineArray[1].equals("T-Shape")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            FloorTile tShapeTile = new FloorTile("T-Shape");
-                        }
-                    } else if (lineArray[1].equals("Fire")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            FloorTile cornerTile = new FloorTile("Corner");
-                        }
-                    } else if (lineArray[1].equals("Ice")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            ActionTile iceTile = new ActionTile("Ice");
-                        }
-                    } else if (lineArray[1].equals("Backtrack")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            ActionTile backtrackTile = new ActionTile("Backtrack");
-                        }
-                    } else if (lineArray[1].equals("DoubleMove")) {
-                        for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            ActionTile doubleMoveTile = new ActionTile("DoubleMove");
-                        }
-                    } else if (lineArray[2].equals("Player1")) {
-                        Player player1 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
-                    } else if (lineArray[2].equals("Player2")) {
-                        Player player2 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
-                    } else if (lineArray[2].equals("Player3")) {
-                        Player player3 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
-                    } else if (lineArray[2].equals("Player4")) {
-                        Player player4 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
+            if (lineCounter == 1) {
+                int width = Integer.parseInt(lineArray[0]);
+                int height = Integer.parseInt(lineArray[1]);
+                gameboard = new Gameboard(width, height);
+            } else if (lineCounter == 2) {
+                numOfFixedTiles = Integer.parseInt(lineArray[0]);
+            } else if (lineCounter == (numOfFixedTiles + playerCounter)) {
+                if (lineArray[1].equals("Corner")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        FloorTile cornerTile = new FloorTile("Corner");
                     }
-                    if (playerCounter <= NUM_OF_TILE_TYPES + MAX_NUM_OF_PLAYERS) {
-                        playerCounter++;
+                } else if (lineArray[1].equals("Straight")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        FloorTile straightTile = new FloorTile("Straight");
                     }
-                    break;
+                } else if (lineArray[1].equals("T-Shape")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        FloorTile tShapeTile = new FloorTile("T-Shape");
+                    }
+                } else if (lineArray[1].equals("Fire")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        FloorTile cornerTile = new FloorTile("Corner");
+                    }
+                } else if (lineArray[1].equals("Ice")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        ActionTile iceTile = new ActionTile("Ice");
+                    }
+                } else if (lineArray[1].equals("Backtrack")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        ActionTile backtrackTile = new ActionTile("Backtrack");
+                    }
+                } else if (lineArray[1].equals("DoubleMove")) {
+                    for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
+                        ActionTile doubleMoveTile = new ActionTile("DoubleMove");
+                    }
+                } else if (lineArray[2].equals("Player1")) {
+                    Player player1 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
+                } else if (lineArray[2].equals("Player2")) {
+                    Player player2 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
+                } else if (lineArray[2].equals("Player3")) {
+                    Player player3 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
+                } else if (lineArray[2].equals("Player4")) {
+                    Player player4 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
+                }
+                if (playerCounter <= NUM_OF_TILE_TYPES + MAX_NUM_OF_PLAYERS) {
+                    playerCounter++;
+                }
             }
         }
     }
+
     /**
      * This method takes in the given level format file, and checks to see that the file exists.
      * @param filename The name of the level file format text file.

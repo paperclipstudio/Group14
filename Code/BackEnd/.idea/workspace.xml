@@ -52,6 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605645875240</updated>
       <workItem from="1605645876833" duration="3212000" />
+      <workItem from="1605649713378" duration="385000" />
     </task>
     <servers />
   </component>
@@ -68,8 +69,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="166" key="#Plugins" timestamp="1605649750560">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="166" key="#Plugins/0.0.1920.1050/-3840.1.2560.1409@0.0.1920.1050" timestamp="1605649750560" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1605647306904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -78,5 +84,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="342" y="140" key="new project wizard/0.0.1920.1040/-1920.2.1920.1040@0.0.1920.1040" timestamp="1605647214216" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1605649733150">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-3840.1.2560.1409@0.0.1920.1050" timestamp="1605649733150" />
   </component>
 </project>
