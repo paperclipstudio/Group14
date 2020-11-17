@@ -1,5 +1,3 @@
-import sun.security.ssl.CookieExtension;
-
 public class Gameboard {
 
     private static int width;
@@ -33,12 +31,11 @@ public class Gameboard {
 
     }
 
-    public void placeFixedTile (FloorTile tile, int x, int y, int rotation) {
+    public void placeFixedTile (FloorTile tile, int x, int y) {
         for (int i = 0; i < boardTiles.length; i++){
             for (int j = 0; j < boardTiles[i].length; j++){
                 if (i == x && j == y){
                     boardTiles[i][j] = tile;
-                    boardTiles[i][j].setRotation(rotation);
                 }
             }
         }

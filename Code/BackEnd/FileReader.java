@@ -49,11 +49,11 @@ public class FileReader {
                     break;
                 case "T-Shape":
                     FloorTile boardTShapeTile = new FloorTile("T-Shape", Integer.parseInt(lineArray[3]));
-                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
+                    gameboard.placeFixedTile(boardTShapeTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "Goal":
                     FloorTile goalTile = new FloorTile("Goal", Integer.parseInt(lineArray[3]));
-                    gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
+                    gameboard.placeFixedTile(goalTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
             }
             switch (lineCounter) {
                 case 1:
@@ -83,24 +83,24 @@ public class FileReader {
                         }
                     } else if (lineArray[1].equals("Ice")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            IceTile iceTile = constructIceTile();
+                            ActionTile iceTile = new ActionTile("Ice");
                         }
                     } else if (lineArray[1].equals("Backtrack")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            BacktrackTile backtrackTile = constructBacktrackTile();
+                            ActionTile backtrackTile = new ActionTile("Backtrack");
                         }
                     } else if (lineArray[1].equals("DoubleMove")) {
                         for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                            DoubleMove doubleMoveTile = constructDoubleMoveTile();
+                            ActionTile doubleMoveTile = new ActionTile("DoubleMove");
                         }
                     } else if (lineArray[2].equals("Player1")) {
-                        Player player1 = constructPlayer(Integer.parseInt([0]), Integer.parseInt([1]));
+                        Player player1 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
                     } else if (lineArray[2].equals("Player2")) {
-                        Player player2 = constructPlayer(Integer.parseInt([0]), Integer.parseInt([1]));
+                        Player player2 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
                     } else if (lineArray[2].equals("Player3")) {
-                        Player player3 = constructPlayer(Integer.parseInt([0]), Integer.parseInt([1]));
+                        Player player3 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
                     } else if (lineArray[2].equals("Player4")) {
-                        Player player4 = constructPlayer(Integer.parseInt([0]), Integer.parseInt([1]));
+                        Player player4 = new Player(Integer.parseInt(lineArray[0]), Integer.parseInt(lineArray[1]));
                     }
                     if (playerCounter <= NUM_OF_TILE_TYPES + MAX_NUM_OF_PLAYERS) {
                         playerCounter++;
@@ -125,57 +125,5 @@ public class FileReader {
             //return null is never reached.
             return null;
         }
-    }
-
-    private Gameboard constructGameboard() {
-
-    }
-    // This creates the tile for the bag.
-    private CornerTile constructCornerTile() {
-
-    }
-    // This creates the tile for the gameboard, with its relevant location and rotation
-    private BoardCornerTile constructBoardCornerTile(int x, int y, int rotation) {
-
-    }
-
-    private StraightTile constructStraightTile() {
-
-    }
-
-    private BoardStraightTile constructBoardStraightTile(int x, int y, int rotation) {
-
-    }
-
-    private TShapeTile constructTShapeTile() {
-
-    }
-
-    private BoardTShapeTile constructBoardTShapeTile(int x, int y, int rotation) {
-
-    }
-
-    private Goal constructGoalTile(int x, int y, int rotation) {
-
-    }
-
-    private FireTile constructFileTile() {
-
-    }
-
-    private IceTile constructIceTile() {
-
-    }
-
-    private BacktrackTile constructBacktrackTile() {
-
-    }
-
-    private DoubleMoveTile constructDoubleMoveTile() {
-
-    }
-
-    private Player constructPlayer(int x, int y) {
-
     }
 }
