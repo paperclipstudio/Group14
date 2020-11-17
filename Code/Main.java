@@ -16,7 +16,7 @@ public class Main extends Application {
         System.out.println("Hello World");
         //Parent root = null;
         // You can use the line below to test out your own screens
-        Parent root = FXMLLoader.load(getClass().getResource("FrontEnd\\DevScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\MenuScreen.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setFullScreen(false);
         primaryStage.setScene(scene);
