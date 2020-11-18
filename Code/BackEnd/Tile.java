@@ -1,3 +1,4 @@
+package BackEnd;
 /**
  * This represents an abstract class tile to be put on the Gameboard.
  * @author James Sam

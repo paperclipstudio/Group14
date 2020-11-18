@@ -1,4 +1,4 @@
-
+package BackEnd;
 public class FloorTile extends Tile {
 	boolean	isFixed;
 	String type;
