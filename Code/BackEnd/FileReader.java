@@ -8,6 +8,8 @@
  */
 
 
+import javafx.fxml.Initializable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -40,22 +42,22 @@ public class FileReader {
             String line = in.nextLine();
             String[] lineArray = line.split(" ");
             lineCounter++;
+            Rotation rotation = Rotation.values()[Integer.parseInt(lineArray[3])];
             switch (lineArray[0]) {
-                
                 case "Corner":
-                    FloorTile boardCornerTile = new FloorTile("Corner", Integer.parseInt(lineArray[3]));
+                    FloorTile boardCornerTile = new FloorTile("Corner", rotation);
                     gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "Straight":
-                    FloorTile boardStraightTile = new FloorTile("Straight", Integer.parseInt(lineArray[3]));
+                    FloorTile boardStraightTile = new FloorTile("Straight", rotation);
                     gameboard.placeFixedTile(boardStraightTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "T-Shape":
-                    FloorTile boardTShapeTile = new FloorTile("T-Shape", Integer.parseInt(lineArray[3]));
+                    FloorTile boardTShapeTile = new FloorTile("T-Shape", rotation);
                     gameboard.placeFixedTile(boardTShapeTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
                     break;
                 case "Goal":
-                    FloorTile goalTile = new FloorTile("Goal", Integer.parseInt(lineArray[3]));
+                    FloorTile goalTile = new FloorTile("Goal", rotation);
                     gameboard.placeFixedTile(goalTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));
             }
             if (lineCounter == 1) {
