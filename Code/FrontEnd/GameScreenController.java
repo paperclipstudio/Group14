@@ -1,3 +1,6 @@
+import BackEnd.Coordinate;
+import BackEnd.FloorTile;
+import BackEnd.GameLogic;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
