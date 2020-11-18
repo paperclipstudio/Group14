@@ -1,5 +1,9 @@
 package BackEnd;
 import java.util.Random;
+import java.util.StringTokenizer;
+
+import static BackEnd.Phase.DRAW;
+import static BackEnd.Phase.FLOOR;
 
 /***
  * Controls the flow of game, lets the UI know what choices the player has
@@ -7,6 +11,33 @@ import java.util.Random;
  * @author Christian Sanger
  */
 public class GameLogic {
+
+	Object[] gameItems;
+	Gameboard gb;
+	Player[] players;
+	int currentPlayer;
+	Phase phase;
+
+	void newGame(String boardFile) {
+		currentPlayer = 0;
+		phase = DRAW;
+		gameItems = FileReader.gameSetup(boardFile);
+		gb = (Gameboard) gameItems[0];
+		players = (Player[]) gameItems[1];
+
+	}
+
+	Phase getGamePhase() {
+		return this.phase;
+	}
+
+	public void draw() {
+		players[currentPlayer].drawTile();
+		phase = FLOOR;
+	}
+
+
+
 
 	// Added by George to start to print game to screen
 	Random r = new Random();

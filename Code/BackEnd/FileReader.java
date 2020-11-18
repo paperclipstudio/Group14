@@ -38,7 +38,7 @@ public class FileReader {
      *
      * @param filename The name of the level file format text file.
      */
-    public static void gameSetup(String filename) {
+    public static Object[] gameSetup(String filename) {
         Scanner in = verifyFile(filename);
         while (in.hasNextLine()) {
             String line = in.nextLine();

@@ -25,10 +25,9 @@ public class Player
     {
         return playerInventory;
     }
-
-    public void drawTileFromBag ()
+*/
+    public void drawTile()
     {
-        // if newTile.type = ACTION_TILE
         // {
         //     addToInventory(newTile);
         // }
@@ -38,7 +37,7 @@ public class Player
         //      use front end input here
         // }
     }
-
+/*
     public void playFloorTile (Coor slideLocations)
     {
         // if !(slideLocations in GAMEBOARD.getFrozenEffectedArea())  need to check entire row/column
