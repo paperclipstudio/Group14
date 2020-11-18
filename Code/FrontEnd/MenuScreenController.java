@@ -15,8 +15,6 @@ import java.util.ResourceBundle;
  */
 public class MenuScreenController implements Initializable {
     @FXML
-    private Button quitButton;
-    @FXML
     private Button newGameButton;
 
     private WindowLoader wl;
@@ -29,7 +27,8 @@ public class MenuScreenController implements Initializable {
      * Used to exit the application
      */
     public void onQuitButton() {
-        Platform.exit();
+        wl = new WindowLoader(newGameButton);
+        wl.load("QuitScreen");
     }
 
     public void onNewGame() {
