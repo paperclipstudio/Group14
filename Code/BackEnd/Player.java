@@ -1,18 +1,25 @@
-package BackEnd;
-import java.util.ArrayList;
-
 public class Player
 {
+    /*
+    private static int x;
+    private static int y;
     ArrayList<Tile> playerInventory = new ArrayList<Tile>();
     Tile lastDrawnTile;
+    */
     int playerNumber;
+    /*
     Boolean backtrackUsedOnMe = false;
 
-    public Player (int playerNo)
+    public Player (int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+*/
+    public Player(int no, int playerNo)
     {
         playerNumber = playerNo;
     }
-
+/*
     public ArrayList<Tile> getInventory ()
     {
         return playerInventory;
@@ -97,4 +104,6 @@ public class Player
     {
         playerInventory.remove(new Tile(tile));
     }
+
+     */
 }

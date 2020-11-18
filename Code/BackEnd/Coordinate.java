@@ -1,4 +1,4 @@
-package BackEnd;
+
 /**
  * This class is a coordinate class which will hold an integer coordinate pair X and Y
  * for a particular object or item.
@@ -53,5 +53,7 @@ public class Coordinate {
     public void setY(int yCoor){
         y = yCoor;
     }
+
+
 
 }

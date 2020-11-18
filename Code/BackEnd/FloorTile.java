@@ -1,4 +1,3 @@
-package BackEnd;
 
 public class FloorTile extends Tile {
 	boolean	isFixed;
@@ -15,5 +14,9 @@ public class FloorTile extends Tile {
 
 	public String getType() {
 		return type;
+	}
+
+	public Rotation getRotation() {
+		return rotation;
 	}
 }
