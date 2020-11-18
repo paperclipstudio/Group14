@@ -12,8 +12,7 @@ public class FloorTile extends Tile {
 
 	}
 
-	public String getType() {
-		return type;
+	public String getType() { return type;
 	}
 
 	public Rotation getRotation() {

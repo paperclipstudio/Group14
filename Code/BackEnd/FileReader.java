@@ -81,7 +81,7 @@ public class FileReader {
                     }
                 } else if (lineArray[1].equals("Fire")) {
                     for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {
-                        FloorTile cornerTile = new FloorTile("Corner");
+                        ActionTile fireTile = new ActionTile("Fire");
                     }
                 } else if (lineArray[1].equals("Ice")) {
                     for (int i = 0; i < Integer.parseInt(lineArray[0]); i++) {

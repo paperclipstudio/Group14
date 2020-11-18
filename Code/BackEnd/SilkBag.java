@@ -9,10 +9,8 @@ import java.util.Random;
 
 
 public class SilkBag {
-    private  ArrayList<Tile> allTiles = new ArrayList<Tile>();
+    private ArrayList<Tile> allTiles = new ArrayList<Tile>();
     private Random randomGenerator = new Random();
-
-
 
     /**
      * Get a tile from bag.
