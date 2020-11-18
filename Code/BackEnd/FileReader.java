@@ -41,6 +41,7 @@ public class FileReader {
             String[] lineArray = line.split(" ");
             lineCounter++;
             switch (lineArray[0]) {
+                
                 case "Corner":
                     FloorTile boardCornerTile = new FloorTile("Corner", Integer.parseInt(lineArray[3]));
                     gameboard.placeFixedTile(boardCornerTile, Integer.parseInt(lineArray[1]), Integer.parseInt(lineArray[2]));

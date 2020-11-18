@@ -8,11 +8,15 @@ public class FloorTile extends Tile {
 
 	}
 
-	public FloorTile(String type, int rotation) {
+	public FloorTile(String type, Rotation rotation) {
 
 	}
 
 	public String getType() {
 		return type;
+	}
+
+	public Rotation getRotation() {
+		return rotation;
 	}
 }
