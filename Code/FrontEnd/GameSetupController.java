@@ -6,7 +6,10 @@ import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/***
+ * Use to control the GameSetup scene.
+ * @author Chrisitan Sanger
+ */
 public class GameSetupController implements Initializable {
 	@FXML
 	private Button backButton;
@@ -15,11 +18,17 @@ public class GameSetupController implements Initializable {
 
 	}
 
+	/***
+	 * Returns to main menu
+	 */
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}
 
+	/***
+	 * Continues to GameScreen
+	 */
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameScreen");

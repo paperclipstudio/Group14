@@ -15,11 +15,22 @@ import java.io.IOException;
  */
 public class WindowLoader {
 	private static final String fileLocation = "FrontEnd\\";
+	// Reference to the primary stage
 	private Stage w;
 
+	/***
+	 * Creates a window loader that changes the scene shown to the user.
+	 * @param window any Node object on the stage that you wish control.
+	 */
 	public WindowLoader(Node window) {
 		this.w = (Stage) window.getScene().getWindow();
 	}
+
+	/***
+	 * swaps the scene for the given scene. Window should be the scene file name
+	 * i.e. to swap to MenuScreen.fxml use "MenuScreen"
+	 * @param window scene name
+	 */
 	public void load(String window) {
 		Parent root = null;
 		try {
@@ -30,10 +41,10 @@ public class WindowLoader {
 		}
 		Scene scene = null;
 		if (root == null) {
-			System.out.print("yeah thats null");
+			System.out.print("Scene loading failed, " + window + " could not be loaded");
 		} else {
 			scene = new Scene(root);
+			w.setScene(scene);
 		}
-		w.setScene(scene);
 	}
 }

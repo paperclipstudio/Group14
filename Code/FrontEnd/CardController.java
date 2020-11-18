@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 /***
- * Used to control Card scene
+ * Card is a display of one card. Used in
  * @author Christian
  */
 public class CardController implements Initializable {
