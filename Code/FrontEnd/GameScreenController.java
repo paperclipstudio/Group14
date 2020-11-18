@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import BackEnd.*;
+import javafx.scene.layout.Pane;
 
 /***
  * Use to control the GameScreen scene.
@@ -18,7 +20,9 @@ import java.util.ResourceBundle;
 public class GameScreenController implements Initializable {
 	@FXML private HBox cards;
 	@FXML
-	private AnchorPane tiles;
+	private Pane tiles;
+
+	int tileWidth = 50;
 	/***
 	 * Gets all resources for gameScreen
 	 * @param url Url for resources
@@ -26,7 +30,7 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		startNewGame();
 	}
 
 	public void startNewGame() {
@@ -40,17 +44,29 @@ public class GameScreenController implements Initializable {
 				// What is going to be shown on screen
 				ImageView tileView = new ImageView("Error.png");
 				// Get correct image
-				tileView.setImage(new Image(tile.getType() + ".png"));
+				try {
+					tileView.setImage(new Image(tile.getType() + ".png"));
+				} catch (Exception e) {
+					System.out.println("failed to find " + tile.getType() + ".png");
+				}
 				// Rotate
 				switch (tile.getRotation()) {
 					case UP: tileView.setRotate(0); // Not needed but just for consistency
+						break;
 					case RIGHT: tileView.setRotate(90);
+						break;
 					case DOWN: tileView.setRotate(180);
+						break;
 					case LEFT: tileView.setRotate(270);
+						break;
 				}
 				// Translate
-				tileView.setTranslateY(x * 20);
-				tileView.setTranslateY(y * 20);
+				tileView.setTranslateX(x * tileWidth);
+				tileView.setTranslateY(y * tileWidth);
+
+				// Scale
+				tileView.setFitHeight(tileWidth);
+				tileView.setFitWidth(tileWidth);
 				// set ID
 				tileView.setId("tile" + Integer.toString(x) + ":" + Integer.toString(y));
 				tiles.getChildren().add(tileView);

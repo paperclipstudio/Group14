@@ -5,11 +5,13 @@ public class FloorTile extends Tile {
 	Rotation rotation;
 
 	public	FloorTile(String type){
-
+		this.type = type;
+		this.rotation = Rotation.UP;
 	}
 
 	public FloorTile(String type, Rotation rotation) {
-
+		this.rotation = rotation;
+		this.type = type;
 	}
 
 	public String getType() { return type;

@@ -11,6 +11,7 @@ package BackEnd;
 
 
 import javafx.fxml.Initializable;
+import javafx.util.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +39,7 @@ public class FileReader {
      *
      * @param filename The name of the level file format text file.
      */
-    public static Object[] gameSetup(String filename) {
+    public static Pair<Gameboard, Player[]> gameSetup(String filename) {
         Scanner in = verifyFile(filename);
         while (in.hasNextLine()) {
             String line = in.nextLine();
@@ -111,6 +112,12 @@ public class FileReader {
                 }
             }
         }
+        Gameboard temp = new Gameboard(4,5);
+        Player[] temp2 = new Player[4];
+        for (int i = 0; i < 4; i++) {
+            temp2[i] = new Player(i,i);
+        }
+        return new Pair<Gameboard, Player[]>(temp, temp2);
     }
 
     /**

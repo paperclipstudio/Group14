@@ -1,9 +1,9 @@
 package BackEnd;
-import java.util.Random;
-import java.util.StringTokenizer;
+import javafx.util.Pair;
 
-import static BackEnd.Phase.DRAW;
-import static BackEnd.Phase.FLOOR;
+import java.util.Random;
+
+import static BackEnd.Phase.*;
 
 /***
  * Controls the flow of game, lets the UI know what choices the player has
@@ -12,19 +12,25 @@ import static BackEnd.Phase.FLOOR;
  */
 public class GameLogic {
 
-	Object[] gameItems;
 	Gameboard gb;
 	Player[] players;
-	int currentPlayer;
+	int numberOfPlayers;
+	int currentPlayerNo;
+	Player currentPlayer;
 	Phase phase;
 
-	void newGame(String boardFile) {
-		currentPlayer = 0;
-		phase = DRAW;
-		gameItems = FileReader.gameSetup(boardFile);
-		gb = (Gameboard) gameItems[0];
-		players = (Player[]) gameItems[1];
+	// Special flags
 
+	// True if player gets two moves.
+	boolean doubleMove = false;
+
+	void newGame(String boardFile) {
+		currentPlayerNo = 0;
+		phase = DRAW;
+		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		currentPlayer = players[currentPlayerNo];
+		gb = gameItems.getKey();
+		players = gameItems.getValue();
 	}
 
 	Phase getGamePhase() {
@@ -32,9 +38,42 @@ public class GameLogic {
 	}
 
 	public void draw() {
-		players[currentPlayer].drawTile();
-		phase = FLOOR;
+		currentPlayer.drawTile();
+		if (currentPlayer.isHolding() instanceof FloorTile) {
+			phase = FLOOR;
+		} else {
+			phase = ACTION;
+		}
 	}
+
+	public Tile drawnCard() {
+		return players[currentPlayerNo].isHolding();
+	}
+
+	public void floor(FloorTile tile, Coordinate location) {
+		players[currentPlayerNo].playFloorTile(location, tile.getRotation());
+		phase = ACTION;
+	}
+/*
+	public void action(ActionTile tile, Coordinate coordinate) {
+		players[currentPlayerNo].playActionTile(coordinate, tile);
+		doubleMove = true;
+		phase = MOVE;
+	}
+*/
+	public void move(Coordinate location) {
+		gb.setPlayerPos(currentPlayerNo, location);
+		if (doubleMove) {
+			doubleMove = false;
+		} else {
+			phase = DRAW;
+			currentPlayerNo = (currentPlayerNo + 1) % numberOfPlayers;
+			currentPlayer = players[currentPlayerNo];
+		}
+
+	}
+
+
 
 
 
@@ -64,7 +103,7 @@ public class GameLogic {
 						rotation = Rotation.RIGHT;
 						break;
 				}
-				FloorTile newTile = new FloorTile(tileTypes[r.nextInt(3)], rotation);
+				FloorTile newTile = new FloorTile(tileTypes[r.nextInt(4)], rotation);
 				tiles[x][y] = newTile;
 			}
 		}

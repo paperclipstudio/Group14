@@ -1,12 +1,16 @@
 package BackEnd;
+
+import java.awt.event.ActionEvent;
+
 public class Player
 {
     /*
     private static int x;
     private static int y;
     ArrayList<Tile> playerInventory = new ArrayList<Tile>();
-    Tile lastDrawnTile;
     */
+    Tile lastDrawnTile;
+
     int playerNumber;
     /*
     Boolean backtrackUsedOnMe = false;
@@ -37,8 +41,8 @@ public class Player
         //      use front end input here
         // }
     }
-/*
-    public void playFloorTile (Coor slideLocations)
+
+    public void playFloorTile (Coordinate slideLocations, Rotation rotation)
     {
         // if !(slideLocations in GAMEBOARD.getFrozenEffectedArea())  need to check entire row/column
         // {
@@ -46,49 +50,14 @@ public class Player
         // }
     }
 
-    public void playActionTile (Coor location, Tile tile)
+    public void playActionTile (Coordinate location, ActionTile tile)
     {
-        if (tile instanceof FREEZE_TILE)
-        {
-            // GAMEBOARD.setFreezeCoords(location);
-            // removeFromInventory(tile);
-        }
-
-        if (tile instanceof FIRE_TILE)
-        {
-            // GAMEBOARD.setFireCoords(location);
-            // removeFromInventory(tile);
-        }
-
-        if (tile instanceof DOUBLE_MOVE_TILE)
-        {
-            // move twice somewhere, change this according to how front end team implements user input
-            // removeFromInventory(tile);
-        }
-
-        if (tile instanceof BACKTRACK_TILE)
-        {
-            // if (!CHOSEN_PLAYER.backtrackUsedOnMe)
-            // {
-            //     if !(Coor[playerNumber][1] = Coor[OTHER_PLAYER_NUMBERS][0])
-            //     or !(Coor[playerNumber[1] in GAMEBOARD.getFireEffectedArea())
-            //     {
-            //          if !(Coor[playerNumber][2] = Coor[OTHER_PLAYER_NUMBERS][0])
-            //          and !(Coor[playerNumber[2] in GAMEBOARD.getFireEffectedArea())
-            //          {
-            //              movePlayer(Coor[playerNumber][2]);
-            //          }
-            //          else
-            //          {
-            //              movePlayer(Coor[playerNumber][1]);
-            //          }
-            //      }
-            //      backtrackUsedOnMe = true;
-            //      removeFromInventory(tile);
-            // }
-        }
     }
 
+    public Tile isHolding() {
+        return lastDrawnTile;
+    }
+/*
     public void movePlayer (Coor location)
     {
         // GAMEBOARD.movePlayer(playerNumber, location);
