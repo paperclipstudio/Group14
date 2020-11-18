@@ -35,5 +35,4 @@ public class quitScreenController implements Initializable {
         wl = new WindowLoader(noButton);
         wl.load("MenuScreen");
     }
-
 }
