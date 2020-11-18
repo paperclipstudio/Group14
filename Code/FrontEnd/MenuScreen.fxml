@@ -33,7 +33,7 @@
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Play" textAlignment="CENTER" textFill="#009c05" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Settings" textAlignment="CENTER" textFill="#009e05" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Player Profiles" textAlignment="CENTER" textFill="#009e05" />
-            <Button fx:id="onQuitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Button" textAlignment="CENTER" textFill="#009e05" />
+            <Button fx:id="quitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onQuitButton" prefHeight="25.0" prefWidth="100.0" text="Quit" textAlignment="CENTER" textFill="#009e05" />
          </children>
       </VBox>
    </center>

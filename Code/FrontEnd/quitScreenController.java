@@ -1,24 +1,29 @@
 package FrontEnd;
 
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 /**
- * Use to control the MenuScreen scene.
+ * Use to control the QuitScreen scene.
  * @author David Langmaid
  */
-public class MenuScreenController implements Initializable {
+public class quitScreenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
 
     /**
-     * Used to exit the application
+     * Closes the application
      */
-    public void onQuitButton() {
+    public void onYes() {
         Platform.exit();
     }
+
+    /**
+     * Returns you to previous scene
+     */
+    public void onNo() {
+        Platform.exit();
+    }
+
 }
