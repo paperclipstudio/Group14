@@ -1,6 +1,7 @@
 package BackEnd;
 import javafx.util.Pair;
 
+import java.nio.charset.CoderResult;
 import java.util.Random;
 
 import static BackEnd.Phase.*;
@@ -115,6 +116,14 @@ public class GameLogic {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			result[i] = gameboard.getPlayerPos(i);
 		}
+
+		//TODO Change when gameboard working correctly
+		result = new Coordinate[] {
+				new Coordinate(1,1),
+				new Coordinate(7,7),
+				new Coordinate(1 , 7),
+				new Coordinate( 7, 1)
+		};
 		return result;
 	}
 

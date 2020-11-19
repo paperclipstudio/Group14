@@ -24,7 +24,9 @@ public class GameScreenController implements Initializable {
 	@FXML private HBox cards;
 	@FXML
 	private Pane tiles;
-
+	private int width;
+	private int height;
+	private GameLogic gameLogic;
 	int tileWidth = 50;
 	/***
 	 * Gets all resources for gameScreen
@@ -33,17 +35,20 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		System.out.println("GameScreenStarted");
 		startNewGame();
+		updateBoard();
 	}
 
-	public void startNewGame() {
-		GameLogic gl = new GameLogic();
-		int width = gl.getWidth();
-		int height = gl.getHeight();
+
+
+	private void updateBoard() {
+		// showing the tiles
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
+				System.out.println(x + ":" + y);
 				// Tile from the gameboard.
-				FloorTile tile = gl.getTileAt(new Coordinate(x, y));
+				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
 				// What is going to be shown on screen
 				ImageView tileView = new ImageView("Error.png");
 				// Get correct image
@@ -54,13 +59,17 @@ public class GameScreenController implements Initializable {
 				}
 				// Rotate
 				switch (tile.getRotation()) {
-					case UP: tileView.setRotate(0); // Not needed but just for consistency
+					case UP:
+						tileView.setRotate(0); // Not needed but just for consistency
 						break;
-					case RIGHT: tileView.setRotate(90);
+					case RIGHT:
+						tileView.setRotate(90);
 						break;
-					case DOWN: tileView.setRotate(180);
+					case DOWN:
+						tileView.setRotate(180);
 						break;
-					case LEFT: tileView.setRotate(270);
+					case LEFT:
+						tileView.setRotate(270);
 						break;
 				}
 				// Translate
@@ -75,7 +84,25 @@ public class GameScreenController implements Initializable {
 				tiles.getChildren().add(tileView);
 
 			}
+
 		}
+		// showing the player locations
+		Image player = new Image("player1.png");
+		for (Coordinate location: gameLogic.getPlayerLocations()) {
+			ImageView imageview = new ImageView(player);
+			imageview.setFitWidth(tileWidth);
+			imageview.setFitHeight(tileWidth);
+			imageview.setTranslateX(location.getX() * tileWidth);
+			imageview.setTranslateY(location.getY() * tileWidth);
+			tiles.getChildren().add(imageview);
+		}
+	}
+
+	public void startNewGame() {
+		gameLogic = new GameLogic();
+		width = gameLogic.getWidth();
+		height = gameLogic.getHeight();
+
 	}
 
 	/***
