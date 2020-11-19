@@ -29,10 +29,11 @@ public class Player
         playerNumber = playerNo;
     }
 
-    public Player(int playerNumber, SilkBag silkBag) {
+    public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
         this.playerNumber = playerNumber;
     }
+
 
     /*
 		public ArrayList<Tile> getInventory ()

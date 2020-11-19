@@ -20,4 +20,12 @@ public class FloorTile extends Tile {
 	public Rotation getRotation() {
 		return rotation;
 	}
+
+	public Boolean onFire() {
+		return false;
+	}
+
+	public Boolean Frozen() {
+		return false;
+	}
 }

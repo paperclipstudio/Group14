@@ -89,4 +89,8 @@ public class Gameboard {
         Coordinate test3 = new Coordinate(-1,1);
         return new Coordinate[] {test, test3, test2};
     }
+
+    public FloorTile TileAt(Coordinate coordinate) {
+        return null;
+    }
 }
