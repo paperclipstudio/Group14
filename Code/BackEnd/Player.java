@@ -1,6 +1,7 @@
 package BackEnd;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class Player
 {
@@ -10,7 +11,8 @@ public class Player
     ArrayList<Tile> playerInventory = new ArrayList<Tile>();
     */
     Tile lastDrawnTile;
-
+    ArrayList<Tile> inventory;
+    SilkBag silkBag;
     int playerNumber;
     private boolean backTracked;
 
@@ -28,6 +30,8 @@ public class Player
     }
 
     public Player(int playerNumber, SilkBag silkBag) {
+        this.silkBag = silkBag;
+        this.playerNumber = playerNumber;
     }
 
     /*
@@ -38,14 +42,10 @@ public class Player
 	*/
     public void drawTile()
     {
-        // {
-        //     addToInventory(newTile);
-        // }
-
-        // else
-        // {
-        //      use front end input here
-        // }
+        if (isHolding() != null) {
+            inventory.add(isHolding());
+        }
+       lastDrawnTile = silkBag.getTile();
     }
 
     public void playFloorTile (Coordinate slideLocations, Rotation rotation)

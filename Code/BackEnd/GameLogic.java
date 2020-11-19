@@ -94,7 +94,7 @@ public class GameLogic {
 	 * @param location where the tile should be played.
 	 */
 	public void floor(FloorTile tile, Coordinate location) {
-		assert(tile.getTileType().equals(currentPlayer.isHolding().getTileType()));
+		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
 		players[currentPlayerNo].playFloorTile(location, tile.getRotation());
 		phase = ACTION;
 	}

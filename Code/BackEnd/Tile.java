@@ -38,7 +38,5 @@ public abstract class Tile {
      * returns the type of tile.
      * @return tile type string.
      */
-    public String getTileType() {
-        return tileType;
-    }
+    public abstract String getType();
 }

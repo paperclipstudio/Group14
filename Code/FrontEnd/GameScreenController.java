@@ -254,7 +254,7 @@ public class GameScreenController implements Initializable {
 	/**
 	 * Called when Draw button is pressed
 	 */
-	private void onDrawButton() {
+	public void onDrawButton() {
 		gameLogic.draw();
 		Node newCard = null;
 		try {
