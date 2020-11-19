@@ -1,5 +1,5 @@
 package BackEnd;
-public class ActionTile {
+public class ActionTile extends Tile {
     String type;
 
     public	ActionTile(String type){
