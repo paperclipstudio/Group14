@@ -163,11 +163,16 @@ public class GameLogic {
 	int width = 9;
 	int height = 9;
 	FloorTile[][] tiles = new FloorTile[width][height];
+
+	/**
+	 * Creates an empty game logic class, must run startNew or load before you
+	 * can play.
+	 */
 	public GameLogic() {
 		// Filling fake board with values.
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				String[] tileTypes = {"Straight", "Corner", "Tee", "Goal"};
+				//String[] tileTypes = {"Straight", "Corner", "Tee", "Goal"};
 				Rotation rotation = Rotation.UP;
 				switch (r.nextInt(3)) {
 					case 0:
@@ -183,7 +188,7 @@ public class GameLogic {
 						rotation = Rotation.RIGHT;
 						break;
 				}
-				FloorTile newTile = new FloorTile(tileTypes[r.nextInt(4)], rotation);
+				FloorTile newTile = new FloorTile(TileType.values()[r.nextInt(4)], rotation);
 				tiles[x][y] = newTile;
 			}
 		}
@@ -198,10 +203,17 @@ public class GameLogic {
 		return tiles[location.getX()][location.getY()];
 	}
 
+	/**
+	 * Returns the width of the board
+	 * @return the width of the board
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * @return the height of the board.
+	 */
 	public int getHeight() {
 		return height;
 	}

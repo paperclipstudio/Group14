@@ -3,6 +3,7 @@ package BackEnd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameboardTest {
@@ -15,15 +16,15 @@ class GameboardTest {
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
 		gb.setPlayerPos(3, new Coordinate( 2,0));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile("Corner"));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile("Tee"));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile("Corner"));
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile("Straight"));
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile("Goal"));
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile("Straight"));
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile("Corner"));
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile("Tee"));
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile("Corner"));
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(GOAL));
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
 	}
 	@Test
 	void getPlayerPos() {
