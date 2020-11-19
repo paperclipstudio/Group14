@@ -6,13 +6,16 @@ import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-/***
+/**
  * Use to control the GameSetup scene.
+ *
  * @author Chrisitan Sanger
  */
+
 public class GameSetupController implements Initializable {
 	@FXML
 	private Button backButton;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
