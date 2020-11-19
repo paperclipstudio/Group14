@@ -2,6 +2,9 @@ package BackEnd;
 public class Gameboard {
 
     private static int width;
+
+
+
     private static int height;
     private static Coordinate goalCoor;
     private Coordinate[] playerLocations;
@@ -58,6 +61,13 @@ public class Gameboard {
 
     }
 
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
     public void placeFixedTile (FloorTile tile, int x, int y) {
         for (int i = 0; i < boardTiles.length; i++){
             for (int j = 0; j < boardTiles[i].length; j++){
