@@ -1,8 +1,11 @@
 package BackEnd;
 public class Gameboard {
 
-    private static int width;
-    private static int height;
+    private int width;
+
+
+
+    private int height;
     private static Coordinate goalCoor;
     private Coordinate[] playerLocations;
     private Coordinate[] slideLocations;
@@ -11,14 +14,19 @@ public class Gameboard {
 
 
     public Gameboard (int width, int height) {
-        width = this.width;
-        height = this.height;
+        this.width = width;
+        this.height = height;
         Coordinate locationOne = new Coordinate(0, -1);
         Coordinate locationTwo = new Coordinate(-1, -0);
         Coordinate locationThree = new Coordinate(-1, height-1);
         Coordinate locationFour = new Coordinate(width, height-1);
         Coordinate locationFive = new Coordinate(width, 0);
-
+        //TODO Added as a quick fix by George.
+        slideLocations = new Coordinate[100];
+        //TODO turns out nothing has been initalised.
+        boardTiles = new Tile[100][100];
+        //TODO third null pointer exception
+        playerLocations = new Coordinate[100];
         slideLocations[0] = locationOne;
         slideLocations[1] = locationTwo;
         slideLocations[2] = locationThree;
@@ -58,6 +66,13 @@ public class Gameboard {
 
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
     public void placeFixedTile (FloorTile tile, int x, int y) {
         for (int i = 0; i < boardTiles.length; i++){
             for (int j = 0; j < boardTiles[i].length; j++){

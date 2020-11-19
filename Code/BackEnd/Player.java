@@ -26,12 +26,16 @@ public class Player
     {
         playerNumber = playerNo;
     }
-/*
-    public ArrayList<Tile> getInventory ()
-    {
-        return playerInventory;
+
+    public Player(int playerNumber, SilkBag silkBag) {
     }
-*/
+
+    /*
+		public ArrayList<Tile> getInventory ()
+		{
+			return playerInventory;
+		}
+	*/
     public void drawTile()
     {
         // {
