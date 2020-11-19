@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -24,6 +25,7 @@ public class GameScreenController implements Initializable {
 	@FXML private HBox cards;
 	@FXML private Pane tiles;
 	@FXML private Button drawButton;
+	@FXML private Label phaseText;
 	private int width;
 	private int height;
 	private GameLogic gameLogic;
@@ -35,6 +37,8 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		//load assets
+		URL cardFile = getClass().getResource("FrontEnd\\Card.fxml");
 		startNewGame("ExampleInput.txt");
 		mainLoop();
 	}
@@ -51,6 +55,7 @@ public class GameScreenController implements Initializable {
 	private void mainLoop() {
 		updateBoard();
 		Phase phase = gameLogic.getGamePhase();
+		phaseText.setText(phase.toString());
 		hideAllControls();
 		switch (phase) {
 			case DRAW:
@@ -139,6 +144,15 @@ public class GameScreenController implements Initializable {
 
 	public void onDrawButton() {
 		gameLogic.draw();
+		Node newCard = null;
+		try {
+			newCard = FXMLLoader.load(getClass().getResource("FrontEnd\\Card.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		cards.getChildren().add(newCard);
+		
+		mainLoop();
 	}
 
 	/***
