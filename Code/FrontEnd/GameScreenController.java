@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import BackEnd.*;
 import javafx.scene.layout.Pane;
@@ -26,6 +27,7 @@ public class GameScreenController implements Initializable {
 	@FXML private Pane tiles;
 	@FXML private Button drawButton;
 	@FXML private Label phaseText;
+	private HashMap<String, Image> assets;
 	private int width;
 	private int height;
 	private GameLogic gameLogic;
@@ -39,6 +41,19 @@ public class GameScreenController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		//load assets
 		URL cardFile = getClass().getResource("FrontEnd\\Card.fxml");
+		assets = new HashMap<String, Image>();
+		String[] listOfAssets = new String[] {
+			"Corner",
+			"Error",
+			"Goal",
+			"player1",
+			"Straight",
+				"Tee"
+		};
+		for (String asset: listOfAssets) {
+			assets.put(asset, new Image(asset + ".png"));
+		}
+
 		startNewGame("ExampleInput.txt");
 		mainLoop();
 	}
@@ -80,11 +95,7 @@ public class GameScreenController implements Initializable {
 				// What is going to be shown on screen
 				ImageView tileView = new ImageView("Error.png");
 				// Get correct image
-				try {
-					tileView.setImage(new Image(tile.getType() + ".png"));
-				} catch (Exception e) {
-					System.out.println("failed to find " + tile.getType() + ".png");
-				}
+				tileView.setImage(assets.get(tile.getType()));
 				// Rotate
 				switch (tile.getRotation()) {
 					case UP:
@@ -151,7 +162,7 @@ public class GameScreenController implements Initializable {
 			e.printStackTrace();
 		}
 		cards.getChildren().add(newCard);
-		
+
 		mainLoop();
 	}
 
