@@ -2,6 +2,8 @@ import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.GameLogic;
 import com.sun.corba.se.spi.transport.CorbaAcceptor;
+import javafx.animation.Animation;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import BackEnd.*;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 /***
  * Use to control the GameScreen scene.
@@ -45,7 +48,7 @@ public class GameScreenController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		//load assets
 		URL cardFile = getClass().getResource("FrontEnd\\Card.fxml");
-		assets = new HashMap<String, Image>();
+		assets = new HashMap<>();
 		String[] listOfAssets = new String[] {
 			"Corner",
 			"Error",
@@ -132,6 +135,7 @@ public class GameScreenController implements Initializable {
 			arrow.setOnMouseClicked((e) -> {
 				arrow.setEffect(new Bloom(0.1));
 				shiftTiles(tiles, direction, where);
+
 			});
 			tiles.getChildren().add(arrow);
 		}
@@ -152,19 +156,22 @@ public class GameScreenController implements Initializable {
 			if (tile.getId().split(" ")[0].equals("tile")) {
 				int x = ((int) tile.getTranslateX()) / tileWidth;
 				int y = ((int) tile.getTranslateY()) / tileWidth;
+				TranslateTransition smooth = new TranslateTransition();
+				smooth.setNode(tile);
+				smooth.setDuration(new Duration(200));
 				switch (direction) {
 					case RIGHT:
 						if (y == location) {
-							tile.setTranslateX(tile.getTranslateX() + tileWidth);
-							System.out.println(x + ":" + y);
+							smooth.setByX(tileWidth);
 						}
 						break;
 					case DOWN:
 						if (x == location) {
-							tile.setTranslateY(tile.getTranslateY() + tileWidth);
+							smooth.setByY(tileWidth);
 						}
 						break;
 				}
+				smooth.play();
 			}
 		}
 	}
@@ -237,11 +244,17 @@ public class GameScreenController implements Initializable {
 		drawButton.setVisible(true);
 	}
 
+	/**
+	 * hides all controls ready for when mainloop shows the correct ones.
+	 */
 	private void hideAllControls() {
 		drawButton.setVisible(false);
 	}
 
-	public void onDrawButton() {
+	/**
+	 * Called when Draw button is pressed
+	 */
+	private void onDrawButton() {
 		gameLogic.draw();
 		Node newCard = null;
 		try {
