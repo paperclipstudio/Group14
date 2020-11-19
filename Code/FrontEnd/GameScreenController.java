@@ -1,13 +1,17 @@
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.GameLogic;
+import com.sun.corba.se.spi.transport.CorbaAcceptor;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point3D;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -48,12 +52,16 @@ public class GameScreenController implements Initializable {
 			"Goal",
 			"player1",
 			"Straight",
-				"Tee"
+				"Tee",
+				"SlideArrow"
 		};
 		for (String asset: listOfAssets) {
 			assets.put(asset, new Image(asset + ".png"));
 		}
 
+		tiles.setTranslateZ(20);
+		tiles.setRotationAxis(new Point3D(10,0,0));
+		tiles.setRotate(10);
 		startNewGame("ExampleInput.txt");
 		mainLoop();
 	}
@@ -68,8 +76,11 @@ public class GameScreenController implements Initializable {
 	mainLoop() -> show buttons -> wait for call back from button -> mainLoop()
 	 */
 	private void mainLoop() {
+
+		tiles.setRotate(tiles.getRotate() + 10);
 		updateBoard();
 		Phase phase = gameLogic.getGamePhase();
+		phase = Phase.FLOOR;
 		phaseText.setText(phase.toString());
 		hideAllControls();
 		switch (phase) {
@@ -77,6 +88,7 @@ public class GameScreenController implements Initializable {
 				drawButton.setVisible(true);
 				break;
 			case FLOOR:
+				setupFloorPhase();
 				break;
 			case ACTION:
 				break;
@@ -85,11 +97,82 @@ public class GameScreenController implements Initializable {
 		}
 	}
 
+	private void setupFloorPhase() {
+		Coordinate[] locations = gameLogic.getSlideLocations();
+		for (Coordinate coor: locations) {
+			ImageView arrow = new ImageView(assets.get("SlideArrow"));
+			final Rotation direction;
+			final int where;
+			if (coor.getX() == -1){
+				arrow.setRotate(0);
+				direction = Rotation.RIGHT;
+				where = coor.getY();
+			} else if (coor.getY() == -1) {
+				arrow.setRotate(90);
+				direction = Rotation.DOWN;
+				where = coor.getX();
+			} else if (coor.getX() == width) {
+				arrow.setRotate(180);
+				direction = Rotation.LEFT;
+				where = coor.getX();
+			} else if (coor.getY() == height) {
+				arrow.setRotate(270);
+				direction = Rotation.UP;
+				where = coor.getY();
+			} else {
+				direction = Rotation.DOWN;
+				where = 2;
+				// Invalid Push location
+				assert(false);
+			}
+			arrow.setFitWidth(tileWidth);
+			arrow.setFitHeight(tileWidth);
+			arrow.setTranslateX(coor.getX() * tileWidth);
+			arrow.setTranslateY(coor.getY() * tileWidth);
+			arrow.setOnMouseClicked((e) -> {
+				arrow.setEffect(new Bloom(0.1));
+				shiftTiles(tiles, direction, where);
+			});
+			tiles.getChildren().add(arrow);
+		}
+	}
+
+	private void shiftTiles(Node node, Rotation direction, int location) {
+
+		for (Object o : tiles.getChildren().toArray()) {
+			// Skips if the object is null;
+			if (o == null) {
+				continue;
+			}
+			Node tile = (Node) o;
+			// Skips if tile has no ID.
+			if (tile.getId() == null) {
+				continue;
+			}
+			if (tile.getId().split(" ")[0].equals("tile")) {
+				int x = ((int) tile.getTranslateX()) / tileWidth;
+				int y = ((int) tile.getTranslateY()) / tileWidth;
+				switch (direction) {
+					case RIGHT:
+						if (y == location) {
+							tile.setTranslateX(tile.getTranslateX() + tileWidth);
+							System.out.println(x + ":" + y);
+						}
+						break;
+					case DOWN:
+						if (x == location) {
+							tile.setTranslateY(tile.getTranslateY() + tileWidth);
+						}
+						break;
+				}
+			}
+		}
+	}
 	private void updateBoard() {
+		tiles.getChildren().clear();
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				System.out.println(x + ":" + y);
 				// Tile from the game board.
 				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
 				// What is going to be shown on screen
@@ -119,11 +202,16 @@ public class GameScreenController implements Initializable {
 				tileView.setFitHeight(tileWidth);
 				tileView.setFitWidth(tileWidth);
 				// set ID
-				tileView.setId("tile" + x + ":" + y);
+				tileView.setId("tile " + x + " " + y);
 				tiles.getChildren().add(tileView);
 
 			}
 
+		}
+
+		for(Object i : tiles.getChildren().toArray()) {
+			ImageView j = (ImageView) i;
+			System.out.println(j.getId());
 		}
 		// showing the player locations
 		Image player = new Image("player1.png");
