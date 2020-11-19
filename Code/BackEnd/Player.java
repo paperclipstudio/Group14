@@ -12,6 +12,8 @@ public class Player
     Tile lastDrawnTile;
 
     int playerNumber;
+    private boolean backTracked;
+
     /*
     Boolean backtrackUsedOnMe = false;
 
@@ -56,6 +58,10 @@ public class Player
 
     public Tile isHolding() {
         return lastDrawnTile;
+    }
+
+    public boolean hasBeenBacktracked() {
+        return backTracked;
     }
 /*
     public void movePlayer (Coor location)

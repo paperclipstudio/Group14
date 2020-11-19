@@ -67,4 +67,9 @@ public class Gameboard {
             }
         }
     }
+
+    public Coordinate[] getSlideLocations() {
+        Coordinate test = new Coordinate(-1, 0);
+        return new Coordinate[] {test};
+    }
 }
