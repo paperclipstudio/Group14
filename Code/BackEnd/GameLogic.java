@@ -30,14 +30,18 @@ public class GameLogic {
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
 	 */
-	void newGame(String boardFile) {
+	public void newGame(String boardFile) {
 		// Set up
 		currentPlayerNo = 0;
 		phase = DRAW;
-		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		//Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		//TODO undo when FileReader Works
+		gameboard = new Gameboard(9,9);//gameItems.getKey();
+		players = new Player[4]; //gameItems.getValue();
+		for (int i = 0; i < 4; i++) {
+			players[i] = new Player(i, i);
+		}
 		currentPlayer = players[currentPlayerNo];
-		gameboard = gameItems.getKey();
-		players = gameItems.getValue();
 	}
 
 	/**

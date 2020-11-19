@@ -6,9 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.net.URL;
@@ -22,8 +22,8 @@ import javafx.scene.layout.Pane;
  */
 public class GameScreenController implements Initializable {
 	@FXML private HBox cards;
-	@FXML
-	private Pane tiles;
+	@FXML private Pane tiles;
+	@FXML private Button drawButton;
 	private int width;
 	private int height;
 	private GameLogic gameLogic;
@@ -35,19 +35,42 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		System.out.println("GameScreenStarted");
-		startNewGame();
-		updateBoard();
+		startNewGame("ExampleInput.txt");
+		mainLoop();
 	}
 
-
+	/*
+	The flow though this window goes like this
+	mainLoop() : will check the current phase and update the visuals
+		depending on the phase it will make a selection of controls visible
+	onSomeButton() : when a button is pressed i.e. drawButton, it will have an
+		onDrawButton called which will send the user choice to gameLogic the
+		call back to mainLoop.
+	mainLoop() -> show buttons -> wait for call back from button -> mainLoop()
+	 */
+	private void mainLoop() {
+		updateBoard();
+		Phase phase = gameLogic.getGamePhase();
+		hideAllControls();
+		switch (phase) {
+			case DRAW:
+				drawButton.setVisible(true);
+				break;
+			case FLOOR:
+				break;
+			case ACTION:
+				break;
+			case MOVE:
+				break;
+		}
+	}
 
 	private void updateBoard() {
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				System.out.println(x + ":" + y);
-				// Tile from the gameboard.
+				// Tile from the game board.
 				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
 				// What is going to be shown on screen
 				ImageView tileView = new ImageView("Error.png");
@@ -80,7 +103,7 @@ public class GameScreenController implements Initializable {
 				tileView.setFitHeight(tileWidth);
 				tileView.setFitWidth(tileWidth);
 				// set ID
-				tileView.setId("tile" + Integer.toString(x) + ":" + Integer.toString(y));
+				tileView.setId("tile" + x + ":" + y);
 				tiles.getChildren().add(tileView);
 
 			}
@@ -98,11 +121,24 @@ public class GameScreenController implements Initializable {
 		}
 	}
 
-	public void startNewGame() {
+	/**
+	 * Clears the game and starts a new one with given starting board
+	 * @param board path to board file
+	 */
+	public void startNewGame(String board) {
 		gameLogic = new GameLogic();
+		gameLogic.newGame(board);
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
+		drawButton.setVisible(true);
+	}
 
+	private void hideAllControls() {
+		drawButton.setVisible(false);
+	}
+
+	public void onDrawButton() {
+		gameLogic.draw();
 	}
 
 	/***
