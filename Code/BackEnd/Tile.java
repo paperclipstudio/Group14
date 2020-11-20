@@ -1,44 +1,42 @@
 package BackEnd;
 
 import java.util.InputMismatchException;
-
 /**
  * This represents an abstract class tile to be put on the Gameboard.
  * @author James Sam
  * @version 1.0
  */
-
 public abstract class Tile {
-    protected String tileType;
-    public static Tile createTile(String type) {
+    /**
+     * Creates any type of tile.
+     * @param type the type of the tile
+     * @return Floor or Action tile cast to Tile.
+     */
+    public static Tile createTile(TileType type) {
         Tile result;
        switch (type) {
-           case "Corner":
-           case "T-Shape":
-           case "Straight":
-           case "Goal":
-               result = (Tile) new FloorTile(type);
+           case CORNER:
+           case T_SHAPE:
+           case STRAIGHT:
+           case GOAL:
+               result = new FloorTile(type);
                break;
-           case "Fire":
-           case "Ice":
-           case "Backtrack":
-           case "DoubleMove":
-               result = (Tile) new ActionTile(type);
+           case FIRE:
+           case FROZEN:
+           case BACKTRACK:
+           case DOUBLE_MOVE:
+               result = new ActionTile(type);
                break;
            default:
-               throw new InputMismatchException(type);
+               result = new FloorTile(TileType.GOAL);
+
        }
        return result;
     }
-
-
-
 
     /**
      * returns the type of tile.
      * @return tile type string.
      */
-    public String getTileType() {
-        return tileType;
-    }
+    public abstract TileType getType();
 }

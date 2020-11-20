@@ -1,6 +1,7 @@
 package BackEnd;
 import javafx.util.Pair;
 
+import java.nio.charset.CoderResult;
 import java.util.Random;
 
 import static BackEnd.Phase.*;
@@ -29,14 +30,18 @@ public class GameLogic {
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
 	 */
-	void newGame(String boardFile) {
+	public void newGame(String boardFile) {
 		// Set up
 		currentPlayerNo = 0;
 		phase = DRAW;
-		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		//Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		//TODO undo when FileReader Works
+		gameboard = new Gameboard(9,9);//gameItems.getKey();
+		players = new Player[4]; //gameItems.getValue();
+		for (int i = 0; i < 4; i++) {
+			players[i] = new Player(i, i);
+		}
 		currentPlayer = players[currentPlayerNo];
-		gameboard = gameItems.getKey();
-		players = gameItems.getValue();
 	}
 
 	/**
@@ -89,7 +94,7 @@ public class GameLogic {
 	 * @param location where the tile should be played.
 	 */
 	public void floor(FloorTile tile, Coordinate location) {
-		assert(tile.getTileType().equals(currentPlayer.isHolding().getTileType()));
+		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
 		players[currentPlayerNo].playFloorTile(location, tile.getRotation());
 		phase = ACTION;
 	}
@@ -115,6 +120,14 @@ public class GameLogic {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			result[i] = gameboard.getPlayerPos(i);
 		}
+
+		//TODO Change when gameboard working correctly
+		result = new Coordinate[] {
+				new Coordinate(1,1),
+				new Coordinate(7,7),
+				new Coordinate(1 , 7),
+				new Coordinate( 7, 1)
+		};
 		return result;
 	}
 
@@ -150,11 +163,15 @@ public class GameLogic {
 	int width = 9;
 	int height = 9;
 	FloorTile[][] tiles = new FloorTile[width][height];
+
+	/**
+	 * Creates an empty game logic class, must run startNew or load before you
+	 * can play.
+	 */
 	public GameLogic() {
 		// Filling fake board with values.
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				String[] tileTypes = {"Straight", "Corner", "Tee", "Goal"};
 				Rotation rotation = Rotation.UP;
 				switch (r.nextInt(3)) {
 					case 0:
@@ -170,7 +187,7 @@ public class GameLogic {
 						rotation = Rotation.RIGHT;
 						break;
 				}
-				FloorTile newTile = new FloorTile(tileTypes[r.nextInt(4)], rotation);
+				FloorTile newTile = new FloorTile(TileType.values()[r.nextInt(3)], rotation);
 				tiles[x][y] = newTile;
 			}
 		}
@@ -185,10 +202,17 @@ public class GameLogic {
 		return tiles[location.getX()][location.getY()];
 	}
 
+	/**
+	 * Returns the width of the board
+	 * @return the width of the board
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * @return the height of the board.
+	 */
 	public int getHeight() {
 		return height;
 	}

@@ -1,6 +1,7 @@
 package BackEnd;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * Stores details about the player while they are in-game, for example their inventory or player number.
@@ -14,7 +15,8 @@ public class Player
     ArrayList<Tile> playerInventory = new ArrayList<Tile>();
     */
     Tile lastDrawnTile;
-
+    ArrayList<Tile> inventory;
+    SilkBag silkBag;
     int playerNumber;
     private boolean backTracked;
 
@@ -31,8 +33,11 @@ public class Player
         playerNumber = playerNo;
     }
 
-    public Player(int playerNumber, SilkBag silkBag) {
+    public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
+        this.silkBag = silkBag;
+        this.playerNumber = playerNumber;
     }
+
 
     /*
 		public ArrayList<Tile> getInventory ()
@@ -42,14 +47,10 @@ public class Player
 	*/
     public void drawTile()
     {
-        // {
-        //     addToInventory(newTile);
-        // }
-
-        // else
-        // {
-        //      use front end input here
-        // }
+        if (isHolding() != null) {
+            inventory.add(isHolding());
+        }
+       lastDrawnTile = silkBag.getTile();
     }
 
     public void playFloorTile (Coordinate slideLocations, Rotation rotation)

@@ -1,12 +1,12 @@
 package BackEnd;
 public class ActionTile extends Tile {
-    String type;
+    TileType type;
 
-    public	ActionTile(String type){
-
+    public	ActionTile(TileType type){
+        this.type = type;
     }
 
-    public String getType() {
+    public TileType getType() {
         return type;
     }
 }

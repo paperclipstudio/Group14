@@ -1,4 +1,9 @@
 package BackEnd;
+import javafx.fxml.Initializable;
+import javafx.util.Pair;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 /**
  * This class is a file reader class which will take in a given level file format text file, verify it
@@ -8,14 +13,6 @@ package BackEnd;
  * @author Atif Ishaq and Joshua Oladitan.
  * @version 1.0
  */
-
-
-import javafx.fxml.Initializable;
-import javafx.util.Pair;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
 
 public class FileReader {
     /**
@@ -39,6 +36,7 @@ public class FileReader {
      * amount and type of each floor or action tile.
      *
      * @param filename The name of the level file format text file.
+     * @return pair where first element is the gameboard and second is the players.
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename) {
         Scanner in = verifyFile(filename);
@@ -62,7 +60,7 @@ public class FileReader {
 
         for (int i= 0; i < numberOfFixedTiles; i++) {
            currentLine = new Scanner(in.nextLine());
-           String tileType = currentLine.next();
+           TileType tileType = TileType.valueOf(currentLine.next());
            int x = currentLine.nextInt();
            int y = currentLine.nextInt();
            int rotationInt = currentLine.nextInt();
@@ -72,15 +70,6 @@ public class FileReader {
         }
 
         //// Filling SilkBag
-        String[] tileTypes = {
-            "Corner",
-            "Straight",
-            "T-Shape",
-            "Fire",
-            "Ice",
-            "Backtrack",
-            "DoubleMove"
-        };
         int[] tileTypeCount = new int[NUM_OF_TILE_TYPES];
         // Reading how many of each tile
         for(int tileType = 0; tileType < NUM_OF_TILE_TYPES; tileType++) {
@@ -93,7 +82,7 @@ public class FileReader {
             int numberOfThisTile = tileTypeCount[tileType];
             // for each tile that need to be added to silkbag
             for (int i = 0; i < numberOfThisTile; i++) {
-                Tile newTile = Tile.createTile(tileTypes[tileType]);
+                Tile newTile = Tile.createTile(TileType.values()[tileType]);
                 silkBag.insertTile(newTile);
             }
         }
@@ -104,10 +93,10 @@ public class FileReader {
             int x = currentLine.nextInt();
             int y = currentLine.nextInt();
             gameboard.setPlayerPos(i, new Coordinate(x, y));
-            players[i] = new Player(i, silkBag);
+            players[i] = new Player(i, silkBag, gameboard);
         }
 
-        return new Pair<Gameboard, Player[]>(gameboard, players);
+        return new Pair<>(gameboard, players);
     }
 
     /**

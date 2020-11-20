@@ -85,6 +85,12 @@ public class Gameboard {
 
     public Coordinate[] getSlideLocations() {
         Coordinate test = new Coordinate(-1, 0);
-        return new Coordinate[] {test};
+        Coordinate test2 = new Coordinate(1,-1);
+        Coordinate test3 = new Coordinate(-1,1);
+        return new Coordinate[] {test, test3, test2};
+    }
+
+    public FloorTile TileAt(Coordinate coordinate) {
+        return null;
     }
 }
