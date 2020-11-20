@@ -7,7 +7,7 @@ import static BackEnd.Phase.*;
 
 /***
  * Controls the flow of game, lets the UI know what choices the player has
- * and the state of the game. Also lets the UI tell it the User choices, basicly
+ * and the state of the game. Also lets the UI tell it the User choices, basically
  * acts and an API for the front end.
  * @author Christian Sanger
  */

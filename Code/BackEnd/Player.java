@@ -2,6 +2,10 @@ package BackEnd;
 
 import java.awt.event.ActionEvent;
 
+/**
+ * Stores details about the player while they are in-game, for example their inventory or player number.
+ * @author Brandon Chan
+ */
 public class Player
 {
     /*
