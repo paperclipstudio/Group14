@@ -28,9 +28,9 @@ public class CardController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		Image newCard = new Image("Tee.png");
+		Image newCard = new Image("t_shape.png");
 		if ((new Random()).nextBoolean()) {
-			newCard = new Image("Goal.png");
+			newCard = new Image("goal.png");
 		}
 		if (image == null) {
 			System.out.println("Image is NULL");

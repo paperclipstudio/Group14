@@ -70,15 +70,6 @@ public class FileReader {
         }
 
         //// Filling SilkBag
-        String[] tileTypes = {
-            "Corner",
-            "Straight",
-            "T-Shape",
-            "Fire",
-            "Ice",
-            "Backtrack",
-            "DoubleMove"
-        };
         int[] tileTypeCount = new int[NUM_OF_TILE_TYPES];
         // Reading how many of each tile
         for(int tileType = 0; tileType < NUM_OF_TILE_TYPES; tileType++) {
@@ -102,7 +93,7 @@ public class FileReader {
             int x = currentLine.nextInt();
             int y = currentLine.nextInt();
             gameboard.setPlayerPos(i, new Coordinate(x, y));
-            players[i] = new Player(i, silkBag);
+            players[i] = new Player(i, silkBag, gameboard);
         }
 
         return new Pair<>(gameboard, players);

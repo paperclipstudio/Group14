@@ -1,8 +1,8 @@
+package FrontEnd;
+
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.GameLogic;
-import com.sun.corba.se.spi.transport.CorbaAcceptor;
-import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
@@ -30,15 +29,15 @@ import javafx.util.Duration;
  * @author Chrisitan Sanger
  */
 public class GameScreenController implements Initializable {
+	//TODO Fix the graphical output of tiles.
 	@FXML private HBox cards;
 	@FXML private Pane tiles;
 	@FXML private Button drawButton;
 	@FXML private Label phaseText;
-	private HashMap<String, Image> assets;
 	private int width;
 	private int height;
 	private GameLogic gameLogic;
-	int tileWidth = 50;
+	public static int tileWidth = 50;
 	/***
 	 * Gets all resources for gameScreen
 	 * @param url Url for resources
@@ -47,6 +46,7 @@ public class GameScreenController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		//load assets
+		/*
 		URL cardFile = getClass().getResource("FrontEnd\\Card.fxml");
 		assets = new HashMap<>();
 		String[] listOfAssets = new String[] {
@@ -61,6 +61,8 @@ public class GameScreenController implements Initializable {
 		for (String asset: listOfAssets) {
 			assets.put(asset, new Image(asset + ".png"));
 		}
+
+		 */
 
 		tiles.setTranslateZ(20);
 		tiles.setRotationAxis(new Point3D(10,0,0));
@@ -103,7 +105,7 @@ public class GameScreenController implements Initializable {
 	private void setupFloorPhase() {
 		Coordinate[] locations = gameLogic.getSlideLocations();
 		for (Coordinate coor: locations) {
-			ImageView arrow = new ImageView(assets.get("SlideArrow"));
+			ImageView arrow = Assets.makeArrow();
 			final Rotation direction;
 			final int where;
 			if (coor.getX() == -1){
@@ -183,24 +185,11 @@ public class GameScreenController implements Initializable {
 				// Tile from the game board.
 				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
 				// What is going to be shown on screen
-				ImageView tileView = new ImageView("Error.png");
+				ImageView tileView;
 				// Get correct image
-				tileView.setImage(assets.get(tile.getType()));
-				// Rotate
-				switch (tile.getRotation()) {
-					case UP:
-						tileView.setRotate(0); // Not needed but just for consistency
-						break;
-					case RIGHT:
-						tileView.setRotate(90);
-						break;
-					case DOWN:
-						tileView.setRotate(180);
-						break;
-					case LEFT:
-						tileView.setRotate(270);
-						break;
-				}
+				//tileView.setImage(assets.get(tile.getType().toString()));
+				tileView = Assets.getFloorTileImage(tile);
+
 				// Translate
 				tileView.setTranslateX(x * tileWidth);
 				tileView.setTranslateY(y * tileWidth);
@@ -218,7 +207,6 @@ public class GameScreenController implements Initializable {
 
 		for(Object i : tiles.getChildren().toArray()) {
 			ImageView j = (ImageView) i;
-			System.out.println(j.getId());
 		}
 		// showing the player locations
 		Image player = new Image("player1.png");
