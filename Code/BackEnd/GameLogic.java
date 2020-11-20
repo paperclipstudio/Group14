@@ -172,7 +172,6 @@ public class GameLogic {
 		// Filling fake board with values.
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				//String[] tileTypes = {"Straight", "Corner", "Tee", "Goal"};
 				Rotation rotation = Rotation.UP;
 				switch (r.nextInt(3)) {
 					case 0:
@@ -188,7 +187,7 @@ public class GameLogic {
 						rotation = Rotation.RIGHT;
 						break;
 				}
-				FloorTile newTile = new FloorTile(TileType.values()[r.nextInt(4)], rotation);
+				FloorTile newTile = new FloorTile(TileType.values()[r.nextInt(3)], rotation);
 				tiles[x][y] = newTile;
 			}
 		}

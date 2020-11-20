@@ -3,6 +3,7 @@ package FrontEnd;
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.GameLogic;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -18,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import BackEnd.*;
 import javafx.scene.layout.Pane;
@@ -29,7 +29,6 @@ import javafx.util.Duration;
  * @author Chrisitan Sanger
  */
 public class GameScreenController implements Initializable {
-	//TODO Fix the graphical output of tiles.
 	@FXML private HBox cards;
 	@FXML private Pane tiles;
 	@FXML private Button drawButton;
@@ -45,24 +44,6 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		//load assets
-		/*
-		URL cardFile = getClass().getResource("FrontEnd\\Card.fxml");
-		assets = new HashMap<>();
-		String[] listOfAssets = new String[] {
-			"Corner",
-			"Error",
-			"Goal",
-			"player1",
-			"Straight",
-				"Tee",
-				"SlideArrow"
-		};
-		for (String asset: listOfAssets) {
-			assets.put(asset, new Image(asset + ".png"));
-		}
-
-		 */
 
 		tiles.setTranslateZ(20);
 		tiles.setRotationAxis(new Point3D(10,0,0));
@@ -136,15 +117,14 @@ public class GameScreenController implements Initializable {
 			arrow.setTranslateY(coor.getY() * tileWidth);
 			arrow.setOnMouseClicked((e) -> {
 				arrow.setEffect(new Bloom(0.1));
-				shiftTiles(tiles, direction, where);
+				shiftTiles(direction, where);
 
 			});
 			tiles.getChildren().add(arrow);
 		}
 	}
 
-	private void shiftTiles(Node node, Rotation direction, int location) {
-
+	private void shiftTiles(Rotation direction, int location) {
 		for (Object o : tiles.getChildren().toArray()) {
 			// Skips if the object is null;
 			if (o == null) {
@@ -161,19 +141,31 @@ public class GameScreenController implements Initializable {
 				TranslateTransition smooth = new TranslateTransition();
 				smooth.setNode(tile);
 				smooth.setDuration(new Duration(200));
+				FadeTransition smoothVanish = new FadeTransition(new Duration(200));
+				smoothVanish.setFromValue(100);
+				smoothVanish.setToValue(0);
 				switch (direction) {
 					case RIGHT:
 						if (y == location) {
 							smooth.setByX(tileWidth);
+							//smoothVanish.setNode(tile);
+							if (x == width-1) {
+								smoothVanish.setNode(tile);
+							}
 						}
 						break;
 					case DOWN:
 						if (x == location) {
 							smooth.setByY(tileWidth);
+							if (y == height - 1) {
+								smoothVanish.setNode(tile);
+							}
 						}
 						break;
 				}
+
 				smooth.play();
+				smoothVanish.play();
 			}
 		}
 	}
@@ -182,6 +174,7 @@ public class GameScreenController implements Initializable {
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
+
 				// Tile from the game board.
 				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
 				// What is going to be shown on screen
@@ -205,9 +198,6 @@ public class GameScreenController implements Initializable {
 
 		}
 
-		for(Object i : tiles.getChildren().toArray()) {
-			ImageView j = (ImageView) i;
-		}
 		// showing the player locations
 		Image player = new Image("player1.png");
 		for (Coordinate location: gameLogic.getPlayerLocations()) {

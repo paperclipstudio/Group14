@@ -51,7 +51,7 @@
       <Button id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" text="AddCard" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <Pane fx:id="tiles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="tiles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT" />
    </center>
    <right>
       <Button fx:id="drawButton" mnemonicParsing="false" onAction="#onDrawButton" text="Draw" BorderPane.alignment="CENTER" />
