@@ -73,11 +73,59 @@ public class Gameboard {
     public int getHeight() {
         return height;
     }
+
+    //places a fixed floor tile in the coordinates specified.
     public void placeFixedTile (FloorTile tile, int x, int y) {
         for (int i = 0; i < boardTiles.length; i++){
             for (int j = 0; j < boardTiles[i].length; j++){
                 if (i == x && j == y){
                     boardTiles[i][j] = tile;
+                }
+            }
+        }
+    }
+
+    public static void setGoalCoor(Coordinate goalCoor) {
+        this.goalCoor = goalCoor;
+    }
+
+    public static void getGoalCoor() {
+        return this.goalCoor;
+    }
+
+    //checks to see if a player is on goal by going through all the players' locations to see
+    //if they match the goal coordinates.
+    public boolean isPlayerOnGoal() {
+        int goalX = getGoalCoor().getX();
+        int goalY = getGoalCoor().getY();
+        for (int i = 0; i < playerLocations.length; i++){
+            int playerX = playerLocations[i].getX();
+            int playerY = playerLocations[i].getY();
+            if (playerX == goalX && playerY == goalY){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Tile getPlayerTile(int player) {
+
+    }
+
+    public Coordinate[] getPlayerMoveLocations(int player) {
+        Coordinate[] moveLocations;
+
+    }
+
+    private void setFireCoords(Coordinate location){
+        for (int i = 0; i < boardTiles.length; i++){
+            for (int j = 0; j < boardTiles[i].length; j++){
+                if (i == location.getX() && j == location.getY()){
+                    //Assuming  0,0 is bottom left.
+                    boardTiles[i][j].setFire();
+                    //set fire to boardTiles[i][j] (mid), boardTiles[i+1][j] (right), boardTiles[i-1][j] (left)
+                    //boardTiles[i][j+1] (up), boardTiles[i+1][j+1] (upper right), boardTiles[i-1][j+1] (upper left)
+                    //boardTiles[i][j-1] (down), boardTiles[i+1][j-1] (down right), boardTiles[i-1][j-1] (down left)
                 }
             }
         }
