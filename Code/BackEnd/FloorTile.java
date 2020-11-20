@@ -1,5 +1,6 @@
 package BackEnd;
 public class FloorTile extends Tile {
+
 	boolean	isFixed;
 	TileType type;
 	Rotation rotation;
@@ -14,7 +15,7 @@ public class FloorTile extends Tile {
 		this.rotation = Rotation.UP;
 		//
 		this.isOnFire = false;
-		this.isFrozenis = false;
+		this.isFrozen = false;
 	}
 
 	public FloorTile(TileType type, Rotation rotation) {
@@ -42,7 +43,7 @@ public class FloorTile extends Tile {
 		hasPlayer = player;
 	}
 
-	public int playerOnTile(int player){
+	public int playerOnTile(){
 		return this.hasPlayer;
 	}
 

@@ -1,0 +1,6 @@
+
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ηρά
+O
+java:S1610	"4Convert the abstract class "Tile" into an interface.(ªαΥτύÿÿÿÿ
+R
+java:S1128"=Remove this unused import 'java.util.InputMismatchException'.(έ§1

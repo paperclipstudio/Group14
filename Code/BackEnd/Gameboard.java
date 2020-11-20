@@ -2,15 +2,12 @@ package BackEnd;
 public class Gameboard {
 
     private int width;
-
-
-
     private int height;
     private static Coordinate goalCoor;
     private Coordinate[] playerLocations;
     private Coordinate[] slideLocations;
     private ActionTileLocations[] actionTiles;
-    private Tile[][] boardTiles;
+    private FloorTile[][] boardTiles;
 
 
     public Gameboard (int width, int height) {
@@ -24,7 +21,7 @@ public class Gameboard {
         //TODO Added as a quick fix by George.
         slideLocations = new Coordinate[100];
         //TODO turns out nothing has been initalised.
-        boardTiles = new Tile[100][100];
+        boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
         playerLocations = new Coordinate[100];
         slideLocations[0] = locationOne;
@@ -32,6 +29,7 @@ public class Gameboard {
         slideLocations[2] = locationThree;
         slideLocations[3] = locationFour;
         slideLocations[4] = locationFive;
+
     }
 
     public Coordinate getPlayerPos (int player){
@@ -86,11 +84,12 @@ public class Gameboard {
     }
 
     public static void setGoalCoor(Coordinate goalCoor) {
-        this.goalCoor = goalCoor;
+
+        goalCoor = goalCoor;
     }
 
-    public static void getGoalCoor() {
-        return this.goalCoor;
+    public static Coordinate getGoalCoor() {
+        return goalCoor;
     }
 
     //checks to see if a player is on goal by going through all the players' locations to see
@@ -122,7 +121,7 @@ public class Gameboard {
     private void updatePlayerPos(int player){
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].playerOnTile == player)
+                if (boardTiles[i][j].playerOnTile() == player)
                     playerLocations[player] = new Coordinate(i, j);
             }
         }
