@@ -26,7 +26,7 @@ public class SilkBag {
         int index = randomGenerator.nextInt(allTiles.size());
         if (getTile().getType().equals("FloorTile")) {
            return allTiles.get(index);
-       }
+        }
         else {
             return null;
         }

@@ -144,7 +144,7 @@ public class GameLogic {
 
 	/**
 	 * moves the current player to another location.
-	 * @param location where the player wishs to move.
+	 * @param location where the player wishes to move.
 	 */
 	public void move(Coordinate location) {
 		gameboard.setPlayerPos(currentPlayerNo, location);
@@ -193,7 +193,7 @@ public class GameLogic {
 		}
 	}
 
-	/***
+	/**
 	 * Returns what floor tile is at a given location on the board.
 	 * @param location which tile you want.
 	 * @return tile at location.
