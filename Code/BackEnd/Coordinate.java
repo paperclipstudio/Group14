@@ -47,11 +47,21 @@ public class Coordinate {
     }
 
     /**
-     * THis method sets the y Coordinate.
+     * This method sets the y Coordinate.
      * @param yCoor This parameter would be set as the y Coordinate.
      */
     public void setY(int yCoor){
         y = yCoor;
+    }
+
+    /**
+     * This method sets both the x and y coordinate.
+     * @param x This parameter would be set as the x Coordinate.
+     * @param y This parameter would be set as the y Coordinate.
+     */
+    public void setCoordinate(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
 
