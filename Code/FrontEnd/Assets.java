@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,12 +35,16 @@ public class Assets {
 	/**
 	 * Creates an ImageView of this tile.
 	 * @param tile to create ImageView of
+	 * @param x the X coordinate of this tile
+	 * @param y the Y coordinate of this tile
 	 * @return view of that tile.
 	 */
-	public static ImageView getFloorTileImage(FloorTile tile) {
+	public static ImageView getFloorTileImage(FloorTile tile, int x, int y) {
 		ImageView tileView = new ImageView(get(tile.getType().toString().toLowerCase()));
 		tileView.setFitWidth(GameScreenController.tileWidth);
 		tileView.setFitHeight(GameScreenController.tileWidth);
+		tileView.setTranslateX(x * GameScreenController.tileWidth);
+		tileView.setTranslateY(y * GameScreenController.tileWidth);
 		switch (tile.getRotation()) {
 			case UP:
 				tileView.setRotate(0); // Not needed but just for consistency
@@ -54,10 +59,27 @@ public class Assets {
 				tileView.setRotate(270);
 				break;
 		}
-
+		tileView.setId("tile " + x + " " + y);
 		return tileView;
 	}
+	/**
+	 * Creates an ImageView of this tile.
+	 * @param tile to create ImageView of
+	 * @param coordinate the coordinate of this tile
+	 * @return view of that tile.
+	 */
+	public static ImageView getFloorTileImage(FloorTile tile, Coordinate coordinate) {
+		return getFloorTileImage(tile, coordinate.getX(), coordinate.getY());
+	}
 
+	/**
+	 * Creates an ImageView of this tile.
+	 * @param tile to create ImageView of
+	 * @return view of that tile.
+	 */
+	public static ImageView getFloorTileImage(FloorTile tile) {
+		return getFloorTileImage(tile, 0,0);
+	}
 	/**
 	 * @return Image view of arrow.
 	 */

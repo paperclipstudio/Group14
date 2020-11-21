@@ -117,14 +117,37 @@ public class GameScreenController implements Initializable {
 			arrow.setTranslateY(coor.getY() * tileWidth);
 			arrow.setOnMouseClicked((e) -> {
 				arrow.setEffect(new Bloom(0.1));
-				shiftTiles(direction, where);
+				shiftTiles(direction, where, new FloorTile(TileType.GOAL));
 
 			});
 			tiles.getChildren().add(arrow);
 		}
 	}
 
-	private void shiftTiles(Rotation direction, int location) {
+	private void shiftTiles(Rotation direction, int location, FloorTile newTile) {// Add in new tile.
+		ImageView tileView = Assets.getFloorTileImage(newTile);
+		Coordinate newTileLocation;
+		switch (direction) {
+			case UP:
+				newTileLocation = new Coordinate(location, height);
+				break;
+			case LEFT:
+				newTileLocation = new Coordinate(width, location);
+				break;
+			case DOWN:
+				newTileLocation = new Coordinate(location, -1);
+				break;
+			case RIGHT:
+				newTileLocation = new Coordinate(-1, location);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected value: " + direction);
+		}
+		tileView.setTranslateX(newTileLocation.getX() * tileWidth);
+		tileView.setTranslateY(newTileLocation.getY() * tileWidth);
+		tiles.getChildren().add(tileView);
+
+		// Shift all tiles
 		for (Object o : tiles.getChildren().toArray()) {
 			// Skips if the object is null;
 			if (o == null) {
@@ -168,6 +191,7 @@ public class GameScreenController implements Initializable {
 				smoothVanish.play();
 			}
 		}
+
 	}
 	private void updateBoard() {
 		tiles.getChildren().clear();
@@ -181,17 +205,13 @@ public class GameScreenController implements Initializable {
 				ImageView tileView;
 				// Get correct image
 				//tileView.setImage(assets.get(tile.getType().toString()));
-				tileView = Assets.getFloorTileImage(tile);
-
-				// Translate
-				tileView.setTranslateX(x * tileWidth);
-				tileView.setTranslateY(y * tileWidth);
+				tileView = Assets.getFloorTileImage(tile, x, y);
 
 				// Scale
 				tileView.setFitHeight(tileWidth);
 				tileView.setFitWidth(tileWidth);
 				// set ID
-				tileView.setId("tile " + x + " " + y);
+
 				tiles.getChildren().add(tileView);
 
 			}
