@@ -104,6 +104,13 @@ public class Gameboard {
         return false;
     }
 
+    //this method would be used to help with the movement of the player.
+    private Coordinate checkTileMovement(FloorTile tile, Rotation rotation){
+
+
+        return new Coordinate(0,0)
+    }
+
     /*
     public Tile getPlayerTile(int player) {
 
