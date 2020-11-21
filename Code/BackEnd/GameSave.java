@@ -14,7 +14,4 @@ public class GameSave {
     public void savePlayActionTile(Coordinate location, ActionTile tile) {
 
     }
-    public void saveAddToInv(Tile tile) {
-
-    }
 }
