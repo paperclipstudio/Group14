@@ -43,7 +43,6 @@
                <padding>
                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                </padding>
-               <Pane prefHeight="0.0" prefWidth="0.0"/>
            </HBox>
        </ScrollPane>
    </bottom>

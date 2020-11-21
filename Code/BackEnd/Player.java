@@ -22,9 +22,12 @@ public class Player
      * @param x The starting x coordinate of the Player object
      * @param y The starting y coordinate of the Player object
      */
+    /*
     public Player(int x, int y) {
         location = new Coordinate(x, y);
     }
+
+     */
 
 
     /**

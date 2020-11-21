@@ -66,13 +66,21 @@ public class CardController implements Initializable {
 	 * Rotates the image on the card 90 degrees anti-clockwise
 	 */
 	public void onRotateLeft() {
-		image.setRotate(image.getRotate() - 90);
+		double newAngle = image.getRotate() - 90;
+		if (newAngle < 0) {
+			newAngle += 360;
+		}
+		image.setRotate(newAngle);
 	}
 
 	/***
 	 * Rotates the image on the card 90 degrees clockwise
 	 */
 	public void onRotateRight() {
-		image.setRotate(image.getRotate() + 90);
+		double newAngle = image.getRotate() + 90;
+		if (newAngle >= 360) {
+			newAngle -= 360;
+		}
+		image.setRotate(newAngle);
 	}
 }

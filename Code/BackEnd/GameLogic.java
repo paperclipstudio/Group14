@@ -34,13 +34,10 @@ public class GameLogic {
 		// Set up
 		currentPlayerNo = 0;
 		phase = DRAW;
-		//Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
 		//TODO undo when FileReader Works
-		gameboard = new Gameboard(9,9);//gameItems.getKey();
-		players = new Player[4]; //gameItems.getValue();
-		for (int i = 0; i < 4; i++) {
-			players[i] = new Player(i, i);
-		}
+		gameboard = gameItems.getKey();
+		players = gameItems.getValue();
 		currentPlayer = players[currentPlayerNo];
 	}
 

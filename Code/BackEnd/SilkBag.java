@@ -29,7 +29,6 @@ public class SilkBag {
     public Tile getTile() {
         int index = randomGenerator.nextInt(allTiles.size());
         return allTiles.remove(index);
-
     }
 
     /**

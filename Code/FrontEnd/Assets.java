@@ -2,10 +2,16 @@ package FrontEnd;
 
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
+import BackEnd.Tile;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Used to cache assets and control reading image files.
@@ -88,5 +94,22 @@ public class Assets {
 		arrow.setFitHeight(GameScreenController.tileWidth);
 		arrow.setFitWidth(GameScreenController.tileWidth);
 		return arrow;
+	}
+
+	/**
+	 * Creates a Card which the user is holding
+	 * @param Tile the tile that should be on the card
+	 * @return Card.fxml Object
+	 */
+	public static Node createCard(Tile tile) {
+		Node newCard = null;
+		try {
+			newCard = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\Card.fxml")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ImageView newCardImage = ((ImageView)newCard.lookup("#image"));
+		newCardImage.setImage(Assets.get(tile.getType().toString()));
+		return newCard;
 	}
 }

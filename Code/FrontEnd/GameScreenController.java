@@ -68,7 +68,7 @@ public class GameScreenController implements Initializable {
 		tiles.setRotate(tiles.getRotate() + 10);
 		updateBoard();
 		Phase phase = gameLogic.getGamePhase();
-		phase = Phase.FLOOR;
+		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString());
 		hideAllControls();
 		switch (phase) {
@@ -120,17 +120,18 @@ public class GameScreenController implements Initializable {
 			arrow.setOnMouseClicked((e) -> {
 				arrow.setEffect(new Bloom(0.1));
 				FloorTile playerTileChoice = (FloorTile) gameLogic.drawnCard();
-				switch ((int) cards.getChildren().get(0).getRotate()) {
-					case 0:
-						playerTileChoice.setRotation(UP);
-						break;
-					case 90:
-						playerTileChoice.setRotation(RIGHT);
-						break;
-					case 180:
-						playerTileChoice.setRotation(DOWN);
-						break;
-					case 270:
+				Node choiceCard = cards.getChildren().get(0).lookup("#image");
+				double rotation = choiceCard.getRotate();
+				if (rotation >= 0) {
+					playerTileChoice.setRotation(UP);
+				}
+				if (rotation >= 90) {
+					playerTileChoice.setRotation(RIGHT);
+				}
+				if (rotation >= 180) {
+					playerTileChoice.setRotation(DOWN);
+				}
+				if (rotation >= 270) {
 						playerTileChoice.setRotation(LEFT);
 				}
 				shiftTiles(direction, where, playerTileChoice);
@@ -270,13 +271,8 @@ public class GameScreenController implements Initializable {
 	 */
 	public void onDrawButton() {
 		gameLogic.draw();
-		Node newCard = null;
-		try {
-			newCard = FXMLLoader.load(getClass().getResource("FrontEnd\\Card.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		cards.getChildren().add(newCard);
+
+		cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
 
 		mainLoop();
 	}
