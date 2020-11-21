@@ -39,9 +39,10 @@ public class SilkBag {
     public Tile getFloorTile () {
         int index = randomGenerator.nextInt(allTiles.size());
         //TODO Small change from getTileType -> GetType so it can compile. (Joshua)
-        if (getTile().getType().equals("Corner")|| getTile().getType().equals("Straight")
-                || getTile().getType().equals("T-shaped")|| getTile().getType().equals("Goal") ) {
+        if (getTile().getType() == TileType.CORNER|| getTile().getType()== TileType.STRAIGHT
+                || getTile().getType() == TileType.T_SHAPE|| getTile().getType() == TileType.GOAL ) {
            return allTiles.remove(index);
+
        }
         else {
             return null;
