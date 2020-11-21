@@ -8,7 +8,7 @@ import static BackEnd.Phase.*;
 
 /***
  * Controls the flow of game, lets the UI know what choices the player has
- * and the state of the game. Also lets the UI tell it the User choices, basicly
+ * and the state of the game. Also lets the UI tell it the User choices, basically
  * acts and an API for the front end.
  * @author Christian Sanger
  */
@@ -144,7 +144,7 @@ public class GameLogic {
 
 	/**
 	 * moves the current player to another location.
-	 * @param location where the player wishs to move.
+	 * @param location where the player wishes to move.
 	 */
 	public void move(Coordinate location) {
 		gameboard.setPlayerPos(currentPlayerNo, location);
@@ -155,7 +155,6 @@ public class GameLogic {
 			currentPlayerNo = (currentPlayerNo + 1) % numberOfPlayers;
 			currentPlayer = players[currentPlayerNo];
 		}
-
 	}
 
 	// Added by George to start to print game to screen
@@ -193,7 +192,7 @@ public class GameLogic {
 		}
 	}
 
-	/***
+	/**
 	 * Returns what floor tile is at a given location on the board.
 	 * @param location which tile you want.
 	 * @return tile at location.

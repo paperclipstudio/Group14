@@ -10,8 +10,10 @@ import java.util.Random;
 
 
 public class SilkBag {
-    private ArrayList<Tile> allTiles = new ArrayList<Tile>();
+    private  ArrayList<Tile> allTiles = new ArrayList<>();
     private Random randomGenerator = new Random();
+
+
 
     /**
      * Get a tile from bag.
@@ -19,13 +21,20 @@ public class SilkBag {
      */
     public Tile getTile() {
         int index = randomGenerator.nextInt(allTiles.size());
-        return allTiles.get(index);
+        return allTiles.remove(index);
+
     }
 
+    /**
+     * Gets a floor tile from bag for setup
+     * @return a Tile
+     */
     public Tile getFloorTile () {
         int index = randomGenerator.nextInt(allTiles.size());
-        if (getTile().getType().equals("FloorTile")) {
-           return allTiles.get(index);
+        //TODO Small change from getTileType -> GetType so it can compile. (Joshua)
+        if (getTile().getType().equals("Corner")|| getTile().getType().equals("Straight")
+                || getTile().getType().equals("T-shaped")|| getTile().getType().equals("Goal") ) {
+           return allTiles.remove(index);
        }
         else {
             return null;
@@ -38,5 +47,9 @@ public class SilkBag {
      */
     public void insertTile (Tile tile) {
         allTiles.add(tile);
+    }
+
+    private void removeTile(int index){
+        allTiles.remove(index);
     }
 }
