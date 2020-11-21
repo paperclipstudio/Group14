@@ -3,87 +3,106 @@ package BackEnd;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+/**
+ * Stores details about the player while they are in-game, for example their inventory or player number.
+ * @author Brandon Chan
+ * @version 1.0
+ */
 public class Player
 {
-    /*
-    private static int x;
-    private static int y;
-    ArrayList<Tile> playerInventory = new ArrayList<Tile>();
-    */
+    Coordinate location;
     Tile lastDrawnTile;
     ArrayList<Tile> inventory;
     SilkBag silkBag;
     int playerNumber;
     private boolean backTracked;
 
-    /*
-    Boolean backtrackUsedOnMe = false;
-
-    public Player (int x, int y){
-        this.x = x;
-        this.y = y;
-    }
-*/
-    public Player(int no, int playerNo)
-    {
-        playerNumber = playerNo;
+    /**
+     * Constructor for storing the starting coordinates of the player.
+     * @param x The starting x coordinate of the Player object
+     * @param y The starting y coordinate of the Player object
+     */
+    public Player(int x, int y) {
+        location = new Coordinate(x, y);
     }
 
+
+    /**
+     * idk what this is
+     * @param playerNumber
+     * @param silkBag
+     * @param gameboard
+     */
     public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
         this.playerNumber = playerNumber;
     }
 
 
-    /*
-		public ArrayList<Tile> getInventory ()
-		{
-			return playerInventory;
-		}
-	*/
-    public void drawTile()
-    {
+    /**
+     * Method to get the action tiles in the player's inventory.
+     * @return inventory The action tiles in the player's inventory.
+     */
+    public ArrayList<Tile> getInventory () {
+        return inventory;
+    }
+
+
+    /**
+     *
+     */
+    public void drawTile()    {
         if (isHolding() != null) {
             inventory.add(isHolding());
         }
        lastDrawnTile = silkBag.getTile();
     }
 
-    public void playFloorTile (Coordinate slideLocations, Rotation rotation)
-    {
-        // if !(slideLocations in GAMEBOARD.getFrozenEffectedArea())  need to check entire row/column
-        // {
-        //      GAMEBOARD.slideTile(slideLocations);
-        // }
+
+    /**
+     * Play a floor tile in a given location and rotation.
+     * @param slideLocations Where the player wants to slide a tile in from
+     * @param rotation What orientation the player wants the tile to be slid in at
+     */
+    public void playFloorTile (Coordinate slideLocations, Rotation rotation)    {
+
+
+        lastDrawnTile = null;
     }
 
-    public void playActionTile (Coordinate location, ActionTile tile)
-    {
+
+    /**
+     * Play the selected action tile in the given location (provided it needs to be)
+     * @param location where the player wants to use the action
+     * @param tile type of action tile
+     */
+    public void playActionTile (Coordinate location, Tile tile)    {
+
+        inventory.remove(tile);
     }
 
+
+    /**
+     * Returns the player's last drawn tile
+     * @return lastDrawnTile The player's last drawn tile
+     */
     public Tile isHolding() {
         return lastDrawnTile;
     }
 
+
+    /**
+     * Gets whether the player has had the backtrack action used on them in
+     * the history of the current game.
+     * @return backTracked Record of if backtrack action has been used on this player
+     */
     public boolean hasBeenBacktracked() {
         return backTracked;
     }
 /*
-    public void movePlayer (Coor location)
+    public void movePlayer (Coordinate location)
     {
         // GAMEBOARD.movePlayer(playerNumber, location);
     }
-
-    private void addToInventory (Tile tile)
-    {
-        playerInventory.add(tile);
-        lastDrawnTile = tile;
-    }
-
-    private void removeFromInventory (Tile tile)
-    {
-        playerInventory.remove(new Tile(tile));
-    }
-
-     */
+*/
 }

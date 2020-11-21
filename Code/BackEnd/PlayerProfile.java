@@ -2,6 +2,10 @@ package BackEnd;
 
 import javafx.scene.image.Image;
 
+/**
+ * Stores the data about a player's profile like their name or scores across maps.
+ * @author Brandon Chan
+ */
 public class PlayerProfile
 {
     Player player;
@@ -52,10 +56,10 @@ public class PlayerProfile
         losses[map] = losses[map] + 1;
     }
 
-    // public String toString ()
-    // {
-    //      getName();
-    //      getWins();
-    //      getLosses();
-    // }
+    /* Small improvements to the structure. (Joshua)
+    public String toString () {
+        return getName() + "'s Profile:"+ "\n"
+                + getWins() + " Wins" + "\n"
+                + getLosses() + " Losses";
+    } */
 }

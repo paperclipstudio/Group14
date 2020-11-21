@@ -25,7 +25,7 @@ public class FileReader {
     private static int lineCounter = 0;
     private static int playerCounter = 0;
     private static final int NUM_OF_TILE_TYPES = 7;
-    private static final int NUM_OF_FLOOR_TYPES = 3; // Not including goal tile
+    private static final int NUM_OF_FLOOR_TYPES = 3; //Not including goal tile
     private static final int MAX_NUM_OF_PLAYERS = 4;
     private static Gameboard gameboard;
 
