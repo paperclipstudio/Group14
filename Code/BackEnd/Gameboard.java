@@ -40,7 +40,8 @@ public class Gameboard {
     }
 
     public void playFloorTile (Coordinate location, FloorTile tileType){
-    // Why are we using a loop here? (Joshua)
+        // Loop based off slide location length? Could use a loop based off width and height depending
+        // on whether it was slid in from vertical or horizontal. (Joshua)
         for (int i = 0; i < slideLocations.length; i++){
             if (slideLocations[i].getX() == location.getX() && slideLocations[i].getY() == location.getY()){
                 if (location.getX() == -1){
