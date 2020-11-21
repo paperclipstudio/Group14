@@ -24,6 +24,8 @@ import BackEnd.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import static BackEnd.Rotation.*;
+
 /***
  * Use to control the GameScreen scene.
  * @author Chrisitan Sanger
@@ -103,7 +105,7 @@ public class GameScreenController implements Initializable {
 				where = coor.getX();
 			} else if (coor.getY() == height) {
 				arrow.setRotate(270);
-				direction = Rotation.UP;
+				direction = UP;
 				where = coor.getY();
 			} else {
 				direction = Rotation.DOWN;
@@ -117,15 +119,29 @@ public class GameScreenController implements Initializable {
 			arrow.setTranslateY(coor.getY() * tileWidth);
 			arrow.setOnMouseClicked((e) -> {
 				arrow.setEffect(new Bloom(0.1));
-				shiftTiles(direction, where, new FloorTile(TileType.GOAL));
+				FloorTile playerTileChoice = (FloorTile) gameLogic.drawnCard();
+				switch ((int) cards.getChildren().get(0).getRotate()) {
+					case 0:
+						playerTileChoice.setRotation(UP);
+						break;
+					case 90:
+						playerTileChoice.setRotation(RIGHT);
+						break;
+					case 180:
+						playerTileChoice.setRotation(DOWN);
+						break;
+					case 270:
+						playerTileChoice.setRotation(LEFT);
+				}
+				shiftTiles(direction, where, playerTileChoice);
 
 			});
 			tiles.getChildren().add(arrow);
 		}
 	}
 
-	private void shiftTiles(Rotation direction, int location, FloorTile newTile) {// Add in new tile.
-		ImageView tileView = Assets.getFloorTileImage(newTile);
+	private void shiftTiles(Rotation direction, int location, FloorTile newTile) {
+		// Add in new tile.
 		Coordinate newTileLocation;
 		switch (direction) {
 			case UP:
@@ -143,8 +159,7 @@ public class GameScreenController implements Initializable {
 			default:
 				throw new IllegalStateException("Unexpected value: " + direction);
 		}
-		tileView.setTranslateX(newTileLocation.getX() * tileWidth);
-		tileView.setTranslateY(newTileLocation.getY() * tileWidth);
+		ImageView tileView = Assets.getFloorTileImage(newTile, newTileLocation);
 		tiles.getChildren().add(tileView);
 
 		// Shift all tiles
@@ -193,6 +208,7 @@ public class GameScreenController implements Initializable {
 		}
 
 	}
+
 	private void updateBoard() {
 		tiles.getChildren().clear();
 		// showing the tiles
@@ -270,9 +286,9 @@ public class GameScreenController implements Initializable {
 	 */
 	public void onButtonPressed() {
 		Node newCard = null;
-
+		System.out.println("Test Button");
 		try {
-			newCard = FXMLLoader.load(getClass().getResource("FrontEnd\\Card.fxml"));
+			newCard = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\Card.fxml"));
 		} catch (IOException e) {
 			System.out.println("Fail to load Card class due to:" + e.getCause());
 		}

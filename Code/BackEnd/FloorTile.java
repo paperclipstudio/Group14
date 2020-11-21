@@ -55,4 +55,7 @@ public class FloorTile extends Tile {
 		this.isFrozen = true;
 	}
 
+	public void setRotation(Rotation up) {
+	}
+
 }

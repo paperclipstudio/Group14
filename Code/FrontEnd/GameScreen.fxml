@@ -48,7 +48,7 @@
        </ScrollPane>
    </bottom>
    <left>
-      <Button id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" text="AddCard" BorderPane.alignment="CENTER" />
+      <Button prefWidth="100.0" id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" text="AddCard" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <Pane fx:id="tiles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT" />
