@@ -1,25 +1,0 @@
-
-i	java:S100°"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Ôþßùÿÿÿÿ
-]	java:S125p"<This block of commented-out lines of code should be removed.(¹ò¹Ñÿÿÿÿÿ8ƒàƒ½Þ.
-M
-java:S1135"2Complete the task associated to this TODO comment.(þêèàùÿÿÿÿ
-W
-java:S1144–"4Remove this unused private "setFreezeCoords" method.(çˆ’Îýÿÿÿÿ8ì®Ñ¼Þ.
-M
-java:S1172°"1Remove this unused method parameter "coordinate".(¿Ôþßùÿÿÿÿ
-J
-java:S1068"/Remove this unused "actionTiles" private field.(‡Ê‹ûÿÿÿÿ
-q
-java:S39231"[Remove this conditional structure or edit its code blocks so that they're not all the same.(Ôõ·ø
-M
-java:S1135"2Complete the task associated to this TODO comment.(ÆÓ®æþÿÿÿÿ
-n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
-Q
-java:S1144z"4Remove this unused private "updatePlayerPos" method.(£òùº8‡£½Þ.
-E
-java:S1172-"/Remove this unused method parameter "tileType".(é‰ç€
-V	java:S125@"<This block of commented-out lines of code should be removed.(ïŸÜ•úÿÿÿÿ
-H
-java:S1135"2Complete the task associated to this TODO comment.(²¸³Š
-P
-java:S1144ƒ"2Remove this unused private "setFireCoords" method.(ÊÌ8³Í¦»Þ.

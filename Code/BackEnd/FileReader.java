@@ -60,7 +60,7 @@ public class FileReader {
 
         for (int i= 0; i < numberOfFixedTiles; i++) {
            currentLine = new Scanner(in.nextLine());
-           TileType tileType = TileType.valueOf(currentLine.next());
+           TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
            int x = currentLine.nextInt();
            int y = currentLine.nextInt();
            int rotationInt = currentLine.nextInt();
