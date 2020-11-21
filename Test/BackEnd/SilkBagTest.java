@@ -1,5 +1,6 @@
 package BackEnd;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import BackEnd.TileType;
 
@@ -15,15 +16,16 @@ class SilkBagTest {
 		assertEquals(silkBag.getTile().getType(), FIRE);
 	}
 
+	@RepeatedTest()
+
 	@Test
 	void getFloorTile() {
 		SilkBag silkBag = new SilkBag();
 		silkBag.insertTile(Tile.createTile(FIRE));
 		silkBag.insertTile(Tile.createTile(FROZEN));
+		silkBag.insertTile(Tile.createTile(CORNER));
 		silkBag.insertTile(Tile.createTile(BACKTRACK));
-	}
+		assertEquals(silkBag.getFloorTile().getType(), CORNER);
 
-	@Test
-	void insertTile() {
 	}
 }

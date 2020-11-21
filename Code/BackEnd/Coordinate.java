@@ -64,6 +64,15 @@ public class Coordinate {
         this.y = y;
     }
 
+    /**
+     * Checks if too coordinates are equal.
+     * @param input coordinate to check
+     * @return true if showing the same location.
+     */
+    public boolean equals(Coordinate input) {
+        return (x == input.getX()) && (y == input.getY());
+    }
+
 
 
 }

@@ -40,6 +40,9 @@ class GameboardTest {
 
 	@Test
 	void setPlayerPos() {
+		Coordinate coor1 = new Coordinate(2,2);
+		Coordinate coor2 = new Coordinate(0,1);
+		gb.setPlayerPos(2, coor1);
 	}
 
 	@Test
@@ -74,4 +77,47 @@ class GameboardTest {
 	}
 
 
+	@Test
+	void testGetPlayerPos() {
+	}
+
+	@Test
+	void testSetPlayerPos() {
+	}
+
+	@Test
+	void testPlayFloorTile() {
+	}
+
+	@Test
+	void testGetWidth() {
+	}
+
+	@Test
+	void testGetHeight() {
+	}
+
+	@Test
+	void testPlaceFixedTile() {
+	}
+
+	@Test
+	void setGoalCoor() {
+	}
+
+	@Test
+	void getGoalCoor() {
+	}
+
+	@Test
+	void isPlayerOnGoal() {
+	}
+
+	@Test
+	void testGetSlideLocations() {
+	}
+
+	@Test
+	void tileAt() {
+	}
 }

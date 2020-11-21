@@ -40,12 +40,30 @@ class PlayerTest {
 	@Test
 	void playActionTile() {
 		player.drawTile();
+		//Silk bag empty
 		silkBag.insertTile(Tile.createTile(FROZEN));
-		player.playActionTile(new Coordinate(0,0), new ActionTile(FIRE));
-		assertFalse(board.TileAt(new Coordinate(0,0)).onFire());
-		assertFalse(board.TileAt(new Coordinate(0,0)).isFrozen());
+		//silk bag just has Frozen tile.
+		// now play valid tile.
 		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN));
+		// it should now be frozen.
+		assertTrue(board.TileAt(new Coordinate(0,0)).isFrozen());
+	}
+
+	@Test
+	void playInvalidActionTile() {
+		player.drawTile();
+		//Silk bag empty
+		silkBag.insertTile(Tile.createTile(FROZEN));
+		//silk bag just has Frozen tile.
+		player.playActionTile(new Coordinate(0,0), new ActionTile(FIRE));
+		// Player plays invalid card.
+		assertFalse(board.TileAt(new Coordinate(0,0)).onFire());
+		// check that its not frozen.
 		assertFalse(board.TileAt(new Coordinate(0,0)).isFrozen());
+		// now play valid tile.
+		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN));
+		// it should now be frozen.
+		assertTrue(board.TileAt(new Coordinate(0,0)).isFrozen());
 	}
 
 	@Test
