@@ -108,7 +108,7 @@ public class Gameboard {
     private Coordinate checkTileMovement(FloorTile tile, Rotation rotation){
 
 
-        return new Coordinate(0,0)
+        return new Coordinate(0,0);
     }
 
     /*

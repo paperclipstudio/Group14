@@ -13,6 +13,13 @@ public class SilkBag {
     private  ArrayList<Tile> allTiles = new ArrayList<>();
     private Random randomGenerator = new Random();
 
+	public SilkBag(int seed) {
+	    randomGenerator = new Random(seed);
+	}
+
+    public SilkBag() {
+
+    }
 
 
     /**

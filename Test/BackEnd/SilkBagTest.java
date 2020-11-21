@@ -16,7 +16,25 @@ class SilkBagTest {
 		assertEquals(silkBag.getTile().getType(), FIRE);
 	}
 
-	@RepeatedTest()
+	@RepeatedTest(10)
+	public void testRandom() {
+		SilkBag silkBag1 = new SilkBag(123456);
+		SilkBag silkBag2 = new SilkBag(789101);
+		for (int i = 0; i < values().length; i++) {
+			silkBag1.insertTile(Tile.createTile(values()[i]));
+			silkBag1.insertTile(Tile.createTile(values()[i]));
+			silkBag2.insertTile(Tile.createTile(values()[i]));
+			silkBag2.insertTile(Tile.createTile(values()[i]));
+		}
+		int matchCount = 0;
+		for (int i = 0; i < values().length; i++) {
+			if (silkBag1.getTile().getType() == silkBag2.getTile().getType()) {
+				matchCount++;
+			}
+		}
+		assertTrue(matchCount < 3);
+
+	}
 
 	@Test
 	void getFloorTile() {

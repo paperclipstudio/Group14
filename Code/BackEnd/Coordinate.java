@@ -73,6 +73,20 @@ public class Coordinate {
         return (x == input.getX()) && (y == input.getY());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o instanceof Coordinate) {
+            return false;
+        }
+
+        Coordinate coor = (Coordinate) o;
+        return this.equals(coor);
+    }
+
 
 
 }

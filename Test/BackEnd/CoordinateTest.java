@@ -9,8 +9,7 @@ class CoordinateTest {
 	public void equals() {
 		Coordinate coor1 = new Coordinate(2,3);
 		Coordinate coor2 = new Coordinate(2,3);
-		assertTrue(coor1.equals(coor2));
-		assertTrue(coor2.equals(coor1));
+		assertEquals(coor1, coor2);
 
 	}
 

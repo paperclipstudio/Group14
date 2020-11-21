@@ -12,5 +12,10 @@ class FileReaderTest {
 		Player[] players = output.getValue();
 		assertEquals(8, gameboard.getWidth());
 		assertEquals(10, gameboard.getHeight());
+
+		assertTrue(new Coordinate(0,0) == gameboard.getPlayerPos(0));
+		assertTrue(new Coordinate(0,9) == gameboard.getPlayerPos(1));
+		assertTrue(new Coordinate(7,9) == gameboard.getPlayerPos(2));
+		assertTrue(new Coordinate(7,0) == gameboard.getPlayerPos(3));
 	}
 }
