@@ -18,7 +18,7 @@ public class Player
     private boolean backTracked;
 
     /**
-     * Constructor for storing the starting coordinates of the player
+     * Constructor for storing the starting coordinates of the player.
      * @param x The starting x coordinate of the Player object
      * @param y The starting y coordinate of the Player object
      */

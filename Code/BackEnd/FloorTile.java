@@ -35,7 +35,7 @@ public class FloorTile extends Tile {
 		return isOnFire;
 	}
 
-	public Boolean isfrozen() {
+	public Boolean isFrozen() {
 		return isFrozen;
 	}
 

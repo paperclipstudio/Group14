@@ -1,5 +1,4 @@
 package BackEnd;
-
 import java.util.InputMismatchException;
 /**
  * This represents an abstract class tile to be put on the Gameboard.
@@ -33,7 +32,6 @@ public abstract class Tile {
        }
        return result;
     }
-
     /**
      * returns the type of tile.
      * @return tile type string.

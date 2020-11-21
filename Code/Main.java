@@ -27,6 +27,7 @@ public class Main extends Application {
      * Only starts javaFX
      * @param args doesn't use any arguments right now.
      */
+
     public static void main(String[] args) {
         launch(args);
     }

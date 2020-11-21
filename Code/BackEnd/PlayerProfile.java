@@ -56,10 +56,10 @@ public class PlayerProfile
         losses[map] = losses[map] + 1;
     }
 
-    // public String toString ()
-    // {
-    //      getName();
-    //      getWins();
-    //      getLosses();
-    // }
+    /* Small improvements to the structure. (Joshua)
+    public String toString () {
+        return getName() + "'s Profile:"+ "\n"
+                + getWins() + " Wins" + "\n"
+                + getLosses() + " Losses";
+    } */
 }

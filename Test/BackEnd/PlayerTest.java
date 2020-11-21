@@ -35,7 +35,6 @@ class PlayerTest {
 		assertNotNull(tile);
 		assertEquals(CORNER, tile.getType());
 		assertEquals(Rotation.UP, tile.getRotation());
-
 	}
 
 	@Test
@@ -44,9 +43,9 @@ class PlayerTest {
 		silkBag.insertTile(Tile.createTile(FROZEN));
 		player.playActionTile(new Coordinate(0,0), new ActionTile(FIRE));
 		assertFalse(board.TileAt(new Coordinate(0,0)).onFire());
-		assertFalse(board.TileAt(new Coordinate(0,0)).Frozen());
+		assertFalse(board.TileAt(new Coordinate(0,0)).isFrozen());
 		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN));
-		assertFalse(board.TileAt(new Coordinate(0,0)).Frozen());
+		assertFalse(board.TileAt(new Coordinate(0,0)).isFrozen());
 	}
 
 	@Test
@@ -58,7 +57,5 @@ class PlayerTest {
 	@Test
 	void hasBeenBacktracked() {
 		player.hasBeenBacktracked();
-
-
 	}
 }

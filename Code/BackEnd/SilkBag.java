@@ -1,3 +1,4 @@
+package BackEnd;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ import java.util.Random;
 
 
 public class SilkBag {
-    private  ArrayList<Tile> allTiles = new ArrayList<Tile>();
+    private  ArrayList<Tile> allTiles = new ArrayList<>();
     private Random randomGenerator = new Random();
 
 
@@ -30,8 +31,9 @@ public class SilkBag {
      */
     public Tile getFloorTile () {
         int index = randomGenerator.nextInt(allTiles.size());
-        if (getTile().getTileType().equals("Corner")|| getTile().getTileType().equals("Straight")
-                || getTile().getTileType().equals("T-shaped")|| getTile().getTileType().equals("Goal") ) {
+        //TODO Small change from getTileType -> GetType so it can compile. (Joshua)
+        if (getTile().getType().equals("Corner")|| getTile().getType().equals("Straight")
+                || getTile().getType().equals("T-shaped")|| getTile().getType().equals("Goal") ) {
            return allTiles.remove(index);
        }
         else {

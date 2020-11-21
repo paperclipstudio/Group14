@@ -155,7 +155,6 @@ public class GameLogic {
 			currentPlayerNo = (currentPlayerNo + 1) % numberOfPlayers;
 			currentPlayer = players[currentPlayerNo];
 		}
-
 	}
 
 	// Added by George to start to print game to screen

@@ -29,7 +29,6 @@ public class Gameboard {
         slideLocations[2] = locationThree;
         slideLocations[3] = locationFour;
         slideLocations[4] = locationFive;
-
     }
 
     public Coordinate getPlayerPos (int player){
@@ -41,7 +40,7 @@ public class Gameboard {
     }
 
     public void playFloorTile (Coordinate location, FloorTile tileType){
-
+    // Why are we using a loop here? (Joshua)
         for (int i = 0; i < slideLocations.length; i++){
             if (slideLocations[i].getX() == location.getX() && slideLocations[i].getY() == location.getY()){
                 if (location.getX() == -1){
@@ -51,17 +50,15 @@ public class Gameboard {
                     //move everything to the left.
                 }
                 else if (location.getY() == -1){
-                    //move everything up
+                    //move everything up.
                 }
                 else{
-                    //move everything down
+                    //move everything down.
                 }
             }
         }
-
         //Tile topLeft = boardTiles[0][height-1];
         //System.out.println(topLeft.getType());
-
     }
 
     public int getWidth() {
@@ -84,7 +81,6 @@ public class Gameboard {
     }
 
     public static void setGoalCoor(Coordinate goalCoor) {
-
         goalCoor = goalCoor;
     }
 
@@ -114,7 +110,6 @@ public class Gameboard {
 
     public Coordinate[] getPlayerMoveLocations(int player) {
         Coordinate[] moveLocations;
-
     }
     */
 
@@ -131,7 +126,7 @@ public class Gameboard {
         for (int i = 0; i < boardTiles.length; i++){
             for (int j = 0; j < boardTiles[i].length; j++){
                 if (i == location.getX() && j == location.getY()){
-                    //Assuming  0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
+                    //Assuming 0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
                     boardTiles[i][j].setFire(); //mid
                     boardTiles[i+1][j].setFire(); //right
                     boardTiles[i-1][j].setFire(); //left
