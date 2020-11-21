@@ -37,7 +37,6 @@ public class SilkBag {
      */
     public Tile getFloorTile () {
         Tile tile = getTile();
-        //TODO Small change from getTileType -> GetType so it can compile. (Joshua)
         if (tile instanceof FloorTile == false ) {
            getFloorTile();
        }
