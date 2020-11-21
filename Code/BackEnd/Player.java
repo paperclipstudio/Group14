@@ -3,6 +3,9 @@ package BackEnd;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import static BackEnd.TileType.FIRE;
+import static BackEnd.TileType.FROZEN;
+
 /**
  * Stores details about the player while they are in-game, for example their inventory or player number.
  * @author Brandon Chan
@@ -16,6 +19,7 @@ public class Player
     SilkBag silkBag;
     int playerNumber;
     private boolean backTracked;
+    Gameboard gameboard;
 
     /**
      * Constructor for storing the starting coordinates of the player.
@@ -31,14 +35,15 @@ public class Player
 
 
     /**
-     * idk what this is
-     * @param playerNumber
-     * @param silkBag
-     * @param gameboard
+     * Create a player and give them the silk bag and gameboard references.
+     * @param playerNumber The player's number, used to distinguish who's turn it is.
+     * @param silkBag Reference to the game's silk bag object.
+     * @param gameboard Reference to the game's gameboard object.
      */
     public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
         this.playerNumber = playerNumber;
+        this.gameboard = gameboard;
     }
 
 
@@ -52,13 +57,13 @@ public class Player
 
 
     /**
-     *
+     * Draw a tile - if the player's previous action card draw is still in its grace period, add it to inventory first.
      */
     public void drawTile()    {
         if (isHolding() != null) {
             inventory.add(isHolding());
         }
-       lastDrawnTile = silkBag.getTile();
+        lastDrawnTile = silkBag.getTile();
     }
 
 
@@ -68,7 +73,7 @@ public class Player
      * @param rotation What orientation the player wants the tile to be slid in at
      */
     public void playFloorTile (Coordinate slideLocations, Rotation rotation)    {
-
+        //TODO call a playFloorTile function from the gameboard
 
         lastDrawnTile = null;
     }
@@ -79,8 +84,9 @@ public class Player
      * @param location where the player wants to use the action
      * @param tile type of action tile
      */
-    public void playActionTile (Coordinate location, Tile tile)    {
-
+    public void playActionTile (Coordinate location, ActionTile tile)    {
+        //TODO call a playActionTile function from the gameboard
+        gameboard.playActionTile();
         inventory.remove(tile);
     }
 
@@ -102,10 +108,4 @@ public class Player
     public boolean hasBeenBacktracked() {
         return backTracked;
     }
-/*
-    public void movePlayer (Coordinate location)
-    {
-        // GAMEBOARD.movePlayer(playerNumber, location);
-    }
-*/
 }
