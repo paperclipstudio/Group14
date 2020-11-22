@@ -24,7 +24,7 @@ public class GameLogic {
 
 	// Special flags
 	// True if player gets two moves.
-	boolean doubleMove = false;
+	boolean doubleMove;
 
 	/**
 	 * Creates a new game from the given board file
@@ -187,6 +187,7 @@ public class GameLogic {
 				tiles[x][y] = newTile;
 			}
 		}
+		doubleMove = false;
 	}
 
 	/**
@@ -211,5 +212,26 @@ public class GameLogic {
 	 */
 	public int getHeight() {
 		return height;
+	}
+
+	/**
+	 * Returns all Action tiles the current player can use
+	 * @return array of all playable tiles.
+	 */
+	public ActionTile[] getActionCards() {
+		//temp return result;
+		ActionTile[] result = new ActionTile[4];
+		result[0] = new ActionTile(TileType.DOUBLE_MOVE);
+		result[1] = new ActionTile(TileType.BACKTRACK);
+		result[2] = new ActionTile(TileType.FIRE);
+		result[3] = new ActionTile(TileType.FROZEN);
+		return result;
+	}
+
+	/**
+	 * Says that double move action tile has been played.
+	 */
+	private void setDoubleMove() {
+		doubleMove = true;
 	}
 }

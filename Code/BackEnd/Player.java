@@ -18,7 +18,6 @@ public class Player
     private boolean backTracked;
 
     /**
-     * Constructor for storing the starting coordinates of the player.
      * @param x The starting x coordinate of the Player object
      * @param y The starting y coordinate of the Player object
      */
@@ -26,19 +25,20 @@ public class Player
     public Player(int x, int y) {
         location = new Coordinate(x, y);
     }
-
      */
 
 
     /**
-     * idk what this is
-     * @param playerNumber
-     * @param silkBag
-     * @param gameboard
+     * Created players
+     *
+     * @param playerNumber Which player this is
+     * @param silkBag what bag to draw from.
+     * @param gameboard what game board to play on.
      */
     public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
         this.playerNumber = playerNumber;
+        this.inventory = new ArrayList<>();
     }
 
 

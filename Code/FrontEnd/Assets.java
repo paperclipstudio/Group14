@@ -5,8 +5,11 @@ import BackEnd.FloorTile;
 import BackEnd.Tile;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,11 +33,12 @@ public class Assets {
 	 */
 	private static Image get(String name) {
 		System.out.println("Finding " + name + EXT);
-		Image image = cache.get(name);
+		Image image = cache.get(name.toLowerCase());
 		if (image == null) {
 			image = new Image(name + EXT);
 			cache.put(name, image);
 		}
+
 		return image;
 	}
 
@@ -51,6 +55,7 @@ public class Assets {
 		tileView.setFitHeight(GameScreenController.tileWidth);
 		tileView.setTranslateX(x * GameScreenController.tileWidth);
 		tileView.setTranslateY(y * GameScreenController.tileWidth);
+
 		switch (tile.getRotation()) {
 			case UP:
 				tileView.setRotate(0); // Not needed but just for consistency
@@ -93,23 +98,31 @@ public class Assets {
 		ImageView arrow = new ImageView(get("slide_arrow"));
 		arrow.setFitHeight(GameScreenController.tileWidth);
 		arrow.setFitWidth(GameScreenController.tileWidth);
+		arrow.setOnMouseEntered(e -> arrow.setEffect(new Bloom(0.1)));
+		arrow.setOnMouseExited(e  -> arrow.setEffect(new Bloom(999)));
 		return arrow;
 	}
 
 	/**
 	 * Creates a Card which the user is holding
-	 * @param Tile the tile that should be on the card
+	 * @param tile the tile that should be on the card
 	 * @return Card.fxml Object
 	 */
 	public static Node createCard(Tile tile) {
-		Node newCard = null;
+		final Node newCard;
+		Node newCard1;
 		try {
-			newCard = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\Card.fxml")));
+			newCard1 = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\Card.fxml")));
 		} catch (IOException e) {
-			e.printStackTrace();
+			newCard1 = null;
 		}
+		newCard = newCard1;
 		ImageView newCardImage = ((ImageView)newCard.lookup("#image"));
 		newCardImage.setImage(Assets.get(tile.getType().toString()));
+		newCard.setOnMouseEntered((e) -> {
+			newCard.setEffect(new DropShadow(20, 0, 20, Color.BLACK));
+		});
+		newCard.setOnMouseExited(e -> newCard.setEffect(null));
 		return newCard;
 	}
 }

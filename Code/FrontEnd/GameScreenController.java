@@ -6,6 +6,7 @@ import BackEnd.GameLogic;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,15 +17,21 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Function;
+
 import BackEnd.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import static BackEnd.Phase.MOVE;
 import static BackEnd.Rotation.*;
+import static BackEnd.TileType.DOUBLE_MOVE;
 
 /***
  * Use to control the GameScreen scene.
@@ -37,6 +44,7 @@ public class GameScreenController implements Initializable {
 	@FXML private Label phaseText;
 	private int width;
 	private int height;
+	public Phase phase;
 	private GameLogic gameLogic;
 	public static int tileWidth = 50;
 	/***
@@ -51,6 +59,7 @@ public class GameScreenController implements Initializable {
 		tiles.setRotationAxis(new Point3D(10,0,0));
 		tiles.setRotate(10);
 		startNewGame("ExampleInput.txt");
+		updateBoard();
 		mainLoop();
 	}
 
@@ -66,8 +75,7 @@ public class GameScreenController implements Initializable {
 	private void mainLoop() {
 
 		tiles.setRotate(tiles.getRotate() + 10);
-		updateBoard();
-		Phase phase = gameLogic.getGamePhase();
+		phase = gameLogic.getGamePhase();
 		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString());
 		hideAllControls();
@@ -79,8 +87,10 @@ public class GameScreenController implements Initializable {
 				setupFloorPhase();
 				break;
 			case ACTION:
+				setupActionPhase();
 				break;
 			case MOVE:
+				setupMovePhase();
 				break;
 		}
 	}
@@ -117,8 +127,8 @@ public class GameScreenController implements Initializable {
 			arrow.setFitHeight(tileWidth);
 			arrow.setTranslateX(coor.getX() * tileWidth);
 			arrow.setTranslateY(coor.getY() * tileWidth);
+
 			arrow.setOnMouseClicked((e) -> {
-				arrow.setEffect(new Bloom(0.1));
 				FloorTile playerTileChoice = (FloorTile) gameLogic.drawnCard();
 				Node choiceCard = cards.getChildren().get(0).lookup("#image");
 				double rotation = choiceCard.getRotate();
@@ -135,6 +145,8 @@ public class GameScreenController implements Initializable {
 						playerTileChoice.setRotation(LEFT);
 				}
 				shiftTiles(direction, where, playerTileChoice);
+				gameLogic.floor(playerTileChoice, coor);
+				mainLoop();
 
 			});
 			tiles.getChildren().add(arrow);
@@ -263,9 +275,67 @@ public class GameScreenController implements Initializable {
 	 * hides all controls ready for when mainloop shows the correct ones.
 	 */
 	private void hideAllControls() {
+		// Draw controls
 		drawButton.setVisible(false);
+		// Floor controls
+		for (int i = 0; i < tiles.getChildren().size(); i++) {
+
+			ImageView image = (ImageView) tiles.getChildren().get(i);
+			if (image == null) {
+				continue;
+			}
+			if (image.getId() == null) {
+				continue;
+			}
+			if (image.getId().equals("slide")) {
+				//Todo this is gross but works for now
+				tiles.getChildren().remove(i);
+				i = 0;
+			}
+		}
 	}
 
+	private void setupActionPhase() {
+		cards.getChildren().clear();
+		ActionTile[] tiles = gameLogic.getActionCards();
+		for (ActionTile tile : tiles) {
+			final Node vCard = Assets.createCard(tile);
+			vCard.setOnMouseClicked((e) -> {
+			});
+			cards.getChildren().add(vCard);
+			switch (tile.getType()) {
+				case DOUBLE_MOVE:
+					vCard.setOnMouseClicked((e) -> {
+						vCard.setEffect(new Bloom(0.03));
+						vCard.setOnMouseClicked((e2) -> {
+							gameLogic.action(new ActionTile(DOUBLE_MOVE), null);
+							mainLoop();
+						});
+					});
+					break;
+				case BACKTRACK:
+					vCard.setOnMouseClicked((e) -> {
+
+						//setUpBackTrack();
+
+					});
+
+					break;
+				case FIRE:
+					break;
+				case FROZEN:
+					break;
+			}
+		}
+
+
+
+
+	}
+
+	private void setupMovePhase() {
+
+	}
 	/**
 	 * Called when Draw button is pressed
 	 */
@@ -306,4 +376,66 @@ public class GameScreenController implements Initializable {
 		System.out.println("Game Saved");
 	}
 
+	/**
+	 * Takes an id to match and a onClickFunction
+	 * puts that on all matching node with id starting with 'id'
+	 * @param id node to look for
+	 * @param func function to apply to onClick
+	 */
+	private void applyOnClick(String id, EventHandler<MouseEvent> func) {
+		for (Object o : tiles.getChildren().toArray()) {
+			if (o == null) {
+				continue;
+			}
+			if (!(o instanceof Node)) {
+				continue;
+			}
+			Node tile = (Node) o;
+			if (tile.getId().contains(id)) {
+				tile.setOnMouseClicked(func);
+			}
+		}
+	}
+
+	/**
+	 * Takes an id to match and a function
+	 * puts that on all matching node with id starting with 'id'
+	 * @param id node to look for
+	 * @param func function to apply to onHover
+	 */
+	private void applyOnHover(String id, EventHandler<MouseEvent> func) {
+		for (Object o : tiles.getChildren().toArray()) {
+			if (o == null) {
+				continue;
+			}
+			if (!(o instanceof Node)) {
+				continue;
+			}
+			Node tile = (Node) o;
+			if (tile.getId().contains(id)) {
+				tile.setOnMouseEntered(func);
+			}
+		}
+	}
+
+	/**
+	 * Takes an id to match and a function
+	 * puts that on all matching node with id starting with 'id'
+	 * @param id node to look for
+	 * @param func function to apply to offHover
+	 */
+	private void applyOffHover(String id, EventHandler<MouseEvent> func) {
+		for (Object o : tiles.getChildren().toArray()) {
+			if (o == null) {
+				continue;
+			}
+			if (!(o instanceof Node)) {
+				continue;
+			}
+			Node tile = (Node) o;
+			if (tile.getId().contains(id)) {
+				tile.setOnMouseExited(func);
+			}
+		}
+	}
 }
