@@ -13,13 +13,34 @@ import static BackEnd.TileType.FROZEN;
  */
 public class Player
 {
-    Coordinate location;
-    Tile lastDrawnTile;
-    ArrayList<Tile> inventory;
-    SilkBag silkBag;
-    int playerNumber;
+    /**
+     * Location variable will hold the players location.
+     */
+    private Coordinate location;
+    /**
+     * lastDrawnTile is the players last drawn tile.
+     */
+    private Tile lastDrawnTile;
+    /**
+     * inventory variable is a list of the player tiles that he holds in his inventory.
+     */
+    private ArrayList<Tile> inventory;
+    /**
+     * silkbag is an instance of the SilkBag class.
+     */
+    private SilkBag silkBag;
+    /**
+     * playerNumber is used to distinguish which player it is.
+     */
+    private int playerNumber;
+    /**
+     * backTracked is used to check if the player has backtracked.
+     */
     private boolean backTracked;
-    Gameboard gameboard;
+    /**
+     * gameboard is an instance of the gameBoard class.
+     */
+    private Gameboard gameboard;
 
     /**
      * Constructor for storing the starting coordinates of the player.
