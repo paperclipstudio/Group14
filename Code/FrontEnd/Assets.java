@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -124,5 +123,21 @@ public class Assets {
 		});
 		newCard.setOnMouseExited(e -> newCard.setEffect(null));
 		return newCard;
+	}
+
+	public static ImageView getPlayer(int playerNumber) {
+		Image playerModel = get("player" + (playerNumber+1));
+		ImageView player = new ImageView(playerModel);
+		player.setFitHeight(GameScreenController.tileWidth);
+		player.setFitWidth(GameScreenController.tileWidth);
+		return player;
+	}
+
+	public static ImageView getLocationArrow() {
+		Image arrow = get("location_arrow");
+		ImageView locationArrow = new ImageView(arrow);
+		locationArrow.setFitWidth(GameScreenController.tileWidth);
+		locationArrow.setFitHeight(GameScreenController.tileWidth);
+		return locationArrow;
 	}
 }

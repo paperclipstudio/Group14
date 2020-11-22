@@ -88,5 +88,11 @@ public class Coordinate {
     }
 
 
+	public Coordinate shift(int x, int y) {
+        return shift(new Coordinate(x, y));
+	}
 
+	public Coordinate shift(Coordinate shiftAmount) {
+        return new Coordinate(shiftAmount.getX() + x, shiftAmount.getY() + y);
+    }
 }

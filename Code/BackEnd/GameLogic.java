@@ -105,6 +105,8 @@ public class GameLogic {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			result[i] = players[i].hasBeenBacktracked();
 		}
+		// TODO For Testing replace when working.
+		result = new boolean[]{false, true, true, false};
 		return result;
 	}
 
@@ -233,5 +235,32 @@ public class GameLogic {
 	 */
 	private void setDoubleMove() {
 		doubleMove = true;
+	}
+
+	public int getNumberOfPlayers() {
+		//TODO create working version.
+		System.out.println("Fake getNumberOfPlayers");
+		return 4;//numberOfPlayers;
+	}
+
+	public void backtrack(int playerNumber) {
+		//TODO create working backtrack;
+		System.out.println("Fake backtrack");
+		phase = MOVE;
+
+	}
+
+	public int getPlayersTurn() {
+		return currentPlayerNo;
+	}
+
+	public Coordinate[] getMoveLocations() {
+		//todo Get working
+		Coordinate[] validLocation = new Coordinate[4];
+		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(1,0);
+		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,0);
+		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(0,1);
+		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(1,-1);
+		return new Coordinate[0];
 	}
 }

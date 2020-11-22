@@ -47,6 +47,7 @@ public class GameScreenController implements Initializable {
 	public Phase phase;
 	private GameLogic gameLogic;
 	public static int tileWidth = 50;
+	private ImageView[] players;
 	/***
 	 * Gets all resources for gameScreen
 	 * @param url Url for resources
@@ -74,10 +75,10 @@ public class GameScreenController implements Initializable {
 	 */
 	private void mainLoop() {
 
-		tiles.setRotate(tiles.getRotate() + 10);
+		//tiles.setRotate(tiles.getRotate() + 10);
 		phase = gameLogic.getGamePhase();
 		//phase = Phase.FLOOR;
-		phaseText.setText(phase.toString());
+		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug" );
 		hideAllControls();
 		switch (phase) {
 			case DRAW:
@@ -248,14 +249,14 @@ public class GameScreenController implements Initializable {
 		}
 
 		// showing the player locations
-		Image player = new Image("player1.png");
-		for (Coordinate location: gameLogic.getPlayerLocations()) {
-			ImageView imageview = new ImageView(player);
-			imageview.setFitWidth(tileWidth);
-			imageview.setFitHeight(tileWidth);
-			imageview.setTranslateX(location.getX() * tileWidth);
-			imageview.setTranslateY(location.getY() * tileWidth);
-			tiles.getChildren().add(imageview);
+		players = new ImageView[gameLogic.getNumberOfPlayers()];
+		for (int i = 0; i < gameLogic.getPlayerLocations().length; i++) {
+			Coordinate location = gameLogic.getPlayerLocations()[i];
+			ImageView playerView = Assets.getPlayer(i);
+			playerView.setTranslateX(location.getX() * tileWidth);
+			playerView.setTranslateY(location.getY() * tileWidth);
+			players[i] = playerView;
+			tiles.getChildren().add(playerView);
 		}
 	}
 
@@ -277,6 +278,7 @@ public class GameScreenController implements Initializable {
 	private void hideAllControls() {
 		// Draw controls
 		drawButton.setVisible(false);
+		//cards.getChildren().clear();
 		// Floor controls
 		for (int i = 0; i < tiles.getChildren().size(); i++) {
 
@@ -309,15 +311,41 @@ public class GameScreenController implements Initializable {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked((e2) -> {
 							gameLogic.action(new ActionTile(DOUBLE_MOVE), null);
+							for (ImageView player:players) {
+								player.setEffect(new Bloom(999));
+								player.setOnMouseClicked(e3 -> {});
+							}
 							mainLoop();
 						});
 					});
 					break;
 				case BACKTRACK:
 					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						// Get all players that can be back tracked
+						boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
+						for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
+							if (validPlayers[i]) {
+								// For each valid player
+								final int playerNumber = i;
+								// make them glow
+								players[i].setEffect(new Bloom(0.05));
+								// Set them into an active button
+								players[i].setOnMouseClicked(e2 -> {
+									// When they are clicked remove bloom from players
+									for(ImageView player : players) {
+										//TODO don't like this nesting fix later OwO.
+										player.setEffect(new Bloom(999));
+										// Deactivate their click.
+										player.setOnMouseClicked(e3 -> {});
+									}
 
-						//setUpBackTrack();
+									gameLogic.backtrack(playerNumber);
+									mainLoop();
+								});
+							}
 
+						}
 					});
 
 					break;
@@ -327,14 +355,26 @@ public class GameScreenController implements Initializable {
 					break;
 			}
 		}
-
-
-
-
 	}
 
 	private void setupMovePhase() {
+		Coordinate[] validLocations = gameLogic.getMoveLocations();
+		for (Coordinate coordinate: validLocations) {
+			final ImageView pointer = Assets.getLocationArrow();
+			pointer.setTranslateX(coordinate.getX()*tileWidth);
+			pointer.setTranslateY(coordinate.getY() * tileWidth);
+			pointer.setOnMouseClicked(e -> {
+				gameLogic.move(coordinate);
+				Node currentPlayer = players[gameLogic.getPlayersTurn()];
+				TranslateTransition walk = new TranslateTransition();
+				walk.setToX(coordinate.getX() * tileWidth);
+				walk.setToY(coordinate.getY());
+				walk.setNode(currentPlayer);
+				walk.setDuration(new Duration(500));
+			});
+			tiles.getChildren().add(pointer);
 
+		}
 	}
 	/**
 	 * Called when Draw button is pressed
