@@ -360,8 +360,10 @@ public class GameScreenController implements Initializable {
 	private void setupMovePhase() {
 		Coordinate[] validLocations = gameLogic.getMoveLocations();
 		for (Coordinate coordinate: validLocations) {
+			// Create pointer.
 			final ImageView pointer = Assets.getLocationArrow();
-			pointer.setTranslateX(coordinate.getX()*tileWidth);
+			// Move to correct location.
+			pointer.setTranslateX(coordinate.getX() * tileWidth);
 			pointer.setTranslateY(coordinate.getY() * tileWidth);
 			pointer.setOnMouseClicked(e -> {
 				gameLogic.move(coordinate);

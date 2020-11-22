@@ -36,6 +36,34 @@ public class Gameboard {
         slideLocations[4] = locationFive;
     }
 
+    private boolean validMove(Tile tile, Rotation direction) {
+        //Big function
+        return true;
+    }
+/*
+    public Coor[] getMoveDirections() {
+
+        // Find where the currently player is
+        Rotation[] directions;
+        Rotation[] validDirections;
+        For all directions
+        if (vaildmove(current player tile, direction)) {
+
+            add to directions;
+        }
+        for all directions in valid directions {
+            Tile tile = get tile in that direction;
+            if (valid(tile, flip(direction)){
+                add to validdirections;
+            }
+        }
+        return validDirections;
+
+
+    }
+    */
+
+
     public Coordinate getPlayerPos (int player){
         return playerLocations[player];
     }

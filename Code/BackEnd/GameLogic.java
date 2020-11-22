@@ -258,9 +258,9 @@ public class GameLogic {
 		//todo Get working
 		Coordinate[] validLocation = new Coordinate[4];
 		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(1,0);
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,0);
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(0,1);
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(1,-1);
-		return new Coordinate[0];
+		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,0);
+		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo).shift(0,1);
+		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo).shift(1,-1);
+		return validLocation;
 	}
 }
