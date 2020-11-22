@@ -22,7 +22,7 @@ public class Gameboard {
         Coordinate locationOne = new Coordinate(0, -1);
         Coordinate locationTwo = new Coordinate(-1, -0);
         Coordinate locationThree = new Coordinate(-1, height);
-        Coordinate locationFour = new Coordinate(width, 0);
+        Coordinate locationFour = new Coordinate(width,0);
         //TODO Added as a quick fix by George.
         slideLocations = new Coordinate[10];
         //TODO turns out nothing has been initialised.
@@ -130,17 +130,9 @@ public class Gameboard {
         }
     }
 
-    public static void setGoalCoor(Coordinate goalCoor) {
-        goalCoor = goalCoor;
-    }
-
-    public static Coordinate getGoalCoor() {
-        return goalCoor;
-    }
-
     //checks to see if a player is on goal by going through all the players' locations to see
     //if they match the goal coordinates.
-    public boolean isPlayerOnGoal() {
+    /* public boolean isPlayerOnGoal() {
         int goalX = getGoalCoor().getX();
         int goalY = getGoalCoor().getY();
         for (int i = 0; i < playerLocations.length; i++){
@@ -151,7 +143,7 @@ public class Gameboard {
             }
         }
         return false;
-    }
+    } */
 
     //this method check the players tiles, and the tiles around that tile to see which
     //directions the player can move.
