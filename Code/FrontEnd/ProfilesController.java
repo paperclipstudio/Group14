@@ -40,7 +40,7 @@ public class ProfilesController {
 	public void createFile() throws IOException {
 		String newName = input.getText();
 
-		File user = new File("FrontEnd\\saveData\\" + newName + ".txt");
+		File user = new File("Group14\\Code\\FrontEnd\\saveData\\" + newName + ".txt");
 
 		if(user.exists() && !user.isDirectory()){
 
@@ -58,7 +58,7 @@ public class ProfilesController {
 			alert2.setHeaderText(null);
 			alert2.showAndWait();
 
-			PrintWriter newUser = new PrintWriter(new FileWriter("FrontEnd\\saveData\\" + newName + ".txt"));
+			PrintWriter newUser = new PrintWriter(new FileWriter("Group14\\Code\\FrontEnd\\saveData\\" + newName + ".txt"));
 			newUser.write("Game Played: 0  Game Wins: 0");
 			newUser.close();
 
@@ -69,7 +69,7 @@ public class ProfilesController {
 	public void deleteFile() {
 		String newName = input.getText();
 
-		File user = new File("FrontEnd\\saveData\\" + newName + ".txt");
+		File user = new File("Group14\\Code\\FrontEnd\\saveData\\" + newName + ".txt");
 
 		if(user.delete()){
 
@@ -96,7 +96,7 @@ public class ProfilesController {
 	}
 
 	public void viewFile() {
-		String path = "FrontEnd\\saveData\\";
+		String path = "Group14\\Code\\FrontEnd\\saveData\\";
 		getFile(path);
 		File file = new File(path);
 		File[] array = file.listFiles();
@@ -124,7 +124,7 @@ public class ProfilesController {
 
 	public void viewData() throws FileNotFoundException {
 		String newName = input.getText();
-		File user = new File("FrontEnd\\saveData\\" + newName + ".txt");
+		File user = new File("Group14\\Code\\FrontEnd\\saveData\\" + newName + ".txt");
 
 		if(user.exists() && !user.isDirectory()){
 
