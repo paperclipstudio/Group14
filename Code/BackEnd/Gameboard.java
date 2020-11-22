@@ -13,6 +13,7 @@ public class Gameboard {
     private Coordinate[] slideLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
+    private FloorTile removedTile;
 
 
     public Gameboard (int width, int height) {
@@ -20,11 +21,10 @@ public class Gameboard {
         this.height = height;
         Coordinate locationOne = new Coordinate(0, -1);
         Coordinate locationTwo = new Coordinate(-1, -0);
-        Coordinate locationThree = new Coordinate(-1, height-1);
-        Coordinate locationFour = new Coordinate(width, height-1);
-        Coordinate locationFive = new Coordinate(width, 0);
+        Coordinate locationThree = new Coordinate(-1, height);
+        Coordinate locationFour = new Coordinate(width, 0);
         //TODO Added as a quick fix by George.
-        slideLocations = new Coordinate[100];
+        slideLocations = new Coordinate[10];
         //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
@@ -33,7 +33,6 @@ public class Gameboard {
         slideLocations[1] = locationTwo;
         slideLocations[2] = locationThree;
         slideLocations[3] = locationFour;
-        slideLocations[4] = locationFive;
     }
 
     private boolean validMove(Tile tile, Rotation direction) {
@@ -72,27 +71,40 @@ public class Gameboard {
         this.playerLocations[player] = position;
     }
 
-    public void playFloorTile (Coordinate location, FloorTile tileType){
-        // Loop based off slide location length? Could use a loop based off width and height depending
-        // on whether it was slid in from vertical or horizontal. (Joshua)
+    public Tile playFloorTile (Coordinate location, FloorTile insertedTile, Rotation rotation){
         for (int i = 0; i < slideLocations.length; i++){
             if (slideLocations[i].getX() == location.getX() && slideLocations[i].getY() == location.getY()){
+                // Inserting the new tile from the left.
                 if (location.getX() == -1){
-                    //move everything to the right.
+                    for(int j = 0; j < width; j++){
+                        boardTiles[j][location.getY()] = boardTiles[j+1][location.getY()];
+                        removedTile = boardTiles[width][location.getY()];
+                    }
                 }
+                // Inserting the new tile from the right.
                 else if (location.getX() == width){
-                    //move everything to the left.
+                    for(int j = 0; j < width; j++){
+                        boardTiles[j][location.getY()] = boardTiles[j-1][location.getY()];
+                        removedTile = boardTiles[-1][location.getY()];
+                    }
                 }
+                // Inserting the new tile from the bottom.
                 else if (location.getY() == -1){
-                    //move everything up.
+                    for(int j = 0; j < height; j++){
+                        boardTiles[location.getX()][j] = boardTiles[location.getX()][j+1];
+                        removedTile = boardTiles[location.getX()][height];
+                    }
                 }
-                else{
-                    //move everything down.
+                // The last remaining case: Inserting the new tile from the top.
+                else {
+                    for(int j = 0; j < height; j++){
+                        boardTiles[location.getX()][j] = boardTiles[location.getX()][j-1];
+                        removedTile = boardTiles[location.getX()][height];
+                    }
                 }
             }
         }
-        //Tile topLeft = boardTiles[0][height-1];
-        //System.out.println(topLeft.getType());
+        return removedTile;
     }
 
     public void playActionTile () {
