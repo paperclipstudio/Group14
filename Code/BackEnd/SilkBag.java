@@ -10,15 +10,29 @@ import java.util.Random;
 
 
 public class SilkBag {
-    private  ArrayList<Tile> allTiles = new ArrayList<>();
-    private Random randomGenerator = new Random();
+    /**
+     * These are variables are used for the silk bag, a list to hold all tiles and
+     * a random generator to generate a random tile.
+     */
+    private  ArrayList<Tile> allTiles;
+    private Random randomGenerator;
 
+    /**
+     * First constructor of the silk bag, which initialises attributes.
+     * Giving a random integer seed for the random generator.
+     * @param seed the integer seed of the random generator.
+     */
 	public SilkBag(int seed) {
+	    allTiles = new ArrayList<>();
 	    randomGenerator = new Random(seed);
 	}
 
+    /**
+     * Second constructor of the silk bag, which initialises attributes.
+     */
     public SilkBag() {
-
+        allTiles = new ArrayList<>();
+        randomGenerator = new Random();
     }
 
 
@@ -37,13 +51,10 @@ public class SilkBag {
      */
     public Tile getFloorTile () {
         Tile tile = getTile();
-        //TODO Small change from getTileType -> GetType so it can compile. (Joshua)
-        if (tile instanceof FloorTile ) {
-           return tile;
+        if (tile instanceof FloorTile == false ) {
+           getFloorTile();
        }
-        else {
-            return null;
-        }
+        return tile;
     }
 
     /**

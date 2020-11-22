@@ -3,6 +3,9 @@ package BackEnd;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import static BackEnd.TileType.FIRE;
+import static BackEnd.TileType.FROZEN;
+
 /**
  * Stores details about the player while they are in-game, for example their inventory or player number.
  * @author Brandon Chan
@@ -10,12 +13,34 @@ import java.util.ArrayList;
  */
 public class Player
 {
-    Coordinate location;
-    Tile lastDrawnTile;
-    ArrayList<Tile> inventory;
-    SilkBag silkBag;
-    int playerNumber;
+    /**
+     * Location variable will hold the players location.
+     */
+    private Coordinate location;
+    /**
+     * lastDrawnTile is the players last drawn tile.
+     */
+    private Tile lastDrawnTile;
+    /**
+     * inventory variable is a list of the player tiles that he holds in his inventory.
+     */
+    private ArrayList<Tile> inventory;
+    /**
+     * silkbag is an instance of the SilkBag class.
+     */
+    private SilkBag silkBag;
+    /**
+     * playerNumber is used to distinguish which player it is.
+     */
+    private int playerNumber;
+    /**
+     * backTracked is used to check if the player has backtracked.
+     */
     private boolean backTracked;
+    /**
+     * gameboard is an instance of the gameBoard class.
+     */
+    private Gameboard gameboard;
 
     /**
      * @param x The starting x coordinate of the Player object
@@ -29,16 +54,16 @@ public class Player
 
 
     /**
-     * Created players
-     *
-     * @param playerNumber Which player this is
-     * @param silkBag what bag to draw from.
-     * @param gameboard what game board to play on.
+     * Create a player and give them the silk bag and gameboard references.
+     * @param playerNumber The player's number, used to distinguish who's turn it is.
+     * @param silkBag Reference to the game's silk bag object.
+     * @param gameboard Reference to the game's gameboard object.
      */
     public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
         this.playerNumber = playerNumber;
         this.inventory = new ArrayList<>();
+        this.gameboard = gameboard;
     }
 
 
@@ -52,13 +77,13 @@ public class Player
 
 
     /**
-     *
+     * Draw a tile - if the player's previous action card draw is still in its grace period, add it to inventory first.
      */
     public void drawTile()    {
         if (isHolding() != null) {
             inventory.add(isHolding());
         }
-       lastDrawnTile = silkBag.getTile();
+        lastDrawnTile = silkBag.getTile();
     }
 
 
@@ -68,7 +93,7 @@ public class Player
      * @param rotation What orientation the player wants the tile to be slid in at
      */
     public void playFloorTile (Coordinate slideLocations, Rotation rotation)    {
-
+        //TODO call a playFloorTile function from the gameboard
 
         lastDrawnTile = null;
     }
@@ -79,8 +104,9 @@ public class Player
      * @param location where the player wants to use the action
      * @param tile type of action tile
      */
-    public void playActionTile (Coordinate location, Tile tile)    {
-
+    public void playActionTile (Coordinate location, ActionTile tile)    {
+        //TODO call a playActionTile function from the gameboard
+        gameboard.playActionTile();
         inventory.remove(tile);
     }
 
@@ -102,10 +128,4 @@ public class Player
     public boolean hasBeenBacktracked() {
         return backTracked;
     }
-/*
-    public void movePlayer (Coordinate location)
-    {
-        // GAMEBOARD.movePlayer(playerNumber, location);
-    }
-*/
 }

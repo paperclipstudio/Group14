@@ -5,15 +5,16 @@ import javafx.scene.image.Image;
 /**
  * Stores the data about a player's profile like their name or scores across maps.
  * @author Brandon Chan
+ * @version 1.0
  */
 public class PlayerProfile
 {
-    Player player;
-    int[] wins;
-    int[] losses;
-    int[] mapsPlayed;
-    String profileName;
-    Image profileIcon;
+    private Player player;
+    private int[] wins;
+    private int[] losses;
+    private int[] mapsPlayed;
+    private String profileName;
+    private Image profileIcon;
 
     public PlayerProfile (String name, Image playerIcon)
     {

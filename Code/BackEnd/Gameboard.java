@@ -1,4 +1,9 @@
+
 package BackEnd;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Gameboard {
 
     private int width;
@@ -20,7 +25,7 @@ public class Gameboard {
         Coordinate locationFive = new Coordinate(width, 0);
         //TODO Added as a quick fix by George.
         slideLocations = new Coordinate[100];
-        //TODO turns out nothing has been initalised.
+        //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
         playerLocations = new Coordinate[100];
@@ -60,6 +65,10 @@ public class Gameboard {
         }
         //Tile topLeft = boardTiles[0][height-1];
         //System.out.println(topLeft.getType());
+    }
+
+    public void playActionTile () {
+
     }
 
     public int getWidth() {
@@ -104,22 +113,72 @@ public class Gameboard {
         return false;
     }
 
-    //this method would be used to help with the movement of the player.
-    private Coordinate checkTileMovement(FloorTile tile, Rotation rotation){
+    //this method check the players tiles, and the tiles around that tile to see which
+    //directions the player can move.
+    private ArrayList<Coordinate> checkPlayersTile(int x, int y){
+        ArrayList<Coordinate> moveLocations = new ArrayList<Coordinate>();
+        if(boardTiles[x][y].getType() == TileType.CORNER){
+            if (boardTiles[x][y].getRotation() == Rotation.UP){
+                if(checkMovementTile(x,y+1, boardTiles[x][y], new String("left"))){
+                    moveLocations.add(new Coordinate(x,y+1));
+                }
+                if (checkMovementTile(x-1,y, boardTiles[x][y], new String("up"))){
+                    moveLocations.add(new Coordinate(x-1, y));
+                }
 
+            }
+        }
 
-        return new Coordinate(0,0);
+        return moveLocations;
+    }
+
+    //Returns true if the player can move in that direction, else false.
+    private Boolean checkMovementTile(int x, int y, FloorTile previousTile, String directionPrevious){
+        //This is just for the tile were looking at being a corner and facing up (normal).
+        if (boardTiles[x][y].getType() == TileType.CORNER && boardTiles[x][y].getRotation() == Rotation.UP){
+            if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.UP){
+                //if the previous tiles was Corner up and the current tile is Corner up then the player cant
+                //move in this direction no matter where the previous tile was.
+                return false;
+            }
+            else if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.DOWN) {
+                if (directionPrevious.equals("left") || directionPrevious.equals("up")){
+                    return true;
+                }
+            }
+            else if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.LEFT) {
+                if (directionPrevious.equals("up")){
+                    return true;
+                }
+            }
+            else if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.RIGHT) {
+                if (directionPrevious.equals("left")){
+                    return true;
+                }
+            }
+
+        }
+        //temp
+        return false;
     }
 
     /*
     public Tile getPlayerTile(int player) {
 
     }
-
-    public Coordinate[] getPlayerMoveLocations(int player) {
-        Coordinate[] moveLocations;
-    }
     */
+
+    public ArrayList<Coordinate> getPlayerMoveLocations(int player) {
+        //Loops through the board tiles to find the players tile.
+        for (int i = 0; i < boardTiles.length; i++) {
+            for (int j = 0; j < boardTiles[i].length; j++) {
+                if (i == playerLocations[player].getX() && j == playerLocations[player].getY()){
+                    return checkPlayersTile(i,j);
+                }
+            }
+        }
+        return null;
+    }
 
     private void updatePlayerPos(int player){
         for (int i = 0; i < boardTiles.length; i++) {

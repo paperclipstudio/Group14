@@ -1,4 +1,11 @@
 package BackEnd;
+
+/**
+ * This class is used to check what action tiles are in use on the board and their location in the
+ * form of Coordinates.
+ * @author Atif Ishaq
+ * @version 1.0
+ */
 public class ActionTileLocations {
 
     private ActionTile tileType;
