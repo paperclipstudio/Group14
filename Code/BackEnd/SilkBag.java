@@ -52,7 +52,7 @@ public class SilkBag {
     public Tile getFloorTile () {
         Tile tile = getTile();
         if (tile instanceof FloorTile == false ) {
-           getFloorTile();
+           return getFloorTile();
        }
         return tile;
     }
