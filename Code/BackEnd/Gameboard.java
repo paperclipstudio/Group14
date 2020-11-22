@@ -25,7 +25,7 @@ public class Gameboard {
         Coordinate locationFive = new Coordinate(width, 0);
         //TODO Added as a quick fix by George.
         slideLocations = new Coordinate[100];
-        //TODO turns out nothing has been initalised.
+        //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
         playerLocations = new Coordinate[100];
@@ -65,6 +65,10 @@ public class Gameboard {
         }
         //Tile topLeft = boardTiles[0][height-1];
         //System.out.println(topLeft.getType());
+    }
+
+    public void playActionTile () {
+
     }
 
     public int getWidth() {
