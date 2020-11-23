@@ -1,0 +1,11 @@
+
+L
+java:S1068"/Remove this unused "profileIcon" private field.(¿ÅÔ™8ÑÆ¨…ß.
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
+L
+java:S1068"*Remove this unused "player" private field.(Ç¹Ù±úÿÿÿÿ8øº§…ß.
+w
+java:S1450"ZRemove the "profileIcon" field and declare it as a local variable in the relevant methods.(¿ÅÔ™8ÑÆ¨…ß.
+Q	java:S125="<This block of commented-out lines of code should be removed.(Á»›ê
+P
+java:S1068".Remove this unused "mapsPlayed" private field.(à˜‘½ýÿÿÿÿ8Äˆ¨…ß.

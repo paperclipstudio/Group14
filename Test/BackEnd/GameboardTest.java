@@ -25,7 +25,11 @@ class GameboardTest {
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), Rotation.RIGHT);
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE), Rotation.DOWN);
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), Rotation.UP);
+		gb.getMoveDirections(1);
+		gb.getMoveDirections(2);
+		gb.getMoveDirections(3);
 	}
+
 	@Test
 	void getPlayerPos() {
 		assertEquals(1, gb.getPlayerPos(0).getX());
@@ -66,6 +70,10 @@ class GameboardTest {
 		assertEquals(0, gb2.getHeight());
 		gb2 = new Gameboard(3,10);
 		assertEquals(10, gb2.getHeight());
+	}
+
+	@Test
+	void getMoveDirections() {
 	}
 
 	@Test

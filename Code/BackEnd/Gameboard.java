@@ -35,33 +35,13 @@ public class Gameboard {
         slideLocations[3] = locationFour;
     }
 
-    private boolean validMove(Tile tile, Rotation direction) {
-        //Big function
-        return true;
+    public int getWidth() {
+        return width;
     }
-/*
-    public Coor[] getMoveDirections() {
 
-        // Find where the currently player is
-        Rotation[] directions;
-        Rotation[] validDirections;
-        For all directions
-        if (vaildmove(current player tile, direction)) {
-
-            add to directions;
-        }
-        for all directions in valid directions {
-            Tile tile = get tile in that direction;
-            if (valid(tile, flip(direction)){
-                add to validdirections;
-            }
-        }
-        return validDirections;
-
-
+    public int getHeight() {
+        return height;
     }
-    */
-
 
     public Coordinate getPlayerPos (int player){
         return playerLocations[player];
@@ -107,17 +87,141 @@ public class Gameboard {
         return removedTile;
     }
 
+
+    public ArrayList<Coordinate> getMoveDirections(int player) {
+        Rotation[] directions = new Rotation[]{Rotation.UP,Rotation.DOWN,Rotation.LEFT,Rotation.RIGHT};
+        ArrayList<Rotation> validDirections = new ArrayList<>();
+        ArrayList<Coordinate> moveLocations = new ArrayList<>();
+        FloorTile playersTile = null;
+        int playerTilesX = 0;
+        int playerTilesY = 0;
+
+        //Gets the players tile coordinates and sets the player tile.
+        for (int i = 0; i < boardTiles.length; i++) {
+            for (int j = 0; j < boardTiles[i].length; j++) {
+                if (i == playerLocations[player].getX() && j == playerLocations[player].getY()){
+                    playersTile = boardTiles[i][j];
+                    playerTilesX = i;
+                    playerTilesY = j;
+                }
+            }
+        }
+
+        //Loops through all four directions to see if the tile the player is on connects to the direction.
+        for (Rotation direction : directions) {
+            if (validMove(playersTile, direction)) {
+                validDirections.add(direction);
+            }
+        }
+
+        //Loops through all connected valid directions, gets the tile in that valid direction to see if it
+        //connects with the tile the player is on by flipping the rotation, if yes add it as a coordinate to move locations.
+        for (Rotation direction : validDirections) {
+            FloorTile tileInDirection;
+            Rotation flipDirection;
+            if (direction == Rotation.UP) {
+                tileInDirection = boardTiles[playerTilesX][playerTilesY + 1];
+                flipDirection = Rotation.DOWN;
+                if (validMove(tileInDirection, flipDirection)){
+                    moveLocations.add(new Coordinate(playerTilesX, playerTilesY + 1));
+                }
+            }
+            else if (direction == Rotation.DOWN){
+                tileInDirection = boardTiles[playerTilesX][playerTilesY - 1];
+                flipDirection = Rotation.UP;
+                if (validMove(tileInDirection, flipDirection)){
+                    moveLocations.add(new Coordinate(playerTilesX, playerTilesY - 1));
+                }
+            }
+            else if (direction == Rotation.LEFT){
+                tileInDirection = boardTiles[playerTilesX - 1][playerTilesY];
+                flipDirection = Rotation.RIGHT;
+                if (validMove(tileInDirection, flipDirection)){
+                    moveLocations.add(new Coordinate(playerTilesX - 1, playerTilesY));
+                }
+            }
+            else {
+                tileInDirection = boardTiles[playerTilesX + 1][playerTilesY];
+                flipDirection = Rotation.LEFT;
+                if (validMove(tileInDirection, flipDirection)){
+                    moveLocations.add(new Coordinate(playerTilesX + 1, playerTilesY));
+                }
+            }
+        }
+        return moveLocations;
+    }
+
+    //Method checks to see if its possible for the player to move in that direction.
+    private boolean validMove(FloorTile playerTile, Rotation direction) {
+        switch (playerTile.getType()){
+            case CORNER:
+                if (playerTile.getRotation() == Rotation.UP && direction == Rotation.RIGHT ||
+                        playerTile.getRotation() == Rotation.UP && direction == Rotation.DOWN){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.DOWN && direction == Rotation.UP ||
+                        playerTile.getRotation() == Rotation.DOWN && direction == Rotation.LEFT){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.DOWN ||
+                        playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.LEFT){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.LEFT && direction == Rotation.UP ||
+                        playerTile.getRotation() == Rotation.LEFT && direction == Rotation.RIGHT){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            case T_SHAPE:
+                if (playerTile.getRotation() == Rotation.UP && direction == Rotation.LEFT ||
+                        playerTile.getRotation() == Rotation.UP && direction == Rotation.RIGHT ||
+                        playerTile.getRotation() == Rotation.UP && direction == Rotation.DOWN){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.DOWN && direction == Rotation.LEFT ||
+                        playerTile.getRotation() == Rotation.DOWN && direction == Rotation.RIGHT ||
+                        playerTile.getRotation() == Rotation.DOWN && direction == Rotation.UP){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.UP ||
+                        playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.LEFT ||
+                        playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.DOWN){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.LEFT && direction == Rotation.UP ||
+                        playerTile.getRotation() == Rotation.LEFT && direction == Rotation.DOWN ||
+                        playerTile.getRotation() == Rotation.LEFT && direction == Rotation.RIGHT){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            case STRAIGHT:
+                if (playerTile.getRotation() == Rotation.UP && direction == Rotation.LEFT ||
+                        playerTile.getRotation() == Rotation.UP && direction == Rotation.RIGHT ||
+                        playerTile.getRotation() == Rotation.DOWN && direction == Rotation.LEFT ||
+                        playerTile.getRotation() == Rotation.DOWN && direction == Rotation.RIGHT){
+                    return true;
+                }
+                else if (playerTile.getRotation() == Rotation.LEFT && direction == Rotation.UP ||
+                        playerTile.getRotation() == Rotation.LEFT && direction == Rotation.DOWN ||
+                        playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.UP ||
+                        playerTile.getRotation() == Rotation.RIGHT && direction == Rotation.DOWN){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+        }
+        return true;
+    }
+
     public void playActionTile () {
 
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
 
     //places a fixed floor tile in the coordinates specified.
     public void placeFixedTile (FloorTile tile, int x, int y) {
@@ -145,70 +249,15 @@ public class Gameboard {
         return false;
     } */
 
-    //this method check the players tiles, and the tiles around that tile to see which
-    //directions the player can move.
-    private ArrayList<Coordinate> checkPlayersTile(int x, int y){
-        ArrayList<Coordinate> moveLocations = new ArrayList<Coordinate>();
-        if(boardTiles[x][y].getType() == TileType.CORNER){
-            if (boardTiles[x][y].getRotation() == Rotation.UP){
-                if(checkMovementTile(x,y+1, boardTiles[x][y], new String("left"))){
-                    moveLocations.add(new Coordinate(x,y+1));
-                }
-                if (checkMovementTile(x-1,y, boardTiles[x][y], new String("up"))){
-                    moveLocations.add(new Coordinate(x-1, y));
-                }
-
-            }
-        }
-
-        return moveLocations;
-    }
-
-    //Returns true if the player can move in that direction, else false.
-    private Boolean checkMovementTile(int x, int y, FloorTile previousTile, String directionPrevious){
-        //This is just for the tile were looking at being a corner and facing up (normal).
-        if (boardTiles[x][y].getType() == TileType.CORNER && boardTiles[x][y].getRotation() == Rotation.UP){
-            if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.UP){
-                //if the previous tiles was Corner up and the current tile is Corner up then the player cant
-                //move in this direction no matter where the previous tile was.
-                return false;
-            }
-            else if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.DOWN) {
-                if (directionPrevious.equals("left") || directionPrevious.equals("up")){
-                    return true;
-                }
-            }
-            else if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.LEFT) {
-                if (directionPrevious.equals("up")){
-                    return true;
-                }
-            }
-            else if (previousTile.getType() == TileType.CORNER && previousTile.getRotation() == Rotation.RIGHT) {
-                if (directionPrevious.equals("left")){
-                    return true;
-                }
-            }
-
-        }
-        //temp
-        return false;
-    }
-
-    /*
     public Tile getPlayerTile(int player) {
-
-    }
-    */
-
-    public ArrayList<Coordinate> getPlayerMoveLocations(int player) {
-        //Loops through the board tiles to find the players tile.
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == playerLocations[player].getX() && j == playerLocations[player].getY()){
-                    return checkPlayersTile(i,j);
+                    return boardTiles[i][j];
                 }
             }
         }
+        //temp
         return null;
     }
 
