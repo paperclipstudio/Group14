@@ -19,6 +19,7 @@ public class GameLogic {
 	int numberOfPlayers;
 	int currentPlayerNo;
 	Player currentPlayer;
+	// Current phase of the game, Draw|Floor|Action|Move
 	Phase phase;
 
 	// Special flags
@@ -30,7 +31,6 @@ public class GameLogic {
 	 * @param boardFile Paths to board file
 	 */
 	public void newGame(String boardFile) {
-		// Set up
 		currentPlayerNo = 0;
 		phase = DRAW;
 		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
@@ -102,10 +102,8 @@ public class GameLogic {
 	public boolean[] getPlayersThatCanBeBacktracked() {
 		boolean[] result = new boolean[numberOfPlayers];
 		for (int i = 0; i < numberOfPlayers; i++) {
-			result[i] = players[i].hasBeenBacktracked();
+			result[i] = !players[i].hasBeenBacktracked();
 		}
-		// TODO For Testing replace when working.
-		result = new boolean[]{false, true, true, false};
 		return result;
 	}
 
@@ -118,14 +116,6 @@ public class GameLogic {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			result[i] = gameboard.getPlayerPos(i);
 		}
-
-		//TODO Change when gameboard working correctly
-		result = new Coordinate[] {
-				new Coordinate(1,1),
-				new Coordinate(7,7),
-				new Coordinate(1 , 7),
-				new Coordinate( 7, 1)
-		};
 		return result;
 	}
 
@@ -136,10 +126,32 @@ public class GameLogic {
 	 */
 	public void action(ActionTile tile, Coordinate coordinate) {
 		players[currentPlayerNo].playActionTile(coordinate, tile);
-		doubleMove = true;
 		phase = MOVE;
 	}
 
+	/**
+	 * Says that double move action tile has been played.
+	 */
+	public void doubleMoveAction() {
+		doubleMove = true;
+		currentPlayer.playActionTile(null, new ActionTile(TileType.DOUBLE_MOVE));
+		phase = MOVE;
+	}
+
+	/**
+	 * Returns all Action tiles the current player can use
+	 * @return array of all playable tiles.
+	 */
+	public ActionTile[] getActionCards() {
+		//TODO FIX JUST FOR TESTING
+		System.out.println("FAKE GET ACTION CARDS");
+		ActionTile[] result = new ActionTile[4];
+		result[0] = new ActionTile(TileType.DOUBLE_MOVE);
+		result[1] = new ActionTile(TileType.BACKTRACK);
+		result[2] = new ActionTile(TileType.FIRE);
+		result[3] = new ActionTile(TileType.FROZEN);
+		return result;
+	}
 	/**
 	 * moves the current player to another location.
 	 * @param location where the player wishes to move.
@@ -215,38 +227,14 @@ public class GameLogic {
 		return height;
 	}
 
-	/**
-	 * Returns all Action tiles the current player can use
-	 * @return array of all playable tiles.
-	 */
-	public ActionTile[] getActionCards() {
-		//temp return result;
-		ActionTile[] result = new ActionTile[4];
-		result[0] = new ActionTile(TileType.DOUBLE_MOVE);
-		result[1] = new ActionTile(TileType.BACKTRACK);
-		result[2] = new ActionTile(TileType.FIRE);
-		result[3] = new ActionTile(TileType.FROZEN);
-		return result;
-	}
-
-	/**
-	 * Says that double move action tile has been played.
-	 */
-	private void setDoubleMove() {
-		doubleMove = true;
-	}
-
 	public int getNumberOfPlayers() {
 		//TODO create working version.
-		System.out.println("Fake getNumberOfPlayers");
-		return 4;//numberOfPlayers;
+		return numberOfPlayers;
 	}
 
 	public void backtrack(int playerNumber) {
-		//TODO create working backtrack;
-		System.out.println("Fake backtrack");
+		gameboard.backtrack(playerNumber);
 		phase = MOVE;
-
 	}
 
 	public int getPlayersTurn() {
@@ -254,12 +242,12 @@ public class GameLogic {
 	}
 
 	public Coordinate[] getMoveLocations() {
-		//todo Get working
+		//todo waiting on gameboard
 		Coordinate[] validLocation = new Coordinate[4];
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo);
-		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo);
-		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo);
-		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo);
+		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,  0);
+		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo).shift( 1,  0);
+		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo).shift( 0, -1);
+		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo).shift( 0,  1);
 		return validLocation;
 	}
 }

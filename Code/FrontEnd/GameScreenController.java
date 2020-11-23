@@ -314,7 +314,7 @@ public class GameScreenController implements Initializable {
 					vCard.setOnMouseClicked((e) -> {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked((e2) -> {
-							gameLogic.action(new ActionTile(DOUBLE_MOVE), null);
+							gameLogic.doubleMoveAction();
 							for (ImageView player:players) {
 								player.setEffect(new Bloom(999));
 								player.setOnMouseClicked(e3 -> {});
@@ -370,8 +370,8 @@ public class GameScreenController implements Initializable {
 			pointer.setTranslateX(coordinate.getX() * tileWidth);
 			pointer.setTranslateY(coordinate.getY() * tileWidth);
 			pointer.setOnMouseClicked(e -> {
-				gameLogic.move(coordinate);
 				Node currentPlayer = players[gameLogic.getPlayersTurn()];
+				gameLogic.move(coordinate);
 				TranslateTransition walk = new TranslateTransition();
 				walk.setToX(coordinate.getX() * tileWidth);
 				walk.setToY(coordinate.getY() * tileWidth);

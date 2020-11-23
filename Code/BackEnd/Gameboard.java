@@ -4,6 +4,7 @@ package BackEnd;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -271,5 +272,9 @@ public class Gameboard {
 
     public FloorTile TileAt(Coordinate coordinate) {
         return null;
+    }
+
+    public void backtrack(int playerNumber) {
+        //TODO
     }
 }

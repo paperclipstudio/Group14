@@ -64,6 +64,7 @@ public class Player
         this.playerNumber = playerNumber;
         this.inventory = new ArrayList<>();
         this.gameboard = gameboard;
+        this.backTracked = false;
     }
 
 
