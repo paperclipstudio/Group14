@@ -18,6 +18,11 @@ public class SilkBag {
     private Random randomGenerator;
 
     /**
+     * This is a constant to save the seed for loading the game.
+     */
+    private static int SEED;
+
+    /**
      * First constructor of the silk bag, which initialises attributes.
      * Giving a random integer seed for the random generator.
      * @param seed the integer seed of the random generator.
@@ -25,6 +30,7 @@ public class SilkBag {
 	public SilkBag(int seed) {
 	    allTiles = new ArrayList<>();
 	    randomGenerator = new Random(seed);
+	    this.SEED = SEED;
 	}
 
     /**
@@ -35,6 +41,12 @@ public class SilkBag {
         randomGenerator = new Random();
     }
 
+    /**
+     * Returns the seed.
+     */
+    public int getSeed(){
+        return this.SEED;
+    }
 
     /**
      * Get a tile from bag.
