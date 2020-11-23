@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -66,8 +67,10 @@ public class GameSetupController implements Initializable {
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
 			this.SAVE_NAME = (saveName.getText());
-			String seed = ("\n" + SilkBag.getSeed());
-			Files.write(gameSave.toPath(), seed.getBytes(), StandardOpenOption.APPEND);
+			// there is no silk bag right now.
+			// so seed can be created here.
+			int seed = (new Random()).nextInt();
+			Files.write(gameSave.toPath(), String.valueOf(seed).getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			Alert gameExists = new Alert(Alert.AlertType.ERROR);
 			gameExists.setTitle("Error");

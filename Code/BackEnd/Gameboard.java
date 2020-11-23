@@ -56,18 +56,17 @@ public class Gameboard {
     }
 
     public Tile playFloorTile (Coordinate location, FloorTile insertedTile, Rotation rotation){
-        for (int i = 0; i < slideLocations.length; i++){
-            if (slideLocations[i].getX() == location.getX() && slideLocations[i].getY() == location.getY()){
                 // Inserting the new tile from the left.
                 if (location.getX() == -1){
-                    for(int j = 0; j < width; j++){
+                    for(int j = width-1; j >= 0; j--){
                         boardTiles[j][location.getY()] = boardTiles[j+1][location.getY()];
                         removedTile = boardTiles[width][location.getY()];
+                        boardTiles[location.getX()+1][location.getY()] = insertedTile;
                     }
                 }
                 // Inserting the new tile from the right.
                 else if (location.getX() == width){
-                    for(int j = 0; j < width; j++){
+                    for(int j = 1; j < width; j++){
                         boardTiles[j][location.getY()] = boardTiles[j-1][location.getY()];
                         removedTile = boardTiles[-1][location.getY()];
                     }
@@ -85,8 +84,6 @@ public class Gameboard {
                         boardTiles[location.getX()][j] = boardTiles[location.getX()][j-1];
                         removedTile = boardTiles[location.getX()][height];
                     }
-                }
-            }
         }
         return removedTile;
     }
@@ -318,7 +315,7 @@ public class Gameboard {
             locations.add(new Coordinate(-1, y));
             locations.add(new Coordinate(width, y));
         }
-        return (Coordinate[]) locations.toArray();
+        return locations.toArray(new Coordinate[1]);
     }
 
     public FloorTile TileAt(Coordinate coordinate) {

@@ -74,10 +74,14 @@ public class FileReader {
         //// Fill with random tiles
         Random r = new Random(42069);
         Coordinate[] slideLocations = gameboard.getSlideLocations();
+        int count = 0;
         while (gameboard.containsNull()) {
+            count++;
+            System.out.println("Adding tile -> " + count);
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
             Coordinate toSlide = slideLocations[r.nextInt(slideLocations.length-1)];
+            gameboard.playFloorTile(toSlide, tile, Rotation.UP);
         }
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];

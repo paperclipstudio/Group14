@@ -9,9 +9,9 @@ T_Shape 5 3 1
 T_Shape 2 6 2
 Corner 5 6 0
 Goal 4 5 0
-20 Corner
-20 Straight
-20 T_Shape
+50 Corner
+50 Straight
+50 T_Shape
 5 Goal
 5 Fire
 5 Ice 

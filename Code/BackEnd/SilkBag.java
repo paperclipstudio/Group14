@@ -14,13 +14,13 @@ public class SilkBag {
      * These are variables are used for the silk bag, a list to hold all tiles and
      * a random generator to generate a random tile.
      */
-    private  ArrayList<Tile> allTiles;
-    private Random randomGenerator;
+    private final ArrayList<Tile> allTiles;
+    private final Random randomGenerator;
 
     /**
      * This is a constant to save the seed for loading the game.
      */
-    private static int SEED;
+    private int SEED;
 
     /**
      * First constructor of the silk bag, which initialises attributes.
@@ -44,7 +44,7 @@ public class SilkBag {
     /**
      * Returns the seed.
      */
-    public static int getSeed(){
+    public int getSeed(){
         return SEED;
     }
 
@@ -62,10 +62,18 @@ public class SilkBag {
      * @return a Tile
      */
     public FloorTile getFloorTile () {
-        Tile tile = getTile();
-        if (tile instanceof FloorTile == false ) {
-           return getFloorTile();
-       }
+        int index = randomGenerator.nextInt(allTiles.size());
+        int startIndex = index;
+        Tile tile = allTiles.get(index);
+        while(!Tile.isFloorTile(tile)) {
+            //System.out.println(index);
+            tile = allTiles.get(index);
+            index = (index + 1) % allTiles.size();
+            if (index == startIndex) {
+                // We have looped and found no floor tile
+                System.out.println("No FloorTile in silkBag");
+            }
+        }
         return (FloorTile) tile;
     }
 
