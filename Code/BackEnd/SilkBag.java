@@ -44,8 +44,8 @@ public class SilkBag {
     /**
      * Returns the seed.
      */
-    public int getSeed(){
-        return this.SEED;
+    public static int getSeed(){
+        return SEED;
     }
 
     /**

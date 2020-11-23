@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.SilkBag;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -11,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ResourceBundle;
 
 /**
@@ -29,8 +30,10 @@ public class GameSetupController implements Initializable {
 
 	@FXML
 	private ChoiceBox selectGameboard;
-
-	private String saveGameName;
+	/**
+	 * Constant for the name of the save file.
+	 */
+	private static String SAVE_NAME;
 
 	/**
 	 * Populates the choice box with available gameboards when the page is initialized.
@@ -53,7 +56,7 @@ public class GameSetupController implements Initializable {
 	}
 
 	/***
-	 * Copys gameboard file and Continues to GameScreen
+	 * Copys gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
 	public void onStartButton() {
 		try {
@@ -62,7 +65,9 @@ public class GameSetupController implements Initializable {
 			Files.copy(gameboard.toPath(), gameSave.toPath());
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
-			this.saveGameName = (saveName.getText()) + ".txt";
+			this.SAVE_NAME = (saveName.getText());
+			String seed = ("\n" + SilkBag.getSeed());
+			Files.write(gameSave.toPath(), seed.getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			Alert gameExists = new Alert(Alert.AlertType.ERROR);
 			gameExists.setTitle("Error");
@@ -81,7 +86,7 @@ public class GameSetupController implements Initializable {
 	/**
 	 * This returns the name of the save file
 	 */
-	public String getSaveGameName() {
-		return this.saveGameName;
+	public static String getSaveName() {
+		return SAVE_NAME;
 	}
 }
