@@ -15,12 +15,6 @@ import java.util.*;
  */
 
 public class FileReader {
-    /**
-     The numOfFixedTiles attribute is based on the second line of the given level file format, which is used to
-     accurately note how many fixed tiles will be placed on the gameboard.
-     The lineCounter and playerCounter are two counters used in the iteration of each line of the file.
-     The number of tile types and max number of players are both fixed, and are set to be final.
-     */
     private static final int NUM_OF_TILE_TYPES = TileType.values().length;
     private static final int NUM_OF_FLOOR_TYPES = 4; //Not including goal tile
     private static final int MAX_NUM_OF_PLAYERS = 4;
@@ -35,15 +29,15 @@ public class FileReader {
      * @return pair where first element is the gameboard and second is the players.
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename) {
-        Scanner in = verifyFile(filename);
-        Gameboard gameboard;
         int width;
         int height;
+        int numberOfFixedTiles;
+        Gameboard gameboard;
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];
         SilkBag silkBag = new SilkBag();
-        int numberOfFixedTiles;
-        Scanner currentLine;
 
+        Scanner in = verifyFile(filename);
+        Scanner currentLine;
         //// boardConfig
         currentLine = new Scanner (in.nextLine());
         width = currentLine.nextInt();
@@ -91,7 +85,6 @@ public class FileReader {
             gameboard.setPlayerPos(i, new Coordinate(x, y));
             players[i] = new Player(i, silkBag, gameboard);
         }
-
         return new Pair<>(gameboard, players);
     }
 
@@ -101,15 +94,13 @@ public class FileReader {
      * @return in The scanner that iterates through the file.
      */
     public static Scanner verifyFile(String filename) {
+        Scanner in = null;
         try {
             File input = new File(filename);
-            Scanner in = new Scanner(input);
-            return in;
+            in = new Scanner(input);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-            System.exit(0);
-            //return null is never reached.
-            return null;
+            System.out.println("File not found: " + filename);
         }
+        return in;
     }
 }
