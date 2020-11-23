@@ -31,7 +31,7 @@ public class GameSetupController implements Initializable {
 	@FXML
 	private ChoiceBox selectGameboard;
 
-	private static String SAVE_GAME_NAME;
+	private static String SAVE_NAME;
 
 	/**
 	 * Populates the choice box with available gameboards when the page is initialized.
@@ -63,7 +63,7 @@ public class GameSetupController implements Initializable {
 			Files.copy(gameboard.toPath(), gameSave.toPath());
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
-			this.SAVE_GAME_NAME = (saveName.getText()) + ".txt";
+			this.SAVE_NAME = (saveName.getText());
 			String seed = ("\n" + SilkBag.getSeed());
 			Files.write(gameSave.toPath(), seed.getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
@@ -84,7 +84,7 @@ public class GameSetupController implements Initializable {
 	/**
 	 * This returns the name of the save file
 	 */
-	public static String getSaveGameName() {
-		return SAVE_GAME_NAME;
+	public static String getSaveName() {
+		return SAVE_NAME;
 	}
 }
