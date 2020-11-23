@@ -51,13 +51,13 @@ public class GameSetupController implements Initializable {
 	}
 
 	/***
-	 * Continues to GameScreen
+	 * Copys gameboard file and Continues to GameScreen
 	 */
-	public void onStartButton() throws IOException{
+	public void onStartButton() {
 		File gameboard = new File("Gameboards\\" + selectGameboard.getValue().toString());
 		File gameSave = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
 		try {
-			copyFile(gameboard.toPath(), gameSave.toPath());
+			Files.copy(gameboard.toPath(), gameSave.toPath());
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
 		} catch (Exception IOException) {
@@ -68,10 +68,6 @@ public class GameSetupController implements Initializable {
 			gameExists.showAndWait();
 		}
 
-	}
-
-	private static void copyFile(Path source, Path dest) throws IOException {
-		Files.copy(source, dest);
 	}
 
 }
