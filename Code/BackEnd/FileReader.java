@@ -16,7 +16,6 @@ import java.util.*;
 
 public class FileReader {
     private static final int NUM_OF_TILE_TYPES = TileType.values().length;
-    private static final int NUM_OF_FLOOR_TYPES = 4; //Not including goal tile
     private static final int MAX_NUM_OF_PLAYERS = 4;
 
     /**
@@ -29,25 +28,18 @@ public class FileReader {
      * @return pair where first element is the gameboard and second is the players.
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename) {
-        int width;
-        int height;
-        int numberOfFixedTiles;
-        Gameboard gameboard;
-        Player[] players = new Player[MAX_NUM_OF_PLAYERS];
-        SilkBag silkBag = new SilkBag();
-
         Scanner in = verifyFile(filename);
         Scanner currentLine;
-        //// boardConfig
+
+        //// board config
         currentLine = new Scanner (in.nextLine());
-        width = currentLine.nextInt();
-        height = currentLine.nextInt();
-        gameboard = new Gameboard(width, height);
+        int width = currentLine.nextInt();
+        int height = currentLine.nextInt();
+        Gameboard gameboard = new Gameboard(width, height);
 
         //// Fixed tiles
         currentLine = new Scanner(in.nextLine());
-        numberOfFixedTiles = currentLine.nextInt();
-
+        int numberOfFixedTiles = currentLine.nextInt();
         for (int i= 0; i < numberOfFixedTiles; i++) {
            currentLine = new Scanner(in.nextLine());
            TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
@@ -67,6 +59,7 @@ public class FileReader {
             tileTypeCount[tileType] = currentLine.nextInt();
         }
         // putting them in the bag
+        SilkBag silkBag = new SilkBag();
         // for each tile type
         for (int tileType=0; tileType < NUM_OF_TILE_TYPES; tileType++) {
             int numberOfThisTile = tileTypeCount[tileType];
@@ -78,6 +71,7 @@ public class FileReader {
         }
 
         //// Creating players
+        Player[] players = new Player[MAX_NUM_OF_PLAYERS];
         for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
             currentLine = new Scanner(in.nextLine());
             int x = currentLine.nextInt();
