@@ -1,0 +1,15 @@
+
+I
+java:S1068",Remove this unused "location" private field.(‰ÊÏ¢8Ñ©¥…ß.
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
+G
+java:S1135l"2Complete the task associated to this TODO comment.(æè¦)
+M
+java:S1135`"2Complete the task associated to this TODO comment.(¯ÔïÁúÿÿÿÿ
+R
+java:S1068#"0Remove this unused "playerNumber" private field.(ÿÎ¬“úÿÿÿÿ8ç®¦…ß.
+P	java:S1252"<This block of commented-out lines of code should be removed.(ÉŸ³G
+M
+java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘
+†
+java:S1319J"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ş“Ò
