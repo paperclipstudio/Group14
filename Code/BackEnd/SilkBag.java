@@ -30,7 +30,7 @@ public class SilkBag {
 	public SilkBag(int seed) {
 	    allTiles = new ArrayList<>();
 	    randomGenerator = new Random(seed);
-	    this.SEED = SEED;
+	    this.SEED = seed;
 	}
 
     /**
