@@ -61,12 +61,12 @@ public class SilkBag {
      * Gets a floor tile from bag for setup
      * @return a Tile
      */
-    public Tile getFloorTile () {
+    public FloorTile getFloorTile () {
         Tile tile = getTile();
         if (tile instanceof FloorTile == false ) {
            return getFloorTile();
        }
-        return tile;
+        return (FloorTile) tile;
     }
 
     /**

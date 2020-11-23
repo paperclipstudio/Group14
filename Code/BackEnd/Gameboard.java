@@ -125,13 +125,8 @@ public class Gameboard {
 
     //places a fixed floor tile in the coordinates specified.
     public void placeFixedTile (FloorTile tile, int x, int y) {
-        for (int i = 0; i < boardTiles.length; i++){
-            for (int j = 0; j < boardTiles[i].length; j++){
-                if (i == x && j == y){
-                    boardTiles[i][j] = tile;
-                }
-            }
-        }
+        boardTiles[x][y] = tile;
+
     }
 
     //checks to see if a player is on goal by going through all the players' locations to see
@@ -264,17 +259,35 @@ public class Gameboard {
     }
 
     public Coordinate[] getSlideLocations() {
-        Coordinate test = new Coordinate(-1, 0);
-        Coordinate test2 = new Coordinate(1,-1);
-        Coordinate test3 = new Coordinate(-1,1);
-        return new Coordinate[] {test, test3, test2};
+        ArrayList<Coordinate> locations = new ArrayList<>();
+        //TODO FIX
+        for (int x = 0; x < width; x++) {
+            locations.add(new Coordinate(x, -1));
+            locations.add(new Coordinate(x, height));
+        }
+        for (int y = 0; y < width; y++) {
+            locations.add(new Coordinate(-1, y));
+            locations.add(new Coordinate(width, y));
+        }
+        return (Coordinate[]) locations.toArray();
     }
 
     public FloorTile TileAt(Coordinate coordinate) {
-        return null;
+        return boardTiles[coordinate.getX()][coordinate.getY()];
     }
 
     public void backtrack(int playerNumber) {
         //TODO
+    }
+
+    public boolean containsNull() {
+        for(int x = 0; x < width; x++) {
+            for(int y = 0; y < height; y++) {
+                if (boardTiles[x][y] == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

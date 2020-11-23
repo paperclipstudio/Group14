@@ -1,6 +1,8 @@
 package BackEnd;
 import javafx.fxml.Initializable;
 import javafx.util.Pair;
+
+import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -69,7 +71,14 @@ public class FileReader {
                 silkBag.insertTile(newTile);
             }
         }
-
+        //// Fill with random tiles
+        Random r = new Random(42069);
+        Coordinate[] slideLocations = gameboard.getSlideLocations();
+        while (gameboard.containsNull()) {
+            FloorTile tile = silkBag.getFloorTile();
+            tile.setRotation(Rotation.values()[r.nextInt(4)]);
+            Coordinate toSlide = slideLocations[r.nextInt(slideLocations.length-1)];
+        }
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];
         for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {

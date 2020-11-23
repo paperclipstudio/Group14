@@ -31,6 +31,7 @@ public class GameLogic {
 	 * @param boardFile Paths to board file
 	 */
 	public void newGame(String boardFile) {
+		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;
 		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
@@ -178,29 +179,6 @@ public class GameLogic {
 	 * can play.
 	 */
 	public GameLogic() {
-		// Filling fake board with values.
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				Rotation rotation = Rotation.UP;
-				switch (r.nextInt(3)) {
-					case 0:
-						rotation = Rotation.UP;
-						break;
-					case 1:
-						rotation = Rotation.LEFT;
-						break;
-					case 2:
-						rotation = Rotation.DOWN;
-						break;
-					case 3:
-						rotation = Rotation.RIGHT;
-						break;
-				}
-				FloorTile newTile = new FloorTile(TileType.values()[r.nextInt(3)], rotation);
-				tiles[x][y] = newTile;
-			}
-		}
-		doubleMove = false;
 	}
 
 	/**
@@ -209,7 +187,7 @@ public class GameLogic {
 	 * @return tile at location.
 	 */
 	public FloorTile getTileAt(Coordinate location) {
-		return tiles[location.getX()][location.getY()];
+		return gameboard.TileAt(location);
 	}
 
 	/**
