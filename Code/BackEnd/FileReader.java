@@ -21,13 +21,9 @@ public class FileReader {
      The lineCounter and playerCounter are two counters used in the iteration of each line of the file.
      The number of tile types and max number of players are both fixed, and are set to be final.
      */
-    private static int numOfFixedTiles;
-    private static int lineCounter = 0;
-    private static int playerCounter = 0;
-    private static final int NUM_OF_TILE_TYPES = 7;
-    private static final int NUM_OF_FLOOR_TYPES = 3; //Not including goal tile
+    private static final int NUM_OF_TILE_TYPES = TileType.values().length;
+    private static final int NUM_OF_FLOOR_TYPES = 4; //Not including goal tile
     private static final int MAX_NUM_OF_PLAYERS = 4;
-    private static Gameboard gameboard;
 
     /**
      * This method takes in the given level format file, verifies it using the verifyFile method,

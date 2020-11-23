@@ -22,6 +22,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -32,6 +33,7 @@ import javafx.util.Duration;
 import static BackEnd.Phase.MOVE;
 import static BackEnd.Rotation.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
+import static java.lang.Thread.sleep;
 
 /***
  * Use to control the GameScreen scene.
@@ -152,6 +154,7 @@ public class GameScreenController implements Initializable {
 			});
 			tiles.getChildren().add(arrow);
 		}
+		cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
 	}
 
 	private void shiftTiles(Rotation direction, int location, FloorTile newTile) {
@@ -278,7 +281,8 @@ public class GameScreenController implements Initializable {
 	private void hideAllControls() {
 		// Draw controls
 		drawButton.setVisible(false);
-		//cards.getChildren().clear();
+		cards.getChildren().clear();
+		removeAll("slide_arrow");
 		// Floor controls
 		for (int i = 0; i < tiles.getChildren().size(); i++) {
 
@@ -370,9 +374,12 @@ public class GameScreenController implements Initializable {
 				Node currentPlayer = players[gameLogic.getPlayersTurn()];
 				TranslateTransition walk = new TranslateTransition();
 				walk.setToX(coordinate.getX() * tileWidth);
-				walk.setToY(coordinate.getY());
+				walk.setToY(coordinate.getY() * tileWidth);
 				walk.setNode(currentPlayer);
 				walk.setDuration(new Duration(500));
+				walk.play();
+				removeAll("locationarrow");
+				walk.setOnFinished((e2) -> mainLoop());
 			});
 			tiles.getChildren().add(pointer);
 
@@ -383,7 +390,7 @@ public class GameScreenController implements Initializable {
 	 */
 	public void onDrawButton() {
 		gameLogic.draw();
-
+		//TODO just show drawn card.
 		cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
 
 		mainLoop();
@@ -480,4 +487,15 @@ public class GameScreenController implements Initializable {
 			}
 		}
 	}
+
+	private void removeAll(String id) {
+		tiles.getChildren().removeIf(n -> n == null);
+		tiles.getChildren().removeIf(n -> {
+			if (n.getId() == null) {
+				return false;
+			} else {
+				return n.getId().contains(id);
+			}
+		});
+		}
 }

@@ -95,6 +95,7 @@ public class Assets {
 	 */
 	public static ImageView makeArrow() {
 		ImageView arrow = new ImageView(get("slide_arrow"));
+		arrow.setId("slide_arrow");
 		arrow.setFitHeight(GameScreenController.tileWidth);
 		arrow.setFitWidth(GameScreenController.tileWidth);
 		arrow.setOnMouseEntered(e -> arrow.setEffect(new Bloom(0.1)));
@@ -118,13 +119,17 @@ public class Assets {
 		newCard = newCard1;
 		ImageView newCardImage = ((ImageView)newCard.lookup("#image"));
 		newCardImage.setImage(Assets.get(tile.getType().toString()));
-		newCard.setOnMouseEntered((e) -> {
-			newCard.setEffect(new DropShadow(20, 0, 20, Color.BLACK));
-		});
+		newCard.setOnMouseEntered(
+				e -> newCard.setEffect(new DropShadow(20, 0, 20, Color.BLACK)));
 		newCard.setOnMouseExited(e -> newCard.setEffect(null));
 		return newCard;
 	}
 
+	/**
+	 * Get a imageView of that player
+	 * @param playerNumber which player is needed
+	 * @return
+	 */
 	public static ImageView getPlayer(int playerNumber) {
 		Image playerModel = get("player" + (playerNumber+1));
 		ImageView player = new ImageView(playerModel);
@@ -138,6 +143,7 @@ public class Assets {
 		ImageView locationArrow = new ImageView(arrow);
 		locationArrow.setFitWidth(GameScreenController.tileWidth);
 		locationArrow.setFitHeight(GameScreenController.tileWidth);
+		locationArrow.setId("locationarrow");
 		return locationArrow;
 	}
 }

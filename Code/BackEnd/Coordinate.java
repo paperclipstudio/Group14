@@ -16,6 +16,8 @@ public class Coordinate {
 
     /**
      * Constructor takes in a coordinate with x and y.
+     * @param xCoor the X coordinate
+     * @param yCoor the Y coordinate
      */
     public Coordinate(int xCoor, int yCoor){
         x = xCoor;
@@ -79,7 +81,7 @@ public class Coordinate {
             return true;
         }
 
-        if (o instanceof Coordinate) {
+        if (!(o instanceof Coordinate)) {
             return false;
         }
 
@@ -87,11 +89,22 @@ public class Coordinate {
         return this.equals(coor);
     }
 
-
+    /**
+     * Shifts a Coordinate by a given amount
+     * does not mutate original object
+     * @param x amount to shift right
+     * @param y amount to shift down
+     * @return a new Coordinate in shifted location.
+     */
 	public Coordinate shift(int x, int y) {
         return shift(new Coordinate(x, y));
 	}
-
+    /**
+     * Shifts a Coordinate by a given amount
+     * does not mutate original object
+     * @param shiftAmount amount to shift right and down
+     * @return a new Coordinate in shifted location.
+     */
 	public Coordinate shift(Coordinate shiftAmount) {
         return new Coordinate(shiftAmount.getX() + x, shiftAmount.getY() + y);
     }

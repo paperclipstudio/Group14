@@ -12,10 +12,11 @@ Goal 4 5 0
 20 Corner
 20 Straight
 20 T_Shape
+5 Goal
 5 Fire
 5 Ice 
 5 Backtrack 
-5 DoubleMove 
+5 DoubleMove
 0 0 Player1
 7 0 Player2
 0 9 Player3

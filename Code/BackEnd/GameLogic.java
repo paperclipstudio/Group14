@@ -13,7 +13,6 @@ import static BackEnd.Phase.*;
  * @author Christian Sanger
  */
 public class GameLogic {
-
 	// Games parts
 	Gameboard gameboard;
 	Player[] players;
@@ -35,9 +34,9 @@ public class GameLogic {
 		currentPlayerNo = 0;
 		phase = DRAW;
 		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
-		//TODO undo when FileReader Works
 		gameboard = gameItems.getKey();
 		players = gameItems.getValue();
+		numberOfPlayers = players.length;
 		currentPlayer = players[currentPlayerNo];
 	}
 
@@ -257,10 +256,10 @@ public class GameLogic {
 	public Coordinate[] getMoveLocations() {
 		//todo Get working
 		Coordinate[] validLocation = new Coordinate[4];
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(1,0);
-		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,0);
-		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo).shift(0,1);
-		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo).shift(1,-1);
+		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo);
+		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo);
+		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo);
+		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo);
 		return validLocation;
 	}
 }
