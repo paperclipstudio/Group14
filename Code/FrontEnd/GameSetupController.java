@@ -30,7 +30,9 @@ public class GameSetupController implements Initializable {
 
 	@FXML
 	private ChoiceBox selectGameboard;
-
+	/**
+	 * Constant for the name of the save file.
+	 */
 	private static String SAVE_NAME;
 
 	/**
