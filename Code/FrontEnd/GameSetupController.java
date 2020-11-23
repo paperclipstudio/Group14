@@ -30,6 +30,8 @@ public class GameSetupController implements Initializable {
 	@FXML
 	private ChoiceBox selectGameboard;
 
+	private String saveGameName;
+
 	/**
 	 * Populates the choice box with available gameboards when the page is initialized.
 	 */
@@ -54,20 +56,32 @@ public class GameSetupController implements Initializable {
 	 * Copys gameboard file and Continues to GameScreen
 	 */
 	public void onStartButton() {
-		File gameboard = new File("Gameboards\\" + selectGameboard.getValue().toString());
-		File gameSave = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
 		try {
+			File gameboard = new File("Gameboards\\" + selectGameboard.getValue().toString());
+			File gameSave = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
 			Files.copy(gameboard.toPath(), gameSave.toPath());
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
-		} catch (Exception IOException) {
+			this.saveGameName = (saveName.getText()) + ".txt";
+		} catch (IOException e) {
 			Alert gameExists = new Alert(Alert.AlertType.ERROR);
 			gameExists.setTitle("Error");
 			gameExists.setContentText("Game already exists with the same name. Please enter another name.");
 			gameExists.setHeaderText(null);
 			gameExists.showAndWait();
+		} catch (Exception e) {
+			Alert noGameboard = new Alert(Alert.AlertType.ERROR);
+			noGameboard.setTitle("Error");
+			noGameboard.setContentText("Please select a Gameboard.");
+			noGameboard.setHeaderText(null);
+			noGameboard.showAndWait();
 		}
 
 	}
-
+	/**
+	 * This returns the name of the save file
+	 */
+	public String getSaveGameName() {
+		return this.saveGameName;
+	}
 }
