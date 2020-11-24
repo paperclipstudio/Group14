@@ -53,6 +53,13 @@ public class SettingsController implements Initializable {
 		};
 		resolution.getSelectionModel().selectedItemProperty().addListener(resolutionListener);
 		resolution.getSelectionModel().selectFirst();
+		ChangeListener<Number> soundListener = new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				onSoundChange();
+			}
+		};
+		sound.valueProperty().addListener(soundListener);
 	}
 
 	String keyHistory = "";
@@ -79,6 +86,11 @@ public class SettingsController implements Initializable {
 		}
 	}
 
+	public void onSoundChange() {
+		System.out.println(sound.getValue());
+		Main.setVolume(sound.getValue() / 100.0);
+
+	}
 	public void onFullScreenChange() {
 		System.out.println("Boop");
 		boolean isFullscreen = fullscreen.isSelected();
