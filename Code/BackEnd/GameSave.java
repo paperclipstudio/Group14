@@ -21,9 +21,10 @@ public class GameSave {
         Files.write(GAME_SAVE_FILE.toPath(),
                 (" " + location.getX() + " " + location.getY()).getBytes(), StandardOpenOption.APPEND);
     }
-    public static void savePlayFloorTile(Coordinate slideLocations, Rotation rotation) throws IOException {
+    public static void savePlayFloorTile(Coordinate slideLocations, FloorTile tile, Rotation rotation) throws IOException {
         Files.write(GAME_SAVE_FILE.toPath(),
-                ("\n" + slideLocations.getX() + " " + slideLocations.getY() + " " + rotation).getBytes(), StandardOpenOption.APPEND);
+                ("\n" + slideLocations.getX() + " " + slideLocations.getY() + " "
+                        + tile.getType() + " " + rotation).getBytes(), StandardOpenOption.APPEND);
     }
     public static void savePlayActionTile(Coordinate location, ActionTile tile) throws IOException {
         Files.write(GAME_SAVE_FILE.toPath(),
