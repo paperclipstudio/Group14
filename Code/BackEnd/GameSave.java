@@ -1,12 +1,13 @@
 package BackEnd;
 
 import FrontEnd.GameSetupController;
-import jdk.internal.dynalink.beans.StaticClass;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+
+import static BackEnd.TileType.BACKTRACK;
 
 /**
  * This class records each players decisions.
@@ -29,5 +30,8 @@ public class GameSave {
     public static void savePlayActionTile(Coordinate location, ActionTile tile) throws IOException {
         Files.write(GAME_SAVE_FILE.toPath(),
                 (" " + location.getX() + " " + location.getY() + " " + tile.getType()).getBytes(), StandardOpenOption.APPEND);
+        if (tile.getType() == BACKTRACK) {
+            //TODO get player number of backtacked player
+        }
     }
 }
