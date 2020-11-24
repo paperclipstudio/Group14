@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Christian Sanger
  */
 public class WindowLoader {
-	private static final String fileLocation = "FrontEnd\\";
+	private static final String fileLocation = "FrontEnd\\FXML\\";
 	// Reference to the primary stage
 	private static Stage w;
 	private static boolean isFullscreen;
