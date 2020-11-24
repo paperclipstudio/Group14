@@ -314,7 +314,7 @@ public class GameScreenController implements Initializable {
 					vCard.setOnMouseClicked((e) -> {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked((e2) -> {
-							gameLogic.doubleMoveAction();
+							gameLogic.action(new ActionTile(DOUBLE_MOVE), null);
 							for (ImageView player:players) {
 								player.setEffect(new Bloom(999));
 								player.setOnMouseClicked(e3 -> {});

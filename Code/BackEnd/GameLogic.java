@@ -1,9 +1,7 @@
 package BackEnd;
+
+
 import javafx.util.Pair;
-
-import java.nio.charset.CoderResult;
-import java.util.Random;
-
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
 
@@ -148,6 +146,7 @@ public class GameLogic {
 		result[3] = new ActionTile(TileType.FROZEN);
 		return result;
 	}
+
 	/**
 	 * moves the current player to another location.
 	 * @param location where the player wishes to move.
@@ -162,12 +161,6 @@ public class GameLogic {
 			currentPlayer = players[currentPlayerNo];
 		}
 	}
-
-	// Added by George to start to print game to screen
-	Random r = new Random(123456);
-	int width = 9;
-	int height = 9;
-	FloorTile[][] tiles = new FloorTile[width][height];
 
 	/**
 	 * Creates an empty game logic class, must run startNew or load before you
@@ -190,30 +183,46 @@ public class GameLogic {
 	 * @return the width of the board
 	 */
 	public int getWidth() {
-		return width;
+		return gameboard.getWidth();
 	}
 
 	/**
 	 * @return the height of the board.
 	 */
 	public int getHeight() {
-		return height;
+		return gameboard.getHeight();
 	}
 
+	/**
+	 * Gets how many player are currently playing
+	 * @return number of players
+	 */
 	public int getNumberOfPlayers() {
 		//TODO create working version.
 		return numberOfPlayers;
 	}
 
+	/**
+	 * Called when User wants to play a backtrack card.
+	 * @param playerNumber which player to use backtrack on.
+	 */
 	public void backtrack(int playerNumber) {
 		gameboard.backtrack(playerNumber);
 		phase = MOVE;
 	}
 
+	/**
+	 * Finds out which players turn it is.
+	 * @return 0-3 to mean which is the current player
+	 */
 	public int getPlayersTurn() {
 		return currentPlayerNo;
 	}
 
+	/**
+	 * gets all move locations that it is valid for the current player to move to.
+	 * @return all valid move locations
+	 */
 	public Coordinate[] getMoveLocations() {
 		//todo waiting on gameboard
 		Coordinate[] validLocation = new Coordinate[4];
