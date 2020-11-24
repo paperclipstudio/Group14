@@ -62,15 +62,15 @@ public class GameSetupController implements Initializable {
 	public void onStartButton() {
 		try {
 			File gameboard = new File("Gameboards\\" + selectGameboard.getValue().toString());
-			File gameSave = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
-			Files.copy(gameboard.toPath(), gameSave.toPath());
+			File gameSaveFile = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
+			Files.copy(gameboard.toPath(), gameSaveFile.toPath());
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
 			this.SAVE_NAME = (saveName.getText());
 			// there is no silk bag right now.
 			// so seed can be created here.
 			int seed = (new Random()).nextInt();
-			Files.write(gameSave.toPath(), ("\n" + seed).getBytes(), StandardOpenOption.APPEND);
+			Files.write(gameSaveFile.toPath(), ("\n" + seed).getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			Alert gameExists = new Alert(Alert.AlertType.ERROR);
 			gameExists.setTitle("Error");
