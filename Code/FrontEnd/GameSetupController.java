@@ -57,7 +57,7 @@ public class GameSetupController implements Initializable {
 	}
 
 	/***
-	 * Copys gameboard file, appends the seed for the silk bag and Continues to GameScreen.
+	 * This copys the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
 	public void onStartButton() {
 		try {
@@ -70,7 +70,7 @@ public class GameSetupController implements Initializable {
 			// there is no silk bag right now.
 			// so seed can be created here.
 			int seed = (new Random()).nextInt();
-			Files.write(gameSave.toPath(), String.valueOf(seed).getBytes(), StandardOpenOption.APPEND);
+			Files.write(gameSave.toPath(), ("\n" + seed).getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			Alert gameExists = new Alert(Alert.AlertType.ERROR);
 			gameExists.setTitle("Error");
