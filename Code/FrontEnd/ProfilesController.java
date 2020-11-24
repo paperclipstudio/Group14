@@ -3,12 +3,10 @@ package FrontEnd;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Scanner;
 
 /***
@@ -26,7 +24,28 @@ public class ProfilesController {
 	 * called by back button
 	 */
 
-	Path saveAddress = Paths.get("SaveData\\UserData\\");
+	@FXML
+	private ListView<String> playerList;
+
+	public void initialize(){
+
+		File file = new File("SaveData\\UserData\\");
+		String[] children = file.list();
+
+		if(children == null){
+			Alert alert9 = new Alert(Alert.AlertType.INFORMATION);
+			alert9.setTitle("New Player");
+			alert9.setContentText("There is no player yet! Go and create one.");
+			alert9.setHeaderText(null);
+			alert9.showAndWait();
+
+		}else {
+			for (String filename : children) {
+				playerList.getItems().addAll(filename);
+			}
+		}
+
+	}
 
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
@@ -36,7 +55,7 @@ public class ProfilesController {
 	public void createFile() throws IOException {
 		String newName = input.getText();
 
-		File user = new File(saveAddress + newName + ".txt");
+		File user = new File("SaveData\\UserData\\" + newName + ".txt");
 
 		if(user.exists() && !user.isDirectory()){
 
@@ -53,8 +72,9 @@ public class ProfilesController {
 			alert2.setContentText("Welcome " + newName + ", have fun!");
 			alert2.setHeaderText(null);
 			alert2.showAndWait();
+			playerList.getItems().addAll(newName + ".txt");
 
-			PrintWriter newUser = new PrintWriter(new FileWriter(saveAddress + newName + ".txt"));
+			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
 			newUser.write("Game Played: 0  Game Wins: 0");
 			newUser.close();
 
@@ -65,7 +85,7 @@ public class ProfilesController {
 	public void deleteFile() {
 		String newName = input.getText();
 
-		File user = new File(saveAddress + newName + ".txt");
+		File user = new File("SaveData\\UserData\\" + newName + ".txt");
 
 		if(user.delete()){
 
@@ -87,41 +107,9 @@ public class ProfilesController {
 
 	}
 
-	public void getFile(String path){
-
-	}
-
-	public void viewFile() {
-		String path = "SaveData\\UserData\\";
-
-		getFile(path);
-		File file = new File(path);
-		File[] array = file.listFiles();
-
-		for(int i = 0; i < Objects.requireNonNull(array).length; i++){
-			if(array[i].isFile()){
-				Alert alert5 = new Alert(Alert.AlertType.INFORMATION);
-				alert5.setTitle("Saved List");
-				alert5.setContentText("We have Player " + array[i].getName());
-				alert5.setHeaderText(null);
-				alert5.showAndWait();
-			}else if(array[i].isDirectory()){
-				getFile(array[i].getPath());
-			}else{
-				Alert alert6 = new Alert(Alert.AlertType.ERROR);
-				alert6.setTitle("Saved List");
-				alert6.setContentText("No document founded");
-				alert6.setHeaderText(null);
-				alert6.showAndWait();
-			}
-
-		}
-
-	}
-
 	public void viewData() throws FileNotFoundException {
 		String newName = input.getText();
-		File user = new File(saveAddress + newName + ".txt");
+		File user = new File("SaveData\\UserData\\" + newName + ".txt");
 
 		if(user.exists() && !user.isDirectory()){
 
