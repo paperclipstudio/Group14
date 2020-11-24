@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -32,6 +34,9 @@ public class ProfilesController {
 	 * Returns to menu screen
 	 * called by back button
 	 */
+
+	Path saveAddress = Paths.get("SaveData\\UserData\\");
+
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
@@ -40,7 +45,7 @@ public class ProfilesController {
 	public void createFile() throws IOException {
 		String newName = input.getText();
 
-		File user = new File("SaveData\\" + newName + ".txt");
+		File user = new File(saveAddress + newName + ".txt");
 
 		if(user.exists() && !user.isDirectory()){
 
@@ -58,7 +63,7 @@ public class ProfilesController {
 			alert2.setHeaderText(null);
 			alert2.showAndWait();
 
-			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\" + newName + ".txt"));
+			PrintWriter newUser = new PrintWriter(new FileWriter(saveAddress + newName + ".txt"));
 			newUser.write("Game Played: 0  Game Wins: 0");
 			newUser.close();
 
@@ -69,7 +74,7 @@ public class ProfilesController {
 	public void deleteFile() {
 		String newName = input.getText();
 
-		File user = new File("SaveData\\" + newName + ".txt");
+		File user = new File(saveAddress + newName + ".txt");
 
 		if(user.delete()){
 
@@ -96,7 +101,7 @@ public class ProfilesController {
 	}
 
 	public void viewFile() {
-		String path = "SaveData\\";
+		String path = "SaveData\\UserData\\";
 		getFile(path);
 		File file = new File(path);
 		File[] array = file.listFiles();
@@ -124,7 +129,7 @@ public class ProfilesController {
 
 	public void viewData() throws FileNotFoundException {
 		String newName = input.getText();
-		File user = new File("SaveData\\" + newName + ".txt");
+		File user = new File(saveAddress + newName + ".txt");
 
 		if(user.exists() && !user.isDirectory()){
 
