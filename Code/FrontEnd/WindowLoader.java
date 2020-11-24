@@ -16,7 +16,7 @@ import java.io.IOException;
 public class WindowLoader {
 	private static final String fileLocation = "FrontEnd\\";
 	// Reference to the primary stage
-	private Stage w;
+	private static Stage w;
 
 	/***
 	 * Creates a window loader that changes the scene shown to the user.
@@ -46,5 +46,10 @@ public class WindowLoader {
 			scene = new Scene(root);
 			w.setScene(scene);
 		}
+	}
+
+	public static void updateResolution(int width, int height) {
+		w.setWidth(width);
+		w.setHeight(height);
 	}
 }
