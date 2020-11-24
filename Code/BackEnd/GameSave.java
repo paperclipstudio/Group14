@@ -4,6 +4,7 @@ import FrontEnd.GameSetupController;
 import jdk.internal.dynalink.beans.StaticClass;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;

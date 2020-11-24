@@ -5,6 +5,7 @@ import java.nio.charset.CoderResult;
 import java.util.Random;
 
 import static BackEnd.Phase.*;
+import static BackEnd.TileType.DOUBLE_MOVE;
 
 /***
  * Controls the flow of game, lets the UI know what choices the player has
@@ -126,16 +127,10 @@ public class GameLogic {
 	 * @param coordinate where it would like to be played
 	 */
 	public void action(ActionTile tile, Coordinate coordinate) {
+		if (tile.getType() == DOUBLE_MOVE) {
+			doubleMove = true;
+		}
 		players[currentPlayerNo].playActionTile(coordinate, tile);
-		phase = MOVE;
-	}
-
-	/**
-	 * Says that double move action tile has been played.
-	 */
-	public void doubleMoveAction() {
-		doubleMove = true;
-		currentPlayer.playActionTile(null, new ActionTile(TileType.DOUBLE_MOVE));
 		phase = MOVE;
 	}
 
@@ -147,7 +142,7 @@ public class GameLogic {
 		//TODO FIX JUST FOR TESTING
 		System.out.println("FAKE GET ACTION CARDS");
 		ActionTile[] result = new ActionTile[4];
-		result[0] = new ActionTile(TileType.DOUBLE_MOVE);
+		result[0] = new ActionTile(DOUBLE_MOVE);
 		result[1] = new ActionTile(TileType.BACKTRACK);
 		result[2] = new ActionTile(TileType.FIRE);
 		result[3] = new ActionTile(TileType.FROZEN);
