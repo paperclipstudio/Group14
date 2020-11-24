@@ -19,16 +19,7 @@ public class ProfilesController {
 	private Button backButton;
 
 	@FXML
-	private Button create;
-
-	@FXML
-	private Button delete;
-
-	@FXML
 	private TextField input;
-
-	@FXML
-	private Button list;
 
 	/***
 	 * Returns to menu screen
@@ -102,6 +93,7 @@ public class ProfilesController {
 
 	public void viewFile() {
 		String path = "SaveData\\UserData\\";
+
 		getFile(path);
 		File file = new File(path);
 		File[] array = file.listFiles();
