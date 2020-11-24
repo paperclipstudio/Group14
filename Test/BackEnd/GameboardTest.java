@@ -7,11 +7,12 @@ import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameboardTest {
-	Gameboard gb = new Gameboard(3,3);
+	SilkBag sb = new SilkBag();
+	Gameboard gb = new Gameboard(3,3, sb);
 
 	@BeforeEach
 	void setUp() {
-		gb = new Gameboard(3,3);
+		gb = new Gameboard(3,3, sb);
 		gb.setPlayerPos(0, new Coordinate(1,1));
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
@@ -56,9 +57,9 @@ class GameboardTest {
 	@Test
 	void getWidth() {
 		assertEquals(3, gb.getWidth());
-		Gameboard gb2 = new Gameboard(0,3);
+		Gameboard gb2 = new Gameboard(0,3, sb);
 		assertEquals(0, gb2.getWidth());
-		gb2 = new Gameboard(10,3);
+		gb2 = new Gameboard(10,3, sb);
 		assertEquals(10, gb2.getWidth());
 
 	}
@@ -66,9 +67,9 @@ class GameboardTest {
 	@Test
 	void getHeight() {
 		assertEquals(3, gb.getHeight());
-		Gameboard gb2 = new Gameboard(3,0);
+		Gameboard gb2 = new Gameboard(3,0, sb);
 		assertEquals(0, gb2.getHeight());
-		gb2 = new Gameboard(3,10);
+		gb2 = new Gameboard(3,10, sb);
 		assertEquals(10, gb2.getHeight());
 	}
 

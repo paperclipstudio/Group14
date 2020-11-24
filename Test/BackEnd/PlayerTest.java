@@ -13,7 +13,7 @@ class PlayerTest {
 	@BeforeEach
 	void setUp() {
 		silkBag = new SilkBag();
-		board = new Gameboard(3,3);
+		board = new Gameboard(3,3, silkBag);
 		player = new Player(2, silkBag, board);
 		silkBag.insertTile(Tile.createTile(FROZEN));
 	}
