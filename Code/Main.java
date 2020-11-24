@@ -18,7 +18,11 @@ public class Main extends Application {
         // You can use the line below to test out your own screens
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\MenuScreen.fxml"));
         Scene scene = new Scene(root);
+        primaryStage.setWidth(600);
+        primaryStage.setHeight(400);
         primaryStage.setFullScreen(false);
+        primaryStage.setTitle("Covid Game?");
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

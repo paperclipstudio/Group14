@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -37,11 +36,12 @@ public class SettingsController implements Initializable {
 	private Slider sound;
 	@FXML
 	private ChoiceBox<String> resolution;
-	final static private String[] RESOLUTIONS = new String[]{"800x400", "1600x800", "10x10"};
+	final static private String[] RESOLUTIONS = new String[]{"600x400", "1200x800"};
 	private Stage ps;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		fullscreen.setSelected(WindowLoader.getIsFullScreen());
 		for (String setting : RESOLUTIONS) {
 			resolution.getItems().add(setting);
 		}
@@ -73,13 +73,16 @@ public class SettingsController implements Initializable {
 
 	public void updateResolution(String newResolution) {
 		if (newResolution.equals(RESOLUTIONS[0])) {
-			WindowLoader.updateResolution(800, 400);
+			WindowLoader.updateResolution(600, 400);
 		} else if (newResolution.equals(RESOLUTIONS[1])) {
-			WindowLoader.updateResolution(1600, 800);
-		} else if (newResolution.equals(RESOLUTIONS[2])) {
-			WindowLoader.updateResolution(400, 200);
+			WindowLoader.updateResolution(1200, 800);
 		}
-		ps.centerOnScreen();
+	}
+
+	public void onFullScreenChange() {
+		System.out.println("Boop");
+		boolean isFullscreen = fullscreen.isSelected();
+		WindowLoader.setFullScreen(isFullscreen);
 	}
 
 

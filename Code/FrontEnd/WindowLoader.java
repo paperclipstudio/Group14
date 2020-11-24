@@ -17,6 +17,7 @@ public class WindowLoader {
 	private static final String fileLocation = "FrontEnd\\";
 	// Reference to the primary stage
 	private static Stage w;
+	private static boolean isFullscreen;
 
 	/***
 	 * Creates a window loader that changes the scene shown to the user.
@@ -24,6 +25,15 @@ public class WindowLoader {
 	 */
 	public WindowLoader(Node window) {
 		this.w = (Stage) window.getScene().getWindow();
+	}
+
+	public static void setFullScreen(boolean fullscreen) {
+		isFullscreen = fullscreen;
+		w.setFullScreen(isFullscreen);
+	}
+
+	public static boolean getIsFullScreen() {
+		return isFullscreen;
 	}
 
 	/***
@@ -46,10 +56,12 @@ public class WindowLoader {
 			scene = new Scene(root);
 			w.setScene(scene);
 		}
+		w.setFullScreen(isFullscreen);
 	}
 
 	public static void updateResolution(int width, int height) {
 		w.setWidth(width);
 		w.setHeight(height);
+		w.centerOnScreen();
 	}
 }
