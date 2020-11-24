@@ -48,7 +48,7 @@ public class WindowLoader {
 	/***
 	 * swaps the scene for the given scene. Window should be the scene file name
 	 * i.e. to swap to MenuScreen.fxml use "MenuScreen"
-	 * 
+	 *
 	 * @param window scene name
 	 */
 	public void load(String window) {

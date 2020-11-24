@@ -30,7 +30,7 @@ public class GameSetupController implements Initializable {
 	private TextField saveName;
 
 	@FXML
-	private ChoiceBox selectGameboard;
+	private ChoiceBox<String> selectGameboard;
 	/**
 	 * Constant for the name of the save file.
 	 */
@@ -44,8 +44,11 @@ public class GameSetupController implements Initializable {
 		String[] gameboards;
 		File gameboardLocation = new File("Gameboards");
 		gameboards = gameboardLocation.list();
-		for (String gameboard : gameboards)
+		for (String gameboard : gameboards) {
 			selectGameboard.getItems().add(gameboard);
+		}
+		selectGameboard.getSelectionModel().selectFirst();
+
 	}
 
 	/***
@@ -60,17 +63,18 @@ public class GameSetupController implements Initializable {
 	 * This copys the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
 	public void onStartButton() {
+		WindowLoader wl = new WindowLoader(backButton);
 		try {
-			File gameboard = new File("Gameboards\\" + selectGameboard.getValue().toString());
-			File gameSaveFile = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
-			Files.copy(gameboard.toPath(), gameSaveFile.toPath());
-			WindowLoader wl = new WindowLoader(backButton);
-			wl.load("GameScreen");
-			this.SAVE_NAME = (saveName.getText());
-			// there is no silk bag right now.
-			// so seed can be created here.
-			int seed = (new Random()).nextInt();
-			Files.write(gameSaveFile.toPath(), ("\n" + seed).getBytes(), StandardOpenOption.APPEND);
+			File gameboard = new File("Gameboards\\" + selectGameboard.getValue());
+			if (!(saveName.getText().equals(""))) {
+				// So that for testing you arn't forced to type a new save file name every time you run
+				File gameSaveFile = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
+				this.SAVE_NAME = (saveName.getText());
+				// there is no silk bag right now.
+				// so seed can be created here.
+				int seed = (new Random()).nextInt();
+				Files.write(gameSaveFile.toPath(), ("\n" + seed).getBytes(), StandardOpenOption.APPEND);
+			}
 		} catch (IOException e) {
 			Alert gameExists = new Alert(Alert.AlertType.ERROR);
 			gameExists.setTitle("Error");
@@ -84,6 +88,7 @@ public class GameSetupController implements Initializable {
 			noGameboard.setHeaderText(null);
 			noGameboard.showAndWait();
 		}
+		wl.load("GameScreen");
 
 	}
 	/**
