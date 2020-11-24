@@ -32,12 +32,13 @@ public class FileReader {
     public static Pair<Gameboard, Player[]> gameSetup(String filename) {
         Scanner in = verifyFile(filename);
         Scanner currentLine;
+        SilkBag silkBag = new SilkBag();
 
         //// board config
         currentLine = new Scanner (in.nextLine());
         int width = currentLine.nextInt();
         int height = currentLine.nextInt();
-        Gameboard gameboard = new Gameboard(width, height);
+        Gameboard gameboard = new Gameboard(width, height, silkBag);
 
         //// Fixed tiles
         currentLine = new Scanner(in.nextLine());
@@ -61,7 +62,6 @@ public class FileReader {
             tileTypeCount[tileType] = currentLine.nextInt();
         }
         // putting them in the bag
-        SilkBag silkBag = new SilkBag();
         // for each tile type
         for (int tileType=0; tileType < NUM_OF_TILE_TYPES; tileType++) {
             int numberOfThisTile = tileTypeCount[tileType];
