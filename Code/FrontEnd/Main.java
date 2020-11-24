@@ -17,7 +17,7 @@ import java.io.File;
  */
 
 public class Main extends Application {
-    private static double volume = 50;
+    private static double volume = 0;
     private static MediaPlayer mediaPlayer;
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,6 +37,7 @@ public class Main extends Application {
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setCycleCount(100);
+
         mediaPlayer.setVolume(volume/100.0);
         mediaPlayer.play();
         primaryStage.show();
