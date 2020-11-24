@@ -3,6 +3,7 @@ package BackEnd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static BackEnd.Rotation.UP;
 import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,15 +18,15 @@ class GameboardTest {
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
 		gb.setPlayerPos(3, new Coordinate( 2,0));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER), Rotation.UP);
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER), UP);
 		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(T_SHAPE),Rotation.LEFT);
 		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER), Rotation.RIGHT);
 		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT), Rotation.DOWN);
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(GOAL), Rotation.UP);
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(GOAL), UP);
 		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT), Rotation.LEFT);
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), Rotation.RIGHT);
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE), Rotation.DOWN);
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), Rotation.UP);
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), UP);
 		gb.getMoveDirections(1);
 		gb.getMoveDirections(2);
 		gb.getMoveDirections(3);
@@ -52,6 +53,10 @@ class GameboardTest {
 
 	@Test
 	void playFloorTile() {
+		Coordinate[] locations = gb.getSlideLocations();
+		for (Coordinate location: locations) {
+			gb.playFloorTile(location, new FloorTile(CORNER), UP);
+		}
 	}
 
 	@Test
