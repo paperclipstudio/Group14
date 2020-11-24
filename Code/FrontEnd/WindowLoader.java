@@ -49,12 +49,10 @@ public class WindowLoader {
 			System.out.print(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-		Scene scene = null;
 		if (root == null) {
 			System.out.print("Scene loading failed, " + window + " could not be loaded");
 		} else {
-			scene = new Scene(root);
-			w.setScene(scene);
+			w.getScene().setRoot(root);
 		}
 		w.setFullScreen(isFullscreen);
 	}
