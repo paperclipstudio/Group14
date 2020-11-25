@@ -28,17 +28,7 @@ public class MenuScreenController implements Initializable {
      * Used to exit the application
      */
     public void onQuitButton() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Quit to desktop");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to quit to desktop?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            Platform.exit();;
-        }
-        if(result.get()==ButtonType.CANCEL){
-            alert.close();
-        }
+        Platform.exit();;
     }
 
     public void onNewGame() {
