@@ -224,12 +224,6 @@ public class GameLogic {
 	 * @return all valid move locations
 	 */
 	public Coordinate[] getMoveLocations() {
-		//todo waiting on gameboard
-		Coordinate[] validLocation = new Coordinate[4];
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,  0);
-		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo).shift( 1,  0);
-		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo).shift( 0, -1);
-		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo).shift( 0,  1);
-		return validLocation;
+		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
 	}
 }

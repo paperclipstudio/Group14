@@ -177,6 +177,7 @@ public class GameScreenController implements Initializable {
 		tiles.getChildren().add(tileView);
 
 		// Shift all tiles
+
 		for (Object o : tiles.getChildren().toArray()) {
 			// Skips if the object is null;
 			if (o == null) {
@@ -362,6 +363,10 @@ public class GameScreenController implements Initializable {
 
 	private void setupMovePhase() {
 		Coordinate[] validLocations = gameLogic.getMoveLocations();
+		if (validLocations.length == 0) {
+			// No where to move;
+			gameLogic.move(gameLogic.getPlayerLocations()[gameLogic.getPlayersTurn()]);
+		}
 		for (Coordinate coordinate: validLocations) {
 			// Create pointer.
 			final ImageView pointer = Assets.getLocationArrow();
@@ -400,8 +405,10 @@ public class GameScreenController implements Initializable {
 	 */
 	public void onButtonPressed() {
 		System.out.println("Test Button");
-		Node newCard = Assets.createCard(new ActionTile(FIRE));
-		cards.getChildren().add(newCard);
+		applyToAll("", (v) -> {
+			v.setRotate(v.getRotate() + 20);
+			return 0;
+		});
 	}
 
 	/***
@@ -419,6 +426,21 @@ public class GameScreenController implements Initializable {
 		System.out.println("Game Saved");
 	}
 
+
+	private void applyToAll(String id, Function<Node,Integer> f) {
+		for (Object o: tiles.getChildren()) {
+			if (o == null) {
+				continue;
+			}
+			Node n = (Node) o;
+			if (n.getId() == null) {
+				continue;
+			}
+			if (n.getId().contains(id)) {
+				f.apply(n);
+			}
+		}
+	}
 	/**
 	 * Takes an id to match and a onClickFunction
 	 * puts that on all matching node with id starting with 'id'
@@ -426,18 +448,10 @@ public class GameScreenController implements Initializable {
 	 * @param func function to apply to onClick
 	 */
 	private void applyOnClick(String id, EventHandler<MouseEvent> func) {
-		for (Object o : tiles.getChildren().toArray()) {
-			if (o == null) {
-				continue;
-			}
-			if (!(o instanceof Node)) {
-				continue;
-			}
-			Node tile = (Node) o;
-			if (tile.getId().contains(id)) {
-				tile.setOnMouseClicked(func);
-			}
-		}
+		applyToAll(id, v -> {
+			v.setOnMouseClicked(func);
+			return 0;
+		});
 	}
 
 	/**
@@ -447,18 +461,10 @@ public class GameScreenController implements Initializable {
 	 * @param func function to apply to onHover
 	 */
 	private void applyOnHover(String id, EventHandler<MouseEvent> func) {
-		for (Object o : tiles.getChildren().toArray()) {
-			if (o == null) {
-				continue;
-			}
-			if (!(o instanceof Node)) {
-				continue;
-			}
-			Node tile = (Node) o;
-			if (tile.getId().contains(id)) {
-				tile.setOnMouseEntered(func);
-			}
-		}
+		applyToAll(id, (n) -> {
+			n.setOnMouseEntered(func);
+			return 0;
+		});
 	}
 
 	/**
@@ -468,18 +474,11 @@ public class GameScreenController implements Initializable {
 	 * @param func function to apply to offHover
 	 */
 	private void applyOffHover(String id, EventHandler<MouseEvent> func) {
-		for (Object o : tiles.getChildren().toArray()) {
-			if (o == null) {
-				continue;
-			}
-			if (!(o instanceof Node)) {
-				continue;
-			}
-			Node tile = (Node) o;
-			if (tile.getId().contains(id)) {
-				tile.setOnMouseExited(func);
-			}
-		}
+		applyToAll(id, n -> {
+			n.setOnMouseExited(func);
+			return 0;
+		});
+
 	}
 
 	private void removeAll(String id) {
