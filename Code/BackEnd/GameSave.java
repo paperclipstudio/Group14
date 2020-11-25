@@ -19,23 +19,25 @@ public class GameSave {
     //private static File GAME_SAVE_FILE = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
     private static File GAME_SAVE_FILE = new File("SaveData\\GameSave\\TEST.txt");
 
-    public static void savePlayerMove(Coordinate location) throws IOException {
-        Files.write(GAME_SAVE_FILE.toPath(),
-                (location.getX() + " " + location.getY() + " ").getBytes(), StandardOpenOption.APPEND);
+    public static void draw () throws IOException {
+        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+            writer.write("\ndraw");
     }
-    public static void savePlayFloorTile(Coordinate slideLocations, FloorTile tile) throws IOException {
-        Files.write(GAME_SAVE_FILE.toPath(),
-                (slideLocations.getX() + " " + slideLocations.getY() + " "
-                        + tile.getType() + " " + tile.getRotation() + " ").getBytes(), StandardOpenOption.APPEND);
+    public static void playFloorTile(Coordinate slideLocations, FloorTile tile) throws IOException {
+        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+            writer.write("\nfloor "+ slideLocations.getX() + " " + slideLocations.getY() + " " + tile.getType() + " " + tile.getRotation() + " ");
     }
-    public static void savePlayActionTile(Coordinate location, ActionTile tile) throws IOException {
-        Files.write(GAME_SAVE_FILE.toPath(),
-                (location.getX() + " " + location.getY() + " " + tile.getType() + " ").getBytes(), StandardOpenOption.APPEND);
-        if (tile.getType() == BACKTRACK) {
-            //TODO get player number of backtacked player
-        }
+    public static void playActionTile(Coordinate location, ActionTile tile) throws IOException {
+        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+            writer.write("\naction " + location.getX() + " " + location.getY() + " " + tile.getType() + " ");
+
     }
-    public static void saveFileNewLine() throws IOException {
-        Files.write(GAME_SAVE_FILE.toPath(), ("\n").getBytes(), StandardOpenOption.APPEND);
+    public static void playBacktack (int playerNum) throws IOException {
+        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+        writer.write("\naction BACKTRACK " + playerNum);
+    }
+    public static void playerMove(Coordinate location) throws IOException {
+        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+            writer.write("\nmove " + location.getX() + " " + location.getY());
     }
 }
