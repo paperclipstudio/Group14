@@ -48,7 +48,7 @@ public class Gameboard {
                 length++;
             }
         }
-        return playerLocations[player][length];
+        return playerLocations[player][length - 1];
     }
 
     public void setPlayerPos(int player, Coordinate position) {
@@ -130,25 +130,25 @@ public class Gameboard {
         for (Rotation direction : validDirections) {
             FloorTile tileInDirection;
             Rotation flipDirection;
-            if (direction == Rotation.UP) {
+            if (direction == Rotation.UP && location.getY() != height - 1) {
                 tileInDirection = boardTiles[location.getX()][location.getY() + 1];
                 flipDirection = Rotation.DOWN;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() + 1));
                 }
-            } else if (direction == Rotation.DOWN) {
+            } else if (direction == Rotation.DOWN && location.getY() != 0) {
                 tileInDirection = boardTiles[location.getX()][location.getY() - 1];
                 flipDirection = Rotation.UP;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() - 1));
                 }
-            } else if (direction == Rotation.LEFT) {
+            } else if (direction == Rotation.LEFT && location.getX() != 0) {
                 tileInDirection = boardTiles[location.getX() - 1][location.getY()];
                 flipDirection = Rotation.RIGHT;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
                     moveLocations.add(new Coordinate(location.getX() - 1, location.getY()));
                 }
-            } else {
+            } else if (direction == Rotation.RIGHT && location.getX() != width - 1) {
                 tileInDirection = boardTiles[location.getX() + 1][location.getY()];
                 flipDirection = Rotation.LEFT;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
