@@ -31,10 +31,8 @@ public class GameSetupController implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> selectGameboard;
-	/**
-	 * Constant for the name of the save file.
-	 */
-	private static String SAVE_NAME;
+
+	private static String gameSaveName;
 
 	/**
 	 * Populates the choice box with available gameboards when the page is initialized.
@@ -48,7 +46,6 @@ public class GameSetupController implements Initializable {
 			selectGameboard.getItems().add(gameboard);
 		}
 		selectGameboard.getSelectionModel().selectFirst();
-
 	}
 
 	/***
@@ -69,7 +66,7 @@ public class GameSetupController implements Initializable {
 			if (!(saveName.getText().equals(""))) {
 				// So that for testing you arn't forced to type a new save file name every time you run
 				File gameSaveFile = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
-				this.SAVE_NAME = (saveName.getText());
+				this.gameSaveName = (saveName.getText());
 				// there is no silk bag right now.
 				// so seed can be created here.
 				int seed = (new Random()).nextInt();
@@ -95,6 +92,6 @@ public class GameSetupController implements Initializable {
 	 * This returns the name of the save file
 	 */
 	public static String getSaveName() {
-		return SAVE_NAME;
+		return gameSaveName;
 	}
 }
