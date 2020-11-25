@@ -383,6 +383,10 @@ public class GameScreenController implements Initializable {
 
 					break;
 				case FIRE:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+
+					});
 					break;
 				case FROZEN:
 					break;

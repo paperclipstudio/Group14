@@ -128,7 +128,7 @@ public class Player
      * Takes an action tile out of the inventory
      * @param tile The Action Tile to be removed
      */
-    public void removeFromInventory (ActionTile tile) {
+    private void removeFromInventory (ActionTile tile) {
         inventory.remove(tile);
     }
 }
