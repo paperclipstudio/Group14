@@ -32,7 +32,7 @@ public class GameSave {
             writer.write("\naction " + location.getX() + " " + location.getY() + " " + tile.getType() + " ");
 
     }
-    public static void playBacktack (int playerNum) throws IOException {
+    public static void playBacktrack (int playerNum) throws IOException {
         FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
         writer.write("\naction BACKTRACK " + playerNum);
     }
