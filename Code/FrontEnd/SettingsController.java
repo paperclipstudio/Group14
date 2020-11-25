@@ -88,7 +88,7 @@ public class SettingsController implements Initializable {
 
 	public void onSoundChange() {
 		System.out.println(sound.getValue());
-		Main.setVolume(sound.getValue() / 100.0);
+		Main.setVolume(sound.getValue() / 200.0);
 
 	}
 	public void onFullScreenChange() {
