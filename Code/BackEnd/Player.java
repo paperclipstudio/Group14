@@ -102,8 +102,8 @@ public class Player
 
     /**
      * Method for playing a freeze or fire tile
-     * @param location
-     * @param tile
+     * @param location The center of the freeze/fire location
+     * @param tile The freeze or fire action tile
      */
     public void playActionTile (Coordinate location, ActionTile tile) {
         gameboard.playActionTile(location, tile);
