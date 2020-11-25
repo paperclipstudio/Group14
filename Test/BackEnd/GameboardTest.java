@@ -18,15 +18,15 @@ class GameboardTest {
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
 		gb.setPlayerPos(3, new Coordinate( 2,0));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER), UP);
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(T_SHAPE),Rotation.LEFT);
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER), Rotation.RIGHT);
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT), Rotation.DOWN);
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(GOAL), UP);
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT), Rotation.LEFT);
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), Rotation.RIGHT);
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE), Rotation.DOWN);
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER), UP);
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(GOAL));
+		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
 		//gb.getMoveDirections(1);
 		//gb.getMoveDirections(2);
 		//gb.getMoveDirections(3);
@@ -55,7 +55,7 @@ class GameboardTest {
 	void playFloorTile() {
 		Coordinate[] locations = gb.getSlideLocations();
 		for (Coordinate location: locations) {
-			gb.playFloorTile(location, new FloorTile(CORNER), UP);
+			gb.playFloorTile(location, new FloorTile(CORNER));
 		}
 	}
 
