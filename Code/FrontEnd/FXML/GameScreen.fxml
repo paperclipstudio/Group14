@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane prefHeight="50.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameScreenController">
+<GridPane prefHeight="50.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameScreenController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
@@ -48,8 +47,9 @@
            </Label>
        </VBox>
       <Button id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" prefWidth="100.0" text="AddCard" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-      <Pane fx:id="tiles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-      <Button fx:id="drawButton" mnemonicParsing="false" onAction="#onDrawButton" text="Draw" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Pane fx:id="tiles" layoutX="200.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Pane fx:id="players" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Pane fx:id="controls" layoutX="310.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
        <ScrollPane GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
            <HBox id="cards" fx:id="cards" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" style="-fx-background-color: #555;">
                <opaqueInsets>
@@ -60,5 +60,6 @@
                </padding>
            </HBox>
        </ScrollPane>
+      <Button fx:id="drawButton" mnemonicParsing="false" onAction="#onDrawButton" text="Draw" GridPane.columnIndex="4" GridPane.rowIndex="1" />
    </children>
 </GridPane>

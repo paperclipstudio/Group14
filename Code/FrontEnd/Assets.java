@@ -140,8 +140,6 @@ public class Assets {
 		player.setFitHeight(GameScreenController.tileWidth);
 		player.setFitWidth(GameScreenController.tileWidth);
 		player.setId("player " + playerNumber);
-		player.setTranslateZ(PLAYER_HEIGHT);
-		player.toFront();
 		return player;
 	}
 
