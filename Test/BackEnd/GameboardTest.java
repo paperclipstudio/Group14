@@ -27,9 +27,6 @@ class GameboardTest {
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE));
 		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
-		//gb.getMoveDirections(1);
-		//gb.getMoveDirections(2);
-		//gb.getMoveDirections(3);
 	}
 
 	@Test
