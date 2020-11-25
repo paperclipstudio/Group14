@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 
@@ -32,6 +33,7 @@ public class Main extends Application {
         primaryStage.setTitle("Covid Game?");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         String musicFile = "Assets\\music.mp3";     // For example
 
         Media sound = new Media(new File(musicFile).toURI().toString());

@@ -112,7 +112,7 @@ public class Assets {
 		final Node newCard;
 		Node newCard1;
 		try {
-			newCard1 = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\Card.fxml")));
+			newCard1 = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\FXML\\Card.fxml")));
 		} catch (IOException e) {
 			newCard1 = null;
 		}

@@ -33,6 +33,7 @@ import javafx.util.Duration;
 import static BackEnd.Phase.MOVE;
 import static BackEnd.Rotation.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
+import static BackEnd.TileType.FIRE;
 import static java.lang.Thread.sleep;
 
 /***
@@ -48,7 +49,7 @@ public class GameScreenController implements Initializable {
 	private int height;
 	public Phase phase;
 	private GameLogic gameLogic;
-	public static int tileWidth = 50;
+	public static int tileWidth = 25;
 	private ImageView[] players;
 	/***
 	 * Gets all resources for gameScreen
@@ -57,10 +58,6 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
-		tiles.setTranslateZ(20);
-		tiles.setRotationAxis(new Point3D(10,0,0));
-		tiles.setRotate(10);
 		startNewGame("ExampleInput.txt");
 		updateBoard();
 		mainLoop();
@@ -227,6 +224,8 @@ public class GameScreenController implements Initializable {
 	}
 
 	private void updateBoard() {
+		tiles.setPrefWidth(width * tileWidth);
+		tiles.setPrefHeight(height * tileWidth);
 		tiles.getChildren().clear();
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
@@ -400,13 +399,8 @@ public class GameScreenController implements Initializable {
 	 * Used for testing, called when test button is pushed, puts card into players hand.
 	 */
 	public void onButtonPressed() {
-		Node newCard = null;
 		System.out.println("Test Button");
-		try {
-			newCard = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\Card.fxml"));
-		} catch (IOException e) {
-			System.out.println("Fail to load Card class due to:" + e.getCause());
-		}
+		Node newCard = Assets.createCard(new ActionTile(FIRE));
 		cards.getChildren().add(newCard);
 	}
 
