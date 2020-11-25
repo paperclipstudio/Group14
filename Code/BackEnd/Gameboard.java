@@ -15,21 +15,16 @@ public class Gameboard {
     private SilkBag silkbag;
     private static Coordinate goalCoor;
     private Coordinate[] playerLocations;
-    private Coordinate[] slideLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
     private FloorTile removedTile;
+    private Coordinate[] slideLocations;
 
 
     public Gameboard (int width, int height, SilkBag silkBag) {
         this.width = width;
         this.height = height;
         this.silkbag = silkBag;
-        Coordinate locationOne = new Coordinate(0, -1);
-        Coordinate locationTwo = new Coordinate(-1, -0);
-        Coordinate locationThree = new Coordinate(-1, height);
-        Coordinate locationFour = new Coordinate(width,0);
-        //TODO Added as a quick fix by George.
         slideLocations = new Coordinate[10];
         //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
@@ -53,49 +48,49 @@ public class Gameboard {
         this.playerLocations[player] = position;
     }
 
-    public Tile playFloorTile (Coordinate location, FloorTile insertedTile, Rotation rotation){
+    public Tile playFloorTile (Coordinate location, FloorTile insertedTile){
                 // Inserting the new tile from the left.
                 if (location.getX() == -1){
-                    for(int j = width-1; j >= 0; j--){
+                    removedTile = boardTiles[width-1][location.getY()];
+                    for(int j = 0; j < width; j++){
                         boardTiles[j][location.getY()] = boardTiles[j+1][location.getY()];
-                        removedTile = boardTiles[width][location.getY()];
-                        boardTiles[0][location.getY()] = insertedTile;
-                        if (removedTile != null){
-                            silkbag.insertTile(removedTile);
-                        }
+                    }
+                    boardTiles[0][location.getY()] = insertedTile;
+                    if (removedTile != null){
+                        silkbag.insertTile(removedTile);
                     }
                 }
                 // Inserting the new tile from the right.
                 else if (location.getX() == width){
-                    for(int j = 1; j < width; j++){
+                    removedTile = boardTiles[0][location.getY()];
+                    for(int j = width; j > 0; j--){
                         boardTiles[j][location.getY()] = boardTiles[j-1][location.getY()];
-                        removedTile = boardTiles[-1][location.getY()];
-                        boardTiles[width][location.getY()] = insertedTile;
-                        if (removedTile != null){
-                            silkbag.insertTile(removedTile);
-                        }
+                    }
+                    boardTiles[width-1][location.getY()] = insertedTile;
+                    if (removedTile != null){
+                        silkbag.insertTile(removedTile);
                     }
                 }
                 // Inserting the new tile from the bottom.
                 else if (location.getY() == -1){
+                    removedTile = boardTiles[location.getX()][height-1];
                     for(int j = 0; j < height; j++){
                         boardTiles[location.getX()][j] = boardTiles[location.getX()][j+1];
-                        removedTile = boardTiles[location.getX()][height];
-                        boardTiles[location.getX()][0] = insertedTile;
-                        if (removedTile != null){
-                            silkbag.insertTile(removedTile);
-                        }
+                    }
+                    boardTiles[location.getX()][0] = insertedTile;
+                    if (removedTile != null){
+                        silkbag.insertTile(removedTile);
                     }
                 }
                 // The last remaining case: Inserting the new tile from the top.
                 else {
-                    for(int j = 0; j < height; j++){
+                    removedTile = boardTiles[location.getX()][0];
+                    for(int j = height; j > 0; j--){
                         boardTiles[location.getX()][j] = boardTiles[location.getX()][j-1];
-                        removedTile = boardTiles[location.getX()][height];
-                        boardTiles[location.getX()][height] = insertedTile;
-                        if (removedTile != null){
-                            silkbag.insertTile(removedTile);
-                        }
+                    }
+                    boardTiles[location.getX()][height-1] = insertedTile;
+                    if (removedTile != null){
+                        silkbag.insertTile(removedTile);
                     }
         }
         return removedTile;
@@ -240,7 +235,6 @@ public class Gameboard {
     //places a fixed floor tile in the coordinates specified.
     public void placeFixedTile (FloorTile tile, int x, int y) {
         boardTiles[x][y] = tile;
-
     }
 
     //checks to see if a player is on goal by going through all the players' locations to see
@@ -319,7 +313,6 @@ public class Gameboard {
 
     public Coordinate[] getSlideLocations() {
         ArrayList<Coordinate> locations = new ArrayList<>();
-        //TODO FIX
         for (int x = 0; x < width; x++) {
             locations.add(new Coordinate(x, -1));
             locations.add(new Coordinate(x, height));
@@ -328,7 +321,7 @@ public class Gameboard {
             locations.add(new Coordinate(-1, y));
             locations.add(new Coordinate(width, y));
         }
-        return locations.toArray(new Coordinate[1]);
+        return locations.toArray(slideLocations);
     }
 
     public FloorTile TileAt(Coordinate coordinate) {
