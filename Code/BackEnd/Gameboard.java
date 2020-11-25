@@ -13,7 +13,7 @@ public class Gameboard {
     private int width;
     private int height;
     private SilkBag silkbag;
-    private static Coordinate goalCoor;
+    private static Coordinate[] goalCoors;
     private Coordinate[][] playerLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
@@ -27,9 +27,9 @@ public class Gameboard {
         this.silkbag = silkBag;
         slideLocations = new Coordinate[10];
         //TODO turns out nothing has been initialised.
-        boardTiles = new FloorTile[100][100];
+        boardTiles = new FloorTile[width][height];
         //TODO third null pointer exception
-        playerLocations = new Coordinate[100][100];
+        playerLocations = new Coordinate[3][1000];
     }
 
     public int getWidth() {
@@ -241,23 +241,16 @@ public class Gameboard {
         return false;
     } */
 
+  //  private Coordinate[] checkGoalTiles(){
+
+  //  }
+
+
     public Tile getPlayerTile(int player) {
         Coordinate location = getPlayerPos(player);
         return boardTiles[location.getX()][location.getY()];
     }
 
-    //this method isn't needed.
-    /*
-    private void updatePlayerPos(int player){
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].playerOnTile() == player)
-                    playerLocations[player] = new Coordinate(i, j);
-            }
-        }
-         Coordinate location = getPlayerPos(player);
-    }
-*/
     private void setFireCoords(Coordinate location) {
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
