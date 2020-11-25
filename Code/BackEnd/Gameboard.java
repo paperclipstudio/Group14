@@ -27,9 +27,9 @@ public class Gameboard {
         this.silkbag = silkBag;
         slideLocations = new Coordinate[10];
         //TODO turns out nothing has been initialised.
-        boardTiles = new FloorTile[width][height];
+        boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
-        playerLocations = new Coordinate[3][1000];
+        playerLocations = new Coordinate[100][1000];
     }
 
     public int getWidth() {
