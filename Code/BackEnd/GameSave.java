@@ -5,10 +5,6 @@ import FrontEnd.GameSetupController;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-
-import static BackEnd.TileType.BACKTRACK;
 
 /**
  * This class records each players decisions.
@@ -17,27 +13,27 @@ import static BackEnd.TileType.BACKTRACK;
  */
 public class GameSave {
     //private static File GAME_SAVE_FILE = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
-    private static File GAME_SAVE_FILE = new File("SaveData\\GameSave\\TEST.txt");
+    private static File gameSaveFile = new File("SaveData\\GameSave\\TEST.txt");
 
     public static void draw () throws IOException {
-        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+        FileWriter writer =  new FileWriter(gameSaveFile);
             writer.write("\ndraw");
     }
     public static void playFloorTile(Coordinate slideLocations, FloorTile tile) throws IOException {
-        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+        FileWriter writer =  new FileWriter(gameSaveFile);
             writer.write("\nfloor "+ slideLocations.getX() + " " + slideLocations.getY() + " " + tile.getType() + " " + tile.getRotation() + " ");
     }
     public static void playActionTile(Coordinate location, ActionTile tile) throws IOException {
-        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+        FileWriter writer =  new FileWriter(gameSaveFile);
             writer.write("\naction " + location.getX() + " " + location.getY() + " " + tile.getType() + " ");
 
     }
-    public static void playBacktack (int playerNum) throws IOException {
-        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+    public static void playBacktrack (int playerNum) throws IOException {
+        FileWriter writer =  new FileWriter(gameSaveFile);
         writer.write("\naction BACKTRACK " + playerNum);
     }
     public static void playerMove(Coordinate location) throws IOException {
-        FileWriter writer =  new FileWriter(GAME_SAVE_FILE);
+        FileWriter writer =  new FileWriter(gameSaveFile);
             writer.write("\nmove " + location.getX() + " " + location.getY());
     }
 }

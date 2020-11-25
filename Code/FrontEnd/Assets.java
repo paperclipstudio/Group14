@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
@@ -24,6 +25,10 @@ import java.util.Objects;
 public class Assets {
 	private static final String EXT = ".png";
 	private static final HashMap<String, Image> cache = new HashMap<>();
+	private static final int FLOOR_HEIGHT = 0;
+	private static final int PLAYER_HEIGHT = 20;
+	private static final int EFFECTS_HEIGHT = 40;
+
 
 	/**
 	 * Gets a Image with the matching name.
@@ -70,6 +75,8 @@ public class Assets {
 				break;
 		}
 		tileView.setId("tile " + x + " " + y);
+		tileView.setTranslateZ(FLOOR_HEIGHT);
+		tileView.toBack();
 		return tileView;
 	}
 	/**
@@ -108,15 +115,12 @@ public class Assets {
 	 * @param tile the tile that should be on the card
 	 * @return Card.fxml Object
 	 */
-	public static Node createCard(Tile tile) {
+	public static Node createCard(Tile tile) throws IOException {
 		final Node newCard;
-		Node newCard1;
-		try {
-			newCard1 = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\FXML\\Card.fxml")));
-		} catch (IOException e) {
-			newCard1 = null;
+		if (tile == null) {
+			throw new NullPointerException("Cannot create null tile");
 		}
-		newCard = newCard1;
+		newCard = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\FXML\\Card.fxml")));
 		ImageView newCardImage = ((ImageView)newCard.lookup("#image"));
 		newCardImage.setImage(Assets.get(tile.getType().toString()));
 		newCard.setOnMouseEntered(
@@ -135,6 +139,9 @@ public class Assets {
 		ImageView player = new ImageView(playerModel);
 		player.setFitHeight(GameScreenController.tileWidth);
 		player.setFitWidth(GameScreenController.tileWidth);
+		player.setId("player " + playerNumber);
+		player.setTranslateZ(PLAYER_HEIGHT);
+		player.toFront();
 		return player;
 	}
 

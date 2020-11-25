@@ -81,7 +81,7 @@ public class FileReader {
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
             Coordinate toSlide = slideLocations[r.nextInt(slideLocations.length-1)];
-            gameboard.playFloorTile(toSlide, tile, Rotation.UP);
+            gameboard.playFloorTile(toSlide, tile);
         }
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];

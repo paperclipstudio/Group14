@@ -94,6 +94,7 @@ public class ProfilesController {
 			alert3.setContentText("File successful delete.");
 			alert3.setHeaderText(null);
 			alert3.showAndWait();
+			playerList.getItems().remove(newName + ".txt");
 
 		}else{
 
