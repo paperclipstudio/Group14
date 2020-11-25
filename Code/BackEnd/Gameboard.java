@@ -13,7 +13,7 @@ public class Gameboard {
     private int width;
     private int height;
     private SilkBag silkbag;
-    private static Coordinate goalCoor;
+    private static Coordinate[] goalCoors;
     private Coordinate[][] playerLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
@@ -29,7 +29,7 @@ public class Gameboard {
         //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
-        playerLocations = new Coordinate[100][100];
+        playerLocations = new Coordinate[100][1000];
     }
 
     public int getWidth() {
@@ -48,7 +48,7 @@ public class Gameboard {
                 length++;
             }
         }
-        return playerLocations[player][length];
+        return playerLocations[player][length - 1];
     }
 
     public void setPlayerPos(int player, Coordinate position) {
@@ -130,25 +130,25 @@ public class Gameboard {
         for (Rotation direction : validDirections) {
             FloorTile tileInDirection;
             Rotation flipDirection;
-            if (direction == Rotation.UP) {
+            if (direction == Rotation.UP && location.getY() != height - 1) {
                 tileInDirection = boardTiles[location.getX()][location.getY() + 1];
                 flipDirection = Rotation.DOWN;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() + 1));
                 }
-            } else if (direction == Rotation.DOWN) {
+            } else if (direction == Rotation.DOWN && location.getY() != 0) {
                 tileInDirection = boardTiles[location.getX()][location.getY() - 1];
                 flipDirection = Rotation.UP;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() - 1));
                 }
-            } else if (direction == Rotation.LEFT) {
+            } else if (direction == Rotation.LEFT && location.getX() != 0) {
                 tileInDirection = boardTiles[location.getX() - 1][location.getY()];
                 flipDirection = Rotation.RIGHT;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
                     moveLocations.add(new Coordinate(location.getX() - 1, location.getY()));
                 }
-            } else {
+            } else if (direction == Rotation.RIGHT && location.getX() != width - 1) {
                 tileInDirection = boardTiles[location.getX() + 1][location.getY()];
                 flipDirection = Rotation.LEFT;
                 if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
@@ -216,8 +216,12 @@ public class Gameboard {
         return true;
     }
 
-    public void playActionTile() {
-
+    public void playActionTile(Coordinate location, ActionTile tile) {
+        if (tile.getType() == TileType.FROZEN) {
+            setFreezeCoords(location);
+        } else if (tile.getType() == TileType.FIRE) {
+            setFireCoords(location);
+        }
     }
 
 
@@ -241,23 +245,16 @@ public class Gameboard {
         return false;
     } */
 
+  //  private Coordinate[] checkGoalTiles(){
+
+  //  }
+
+
     public Tile getPlayerTile(int player) {
         Coordinate location = getPlayerPos(player);
         return boardTiles[location.getX()][location.getY()];
     }
 
-    //this method isn't needed.
-    /*
-    private void updatePlayerPos(int player){
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].playerOnTile() == player)
-                    playerLocations[player] = new Coordinate(i, j);
-            }
-        }
-         Coordinate location = getPlayerPos(player);
-    }
-*/
     private void setFireCoords(Coordinate location) {
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {

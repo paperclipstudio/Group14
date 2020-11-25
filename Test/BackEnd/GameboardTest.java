@@ -33,6 +33,13 @@ class GameboardTest {
 	}
 
 	@Test
+	void setPlayerPos() {
+		Coordinate coor1 = new Coordinate(2,2);
+		Coordinate coor2 = new Coordinate(0,1);
+		gb.setPlayerPos(2, coor1);
+	}
+
+	@Test
 	void getPlayerPos() {
 		assertEquals(1, gb.getPlayerPos(0).getX());
 		assertEquals(1, gb.getPlayerPos(0).getY());
@@ -44,12 +51,6 @@ class GameboardTest {
 		assertEquals(0, gb.getPlayerPos(3).getY());
 	}
 
-	@Test
-	void setPlayerPos() {
-		Coordinate coor1 = new Coordinate(2,2);
-		Coordinate coor2 = new Coordinate(0,1);
-		gb.setPlayerPos(2, coor1);
-	}
 
 	@Test
 	void playFloorTile() {

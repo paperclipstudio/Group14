@@ -91,7 +91,7 @@ public class GameLogic {
 	 */
 	public void floor(FloorTile tile, Coordinate location) {
 		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
-		players[currentPlayerNo].playFloorTile(location, tile.getRotation());
+		players[currentPlayerNo].playFloorTile(location, tile);
 		phase = ACTION;
 	}
 
@@ -126,6 +126,7 @@ public class GameLogic {
 	 */
 	public void action(ActionTile tile, Coordinate coordinate) {
 		if (tile.getType() == DOUBLE_MOVE) {
+			currentPlayer.removeFromInventory(new ActionTile(DOUBLE_MOVE));
 			doubleMove = true;
 		}
 		players[currentPlayerNo].playActionTile(coordinate, tile);
@@ -208,6 +209,7 @@ public class GameLogic {
 	 */
 	public void backtrack(int playerNumber) {
 		gameboard.backtrack(playerNumber);
+		currentPlayer.removeFromInventory(new ActionTile(TileType.BACKTRACK));
 		phase = MOVE;
 	}
 
@@ -224,12 +226,6 @@ public class GameLogic {
 	 * @return all valid move locations
 	 */
 	public Coordinate[] getMoveLocations() {
-		//todo waiting on gameboard
-		Coordinate[] validLocation = new Coordinate[4];
-		validLocation[0] = gameboard.getPlayerPos(currentPlayerNo).shift(-1,  0);
-		validLocation[1] = gameboard.getPlayerPos(currentPlayerNo).shift( 1,  0);
-		validLocation[2] = gameboard.getPlayerPos(currentPlayerNo).shift( 0, -1);
-		validLocation[3] = gameboard.getPlayerPos(currentPlayerNo).shift( 0,  1);
-		return validLocation;
+		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
 	}
 }

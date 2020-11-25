@@ -86,7 +86,9 @@ public class FileReader {
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];
         for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
-            currentLine = new Scanner(in.nextLine());
+            String nextLine = in.nextLine();
+            currentLine = new Scanner(nextLine);
+            System.out.println(nextLine);
             int x = currentLine.nextInt();
             int y = currentLine.nextInt();
             gameboard.setPlayerPos(i, new Coordinate(x, y));

@@ -30,7 +30,7 @@ class PlayerTest {
 		silkBag.getTile();
 		silkBag.insertTile(Tile.createTile(CORNER));
 		player.drawTile();
-		player.playFloorTile(new Coordinate(-1,0), Rotation.UP);
+		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
 		FloorTile tile = board.TileAt(new Coordinate(0,0));
 		assertNotNull(tile);
 		assertEquals(CORNER, tile.getType());

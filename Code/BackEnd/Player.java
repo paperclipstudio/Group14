@@ -46,11 +46,6 @@ public class Player
      * @param x The starting x coordinate of the Player object
      * @param y The starting y coordinate of the Player object
      */
-    /*
-    public Player(int x, int y) {
-        location = new Coordinate(x, y);
-    }
-     */
 
 
     /**
@@ -93,22 +88,21 @@ public class Player
      * @param slideLocations Where the player wants to slide a tile in from
      * @param rotation What orientation the player wants the tile to be slid in at
      */
-    public void playFloorTile (Coordinate slideLocations, Rotation rotation)    {
+    public void playFloorTile (Coordinate slideLocations, FloorTile tile)    {
         //TODO call a playFloorTile function from the gameboard
-
+        gameboard.playFloorTile(slideLocations, tile);
         lastDrawnTile = null;
     }
 
 
     /**
-     * Play the selected action tile in the given location (provided it needs to be)
-     * @param location where the player wants to use the action
-     * @param tile type of action tile
+     * Method for playing a freeze or fire tile
+     * @param location The center of the freeze/fire location
+     * @param tile The freeze or fire action tile
      */
-    public void playActionTile (Coordinate location, ActionTile tile)    {
-        //TODO call a playActionTile function from the gameboard
-        gameboard.playActionTile();
-        inventory.remove(tile);
+    public void playActionTile (Coordinate location, ActionTile tile) {
+        gameboard.playActionTile(location, tile);
+        removeFromInventory(tile);
     }
 
 
@@ -128,5 +122,13 @@ public class Player
      */
     public boolean hasBeenBacktracked() {
         return backTracked;
+    }
+
+    /**
+     * Takes an action tile out of the inventory
+     * @param tile The Action Tile to be removed
+     */
+    public void removeFromInventory (ActionTile tile) {
+        inventory.remove(tile);
     }
 }
