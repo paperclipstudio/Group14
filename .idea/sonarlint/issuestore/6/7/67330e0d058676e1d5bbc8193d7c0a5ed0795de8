@@ -1,61 +1,70 @@
 
-
-java:S1319i"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¦ˆ8©¯€°ß.
-{	java:S131ª"YComplete cases by adding the missing enum constants or add a default case to this switch.(øÎáäşÿÿÿÿ8ÚĞ‚°ß.
-O
-java:S1068"2Remove this unused "slideLocations" private field.(¯©«º8ñ¶ĞÏß.
-L
-java:S11728"/Remove this unused method parameter "rotation".(Ãõú8ıÓ‰ªß.
-p	java:S100Î"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Ôşßùÿÿÿÿ8÷¦ğ¯ß.
 R
 java:S1481"0Remove this unused "locationTwo" local variable.(°ÈÚ±ûÿÿÿÿ8ñ¶ĞÏß.
-N
-java:S1481"1Remove this unused "locationFour" local variable.(ÆÉšò8ñ¶ĞÏß.
-o
-java:S3776i"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(¦ˆ8©¯€°ß.
-^	java:S125ø"<This block of commented-out lines of code should be removed.(Š¬Â¢ùÿÿÿÿ8ıÓ‰ªß.
-M
-java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8‰äîß.
 d
-java:S1126¸"AReplace this if-then-else statement by a single return statement.(§ÖÃóÿÿÿÿÿ8ÚĞ‚°ß.
-W
-java:S1144­"4Remove this unused private "setFreezeCoords" method.(çˆ’Îıÿÿÿÿ8÷¦ğ¯ß.
+java:S1126º"AReplace this if-then-else statement by a single return statement.(§ÖÃóÿÿÿÿÿ8ÚĞ‚°ß.
 P
-java:S1144š"2Remove this unused private "setFireCoords" method.(ÊÌ8÷¦ğ¯ß.
-H
-java:S1135 "2Complete the task associated to this TODO comment.(²¸³Š
+java:S1144”"2Remove this unused private "setFireCoords" method.(ÊÌ8÷¦ğ¯ß.
 n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
-¤
-java:S1186ë"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(®œ¼Åøÿÿÿÿ8ÄÍÜ„ß.
-U
-java:S1135Â"2Complete the task associated to this TODO comment.(Ù¯ş”øÿÿÿÿ8ñ¶ĞÏß.
-N
-java:S1128"1Remove this unused import 'javafx.util.Duration'.(ç½®§8ñ¶ĞÏß.
-p
-java:S3776©"RRefactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.(Äê¢Ê8ÚĞ‚°ß.
-d
-java:S1126Ş"AReplace this if-then-else statement by a single return statement.(§ÖÃóÿÿÿÿÿ8ÚĞ‚°ß.
-c
-java:S1128"ARemove this unused import 'javafx.animation.TranslateTransition'.(¬°™ªøÿÿÿÿ8ñ¶ĞÏß.
-M
-java:S1481"0Remove this unused "locationOne" local variable.(ï£ü8ñ¶ĞÏß.
-T
-java:S1481"2Remove this unused "locationThree" local variable.(„àÍİúÿÿÿÿ8ñ¶ĞÏß.
-o
-java:S37768"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(Ãõú8ıÓ‰ªß.
+^	java:S125ú"<This block of commented-out lines of code should be removed.(Š¬Â¢ùÿÿÿÿ8ıÓ‰ªß.
 T
 java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8ñ¶ĞÏß.
-d
-java:S1126Ï"AReplace this if-then-else statement by a single return statement.(§ÖÃóÿÿÿÿÿ8ÚĞ‚°ß.
+T
+java:S1481"2Remove this unused "locationThree" local variable.(„àÍİúÿÿÿÿ8ñ¶ĞÏß.
+M
+java:S5411›"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8Ã®æ÷ß.
+M
+java:S5411”"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8„•æ÷ß.
+p	java:S100È"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Ôşßùÿÿÿÿ8÷¦ğ¯ß.
+o
+java:S3776F"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(Ãõú8ıÓ‰ªß.
+N
+java:S1128"1Remove this unused import 'javafx.util.Duration'.(ç½®§8ñ¶ĞÏß.
+o
+java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(¦ˆ8©¯€°ß.
+M
+java:S5411¢"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8¢Àæ÷ß.
 T
 java:S1135$"2Complete the task associated to this TODO comment.(ÆÓ®æşÿÿÿÿ8ÄÍÜ„ß.
-P
-java:S1135Ó"2Complete the task associated to this TODO comment.(…ïœ†8ñ¶ĞÏß.
-I
-java:S1068",Remove this unused "goalCoor" private field.(Üä¢«8ıÓ‰ªß.
-J
-java:S1068"/Remove this unused "actionTiles" private field.(‡Ê‹ûÿÿÿÿ
-R
-java:S1144‘"4Remove this unused private "updatePlayerPos" method.(£òùº8÷¦ğ¯ß.
+d
+java:S1126à"AReplace this if-then-else statement by a single return statement.(§ÖÃóÿÿÿÿÿ8ÚĞ‚°ß.
 H
 java:S1135""2Complete the task associated to this TODO comment.(ö£Í«
+H
+java:S5411Ş"*Use the primitive boolean expression here.(Æ¶çº8¯œ”øß.
+J
+java:S1068"/Remove this unused "actionTiles" private field.(‡Ê‹ûÿÿÿÿ
+U
+java:S1135¼"2Complete the task associated to this TODO comment.(Ù¯ş”øÿÿÿÿ8ñ¶ĞÏß.
+O
+java:S1068"2Remove this unused "slideLocations" private field.(¯©«º8ñ¶ĞÏß.
+W
+java:S1144§"4Remove this unused private "setFreezeCoords" method.(çˆ’Îıÿÿÿÿ8÷¦ğ¯ß.
+p
+java:S3776«"RRefactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.(Äê¢Ê8ÚĞ‚°ß.
+I
+java:S1068",Remove this unused "goalCoor" private field.(Üä¢«8ıÓ‰ªß.
+M
+java:S5411â"*Use the primitive boolean expression here.(€Íìšşÿÿÿÿ8Àš£øß.
+c
+java:S1128"ARemove this unused import 'javafx.animation.TranslateTransition'.(¬°™ªøÿÿÿÿ8ñ¶ĞÏß.
+
+java:S1319w"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¦ˆ8©¯€°ß.
+{	java:S131¬"YComplete cases by adding the missing enum constants or add a default case to this switch.(øÎáäşÿÿÿÿ8ÚĞ‚°ß.
+M
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8‰äîß.
+Y	java:S125"<This block of commented-out lines of code should be removed.(£òùº8éÆ÷ß.
+L
+java:S1172F"/Remove this unused method parameter "rotation".(Ãõú8ıÓ‰ªß.
+M
+java:S1481"0Remove this unused "locationOne" local variable.(ï£ü8ñ¶ĞÏß.
+N
+java:S1481"1Remove this unused "locationFour" local variable.(ÆÉšò8ñ¶ĞÏß.
+M
+java:S5411"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûä÷ß.
+H
+java:S1135 "2Complete the task associated to this TODO comment.(²¸³Š
+d
+java:S1126Ñ"AReplace this if-then-else statement by a single return statement.(§ÖÃóÿÿÿÿÿ8ÚĞ‚°ß.
+¤
+java:S1186í"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(®œ¼Åøÿÿÿÿ8ÄÍÜ„ß.

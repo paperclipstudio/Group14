@@ -27,9 +27,5 @@ P
  Test/BackEnd/ActionTileTest.java,3\b\3b303f56e736f312b60b1213f67e9e79aa0cf272
 I
 Code/FrontEnd/Assets.java,8\f\8f3c0df162221f6a49a5383afb122e353f851562
-G
-Code/FrontEnd/Card.fxml,c\8\c8e5a1326f9362740caa261c6bcf71fe0b86bbd0
 W
 'Code/FrontEnd/GameScreenController.java,0\a\0aeb29af69c373de780b5f967e02b054bb52dc12
-M
-Code/FrontEnd/GameScreen.fxml,0\a\0a45b8fb17f5a77ef3c051c9299db308c3b084c1
