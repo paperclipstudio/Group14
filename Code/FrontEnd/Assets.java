@@ -151,4 +151,20 @@ public class Assets {
 		locationArrow.setId("locationarrow");
 		return locationArrow;
 	}
+
+	public static Node getFireEffect() {
+		Image fire = get("fireEffect");
+		ImageView fireEffect = new ImageView(fire);
+		fireEffect.setFitWidth(GameScreenController.tileWidth * 3);
+		fireEffect.setFitHeight(GameScreenController.tileWidth * 3);
+		return fireEffect;
+	}
+
+	public static Node getFrozenEffect() {
+		Image frozen = get("frozenEffect");
+		ImageView frozenEffect = new ImageView(frozen);
+		frozenEffect.setFitWidth(GameScreenController.tileWidth * 3);
+		frozenEffect.setFitHeight(GameScreenController.tileWidth * 3);
+		return frozenEffect;
+	}
 }

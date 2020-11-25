@@ -28,8 +28,7 @@ import javafx.util.Duration;
 
 import static BackEnd.Phase.MOVE;
 import static BackEnd.Rotation.*;
-import static BackEnd.TileType.DOUBLE_MOVE;
-import static BackEnd.TileType.FIRE;
+import static BackEnd.TileType.*;
 
 /***
  * Use to control the GameScreen scene.
@@ -385,10 +384,67 @@ public class GameScreenController implements Initializable {
 				case FIRE:
 					vCard.setOnMouseClicked((e) -> {
 						hideAllControls();
+						Node fire = Assets.getFireEffect();
+						controls.getChildren().add(fire);
+						controls.setOnMouseMoved((e2) -> {
+							System.out.println("boop");
+							int getX = (int) (e2.getX()/tileWidth);
+							int getY = (int) (e2.getY()/tileWidth);
+							if (getX < 1) {
+								getX = 1;
+							}
+							if (getX > width - 2) {
+								getX = width - 2;
+							}
+							if (getY < 1) {
+								getY = 1;
+							}
+							if (getY > height - 2) {
+								getY = height - 2;
+							}
+							final int x = getX;
+							final int y = getY;
+							fire.setTranslateX((getX - 1) * tileWidth);
+							fire.setTranslateY((getY - 1) * tileWidth);
+							fire.setOnMouseClicked((e3) -> {
+								gameLogic.action(new ActionTile(FIRE), new Coordinate(x, y));
+								mainLoop();
+							});
+						});
 
 					});
 					break;
 				case FROZEN:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						Node frozen = Assets.getFrozenEffect();
+						controls.getChildren().add(frozen);
+						controls.setOnMouseMoved((e2) -> {
+							int getX = (int) (e2.getX()/tileWidth);
+							int getY = (int) (e2.getY()/tileWidth);
+							if (getX < 1) {
+								getX = 1;
+							}
+							if (getX > width - 2) {
+								getX = width - 2;
+							}
+							if (getY < 1) {
+								getY = 1;
+							}
+							if (getY > height - 2) {
+								getY = height - 2;
+							}
+							final int x = getX;
+							final int y = getY;
+							frozen.setTranslateX((getX - 1) * tileWidth);
+							frozen.setTranslateY((getY - 1) * tileWidth);
+							frozen.setOnMouseClicked((e3) -> {
+								gameLogic.action(new ActionTile(FROZEN), new Coordinate(x, y));
+								mainLoop();
+							});
+						});
+
+					});
 					break;
 			}
 		}
