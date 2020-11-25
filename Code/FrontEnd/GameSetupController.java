@@ -63,10 +63,11 @@ public class GameSetupController implements Initializable {
 		WindowLoader wl = new WindowLoader(backButton);
 		try {
 			File gameboard = new File("Gameboards\\" + selectGameboard.getValue());
-			if (!(saveName.getText().equals(""))) {
+			this.gameSaveName = (saveName.getText());
+			if (!(gameSaveName.equals(""))) {
 				// So that for testing you arn't forced to type a new save file name every time you run
-				File gameSaveFile = new File("SaveData\\GameSave\\" + saveName.getText() + ".txt");
-				this.gameSaveName = (saveName.getText());
+				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".txt");
+				Files.copy(gameboard.toPath(), gameSaveFile.toPath());
 				// there is no silk bag right now.
 				// so seed can be created here.
 				int seed = (new Random()).nextInt();
@@ -86,7 +87,6 @@ public class GameSetupController implements Initializable {
 			noGameboard.showAndWait();
 		}
 		wl.load("GameScreen");
-
 	}
 	/**
 	 * This returns the name of the save file
