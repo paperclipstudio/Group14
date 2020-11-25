@@ -29,7 +29,7 @@ public class Gameboard {
         //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
-        playerLocations = new Coordinate[100][1000];
+        playerLocations = new Coordinate[4][1000];
     }
 
     public int getWidth() {
