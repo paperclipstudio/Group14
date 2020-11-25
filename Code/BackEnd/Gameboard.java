@@ -14,7 +14,7 @@ public class Gameboard {
     private int height;
     private SilkBag silkbag;
     private static Coordinate goalCoor;
-    private Coordinate[] playerLocations;
+    private Coordinate[][] playerLocations;
     private Coordinate[] slideLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
@@ -34,7 +34,7 @@ public class Gameboard {
         //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
-        playerLocations = new Coordinate[100];
+        playerLocations = new Coordinate[100][100];
     }
 
     public int getWidth() {
@@ -46,11 +46,25 @@ public class Gameboard {
     }
 
     public Coordinate getPlayerPos (int player){
-        return playerLocations[player];
+        //gets the last location the player was in.
+        int length = 0;
+        for(Coordinate coor : playerLocations[player]) {
+            if (coor != null) {
+                length++;
+            }
+        }
+        return playerLocations[player][length];
     }
 
     public void setPlayerPos (int player, Coordinate position){
-        this.playerLocations[player] = position;
+        //gets the last location the player was in.
+        int length = 0;
+        for(Coordinate coor : playerLocations[player]) {
+            if (coor != null) {
+                length++;
+            }
+        }
+        this.playerLocations[player][length] = position;
     }
 
     public Tile playFloorTile (Coordinate location, FloorTile insertedTile, Rotation rotation){
@@ -106,20 +120,8 @@ public class Gameboard {
         Rotation[] directions = new Rotation[]{Rotation.UP,Rotation.DOWN,Rotation.LEFT,Rotation.RIGHT};
         ArrayList<Rotation> validDirections = new ArrayList<>();
         ArrayList<Coordinate> moveLocations = new ArrayList<>();
-        FloorTile playersTile = null;
-        int playerTilesX = 0;
-        int playerTilesY = 0;
-
-        //Gets the players tile coordinates and sets the player tile.
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (i == playerLocations[player].getX() && j == playerLocations[player].getY()){
-                    playersTile = boardTiles[i][j];
-                    playerTilesX = i;
-                    playerTilesY = j;
-                }
-            }
-        }
+        Coordinate location = getPlayerPos(player);
+        FloorTile playersTile = boardTiles[location.getX()][location.getY()];
 
         //Loops through all four directions to see if the tile the player is on connects to the direction.
         for (Rotation direction : directions) {
@@ -134,31 +136,31 @@ public class Gameboard {
             FloorTile tileInDirection;
             Rotation flipDirection;
             if (direction == Rotation.UP) {
-                tileInDirection = boardTiles[playerTilesX][playerTilesY + 1];
+                tileInDirection = boardTiles[location.getX()][location.getY() + 1];
                 flipDirection = Rotation.DOWN;
-                if (validMove(tileInDirection, flipDirection)){
-                    moveLocations.add(new Coordinate(playerTilesX, playerTilesY + 1));
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()){
+                    moveLocations.add(new Coordinate(location.getX(), location.getY() + 1));
                 }
             }
             else if (direction == Rotation.DOWN){
-                tileInDirection = boardTiles[playerTilesX][playerTilesY - 1];
+                tileInDirection = boardTiles[location.getX()][location.getY() - 1];
                 flipDirection = Rotation.UP;
-                if (validMove(tileInDirection, flipDirection)){
-                    moveLocations.add(new Coordinate(playerTilesX, playerTilesY - 1));
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()){
+                    moveLocations.add(new Coordinate(location.getX(), location.getY() - 1));
                 }
             }
             else if (direction == Rotation.LEFT){
-                tileInDirection = boardTiles[playerTilesX - 1][playerTilesY];
+                tileInDirection = boardTiles[location.getX() - 1][location.getY()];
                 flipDirection = Rotation.RIGHT;
-                if (validMove(tileInDirection, flipDirection)){
-                    moveLocations.add(new Coordinate(playerTilesX - 1, playerTilesY));
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()){
+                    moveLocations.add(new Coordinate(location.getX() - 1, location.getY()));
                 }
             }
             else {
-                tileInDirection = boardTiles[playerTilesX + 1][playerTilesY];
+                tileInDirection = boardTiles[location.getX() + 1][location.getY()];
                 flipDirection = Rotation.LEFT;
-                if (validMove(tileInDirection, flipDirection)){
-                    moveLocations.add(new Coordinate(playerTilesX + 1, playerTilesY));
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()){
+                    moveLocations.add(new Coordinate(location.getX() + 1, location.getY()));
                 }
             }
         }
@@ -259,25 +261,17 @@ public class Gameboard {
     } */
 
     public Tile getPlayerTile(int player) {
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (i == playerLocations[player].getX() && j == playerLocations[player].getY()){
-                    return boardTiles[i][j];
-                }
-            }
-        }
-        //temp
-        return null;
+        Coordinate location = getPlayerPos(player);
+        return boardTiles[location.getX()][location.getY()];
     }
 
+    //this method isn't needed.
+    /*
     private void updatePlayerPos(int player){
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].playerOnTile() == player)
-                    playerLocations[player] = new Coordinate(i, j);
-            }
-        }
+        Coordinate location = getPlayerPos(player);
     }
+
+     */
 
     private void setFireCoords(Coordinate location){
         for (int i = 0; i < boardTiles.length; i++){
@@ -335,8 +329,31 @@ public class Gameboard {
         return boardTiles[coordinate.getX()][coordinate.getY()];
     }
 
-    public void backtrack(int playerNumber) {
-        //TODO
+    public void backtrack(int player) {
+        Coordinate posTwoTurnsAgo;
+        Coordinate posOneTurnAgo;
+        FloorTile tileTwoTurns;
+        FloorTile tileOneTurn;
+        //gets the players current pos
+        int length = 0;
+        for(Coordinate coor : playerLocations[player]) {
+            if (coor != null) {
+                length++;
+            }
+        }
+        //gets the tile, one and two turns ago that the player was on.
+        posTwoTurnsAgo = playerLocations[player][length - 2];
+        posOneTurnAgo = playerLocations[player][length - 1];
+        tileTwoTurns = boardTiles[posTwoTurnsAgo.getY()][posTwoTurnsAgo.getY()];
+        tileOneTurn = boardTiles[posOneTurnAgo.getY()][posOneTurnAgo.getY()];
+        //checks to see if the tile two turns ago is on fire, if not sets that as the players position
+        if (!tileTwoTurns.onFire()){
+            setPlayerPos(player, posTwoTurnsAgo);
+        }
+        ////checks to see if the tile one turn ago is on fire, if not sets that as the players position
+        else if (!tileOneTurn.onFire()) {
+            setPlayerPos(player, posOneTurnAgo);
+        }
     }
 
     public boolean containsNull() {

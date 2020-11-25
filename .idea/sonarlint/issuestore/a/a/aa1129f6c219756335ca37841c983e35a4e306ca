@@ -1,6 +1,7 @@
 
-D
-java:S11256")Remove the literal "false" boolean value.(ÙÅşÿÿÿÿÿ
+U	java:S106J"9Replace this use of System.out or System.err by a logger.(±¸·®8ô¶ĞÏß.
+]	java:S125E"<This block of commented-out lines of code should be removed.(¼îšìşÿÿÿÿ8ô¶ĞÏß.
+k	java:S116"ORename this field "SEED" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£Ñ§ô8ô¶ĞÏß.
 n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
 J
-java:S1144D"/Remove this unused private "removeTile" method.(¨Şµıÿÿÿÿ
+java:S1144X"/Remove this unused private "removeTile" method.(¨Şµıÿÿÿÿ

@@ -1,20 +1,40 @@
 
-g
-java:S1301Ç"KReplace this "switch" statement by "if" statements to increase readability.(Æóõµıÿÿÿÿ
 E
-java:S14441"/Make this "public static tileWidth" field final(¡‡«Ã
-n	java:S127§"XRefactor the code in order to not assign to this loop counter from within the loop body.(Ş¼Ş¢
-o	java:S135´"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
-t	java:S135›"YReduce the total number of break and continue statements in this loop to use at most one.(æô—¹üÿÿÿÿ
-o	java:S135¬"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
-o	java:S135Á"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
-o	java:S135Ö"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
+java:S14443"/Make this "public static tileWidth" field final(¡‡«Ã
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Õ‹âÔ
-l
-java:S1104/"QMake phase a static final constant or non-public and provide accessors if needed.(Í…Í¨ıÿÿÿÿ
-k
-java:S11041"UMake tileWidth a static final constant or non-public and provide accessors if needed.(¡‡«Ã
-N
-java:S1128"8Remove this unused import 'java.util.function.Function'.(»³Í
+o	java:S135³"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
+o	java:S135È"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
 K
 java:S1128"5Remove this unused import 'javafx.scene.image.Image'.(‰¿½Ç
+N
+java:S1128"8Remove this unused import 'java.util.function.Function'.(»³Í
+k
+java:S11043"UMake tileWidth a static final constant or non-public and provide accessors if needed.(¡‡«Ã
+t	java:S135Ÿ"YReduce the total number of break and continue statements in this loop to use at most one.(æô—¹üÿÿÿÿ
+g
+java:S1301Ê"KReplace this "switch" statement by "if" statements to increase readability.(Æóõµıÿÿÿÿ
+o	java:S135İ"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
+n	java:S127«"XRefactor the code in order to not assign to this loop counter from within the loop body.(Ş¼Ş¢
+l
+java:S11041"QMake phase a static final constant or non-public and provide accessors if needed.(Í…Í¨ıÿÿÿÿ
+o	java:S135·"YReduce the total number of break and continue statements in this loop to use at most one.(Ê¨á
+k
+java:S2184ƒ"HCast one of the operands of this multiplication operation to a "double".(¿ùÓùÿÿÿÿ8å«àß.
+f
+java:S2184„"HCast one of the operands of this multiplication operation to a "double".(µîÆ°8å«àß.
+f
+java:S2184ƒ"HCast one of the operands of this multiplication operation to a "double".(ÆÀ°8å«àß.
+f
+java:S2184„"HCast one of the operands of this multiplication operation to a "double".(ìá×ë8å«àß.
+e
+java:S2184ò"HCast one of the operands of this multiplication operation to a "double".(‰²	8å«àß.
+k
+java:S2184ó"HCast one of the operands of this multiplication operation to a "double".(èÀ³úÿÿÿÿ8å«àß.
+e
+java:S2184ø"HCast one of the operands of this multiplication operation to a "double".(µş±8å«àß.
+k
+java:S2184ù"HCast one of the operands of this multiplication operation to a "double".(êéš­úÿÿÿÿ8å«àß.
+_
+java:S1612ì"<Replace this lambda with method reference 'Objects::isNull'.(ë¡»Ëşÿÿÿÿ8å«àß.
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8å«àß.
