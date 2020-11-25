@@ -216,8 +216,12 @@ public class Gameboard {
         return true;
     }
 
-    public void playActionTile() {
-
+    public void playActionTile(Coordinate location, ActionTile tile) {
+        if (tile.getType() == TileType.FROZEN) {
+            setFreezeCoords(location);
+        } else if (tile.getType() == TileType.FIRE) {
+            setFireCoords(location);
+        }
     }
 
 

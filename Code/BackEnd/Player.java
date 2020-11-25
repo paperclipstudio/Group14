@@ -100,15 +100,9 @@ public class Player
     }
 
 
-    /**
-     * Play the selected action tile in the given location (provided it needs to be)
-     * @param location where the player wants to use the action
-     * @param tile type of action tile
-     */
-    public void playActionTile (Coordinate location, ActionTile tile)    {
-        //TODO call a playActionTile function from the gameboard
-        gameboard.playActionTile();
-        inventory.remove(tile);
+    public void playActionTile (Coordinate location, ActionTile tile) {
+        gameboard.playActionTile(location, tile);
+        removeFromInventory(tile);
     }
 
 
@@ -128,5 +122,10 @@ public class Player
      */
     public boolean hasBeenBacktracked() {
         return backTracked;
+    }
+
+
+    public void removeFromInventory (ActionTile tile) {
+        inventory.remove(tile);
     }
 }
