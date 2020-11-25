@@ -1,9 +1,14 @@
 package FrontEnd;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 /**
  * Use to control the GameScreen scene.
@@ -23,8 +28,7 @@ public class MenuScreenController implements Initializable {
      * Used to exit the application
      */
     public void onQuitButton() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("QuitScreen");
+        Platform.exit();;
     }
 
     public void onNewGame() {

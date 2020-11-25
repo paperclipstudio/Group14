@@ -3,8 +3,10 @@ package FrontEnd;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
 import javax.annotation.Generated;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,9 +17,19 @@ import java.util.ResourceBundle;
 public class LoadGameController implements Initializable {
 	@FXML
 	private Button backButton;
+
+	@FXML
+	private ChoiceBox<String> selectGame;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		String[] games;
+		File gameSaveLocation = new File("SaveData\\GameSave");
+		games = gameSaveLocation.list();
+		for (String game : games) {
+			selectGame.getItems().add(game);
+		}
+		selectGame.getSelectionModel().selectFirst();
 	}
 
 	/***

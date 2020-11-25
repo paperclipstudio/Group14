@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author David Langmaid
  */
 public class GameSave {
-    //private static File GAME_SAVE_FILE = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
+    //private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
     private static File gameSaveFile = new File("SaveData\\GameSave\\TEST.txt");
 
     public static void draw () throws IOException {
@@ -21,12 +21,11 @@ public class GameSave {
     }
     public static void playFloorTile(Coordinate slideLocations, FloorTile tile) throws IOException {
         FileWriter writer =  new FileWriter(gameSaveFile);
-            writer.write("\nfloor "+ slideLocations.getX() + " " + slideLocations.getY() + " " + tile.getType() + " " + tile.getRotation() + " ");
+            writer.write("\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY() + " ");
     }
     public static void playActionTile(Coordinate location, ActionTile tile) throws IOException {
         FileWriter writer =  new FileWriter(gameSaveFile);
-            writer.write("\naction " + location.getX() + " " + location.getY() + " " + tile.getType() + " ");
-
+            writer.write("\naction " + tile.getType() + " " + location.getX() + " " + location.getY() + " ");
     }
     public static void playBacktrack (int playerNum) throws IOException {
         FileWriter writer =  new FileWriter(gameSaveFile);
