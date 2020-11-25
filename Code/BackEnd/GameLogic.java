@@ -91,7 +91,7 @@ public class GameLogic {
 	 */
 	public void floor(FloorTile tile, Coordinate location) {
 		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
-		players[currentPlayerNo].playFloorTile(location, tile.getRotation());
+		players[currentPlayerNo].playFloorTile(location, tile);
 		phase = ACTION;
 	}
 
