@@ -100,8 +100,8 @@ public class Player
      * @param location The center of the freeze/fire location
      * @param tile The freeze or fire action tile
      */
-    public void playActionTile (Coordinate location, ActionTile tile) {
-        gameboard.playActionTile(location, tile);
+    public void playActionTile (Coordinate location, ActionTile tile, int playerNumber) {
+        gameboard.playActionTile(location, tile, playerNumber);
         removeFromInventory(tile);
     }
 

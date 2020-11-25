@@ -217,11 +217,13 @@ public class Gameboard {
         return true;
     }
 
-    public void playActionTile(Coordinate location, ActionTile tile) {
+    public void playActionTile(Coordinate location, ActionTile tile, int player) {
         if (tile.getType() == TileType.FROZEN) {
             setFreezeCoords(location);
         } else if (tile.getType() == TileType.FIRE) {
             setFireCoords(location);
+        } else if (tile.getType() == TileType.BACKTRACK) {
+            backtrack(player);
         }
     }
 
