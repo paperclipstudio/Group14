@@ -69,21 +69,24 @@ public class GameSetupController implements Initializable {
 		try {
 			this.gameSaveName = (saveName.getText());
 			if (!(gameSaveName.equals(""))) {
-				// So that for testing you arn't forced to type a new save file name every time you run
 				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".txt");
-				// there is no silk bag right now.
-				// so seed can be created here.
-				int seed = (new Random()).nextInt();
-				//I have no idea why this isnt writing to the file
-				FileWriter writer = new FileWriter(gameSaveFile, true);
-				writer.write(selectGameboard.getValue() + "\n" + seed);
-				writer.flush();
-				writer.close();
+				if(!(gameSaveFile.exists())){
+					// there is no silk bag right now.
+					// so seed can be created here.
+					int seed = (new Random()).nextInt();
+					FileWriter writer = new FileWriter(gameSaveFile, true);
+					writer.write(selectGameboard.getValue() + "\n" + seed);
+					writer.flush();
+					writer.close();
+					//wl.load("GameScreen");
+				} else {
+					//TODO print some msg about file already existing
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		wl.load("GameScreen");
+		wl.load("GameScreen"); // here for testing
 	}
 	/**
 	 * This returns the name of the save file
