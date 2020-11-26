@@ -18,13 +18,15 @@ import java.io.File;
  */
 
 public class Main extends Application {
-    private static String boardFile;
+    private static boolean fullScreen;
+	private static String boardFile;
     private static int numberOfPlayer;
     private static String loadFile;
     private static boolean loadedGameFile = false;
     private static int seed;
     private static double volume = 10;
     private static MediaPlayer mediaPlayer;
+    private static int resolution;
 
     public static int getSeed() {
         return seed;
@@ -32,6 +34,22 @@ public class Main extends Application {
 
     public static void setSeed(int seed) {
         Main.seed = seed;
+    }
+
+    public static boolean isFullScreen() {
+        return fullScreen;
+    }
+
+    public static void setFullScreen(boolean fullScreen) {
+        Main.fullScreen = fullScreen;
+    }
+
+    public static int getResolution() {
+        return Main.resolution;
+    }
+
+    public static void setResolution(int resolution) {
+        Main.resolution = resolution;
     }
 
     @Override
@@ -63,6 +81,10 @@ public class Main extends Application {
         System.out.println("Volume Changed");
         Main.volume = volume;
         mediaPlayer.setVolume(volume);
+    }
+
+    public static double getVolumne() {
+        return Main.volume;
     }
 
     /***
