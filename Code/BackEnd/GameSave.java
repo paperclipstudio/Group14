@@ -12,26 +12,35 @@ import java.io.IOException;
  * @author David Langmaid
  */
 public class GameSave {
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
+    //private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
+    private File gameSaveFile = new File("SaveData\\GameSave\\TEST.txt");
 
-    public static void draw () throws IOException {
-        FileWriter writer =  new FileWriter(gameSaveFile);
-            writer.write("\ndraw");
+    private String gameSaveString = "";
+
+    public GameSave() {
     }
-    public static void playFloorTile(Coordinate slideLocations, FloorTile tile) throws IOException {
-        FileWriter writer =  new FileWriter(gameSaveFile);
-            writer.write("\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY() + " ");
+
+    public void draw() {
+        gameSaveString = gameSaveString + "\ndraw";
     }
-    public static void playActionTile(Coordinate location, ActionTile tile) throws IOException {
-        FileWriter writer =  new FileWriter(gameSaveFile);
-            writer.write("\naction " + tile.getType() + " " + location.getX() + " " + location.getY() + " ");
+    public void playFloorTile(Coordinate slideLocations, FloorTile tile){
+        gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY() + " ";
     }
-    public static void playBacktrack (int playerNum) throws IOException {
-        FileWriter writer =  new FileWriter(gameSaveFile);
-        writer.write("\naction BACKTRACK " + playerNum);
+    public void playActionTile(Coordinate location, ActionTile tile) {
+        gameSaveString = gameSaveString + "\naction " + tile.getType() + " " + location.getX() + " " + location.getY() + " ";
+
     }
-    public static void playerMove(Coordinate location) throws IOException {
-        FileWriter writer =  new FileWriter(gameSaveFile);
-            writer.write("\nmove " + location.getX() + " " + location.getY());
+    public void playBacktrack (int playerNum) {
+        gameSaveString = gameSaveString + "\naction BACKTRACK " + playerNum;
+
+    }
+    public void playerMove(Coordinate location) {
+        gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
+    }
+    public void saveToFile() throws IOException {
+        FileWriter writer = new FileWriter(gameSaveFile, true);
+        writer.write(gameSaveString);
+        writer.flush();
+        writer.close();
     }
 }
