@@ -47,8 +47,6 @@ class GameboardTest {
 		assertEquals(startPos, gb.getPlayerPos(0));
 		gb.setPlayerPos(0, move1);
 		assertEquals(move1, gb.getPlayerPos(0));
-		//Gets an error from here on out because the tiles don't exist on the board.
-		/*
 		gb.backtrack(0);
 		assertEquals(startPos, gb.getPlayerPos(0));
 		gb.setPlayerPos(0, move1);
@@ -63,7 +61,6 @@ class GameboardTest {
 		gb.backtrack(0);
 		assertEquals(move1, gb.getPlayerPos(0));
 
-		 */
 
 	}
 
@@ -86,6 +83,15 @@ class GameboardTest {
 		for (Coordinate location: locations) {
 			gb.playFloorTile(location, new FloorTile(CORNER));
 		}
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
+		assertEquals(CORNER, gb.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
+		assertEquals(CORNER,gb.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(CORNER,    gb.TileAt(new Coordinate(1,1)).getType());
+		assertEquals(CORNER,gb.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
+		assertEquals(CORNER, gb.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
 	}
 
 	@Test
@@ -109,6 +115,11 @@ class GameboardTest {
 
 	@Test
 	void getMoveDirections() {
+		gb.getMoveDirections(0);
+		gb.getMoveDirections(1);
+		gb.getMoveDirections(2);
+		gb.getMoveDirections(3);
+
 	}
 
 	@Test

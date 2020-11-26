@@ -1,6 +1,0 @@
-
-N	java:S106$"9Replace this use of System.out or System.err by a logger.(ÔÙß®
-0
-java:S1220""Move this file to a named package.
-Y
-java:S2259&"CA "NullPointerException" could be thrown; "image" is nullable here.(È‘…“
