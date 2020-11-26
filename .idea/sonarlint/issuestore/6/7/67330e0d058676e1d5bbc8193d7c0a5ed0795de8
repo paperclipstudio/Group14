@@ -1,51 +1,50 @@
 
-N
-java:S1128"1Remove this unused import 'javafx.util.Duration'.(ç½®§8ñ¶ĞÏß.
-O
-java:S1135"2Complete the task associated to this TODO comment.(ö£Í«8ûòùûß.
-n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
-M
-java:S5411"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
-M
-java:S5411ˆ"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
-p
-java:S3776£"RRefactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.(Äê¢Ê8ûòùûß.
-_
-java:S1126Ï"AReplace this if-then-else statement by a single return statement.(Õ¯¦‡8ûòùûß.
-c
-java:S1128"ARemove this unused import 'javafx.animation.TranslateTransition'.(¬°™ªøÿÿÿÿ8ñ¶ĞÏß.
-T
-java:S1135"2Complete the task associated to this TODO comment.(ÆÓ®æşÿÿÿÿ8ûòùûß.
-O
-java:S1068"-Remove this unused "goalCoors" private field.(¨Ì¿¥şÿÿÿÿ8ğ›Üüß.
-
-java:S1319r"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¦ˆ8ûòùûß.
-M
-java:S5411”"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
-Y	java:S125ø"<This block of commented-out lines of code should be removed.(«Ş­Ë8¤¦áüß.
-M
-java:S5411š"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
-M
-java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8‰äîß.
-^	java:S125ú"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8¤¦áüß.
-Q
-java:S1068"/Remove this unused "actionTiles" private field.(‡Ê‹ûÿÿÿÿ8ûòùûß.
-T
-java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8ñ¶ĞÏß.
-_
-java:S1126Â"AReplace this if-then-else statement by a single return statement.(Õ¯¦‡8ûòùûß.
-p	java:S100µ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Ôşßùÿÿÿÿ8ûòùûß.
-^	java:S125ë"<This block of commented-out lines of code should be removed.(Š¬Â¢ùÿÿÿÿ8ûòùûß.
-{	java:S131¤"YComplete cases by adding the missing enum constants or add a default case to this switch.(øÎáäşÿÿÿÿ8ûòùûß.
-t
-java:S3776A"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(¯ßíÁşÿÿÿÿ8ûòùûß.
-M
-java:S5411Ï"*Use the primitive boolean expression here.(€Íìšşÿÿÿÿ8ûòùûß.
 |
 java:S1450"ZRemove the "removedTile" field and declare it as a local variable in the relevant methods.(Œ‹¾Çüÿÿÿÿ8ûòùûß.
-o
-java:S3776r"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(¦ˆ8ûòùûß.
+
+java:S1319s"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¦ˆ8ûòùûß.
+M
+java:S5411Ù"*Use the primitive boolean expression here.(€Íìšşÿÿÿÿ8ûòùûß.
+M
+java:S5411‰"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
+M
+java:S5411"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
+p
+java:S3776¤"RRefactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.(Äê¢Ê8ûòùûß.
+Q
+java:S1068"/Remove this unused "actionTiles" private field.(‡Ê‹ûÿÿÿÿ8ûòùûß.
 _
-java:S1126¯"AReplace this if-then-else statement by a single return statement.(Õ¯¦‡8ûòùûß.
+java:S1126Ğ"AReplace this if-then-else statement by a single return statement.(Õ¯¦‡8ûòùûß.
+V
+java:S1144ú"3Remove this unused private "isPlayerOnGoal" method.(âî‚äûÿÿÿÿ8âª„à.
+o
+java:S3776s"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(¦ˆ8ûòùûß.
+c
+java:S1128"ARemove this unused import 'javafx.animation.TranslateTransition'.(¬°™ªøÿÿÿÿ8¥¢Í„à.
+_
+java:S1126Ã"AReplace this if-then-else statement by a single return statement.(Õ¯¦‡8ûòùûß.
+_
+java:S1126°"AReplace this if-then-else statement by a single return statement.(Õ¯¦‡8ûòùûß.
 H
-java:S5411Ë"*Use the primitive boolean expression here.(Æ¶çº8ûòùûß.
+java:S5411Õ"*Use the primitive boolean expression here.(Æ¶çº8ûòùûß.
+
+java:S1319í"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(´±z8²ÈÎ„à.
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
+M
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¥¢Í„à.
+O
+java:S1135"2Complete the task associated to this TODO comment.(ö£Í«8ûòùûß.
+p	java:S100¿"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Ôşßùÿÿÿÿ8ûòùûß.
+{	java:S131¥"YComplete cases by adding the missing enum constants or add a default case to this switch.(øÎáäşÿÿÿÿ8ûòùûß.
+T
+java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8¥¢Í„à.
+N
+java:S1128"1Remove this unused import 'javafx.util.Duration'.(ç½®§8¥¢Í„à.
+M
+java:S5411›"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
+M
+java:S5411•"*Use the primitive boolean expression here.(ÜÜåÅúÿÿÿÿ8ûòùûß.
+t
+java:S3776B"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(¯ßíÁşÿÿÿÿ8ûòùûß.
+T
+java:S1135 "2Complete the task associated to this TODO comment.(ÆÓ®æşÿÿÿÿ8ûòùûß.
