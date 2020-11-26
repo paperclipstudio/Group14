@@ -66,7 +66,11 @@ public class GameScreenController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		try {
-			startNewGame("Gameboards\\preFilled.txt");
+			if (!Main.isLoadedGameFile()) {
+				startNewGame("Gameboards\\" + Main.getBoardFile());
+			} else {
+				// Load a game
+			}
 			updateBoard();
 			mainLoop();
 		} catch (FileNotFoundException e) {

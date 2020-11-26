@@ -18,8 +18,22 @@ import java.io.File;
  */
 
 public class Main extends Application {
-    private static double volume = 0;
+    private static String boardFile;
+    private static int numberOfPlayer;
+    private static String loadFile;
+    private static boolean loadedGameFile = false;
+    private static int seed;
+    private static double volume = 10;
     private static MediaPlayer mediaPlayer;
+
+    public static int getSeed() {
+        return seed;
+    }
+
+    public static void setSeed(int seed) {
+        Main.seed = seed;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("Hello World");
@@ -58,5 +72,37 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static String getBoardFile() {
+        return boardFile;
+    }
+
+    public static void setBoardFile(String boardFile) {
+        Main.boardFile = boardFile;
+    }
+
+    public static int getNumberOfPlayer() {
+        return numberOfPlayer;
+    }
+
+    public static void setNumberOfPlayer(int numberOfPlayer) {
+        Main.numberOfPlayer = numberOfPlayer;
+    }
+
+    public static String getLoadFile() {
+        return loadFile;
+    }
+
+    public static void setLoadFile(String loadFile) {
+        Main.loadFile = loadFile;
+    }
+
+    public static boolean isLoadedGameFile() {
+        return loadedGameFile;
+    }
+
+    public static void setLoadedGameFile(boolean loadedGameFile) {
+        Main.loadedGameFile = loadedGameFile;
     }
 }

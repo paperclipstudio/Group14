@@ -61,6 +61,10 @@ public class GameSetupController implements Initializable {
 	 */
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
+		Main.setSeed((new Random()).nextInt());
+		Main.setBoardFile( selectGameboard.getValue());
+		// Get number of players from the radio buttons
+		//Main.setNumberOfPlayer();
 		try {
 			File gameboard = new File("Gameboards\\" + selectGameboard.getValue());
 			this.gameSaveName = (saveName.getText());
