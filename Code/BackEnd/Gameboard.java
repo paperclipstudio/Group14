@@ -66,33 +66,33 @@ public class Gameboard {
     public Tile playFloorTile(Coordinate location, FloorTile insertedTile) {
         // Inserting the new tile from the left.
         if (location.getX() == -1) {
+            boardTiles[0][location.getY()] = insertedTile;
             removedTile = boardTiles[width - 1][location.getY()];
             for (int j = 0; j < width; j++) {
-                boardTiles[j][location.getY()] = boardTiles[j + 1][location.getY()];
+                boardTiles[j + 1][location.getY()] = boardTiles[j][location.getY()];
             }
-            boardTiles[0][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
         }
         // Inserting the new tile from the right.
         else if (location.getX() == width) {
+            boardTiles[width - 1][location.getY()] = insertedTile;
             removedTile = boardTiles[0][location.getY()];
             for (int j = width; j > 0; j--) {
-                boardTiles[j][location.getY()] = boardTiles[j - 1][location.getY()];
+                boardTiles[j - 1][location.getY()] = boardTiles[j][location.getY()];
             }
-            boardTiles[width - 1][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
         }
         // Inserting the new tile from the bottom.
         else if (location.getY() == -1) {
+            boardTiles[location.getX()][0] = insertedTile;
             removedTile = boardTiles[location.getX()][height - 1];
             for (int j = 0; j < height; j++) {
-                boardTiles[location.getX()][j] = boardTiles[location.getX()][j + 1];
+                boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
             }
-            boardTiles[location.getX()][0] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
@@ -100,10 +100,10 @@ public class Gameboard {
         // The last remaining case: Inserting the new tile from the top.
         else {
             removedTile = boardTiles[location.getX()][0];
-            for (int j = height; j > 0; j--) {
-                boardTiles[location.getX()][j] = boardTiles[location.getX()][j - 1];
-            }
             boardTiles[location.getX()][height - 1] = insertedTile;
+            for (int j = height; j > 0; j--) {
+                boardTiles[location.getX()][j - 1] = boardTiles[location.getX()][j];
+            }
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
