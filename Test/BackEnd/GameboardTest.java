@@ -105,6 +105,11 @@ class GameboardTest {
 
 	@Test
 	void getMoveDirections() {
+		gb.getMoveDirections(0);
+		gb.getMoveDirections(1);
+		gb.getMoveDirections(2);
+		gb.getMoveDirections(3);
+
 	}
 
 	@Test
