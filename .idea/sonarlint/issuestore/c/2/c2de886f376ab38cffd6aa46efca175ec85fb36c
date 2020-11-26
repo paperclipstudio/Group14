@@ -1,6 +1,0 @@
-
-H
-java:S1068"+Remove this unused "ticFire" private field.(·ÿκ8²±…ΰ.
-n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ηρά
-O
-java:S1068"-Remove this unused "ticFrozen" private field.(—µϊβωÿÿÿÿ8²±…ΰ.
