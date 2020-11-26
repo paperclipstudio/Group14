@@ -271,14 +271,30 @@ public class Gameboard {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming 0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
                     boardTiles[i][j].setFire(); //mid
-                    boardTiles[i + 1][j].setFire(); //right
-                    boardTiles[i - 1][j].setFire(); //left
-                    boardTiles[i][j + 1].setFire(); //up
-                    boardTiles[i + 1][j + 1].setFire(); //upper right
-                    boardTiles[i - 1][j + 1].setFire(); //upper left
-                    boardTiles[i][j - 1].setFire(); //down
-                    boardTiles[i + 1][j - 1].setFire(); //down right
-                    boardTiles[i - 1][j - 1].setFire(); //down left
+                    if (i != width) {
+                        boardTiles[i + 1][j].setFire(); //right
+                    }
+                    if (i != 0) {
+                        boardTiles[i - 1][j].setFire(); //left
+                    }
+                    if (j != height) {
+                        boardTiles[i][j + 1].setFire(); //up
+                    }
+                    if (i != width && j != height) {
+                        boardTiles[i + 1][j + 1].setFire(); //upper right
+                    }
+                    if (i != 0 && j != height){
+                        boardTiles[i - 1][j + 1].setFire(); //upper left
+                    }
+                    if (j != 0) {
+                        boardTiles[i][j - 1].setFire(); //down
+                    }
+                    if (i != width && j != 0) {
+                        boardTiles[i + 1][j - 1].setFire(); //down right
+                    }
+                    if (i != 0 && j != 0 ) {
+                        boardTiles[i - 1][j - 1].setFire(); //down left
+                    }
                 }
             }
         }
@@ -290,14 +306,30 @@ public class Gameboard {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
                     boardTiles[i][j].setFrozen(); //mid
-                    boardTiles[i + 1][j].setFrozen(); //right
-                    boardTiles[i - 1][j].setFrozen(); //left
-                    boardTiles[i][j + 1].setFrozen(); //up
-                    boardTiles[i + 1][j + 1].setFrozen(); //upper right
-                    boardTiles[i - 1][j + 1].setFrozen(); //upper left
-                    boardTiles[i][j - 1].setFrozen(); //down
-                    boardTiles[i + 1][j - 1].setFrozen(); //down right
-                    boardTiles[i - 1][j - 1].setFrozen(); //down left
+                    if (i != width) {
+                        boardTiles[i + 1][j].setFrozen(); //right
+                    }
+                    if (i != 0) {
+                        boardTiles[i - 1][j].setFrozen(); //left
+                    }
+                    if (j != height) {
+                        boardTiles[i][j + 1].setFrozen(); //up
+                    }
+                    if (i != width && j != height) {
+                        boardTiles[i + 1][j + 1].setFrozen(); //upper right
+                    }
+                    if (i != 0 && j != height){
+                        boardTiles[i - 1][j + 1].setFrozen(); //upper left
+                    }
+                    if (j != 0) {
+                        boardTiles[i][j - 1].setFrozen(); //down
+                    }
+                    if (i != width && j != 0) {
+                        boardTiles[i + 1][j - 1].setFrozen(); //down right
+                    }
+                    if (i != 0 && j != 0 ) {
+                        boardTiles[i - 1][j - 1].setFrozen(); //down left
+                    }
                 }
             }
         }

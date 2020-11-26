@@ -62,7 +62,7 @@ public class MessageOfTheDay{
     }
 
     public static void main(String[] args) throws StringIndexOutOfBoundsException {
-        System.out.println(shiftUrlString())
+        System.out.println(shiftUrlString());
 
 
 
