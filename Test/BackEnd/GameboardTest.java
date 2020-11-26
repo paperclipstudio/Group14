@@ -37,6 +37,33 @@ class GameboardTest {
 	}
 
 	@Test
+	void playBackTrack() {
+		Coordinate startPos = new Coordinate(1,1);
+		Coordinate move1 = new Coordinate(2,1);
+		Coordinate move2 = new Coordinate(2, 2);
+		Coordinate fireLocation = new Coordinate(0, 0);
+		assertEquals(startPos, gb.getPlayerPos(0));
+		gb.backtrack(0);
+		assertEquals(startPos, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, move1);
+		assertEquals(move1, gb.getPlayerPos(0));
+		gb.backtrack(0);
+		assertEquals(startPos, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, move1);
+		gb.setPlayerPos(0, move2);
+		assertEquals(move2, gb.getPlayerPos(0));
+		gb.backtrack(0);
+		assertEquals(startPos, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, move1);
+		gb.setPlayerPos(0, move2);
+		// Checking that it doesn't move a player onto a tile thats on fire
+		gb.playActionTile(fireLocation, new ActionTile(FIRE), 0);
+		gb.backtrack(0);
+		assertEquals(move1, gb.getPlayerPos(0));
+
+	}
+
+	@Test
 	void getPlayerPos() {
 		assertEquals(1, gb.getPlayerPos(0).getX());
 		assertEquals(1, gb.getPlayerPos(0).getY());

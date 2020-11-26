@@ -16,6 +16,8 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -63,9 +65,13 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		startNewGame("ExampleInput.txt");
-		updateBoard();
-		mainLoop();
+		try {
+			startNewGame("Gameboards\\ExampleInput2.txt");
+			updateBoard();
+			mainLoop();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -312,7 +318,7 @@ public class GameScreenController implements Initializable {
 	 *
 	 * @param board path to board file
 	 */
-	public void startNewGame(String board) {
+	public void startNewGame(String board) throws FileNotFoundException {
 		gameLogic = new GameLogic();
 		gameLogic.newGame(board);
 		width = gameLogic.getWidth();

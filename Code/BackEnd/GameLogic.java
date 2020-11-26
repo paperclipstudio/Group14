@@ -2,6 +2,9 @@ package BackEnd;
 
 
 import javafx.util.Pair;
+
+import java.io.FileNotFoundException;
+
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
 
@@ -29,7 +32,7 @@ public class GameLogic {
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
 	 */
-	public void newGame(String boardFile) {
+	public void newGame(String boardFile) throws FileNotFoundException {
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;

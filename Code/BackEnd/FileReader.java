@@ -29,7 +29,7 @@ public class FileReader {
      * @param filename The name of the level file format text file.
      * @return pair where first element is the gameboard and second is the players.
      */
-    public static Pair<Gameboard, Player[]> gameSetup(String filename) {
+    public static Pair<Gameboard, Player[]> gameSetup(String filename) throws FileNotFoundException {
         Scanner in = verifyFile(filename);
         Scanner currentLine;
         SilkBag silkBag = new SilkBag();
@@ -102,13 +102,13 @@ public class FileReader {
      * @param filename The name of the level file format text file.
      * @return in The scanner that iterates through the file.
      */
-    public static Scanner verifyFile(String filename) {
+    public static Scanner verifyFile(String filename) throws FileNotFoundException {
         Scanner in = null;
         try {
             File input = new File(filename);
             in = new Scanner(input);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filename);
+            throw new FileNotFoundException(filename);
         }
         return in;
     }
