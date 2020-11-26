@@ -66,7 +66,7 @@ public class GameScreenController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		try {
-			startNewGame("Gameboards\\ExampleInput2.txt");
+			startNewGame("Gameboards\\preFilled.txt");
 			updateBoard();
 			mainLoop();
 		} catch (FileNotFoundException e) {
@@ -86,6 +86,7 @@ public class GameScreenController implements Initializable {
 	private void mainLoop() {
 
 		//tiles.setRotate(tiles.getRotate() + 10);
+		//updateBoard();
 		phase = gameLogic.getGamePhase();
 		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug");
@@ -313,6 +314,8 @@ public class GameScreenController implements Initializable {
 		players.setPrefHeight((height + 4) * tileWidth);
 		players.setPrefWidth((width + 4) * tileWidth);
 		tiles.getChildren().clear();
+		players.getChildren().clear();
+		controls.getChildren().clear();
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
