@@ -131,11 +131,11 @@ public class GameScreenController implements Initializable {
 			} else if (coordinate.getX() == width) {
 				arrow.setRotate(180);
 				direction = Rotation.LEFT;
-				where = coordinate.getX();
+				where = coordinate.getY();
 			} else if (coordinate.getY() == height) {
 				arrow.setRotate(270);
 				direction = UP;
-				where = coordinate.getY();
+				where = coordinate.getX();
 			} else {
 				direction = Rotation.DOWN;
 				where = 2;
@@ -219,6 +219,16 @@ public class GameScreenController implements Initializable {
 						}
 					}
 					break;
+				case LEFT:
+					if (y == location) {
+						if (x <= 0) {
+							smooth.setToX(tileWidth * (width - 1));
+							smooth.setDuration(new Duration(600));
+						} else {
+							smooth.setByX(-tileWidth);
+						}
+					}
+					break;
 				case DOWN:
 					if (x == location) {
 						if (y == height - 1) {
@@ -230,6 +240,15 @@ public class GameScreenController implements Initializable {
 						}
 					}
 					break;
+				case UP:
+					if (x == location) {
+						if (y == 0) {
+							smooth.setToY(tileWidth * (height - 1));
+							smooth.setDuration(new Duration(600));
+						} else {
+							smooth.setByY(-tileWidth);
+						}
+					}
 			}
 			smooth.play();
 			return 0;
@@ -262,6 +281,21 @@ public class GameScreenController implements Initializable {
 						}
 					}
 					break;
+				case LEFT:
+					if (y == location) {
+						smooth.setByX(-tileWidth);
+						if (x <= 0) {
+							smoothVanish.setNode(tile);
+						}
+					}
+					break;
+				case UP:
+					if (x == location) {
+						smooth.setByY(-tileWidth);
+						if (y <= 0) {
+							smoothVanish.setNode(tile);
+						}
+					}
 			}
 
 			smooth.play();
