@@ -7,13 +7,14 @@ public class FloorTile extends Tile {
 	//Added by Atif as a temp way to distinguish if a tile is on fire.
 	private boolean isOnFire;
 	private boolean isFrozen;
-	//for the method update player position, to know if a player is on a tile on the board.
-	private int hasPlayer;
+
+	//These will be used for the tics, it will stop the tiles being affected after 3 turns.
+	private static int ticFire;
+	private static int ticFrozen;
 
 	public	FloorTile(TileType type){
 		this.type = type;
 		this.rotation = Rotation.UP;
-		//
 		this.isOnFire = false;
 		this.isFrozen = false;
 	}
@@ -39,15 +40,6 @@ public class FloorTile extends Tile {
 		return isFrozen;
 	}
 
-	public void placePlayer(int player){
-		hasPlayer = player;
-	}
-
-	public int playerOnTile(){
-		return this.hasPlayer;
-	}
-
-	//temp
 	public void setFire() {
 		this.isOnFire = true;
 	}

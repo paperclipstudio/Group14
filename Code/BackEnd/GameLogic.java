@@ -126,10 +126,9 @@ public class GameLogic {
 	 */
 	public void action(ActionTile tile, Coordinate coordinate) {
 		if (tile.getType() == DOUBLE_MOVE) {
-			currentPlayer.removeFromInventory(new ActionTile(DOUBLE_MOVE));
 			doubleMove = true;
 		}
-		players[currentPlayerNo].playActionTile(coordinate, tile);
+		players[currentPlayerNo].playActionTile(coordinate, tile, 0);
 		phase = MOVE;
 	}
 
@@ -208,8 +207,7 @@ public class GameLogic {
 	 * @param playerNumber which player to use backtrack on.
 	 */
 	public void backtrack(int playerNumber) {
-		gameboard.backtrack(playerNumber);
-		currentPlayer.removeFromInventory(new ActionTile(TileType.BACKTRACK));
+		currentPlayer.playActionTile(null, new ActionTile(TileType.BACKTRACK), playerNumber);
 		phase = MOVE;
 	}
 

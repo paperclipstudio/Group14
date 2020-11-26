@@ -13,7 +13,7 @@ public class Gameboard {
     private int width;
     private int height;
     private SilkBag silkbag;
-    private static Coordinate[] goalCoors;
+    private  ArrayList<Coordinate> goalCoors;
     private Coordinate[][] playerLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
@@ -25,11 +25,12 @@ public class Gameboard {
         this.width = width;
         this.height = height;
         this.silkbag = silkBag;
+        goalCoors = new ArrayList<>();
         slideLocations = new Coordinate[10];
         //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
         //TODO third null pointer exception
-        playerLocations = new Coordinate[100][1000];
+        playerLocations = new Coordinate[4][1000];
     }
 
     public int getWidth() {
@@ -216,11 +217,13 @@ public class Gameboard {
         return true;
     }
 
-    public void playActionTile(Coordinate location, ActionTile tile) {
+    public void playActionTile(Coordinate location, ActionTile tile, int player) {
         if (tile.getType() == TileType.FROZEN) {
             setFreezeCoords(location);
         } else if (tile.getType() == TileType.FIRE) {
             setFireCoords(location);
+        } else if (tile.getType() == TileType.BACKTRACK) {
+            backtrack(player);
         }
     }
 
@@ -230,24 +233,31 @@ public class Gameboard {
         boardTiles[x][y] = tile;
     }
 
+    //Checks the board for goal tiles, sets their Coordinates.
+    public ArrayList<Coordinate> checkGoalTiles() {
+        for (int i = 0; i < boardTiles.length; i++){
+            for (int j = 0; j < boardTiles[i].length; j++){
+                if (boardTiles[i][j].getType() == TileType.GOAL){
+                    goalCoors.add(new Coordinate(i, j));
+                }
+            }
+        }
+        return goalCoors;
+    }
+
     //checks to see if a player is on goal by going through all the players' locations to see
-    //if they match the goal coordinates.
-    /* public boolean isPlayerOnGoal() {
-        int goalX = getGoalCoor().getX();
-        int goalY = getGoalCoor().getY();
-        for (int i = 0; i < playerLocations.length; i++){
-            int playerX = playerLocations[i].getX();
-            int playerY = playerLocations[i].getY();
-            if (playerX == goalX && playerY == goalY){
-                return true;
+    //if they match any of the goal coordinates.
+    private boolean isPlayerOnGoal(){
+        int numberOfPlayers = 4;
+        for (Coordinate goal : goalCoors){
+            for (int i = 0; i < numberOfPlayers; i++){
+                if (getPlayerPos(i) == goal){
+                    return true;
+                }
             }
         }
         return false;
-    } */
-
-  //  private Coordinate[] checkGoalTiles(){
-
-  //  }
+    }
 
 
     public Tile getPlayerTile(int player) {

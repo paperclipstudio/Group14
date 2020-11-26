@@ -44,7 +44,7 @@ class PlayerTest {
 		silkBag.insertTile(Tile.createTile(FROZEN));
 		//silk bag just has Frozen tile.
 		// now play valid tile.
-		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN));
+		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN), 0);
 		// it should now be frozen.
 		assertTrue(board.TileAt(new Coordinate(0,0)).isFrozen());
 	}
@@ -55,13 +55,13 @@ class PlayerTest {
 		//Silk bag empty
 		silkBag.insertTile(Tile.createTile(FROZEN));
 		//silk bag just has Frozen tile.
-		player.playActionTile(new Coordinate(0,0), new ActionTile(FIRE));
+		player.playActionTile(new Coordinate(0,0), new ActionTile(FIRE), 0);
 		// Player plays invalid card.
 		assertFalse(board.TileAt(new Coordinate(0,0)).onFire());
 		// check that its not frozen.
 		assertFalse(board.TileAt(new Coordinate(0,0)).isFrozen());
 		// now play valid tile.
-		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN));
+		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN), 0);
 		// it should now be frozen.
 		assertTrue(board.TileAt(new Coordinate(0,0)).isFrozen());
 	}

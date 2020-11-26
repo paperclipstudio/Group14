@@ -5,26 +5,19 @@ import BackEnd.FloorTile;
 import BackEnd.GameLogic;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point3D;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -35,9 +28,7 @@ import javafx.util.Duration;
 
 import static BackEnd.Phase.MOVE;
 import static BackEnd.Rotation.*;
-import static BackEnd.TileType.DOUBLE_MOVE;
-import static BackEnd.TileType.FIRE;
-import static java.lang.Thread.sleep;
+import static BackEnd.TileType.*;
 
 /***
  * Use to control the GameScreen scene.
@@ -49,15 +40,21 @@ public class GameScreenController implements Initializable {
 	@FXML
 	private Pane tiles;
 	@FXML
+	private Pane players;
+	@FXML
+	private Pane controls;
+	@FXML
 	private Button drawButton;
 	@FXML
 	private Label phaseText;
+
+
 	private int width;
 	private int height;
 	public Phase phase;
 	private GameLogic gameLogic;
 	public static int tileWidth = 25;
-	private ImageView[] players;
+	//private ImageView[] players;
 
 	/***
 	 * Gets all resources for gameScreen
@@ -68,7 +65,7 @@ public class GameScreenController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		startNewGame("ExampleInput.txt");
 		updateBoard();
-			mainLoop();
+		mainLoop();
 	}
 
 	/*
@@ -84,7 +81,7 @@ public class GameScreenController implements Initializable {
 
 		//tiles.setRotate(tiles.getRotate() + 10);
 		phase = gameLogic.getGamePhase();
-		phase = Phase.FLOOR;
+		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug");
 		hideAllControls();
 		switch (phase) {
@@ -165,7 +162,7 @@ public class GameScreenController implements Initializable {
 				mainLoop();
 
 			});
-			tiles.getChildren().add(arrow);
+			controls.getChildren().add(arrow);
 		}
 		cards.getChildren().removeIf(Objects::isNull);
 		if (gameLogic.drawnCard() != null) {
@@ -197,7 +194,7 @@ public class GameScreenController implements Initializable {
 		tiles.getChildren().add(tileView);
 
 		// Shift players
-		applyToAll("player", player -> {
+		applyToAll(players,  player -> {
 			int x = ((int) player.getTranslateX()) / tileWidth;
 			int y = ((int) player.getTranslateY()) / tileWidth;
 			TranslateTransition smooth = new TranslateTransition();
@@ -209,8 +206,8 @@ public class GameScreenController implements Initializable {
 						if (x >= width - 1) {
 							smooth.setToX(0);
 							smooth.setDuration(new Duration(600));
-							tiles.getChildren().remove(player);
-							tiles.getChildren().add(player);
+							//tiles.getChildren().remove(player);
+							//tiles.getChildren().add(player);
 						} else {
 							smooth.setByX(tileWidth);
 						}
@@ -233,7 +230,7 @@ public class GameScreenController implements Initializable {
 		});
 		// Shift all tiles
 
-		applyToAll("tile", tile -> {
+		applyToAll(tiles, tile -> {
 			int x = ((int) tile.getTranslateX()) / tileWidth;
 			int y = ((int) tile.getTranslateY()) / tileWidth;
 			TranslateTransition smooth = new TranslateTransition();
@@ -269,8 +266,12 @@ public class GameScreenController implements Initializable {
 	}
 
 	private void updateBoard() {
-		tiles.setPrefWidth(width * tileWidth);
-		tiles.setPrefHeight(height * tileWidth);
+		tiles.setPrefWidth((width + 4) * tileWidth);
+		tiles.setPrefHeight((height + 4) * tileWidth);
+		controls.setPrefWidth((width + 4) * tileWidth);
+		controls.setPrefHeight((height + 4) * tileWidth);
+		players.setPrefHeight((height + 4) * tileWidth);
+		players.setPrefWidth((width + 4) * tileWidth);
 		tiles.getChildren().clear();
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
@@ -296,14 +297,13 @@ public class GameScreenController implements Initializable {
 		}
 
 		// showing the player locations
-		players = new ImageView[gameLogic.getNumberOfPlayers()];
+		//players = new ImageView[gameLogic.getNumberOfPlayers()];
 		for (int i = 0; i < gameLogic.getPlayerLocations().length; i++) {
 			Coordinate location = gameLogic.getPlayerLocations()[i];
 			ImageView playerView = Assets.getPlayer(i);
 			playerView.setTranslateX(location.getX() * tileWidth);
 			playerView.setTranslateY(location.getY() * tileWidth);
-			players[i] = playerView;
-			tiles.getChildren().add(playerView);
+			players.getChildren().add(playerView);
 		}
 	}
 
@@ -327,23 +327,7 @@ public class GameScreenController implements Initializable {
 		// Draw controls
 		drawButton.setVisible(false);
 		cards.getChildren().clear();
-		removeAll("slide_arrow");
-		// Floor controls
-		for (int i = 0; i < tiles.getChildren().size(); i++) {
-
-			ImageView image = (ImageView) tiles.getChildren().get(i);
-			if (image == null) {
-				continue;
-			}
-			if (image.getId() == null) {
-				continue;
-			}
-			if (image.getId().equals("slide")) {
-				//Todo this is gross but works for now
-				tiles.getChildren().remove(i);
-				i = 0;
-			}
-		}
+		controls.getChildren().clear();
 	}
 
 	private void setupActionPhase() throws IOException {
@@ -360,7 +344,7 @@ public class GameScreenController implements Initializable {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked((e2) -> {
 							gameLogic.action(new ActionTile(DOUBLE_MOVE), null);
-							for (ImageView player : players) {
+							for (Node player : players.getChildren()) {
 								player.setEffect(new Bloom(999));
 								player.setOnMouseClicked(e3 -> {
 								});
@@ -374,23 +358,20 @@ public class GameScreenController implements Initializable {
 						hideAllControls();
 						// Get all players that can be back tracked
 						boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
+						Node[] playerSelectControls = new Node[validPlayers.length];
 						for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
 							if (validPlayers[i]) {
 								// For each valid player
 								final int playerNumber = i;
 								// make them glow
-								players[i].setEffect(new Bloom(0.05));
+								Node fakePlayer = Assets.getPlayer(i);
+								fakePlayer.setTranslateX(gameLogic.getPlayerLocations()[i].getX() * tileWidth);
+								fakePlayer.setTranslateY(gameLogic.getPlayerLocations()[i].getY() * tileWidth);
+								fakePlayer.setEffect(new Bloom(0.1));
+								controls.getChildren().add(fakePlayer);
 								// Set them into an active button
-								players[i].setOnMouseClicked(e2 -> {
-									// When they are clicked remove bloom from players
-									for (ImageView player : players) {
-										//TODO don't like this nesting fix later OwO.
-										player.setEffect(new Bloom(999));
-										// Deactivate their click.
-										player.setOnMouseClicked(e3 -> {
-										});
-									}
-
+								fakePlayer.setOnMouseClicked(e2 -> {
+									hideAllControls();
 									gameLogic.backtrack(playerNumber);
 									mainLoop();
 								});
@@ -401,8 +382,69 @@ public class GameScreenController implements Initializable {
 
 					break;
 				case FIRE:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						Node fire = Assets.getFireEffect();
+						controls.getChildren().add(fire);
+						controls.setOnMouseMoved((e2) -> {
+							System.out.println("boop");
+							int getX = (int) (e2.getX()/tileWidth);
+							int getY = (int) (e2.getY()/tileWidth);
+							if (getX < 1) {
+								getX = 1;
+							}
+							if (getX > width - 2) {
+								getX = width - 2;
+							}
+							if (getY < 1) {
+								getY = 1;
+							}
+							if (getY > height - 2) {
+								getY = height - 2;
+							}
+							final int x = getX;
+							final int y = getY;
+							fire.setTranslateX((getX - 1) * tileWidth);
+							fire.setTranslateY((getY - 1) * tileWidth);
+							fire.setOnMouseClicked((e3) -> {
+								gameLogic.action(new ActionTile(FIRE), new Coordinate(x, y));
+								mainLoop();
+							});
+						});
+
+					});
 					break;
 				case FROZEN:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						Node frozen = Assets.getFrozenEffect();
+						controls.getChildren().add(frozen);
+						controls.setOnMouseMoved((e2) -> {
+							int getX = (int) (e2.getX()/tileWidth);
+							int getY = (int) (e2.getY()/tileWidth);
+							if (getX < 1) {
+								getX = 1;
+							}
+							if (getX > width - 2) {
+								getX = width - 2;
+							}
+							if (getY < 1) {
+								getY = 1;
+							}
+							if (getY > height - 2) {
+								getY = height - 2;
+							}
+							final int x = getX;
+							final int y = getY;
+							frozen.setTranslateX((getX - 1) * tileWidth);
+							frozen.setTranslateY((getY - 1) * tileWidth);
+							frozen.setOnMouseClicked((e3) -> {
+								gameLogic.action(new ActionTile(FROZEN), new Coordinate(x, y));
+								mainLoop();
+							});
+						});
+
+					});
 					break;
 			}
 		}
@@ -422,7 +464,7 @@ public class GameScreenController implements Initializable {
 			pointer.setTranslateX(coordinate.getX() * tileWidth);
 			pointer.setTranslateY(coordinate.getY() * tileWidth);
 			pointer.setOnMouseClicked(e -> {
-				Node currentPlayer = players[gameLogic.getPlayersTurn()];
+				Node currentPlayer = players.getChildren().get(gameLogic.getPlayersTurn());
 				gameLogic.move(coordinate);
 				TranslateTransition walk = new TranslateTransition();
 				walk.setToX(coordinate.getX() * tileWidth);
@@ -433,7 +475,7 @@ public class GameScreenController implements Initializable {
 				removeAll("locationarrow");
 				walk.setOnFinished((e2) -> mainLoop());
 			});
-			tiles.getChildren().add(pointer);
+			controls.getChildren().add(pointer);
 
 		}
 	}
@@ -454,7 +496,7 @@ public class GameScreenController implements Initializable {
 	 */
 	public void onButtonPressed() {
 		System.out.println("Test Button");
-		applyToAll("", (v) -> {
+		applyToAll(tiles, (v) -> {
 			v.setRotate(v.getRotate() + 20);
 			return 0;
 		});
@@ -476,8 +518,8 @@ public class GameScreenController implements Initializable {
 	}
 
 
-	private void applyToAll(String id, Function<Node, Integer> f) {
-		for (Object o : tiles.getChildren()) {
+	private void applyToAll(Pane group, Function<Node, Integer> f) {
+		for (Object o : group.getChildren()) {
 			if (o == null) {
 				continue;
 			}
@@ -485,9 +527,7 @@ public class GameScreenController implements Initializable {
 			if (n.getId() == null) {
 				continue;
 			}
-			if (n.getId().contains(id)) {
-				f.apply(n);
-			}
+			f.apply(n);
 		}
 	}
 
@@ -498,8 +538,8 @@ public class GameScreenController implements Initializable {
 	 * @param id   node to look for
 	 * @param func function to apply to onClick
 	 */
-	private void applyOnClick(String id, EventHandler<MouseEvent> func) {
-		applyToAll(id, v -> {
+	private void applyOnClick(Pane group, EventHandler<MouseEvent> func) {
+		applyToAll(group, v -> {
 			v.setOnMouseClicked(func);
 			return 0;
 		});
@@ -512,8 +552,8 @@ public class GameScreenController implements Initializable {
 	 * @param id   node to look for
 	 * @param func function to apply to onHover
 	 */
-	private void applyOnHover(String id, EventHandler<MouseEvent> func) {
-		applyToAll(id, (n) -> {
+	private void applyOnHover(Pane group, EventHandler<MouseEvent> func) {
+		applyToAll(group, (n) -> {
 			n.setOnMouseEntered(func);
 			return 0;
 		});
@@ -526,8 +566,8 @@ public class GameScreenController implements Initializable {
 	 * @param id   node to look for
 	 * @param func function to apply to offHover
 	 */
-	private void applyOffHover(String id, EventHandler<MouseEvent> func) {
-		applyToAll(id, n -> {
+	private void applyOffHover(Pane group, EventHandler<MouseEvent> func) {
+		applyToAll(group, n -> {
 			n.setOnMouseExited(func);
 			return 0;
 		});
