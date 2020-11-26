@@ -325,25 +325,35 @@ public class Gameboard {
         Coordinate posOneTurnAgo;
         FloorTile tileTwoTurns;
         FloorTile tileOneTurn;
-        //gets the players current pos
+        //gets the players current position.
         int length = 0;
         for (Coordinate coor : playerLocations[player]) {
             if (coor != null) {
                 length++;
             }
         }
-        //gets the tile, one and two turns ago that the player was on.
-        posTwoTurnsAgo = playerLocations[player][length - 2];
-        posOneTurnAgo = playerLocations[player][length - 1];
-        tileTwoTurns = boardTiles[posTwoTurnsAgo.getY()][posTwoTurnsAgo.getY()];
-        tileOneTurn = boardTiles[posOneTurnAgo.getY()][posOneTurnAgo.getY()];
-        //checks to see if the tile two turns ago is on fire, if not sets that as the players position
-        if (!tileTwoTurns.onFire()) {
-            setPlayerPos(player, posTwoTurnsAgo);
+        if (length > 2){
+            //gets the tile, one and two turns ago that the player was on.
+            posTwoTurnsAgo = playerLocations[player][length - 2];
+            tileTwoTurns = boardTiles[posTwoTurnsAgo.getX()][posTwoTurnsAgo.getY()];
+            posOneTurnAgo = playerLocations[player][length - 1];
+            tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
+            //checks to see if the tile two turns ago is on fire, if not, sets that as the players position
+            if (!tileTwoTurns.onFire() ) {
+                setPlayerPos(player, posTwoTurnsAgo);
+            }
+            else if (!tileOneTurn.onFire()){
+                setPlayerPos(player, posOneTurnAgo);
+            }
         }
-        ////checks to see if the tile one turn ago is on fire, if not sets that as the players position
-        else if (!tileOneTurn.onFire()) {
-            setPlayerPos(player, posOneTurnAgo);
+
+        if (length == 2) {
+            posOneTurnAgo = playerLocations[player][length - 1];
+            tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
+            //checks to see if the tile one turn ago is on fire, if not sets that as the players position
+            if (!tileOneTurn.onFire()) {
+                setPlayerPos(player, posOneTurnAgo);
+            }
         }
     }
 

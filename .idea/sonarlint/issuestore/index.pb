@@ -31,3 +31,7 @@ W
 'Code/FrontEnd/GameScreenController.java,0\a\0aeb29af69c373de780b5f967e02b054bb52dc12
 P
  Test/BackEnd/FileReaderTest.java,f\a\fa3a45211f3b76a1fe00e0af80d1bb5c517c3b49
+L
+Test/BackEnd/PlayerTest.java,1\5\15e5b96e063f262bb9a20ff335680725542cb5e8
+K
+Code/BackEnd/GameLogic.java,f\3\f339c967946580be2e280073b6017e0bbe5c3b22
