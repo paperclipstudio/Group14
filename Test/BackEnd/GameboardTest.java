@@ -80,19 +80,18 @@ class GameboardTest {
 	@Test
 	void playFloorTile() {
 		Coordinate[] locations = gb.getSlideLocations();
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
 		for (Coordinate location: locations) {
 			gb.playFloorTile(location, new FloorTile(CORNER));
 		}
-
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
+		assertEquals(CORNER, gb.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
+		assertEquals(CORNER,gb.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(CORNER,    gb.TileAt(new Coordinate(1,1)).getType());
+		assertEquals(CORNER,gb.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
+		assertEquals(CORNER, gb.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
 	}
 
 	@Test
