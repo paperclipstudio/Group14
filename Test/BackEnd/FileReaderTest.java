@@ -2,12 +2,20 @@ package BackEnd;
 
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileReaderTest {
 	@Test
 	public void basic() {
-		Pair<Gameboard, Player[]> output = FileReader.gameSetup("Gameboards\\ExampleInput.txt");
+		Pair<Gameboard, Player[]> output = null;
+		try {
+			output = FileReader.gameSetup("Gameboards\\ExampleInput.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		Gameboard gameboard = output.getKey();
 		Player[] players = output.getValue();
 		assertEquals(8, gameboard.getWidth());
