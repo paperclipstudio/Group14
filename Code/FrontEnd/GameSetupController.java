@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -66,29 +67,19 @@ public class GameSetupController implements Initializable {
 		// Get number of players from the radio buttons
 		//Main.setNumberOfPlayer();
 		try {
-			File gameboard = new File("Gameboards\\" + selectGameboard.getValue());
 			this.gameSaveName = (saveName.getText());
 			if (!(gameSaveName.equals(""))) {
 				// So that for testing you arn't forced to type a new save file name every time you run
 				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".txt");
-				Files.copy(gameboard.toPath(), gameSaveFile.toPath());
 				// there is no silk bag right now.
 				// so seed can be created here.
 				int seed = (new Random()).nextInt();
-				Files.write(gameSaveFile.toPath(), ("\n" + seed).getBytes(), StandardOpenOption.APPEND);
+				//I have no idea why this isnt writing to the file
+				FileWriter writer = new FileWriter(gameSaveFile);
+				writer.write(selectGameboard.getValue() + "\n" + seed);
 			}
 		} catch (IOException e) {
-			Alert gameExists = new Alert(Alert.AlertType.ERROR);
-			gameExists.setTitle("Error");
-			gameExists.setContentText("Game already exists with the same name. Please enter another name.");
-			gameExists.setHeaderText(null);
-			gameExists.showAndWait();
-		} catch (Exception e) {
-			Alert noGameboard = new Alert(Alert.AlertType.ERROR);
-			noGameboard.setTitle("Error");
-			noGameboard.setContentText("Please select a Gameboard.");
-			noGameboard.setHeaderText(null);
-			noGameboard.showAndWait();
+			e.printStackTrace();
 		}
 		wl.load("GameScreen");
 	}
