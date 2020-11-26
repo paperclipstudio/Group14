@@ -12,8 +12,7 @@ import java.io.IOException;
  * @author David Langmaid
  */
 public class GameSave {
-    //private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
-    private static File gameSaveFile = new File("SaveData\\GameSave\\TEST.txt");
+    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
 
     public static void draw () throws IOException {
         FileWriter writer =  new FileWriter(gameSaveFile);
