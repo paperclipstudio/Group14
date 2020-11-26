@@ -75,8 +75,10 @@ public class GameSetupController implements Initializable {
 				// so seed can be created here.
 				int seed = (new Random()).nextInt();
 				//I have no idea why this isnt writing to the file
-				FileWriter writer = new FileWriter(gameSaveFile);
+				FileWriter writer = new FileWriter(gameSaveFile, true);
 				writer.write(selectGameboard.getValue() + "\n" + seed);
+				writer.flush();
+				writer.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
