@@ -79,7 +79,7 @@ public class Gameboard {
         else if (location.getX() == width) {
             boardTiles[width - 1][location.getY()] = insertedTile;
             removedTile = boardTiles[0][location.getY()];
-            for (int j = width; j > 0; j--) {
+            for (int j = width - 2; j >= 0; j--) {
                 boardTiles[j - 1][location.getY()] = boardTiles[j][location.getY()];
             }
             if (removedTile != null) {
@@ -90,7 +90,7 @@ public class Gameboard {
         else if (location.getY() == -1) {
             boardTiles[location.getX()][0] = insertedTile;
             removedTile = boardTiles[location.getX()][height - 1];
-            for (int j = 0; j < height; j++) {
+            for (int j = height - 2; j >= 0; j--) {
                 boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
             }
             if (removedTile != null) {
@@ -101,7 +101,7 @@ public class Gameboard {
         else {
             removedTile = boardTiles[location.getX()][0];
             boardTiles[location.getX()][height - 1] = insertedTile;
-            for (int j = height; j > 0; j--) {
+            for (int j = height - 2; j >= 0; j--) {
                 boardTiles[location.getX()][j - 1] = boardTiles[location.getX()][j];
             }
             if (removedTile != null) {
