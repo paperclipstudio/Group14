@@ -67,7 +67,7 @@ public class Gameboard {
         // Inserting the new tile from the left.
         if (location.getX() == -1) {
             removedTile = boardTiles[width - 1][location.getY()];
-            for (int j = 0; j < width; j++) {
+            for (int j = width - 2; j >= 0; j--) {
                 boardTiles[j + 1][location.getY()] = boardTiles[j][location.getY()];
             }
             boardTiles[0][location.getY()] = insertedTile;
