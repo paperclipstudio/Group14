@@ -1,11 +1,11 @@
 
-n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
-O
-java:S1128"9Remove this unused import 'java.nio.charset.CoderResult'.(ÕŸ—Š
-H
-java:S1135&"2Complete the task associated to this TODO comment.(‰©Á
+U
+java:S1135É"2Complete the task associated to this TODO comment.(ÖêÅŠüÿÿÿÿ8ëã”…à.
+[	java:S106"9Replace this use of System.out or System.err by a logger.(Ö™“÷ùÿÿÿÿ8ëã”…à.
+Ÿ
+java:S1186©"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‘¾®»8ëã”…à.
 C
-java:S4274^"(Replace this assert with a proper check.(Ò³´ıÿÿÿÿ
-M
-java:S1135y"2Complete the task associated to this TODO comment.(œ­õØúÿÿÿÿ
-8	java:S131¬""Add a default case to this switch.(©Œ³Ù
+java:S4274]"(Replace this assert with a proper check.(Ò³´ıÿÿÿÿ
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çñÜ
+P
+java:S1135Œ"2Complete the task associated to this TODO comment.(«³«ï8ëã”…à.
