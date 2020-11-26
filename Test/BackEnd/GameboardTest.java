@@ -18,15 +18,15 @@ class GameboardTest {
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
 		gb.setPlayerPos(3, new Coordinate( 2,0));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(T_SHAPE));
-		gb.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT));
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(GOAL));
-		gb.playFloorTile(new Coordinate(-1,1), new FloorTile(STRAIGHT));
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(T_SHAPE));
-		gb.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(0, gb.getHeight()), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(0, gb.getHeight()), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(0, gb.getHeight()), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(1, gb.getHeight()), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(1, gb.getHeight()), new FloorTile(GOAL));
+		gb.playFloorTile(new Coordinate(1, gb.getHeight()), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(2, gb.getHeight()), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(2, gb.getHeight()), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(2, gb.getHeight()), new FloorTile(CORNER));
 	}
 
 	@Test
@@ -81,13 +81,13 @@ class GameboardTest {
 		Coordinate[] locations = gb.getSlideLocations();
 
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(1,0)).getType());
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(0,1)).getType());
 		assertEquals(GOAL,    gb.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(T_SHAPE,gb.TileAt(new Coordinate(2,1)).getType());
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(1,2)).getType());
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
 
 		for (Coordinate location: locations) {
