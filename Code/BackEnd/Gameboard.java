@@ -63,6 +63,7 @@ public class Gameboard {
         this.playerLocations[player][length] = position;
     }
 
+    //TODO Movement of the player piece.
     public Tile playFloorTile(Coordinate location, FloorTile insertedTile) {
         // Inserting the new tile from the left.
         if (location.getX() == -1) {
