@@ -10,23 +10,57 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameboardTest {
 	SilkBag sb = new SilkBag();
 	Gameboard gb = new Gameboard(3,3, sb);
+	Gameboard gb2 = new Gameboard(3,3, sb);
+	Gameboard gb3 = new Gameboard(3,3, sb);
+	Gameboard gb4 = new Gameboard(3,3, sb);
 
 	@BeforeEach
 	void setUp() {
-		gb = new Gameboard(3,3, sb);
+
 		gb.setPlayerPos(0, new Coordinate(1,1));
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
 		gb.setPlayerPos(3, new Coordinate( 2,0));
-		gb.playFloorTile(new Coordinate(0, gb.getHeight()), new FloorTile(CORNER));
-		gb.playFloorTile(new Coordinate(0, gb.getHeight()), new FloorTile(T_SHAPE));
-		gb.playFloorTile(new Coordinate(0, gb.getHeight()), new FloorTile(CORNER));
-		gb.playFloorTile(new Coordinate(1, gb.getHeight()), new FloorTile(STRAIGHT));
-		gb.playFloorTile(new Coordinate(1, gb.getHeight()), new FloorTile(GOAL));
-		gb.playFloorTile(new Coordinate(1, gb.getHeight()), new FloorTile(STRAIGHT));
-		gb.playFloorTile(new Coordinate(2, gb.getHeight()), new FloorTile(CORNER));
-		gb.playFloorTile(new Coordinate(2, gb.getHeight()), new FloorTile(T_SHAPE));
-		gb.playFloorTile(new Coordinate(2, gb.getHeight()), new FloorTile(CORNER));
+		//Inserting from the left.
+		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1, 1), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(-1, 1), new FloorTile(GOAL));
+		gb.playFloorTile(new Coordinate(-1, 1), new FloorTile(STRAIGHT));
+		gb.playFloorTile(new Coordinate(-1, 2), new FloorTile(CORNER));
+		gb.playFloorTile(new Coordinate(-1, 2), new FloorTile(T_SHAPE));
+		gb.playFloorTile(new Coordinate(-1, 2), new FloorTile(CORNER));
+		//Inserting from the right.
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 0), new FloorTile(CORNER));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 0), new FloorTile(T_SHAPE));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 0), new FloorTile(CORNER));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 1), new FloorTile(STRAIGHT));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 1), new FloorTile(GOAL));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 1), new FloorTile(STRAIGHT));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 2), new FloorTile(CORNER));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 2), new FloorTile(T_SHAPE));
+		gb2.playFloorTile(new Coordinate(gb2.getWidth(), 2), new FloorTile(CORNER));
+		//Inserting from the bottom.
+		gb3.playFloorTile(new Coordinate(0, -1), new FloorTile(CORNER));
+		gb3.playFloorTile(new Coordinate(0, -1), new FloorTile(T_SHAPE));
+		gb3.playFloorTile(new Coordinate(0, -1), new FloorTile(CORNER));
+		gb3.playFloorTile(new Coordinate(1, -1), new FloorTile(STRAIGHT));
+		gb3.playFloorTile(new Coordinate(1, -1), new FloorTile(GOAL));
+		gb3.playFloorTile(new Coordinate(1, -1), new FloorTile(STRAIGHT));
+		gb3.playFloorTile(new Coordinate(2, -1), new FloorTile(CORNER));
+		gb3.playFloorTile(new Coordinate(2, -1), new FloorTile(T_SHAPE));
+		gb3.playFloorTile(new Coordinate(2, -1), new FloorTile(CORNER));
+		//Inserting from the top.
+		gb4.playFloorTile(new Coordinate(0, gb4.getHeight()), new FloorTile(CORNER));
+		gb4.playFloorTile(new Coordinate(0, gb4.getHeight()), new FloorTile(T_SHAPE));
+		gb4.playFloorTile(new Coordinate(0, gb4.getHeight()), new FloorTile(CORNER));
+		gb4.playFloorTile(new Coordinate(1, gb4.getHeight()), new FloorTile(STRAIGHT));
+		gb4.playFloorTile(new Coordinate(1, gb4.getHeight()), new FloorTile(GOAL));
+		gb4.playFloorTile(new Coordinate(1, gb4.getHeight()), new FloorTile(STRAIGHT));
+		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
+		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(T_SHAPE));
+		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
 	}
 
 	@Test
@@ -80,20 +114,46 @@ class GameboardTest {
 	void playFloorTile() {
 		Coordinate[] locations = gb.getSlideLocations();
 
+        // Testing inserting from the left.
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,0)).getType());
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(0,1)).getType());
 		assertEquals(GOAL,    gb.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(T_SHAPE,gb.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(2,1)).getType());
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,2)).getType());
 		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
-
-		for (Coordinate location: locations) {
-			gb.playFloorTile(location, new FloorTile(CORNER));
-		}
-
+		// Testing inserting from the left.
+		assertEquals(CORNER,  gb2.TileAt(new Coordinate(0,0)).getType());
+		assertEquals(T_SHAPE, gb2.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb2.TileAt(new Coordinate(2,0)).getType());
+		assertEquals(STRAIGHT, gb2.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb2.TileAt(new Coordinate(1,1)).getType());
+		assertEquals(STRAIGHT, gb2.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb2.TileAt(new Coordinate(0,2)).getType());
+		assertEquals(T_SHAPE, gb2.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb2.TileAt(new Coordinate(2,2)).getType());
+		// Testing inserting from the left.
+		assertEquals(CORNER,  gb3.TileAt(new Coordinate(0,0)).getType());
+		assertEquals(STRAIGHT, gb3.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb3.TileAt(new Coordinate(2,0)).getType());
+		assertEquals(T_SHAPE, gb3.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb3.TileAt(new Coordinate(1,1)).getType());
+		assertEquals(T_SHAPE, gb3.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb3.TileAt(new Coordinate(0,2)).getType());
+		assertEquals(STRAIGHT, gb3.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb3.TileAt(new Coordinate(2,2)).getType());
+		// Testing inserting from the right.
+		assertEquals(CORNER,  gb4.TileAt(new Coordinate(0,0)).getType());
+		assertEquals(STRAIGHT, gb4.TileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb4.TileAt(new Coordinate(2,0)).getType());
+		assertEquals(T_SHAPE, gb4.TileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb4.TileAt(new Coordinate(1,1)).getType());
+		assertEquals(T_SHAPE,gb4.TileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb4.TileAt(new Coordinate(0,2)).getType());
+		assertEquals(STRAIGHT, gb4.TileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb4.TileAt(new Coordinate(2,2)).getType());
 	}
 
 	@Test
