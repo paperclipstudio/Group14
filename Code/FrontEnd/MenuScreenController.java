@@ -1,12 +1,15 @@
 package FrontEnd;
 
+import MessageOfTheDay.MessageOfTheDay;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -17,11 +20,19 @@ import java.util.ResourceBundle;
 public class MenuScreenController implements Initializable {
     @FXML
     private Button newGameButton;
+    @FXML
+    private Label MoTD;
 
     private WindowLoader wl;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            String message = MessageOfTheDay.shiftLetters();
+            MoTD.setText(message);
+        } catch (IOException e) {
+            MoTD.setText("Error with Motd :)");
+        }
     }
 
     /**
