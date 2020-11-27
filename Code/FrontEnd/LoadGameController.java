@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.GameLoad;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -46,6 +47,7 @@ public class LoadGameController implements Initializable {
 	 * Called by start button.
 	 */
 	public void onPlayButton() {
+		GameLoad.loader(selectGame.getValue());
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameScreen");
 	}
