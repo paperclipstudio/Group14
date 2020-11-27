@@ -26,6 +26,7 @@ public class Main extends Application {
     private static int seed;
     private static double volume = 10;
     private static MediaPlayer mediaPlayer;
+
     private static int resolution;
 
     public static int getSeed() {
@@ -80,7 +81,9 @@ public class Main extends Application {
     public static void setVolume(double volume) {
         System.out.println("Volume Changed");
         Main.volume = volume;
-        mediaPlayer.setVolume(volume);
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume);
+        }
     }
 
     public static double getVolumne() {

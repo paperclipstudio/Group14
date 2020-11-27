@@ -103,9 +103,9 @@ public class SettingsController implements Initializable {
 	 */
 	public void onBackButton() throws IOException {
 		String config = "";
-		config += Main.getVolumne() + "\n";
-		config += Main.isFullScreen() + "\n";
-		config += Main.getResolution() + "\n";
+		config += Main.getVolumne() + " ";
+		config += Main.isFullScreen() + " ";
+		config += Main.getResolution() + " ";
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 		File configFile = new File("SaveData\\config.txt");
