@@ -28,11 +28,9 @@ public class GameSave {
     }
     public void playActionTile(Coordinate location, ActionTile tile) {
         gameSaveString = gameSaveString + "\naction " + tile.getType() + " " + location.getX() + " " + location.getY() + " ";
-
     }
     public void playBacktrack (int playerNum) {
         gameSaveString = gameSaveString + "\naction BACKTRACK " + playerNum;
-
     }
     public void playerMove(Coordinate location) {
         gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();

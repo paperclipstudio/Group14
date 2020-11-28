@@ -39,7 +39,7 @@ public class Main extends Application {
         System.out.println("Hello World");
         //Parent root = null;
         // You can use the line below to test out your own screens
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\FXML\\MenuScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\FXML\\StartScreen.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setWidth(600);
         primaryStage.setHeight(400);

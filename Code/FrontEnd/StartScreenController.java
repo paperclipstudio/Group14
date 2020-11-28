@@ -1,21 +1,18 @@
 package FrontEnd;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-/**
- * Use to control the GameScreen scene.
- * @author David Langmaid
- */
-public class MenuScreenController implements Initializable {
+
+public class StartScreenController implements Initializable {
     @FXML
     private Button newGameButton;
 
@@ -25,9 +22,6 @@ public class MenuScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    /**
-     * Used to exit the application
-     */
     public void onQuitButton() {
         Platform.exit();;
     }
@@ -37,23 +31,8 @@ public class MenuScreenController implements Initializable {
         wl.load("GameSetup");
     }
 
-    public void onLoadGame() {
+    public void OnKeyPressed(KeyEvent keyEvent) {
         wl = new WindowLoader(newGameButton);
-        wl.load("LoadGame");
-    }
-
-    public void onSettings() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Settings");
-    }
-
-    public void onPlayerProfiles() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Profiles");
-    }
-
-    public void onLeaderBoard(ActionEvent actionEvent) {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Leaderboard");
+        wl.load("MenuScreen");
     }
 }
