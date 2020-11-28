@@ -4,6 +4,7 @@ package BackEnd;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 
 import static BackEnd.Phase.*;
@@ -29,12 +30,14 @@ public class GameLogic {
 	// Special flags
 	// True if player gets two moves.
 	boolean doubleMove;
+	private GameSave gameSaver;
 
 	/**
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
 	 */
-	public void newGame(String boardFile) throws FileNotFoundException {
+	public void newGame(String boardFile) throws IOException {
+		gameSaver = new GameSave(boardFile, seed);
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;
@@ -58,6 +61,7 @@ public class GameLogic {
 	 * Lets the current player draw a card
 	 */
 	public void draw() {
+		gameSaver.draw();
 		currentPlayer.drawTile();
 		if (currentPlayer.isHolding() instanceof FloorTile) {
 			// If floorTile you may play it
@@ -95,6 +99,7 @@ public class GameLogic {
 	 * @param location where the tile should be played.
 	 */
 	public void floor(FloorTile tile, Coordinate location) {
+		gameSaver.playFloorTile(location, tile);
 		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
 		players[currentPlayerNo].playFloorTile(location, tile);
 		phase = ACTION;
@@ -130,6 +135,7 @@ public class GameLogic {
 	 * @param coordinate where it would like to be played
 	 */
 	public void action(ActionTile tile, Coordinate coordinate) {
+		gameSaver.playActionTile(coordinate, tile);
 		if (tile.getType() == DOUBLE_MOVE) {
 			doubleMove = true;
 		}
@@ -157,6 +163,7 @@ public class GameLogic {
 	 * @param location where the player wishes to move.
 	 */
 	public void move(Coordinate location) {
+		gameSaver.playerMove(location);
 		gameboard.setPlayerPos(currentPlayerNo, location);
 		if (doubleMove) {
 			doubleMove = false;
@@ -235,5 +242,9 @@ public class GameLogic {
 	 */
 	public Coordinate[] getMoveLocations() {
 		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
+	}
+
+	public void saveGame() throws IOException {
+		gameSaver.saveToFile();
 	}
 }

@@ -32,7 +32,7 @@
        <VBox GridPane.columnSpan="5">
            <MenuBar>
                <Menu mnemonicParsing="false" text="File">
-                   <MenuItem mnemonicParsing="false" text="Save" />
+                   <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveButton" text="Save" />
                    <MenuItem mnemonicParsing="false" text="Load" />
                    <MenuItem mnemonicParsing="false" onAction="#onQuitButton" text="Quit" />
                </Menu>

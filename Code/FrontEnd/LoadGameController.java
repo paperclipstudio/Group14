@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javax.annotation.Generated;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,6 +55,8 @@ public class LoadGameController implements Initializable {
 			wl.load("GameScreen");
 		} catch (FileNotFoundException e) {
 			System.out.println("File not fonud please try again");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
