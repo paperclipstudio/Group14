@@ -82,7 +82,9 @@ public class SettingsController implements Initializable {
 	public void updateResolution(String newResolution) {
 		if (newResolution.equals(RESOLUTIONS[0])) {
 			WindowLoader.updateResolution(600, 400);
+			Main.setResolution(RESOLUTION.SIX_BY_FOUR);
 		} else if (newResolution.equals(RESOLUTIONS[1])) {
+			Main.setResolution(RESOLUTION.TWELVE_BY_EIGHT);
 			WindowLoader.updateResolution(1200, 800);
 		}
 	}
@@ -105,7 +107,7 @@ public class SettingsController implements Initializable {
 		String config = "";
 		config += Main.getVolumne() + " ";
 		config += Main.isFullScreen() + " ";
-		config += Main.getResolution() + " ";
+		config += Main.getResolution().ordinal();
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 		File configFile = new File("SaveData\\config.txt");
@@ -119,4 +121,37 @@ public class SettingsController implements Initializable {
 		configWriter.close();
 	}
 
+	public static int getWidth(RESOLUTION res) {
+		int width = 600;
+		switch (res) {
+			case SIX_BY_FOUR:
+				width = 600;
+				break;
+			case TWELVE_BY_EIGHT:
+				width = 1200;
+				break;
+		}
+		return width;
+	}
+
+	public static int getHeight(RESOLUTION res) {
+		int height = 600;
+		switch (res) {
+			case SIX_BY_FOUR:
+				height = 400;
+				break;
+			case TWELVE_BY_EIGHT:
+				height = 800;
+				break;
+		}
+		return height ;
+
+	}
 }
+
+enum RESOLUTION {
+	SIX_BY_FOUR,
+	TWELVE_BY_EIGHT
+};
+
+
