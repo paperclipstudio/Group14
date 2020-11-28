@@ -2,6 +2,7 @@ package FrontEnd;
 
 import MessageOfTheDay.MessageOfTheDay;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -104,5 +105,10 @@ public class MenuScreenController implements Initializable {
     public void onPlayerProfiles() {
         wl = new WindowLoader(newGameButton);
         wl.load("Profiles");
+    }
+
+    public void onLeaderBoard(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("Leaderboard");
     }
 }

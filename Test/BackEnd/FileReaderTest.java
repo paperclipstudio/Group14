@@ -11,11 +11,10 @@ class FileReaderTest {
 	@Test
 	public void basic() {
 		Pair<Gameboard, Player[]> output = null;
-		try {
-			output = FileReader.gameSetup("Gameboards\\ExampleInput.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+
+		output = FileReader.gameSetup("Gameboards\\ExampleInput.txt");
+
+
 		Gameboard gameboard = output.getKey();
 		Player[] players = output.getValue();
 		assertEquals(8, gameboard.getWidth());

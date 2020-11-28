@@ -117,8 +117,6 @@ public class SettingsController implements Initializable {
 		configWriter.write(config);
 		configWriter.flush();
 		configWriter.close();
-
-
 	}
 
 }
