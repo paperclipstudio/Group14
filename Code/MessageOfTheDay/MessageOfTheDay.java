@@ -27,7 +27,7 @@ public class MessageOfTheDay{
         return puzzle.toString();
     }
 
-    private static void shiftLetters(){
+    public static String shiftLetters(){
         String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String puzzle = urlString("http://cswebcat.swansea.ac.uk/puzzle");
         String answer = "";
@@ -36,7 +36,6 @@ public class MessageOfTheDay{
         System.out.println(puzzle);
 
         while (puzzle.length() > answer.length() ){
-            System.out.println(i+1);
             int position = letters.indexOf(puzzle.charAt(i));
             if ((i +1) % 2 == 1){
                 shift = (position - (i+1)) % letters.length();
@@ -50,13 +49,13 @@ public class MessageOfTheDay{
 
             char newCharacter = letters.charAt(shift);
             answer += newCharacter;
-            System.out.println(answer);
             i++;
         }
-        System.out.println(answer);
+        return "CS-230"+ answer + ("CS-230" + answer).length();
     }
 
     public static void main(String[] args){
-        shiftLetters();
+        System.out.println(shiftLetters());
+
     }
 }
