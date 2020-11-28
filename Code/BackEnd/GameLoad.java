@@ -10,12 +10,12 @@ public class GameLoad {
     public static void loader (String fileName) {
         Scanner in = verifyFile(fileName);
         String gameboard = in.nextLine();
-        FileReader.gameSetup(gameboard);
+        FileReader.gameSetup(gameboard); //not sure if this is correct
 
         try {
             int silkBagSeed = in.nextInt(); //TODO put the silk bag seed in the right place
         } catch (InputMismatchException e) {
-            System.out.println("ERROR : " + fileName + " is in incorrect format");
+            System.out.println("ERROR : " + fileName + " is in an incorrect format");
         }
 
         while (in.hasNextLine()) {
@@ -37,7 +37,7 @@ public class GameLoad {
             File loadFile = new File("SaveData\\GameSave\\" + fileName);
             in = new Scanner(loadFile);
         } catch (FileNotFoundException e) {
-            System.out.println("ERROR : " + fileName + " could not be found");
+            System.out.println("ERROR: " + fileName + " could not be found");
         }
         return in;
     }
