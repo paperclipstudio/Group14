@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -55,7 +56,7 @@ public class GameScreenController implements Initializable {
 	private int height;
 	public Phase phase;
 	private GameLogic gameLogic;
-	public static int tileWidth = 25;
+	public static int tileWidth = 100;
 	//private ImageView[] players;
 
 	/***
@@ -72,6 +73,13 @@ public class GameScreenController implements Initializable {
 				// Load a game
 			}
 			updateBoard();
+			tiles.setRotationAxis(new Point3D(10,0,10));
+			tiles.setRotate(50);
+			players.setRotationAxis(new Point3D(10,0,10));
+			players.setRotate(50);
+			controls.setRotationAxis(new Point3D(10,0,10));
+			controls.setRotate(50);
+
 			mainLoop();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

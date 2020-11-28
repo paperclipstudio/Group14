@@ -1,8 +1,6 @@
 package BackEnd;
-import javafx.fxml.Initializable;
 import javafx.util.Pair;
 
-import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -29,10 +27,10 @@ public class FileReader {
      * @param filename The name of the level file format text file.
      * @return pair where first element is the gameboard and second is the players.
      */
-    public static Pair<Gameboard, Player[]> gameSetup(String filename) {
+    public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkbagSeed) {
         Scanner in = verifyFile(filename);
         Scanner currentLine;
-        SilkBag silkBag = new SilkBag();
+        SilkBag silkBag = new SilkBag(silkbagSeed);
 
         //// board config
         currentLine = new Scanner (in.nextLine());
@@ -112,4 +110,8 @@ public class FileReader {
         }
         return in;
     }
+
+	public static Pair<Gameboard, Player[]> gameSetup(String gameboard) {
+        return gameSetup(gameboard, (new Random()).nextInt());
+	}
 }

@@ -2,34 +2,36 @@ package BackEnd;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GameLoad {
 
-    public static void loader (String fileName) {
+    public static GameLogic loader (String fileName) throws FileNotFoundException {
         Scanner in = verifyFile(fileName);
         String gameboard = in.nextLine();
-        FileReader.gameSetup(gameboard); //not sure if this is correct
-
-        try {
-            int silkBagSeed = in.nextInt(); //TODO put the silk bag seed in the right place
-        } catch (InputMismatchException e) {
-            System.out.println("ERROR : " + fileName + " is in an incorrect format");
-        }
+        int silkBagSeed = Integer.parseInt(in.nextLine());
+        GameLogic gameLogic = new GameLogic(silkBagSeed);
+        gameLogic.newGame(gameboard);
 
         while (in.hasNextLine()) {
-            Scanner lineReader = new Scanner(in.nextLine()).useDelimiter("\\s");
-            switch (lineReader.next()) {
+           Scanner lineReader = new Scanner(in.nextLine());
+           String choiceType = lineReader.next();
+            switch (choiceType) {
                 case "draw":
-
+                    System.out.println("Draw action");
+                    gameLogic.draw();
+                    break;
                 case "floor":
-
+                    System.out.println("Floor Action");
+                    break;
                 case "action":
-
+                    System.out.println("Action Card");
+                    break;
                 case "move":
+                    System.out.println("Move Action");
             }
         }
+        return gameLogic;
     }
     private static Scanner verifyFile (String fileName) {
         Scanner in = null;

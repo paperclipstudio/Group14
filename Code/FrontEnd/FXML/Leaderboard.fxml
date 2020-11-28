@@ -18,7 +18,7 @@
                   <Font size="1.0" />
                </font>
             </Button>
-                <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
+                <HBox fx:id="allButtons" alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
                <children>
                         <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leaderboards" textAlignment="CENTER" wrappingWidth="417.33154296875">
                             <font>

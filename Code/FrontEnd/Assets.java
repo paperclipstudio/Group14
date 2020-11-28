@@ -3,6 +3,7 @@ package FrontEnd;
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.Tile;
+import BackEnd.TileType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.effect.Bloom;
@@ -73,6 +74,9 @@ public class Assets {
 			case LEFT:
 				tileView.setRotate(270);
 				break;
+		}
+		if (tile.getType() == TileType.GOAL) {
+			tileView.setRotate(0);
 		}
 		tileView.setId("tile " + x + " " + y);
 		tileView.setTranslateZ(FLOOR_HEIGHT);

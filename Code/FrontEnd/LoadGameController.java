@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 
 import javax.annotation.Generated;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,9 +48,13 @@ public class LoadGameController implements Initializable {
 	 * Called by start button.
 	 */
 	public void onPlayButton() {
-		GameLoad.loader(selectGame.getValue());
-		WindowLoader wl = new WindowLoader(backButton);
-		wl.load("GameScreen");
+		try {
+			GameLoad.loader(selectGame.getValue());
+			WindowLoader wl = new WindowLoader(backButton);
+			wl.load("GameScreen");
+		} catch (FileNotFoundException e) {
+			System.out.println("File not fonud please try again");
+		}
 	}
 
 

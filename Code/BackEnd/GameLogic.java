@@ -4,6 +4,7 @@ package BackEnd;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
@@ -15,6 +16,7 @@ import static BackEnd.TileType.DOUBLE_MOVE;
  * @author Christian Sanger
  */
 public class GameLogic {
+	private final int seed;
 	// Games parts
 	Gameboard gameboard;
 	Player[] players;
@@ -36,7 +38,7 @@ public class GameLogic {
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;
-		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile, seed);
 		gameboard = gameItems.getKey();
 		players = gameItems.getValue();
 		numberOfPlayers = players.length;
@@ -169,7 +171,12 @@ public class GameLogic {
 	 * Creates an empty game logic class, must run startNew or load before you
 	 * can play.
 	 */
+	public GameLogic(int seed) {
+		this.seed = seed;
+	}
+
 	public GameLogic() {
+		this.seed = (new Random()).nextInt();
 	}
 
 	/**
