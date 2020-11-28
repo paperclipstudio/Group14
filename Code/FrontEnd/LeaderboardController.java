@@ -11,11 +11,8 @@ import javafx.scene.control.ButtonType;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-/**
- * Use to control the GameScreen scene.
- * @author David Langmaid
- */
-public class MenuScreenController implements Initializable {
+
+public class LeaderboardController implements Initializable {
     @FXML
     private Button newGameButton;
 
@@ -25,9 +22,6 @@ public class MenuScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    /**
-     * Used to exit the application
-     */
     public void onQuitButton() {
         Platform.exit();;
     }
@@ -37,23 +31,23 @@ public class MenuScreenController implements Initializable {
         wl.load("GameSetup");
     }
 
-    public void onLoadGame() {
+    public void onBoard1(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
-        wl.load("LoadGame");
+        wl.load("Leaderboards/Board1");
     }
 
-    public void onSettings() {
+    public void onBoard2(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
-        wl.load("Settings");
+        wl.load("Leaderboards/Board2");
     }
 
-    public void onPlayerProfiles() {
+    public void onBoard3(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
-        wl.load("Profiles");
+        wl.load("Leaderboards/Board3");
     }
 
-    public void onLeaderBoard(ActionEvent actionEvent) {
+    public void onBack(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
-        wl.load("Leaderboard");
+        wl.load("MenuScreen");
     }
 }
