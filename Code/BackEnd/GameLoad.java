@@ -1,7 +1,5 @@
 package BackEnd;
 
-import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
@@ -24,8 +22,11 @@ public class GameLoad {
             Scanner lineReader = new Scanner(in.nextLine()).useDelimiter("\\s");
             switch (lineReader.next()) {
                 case "draw":
+
                 case "floor":
+
                 case "action":
+
                 case "move":
             }
         }
