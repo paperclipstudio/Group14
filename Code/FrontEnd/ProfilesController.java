@@ -75,7 +75,7 @@ public class ProfilesController {
 			playerList.getItems().addAll(newName + ".txt");
 
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
-			newUser.write("Game Played: 0  Game Wins: 0");
+			newUser.write("Game Wins: 0  Game Loss: 0");
 			newUser.close();
 
 		}
