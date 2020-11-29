@@ -27,9 +27,7 @@ public class Gameboard {
         this.silkbag = silkBag;
         goalCoors = new ArrayList<>();
         slideLocations = new Coordinate[10];
-        //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
-        //TODO third null pointer exception
         playerLocations = new Coordinate[4][1000];
     }
 
@@ -71,6 +69,21 @@ public class Gameboard {
             for (int j = width - 2; j >= 0; j--) {
                 boardTiles[j + 1][location.getY()] = boardTiles[j][location.getY()];
             }
+            for (int j = 0; j < width - 1; j++){
+                if (checkTileForPlayerInt(j, location.getY()) == 0){
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(3, newPlayerPos);
+                }
+            }
             boardTiles[0][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -81,6 +94,21 @@ public class Gameboard {
             removedTile = boardTiles[0][location.getY()];
             for (int j = 0; j < width - 1; j++) {
                 boardTiles[j][location.getY()] = boardTiles[j + 1][location.getY()];
+            }
+            for (int j = width - 1; j > 0; j--){
+                if (checkTileForPlayerInt(j, location.getY()) == 0){
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(3, newPlayerPos);
+                }
             }
             boardTiles[width - 1][location.getY()] = insertedTile;
             if (removedTile != null) {
@@ -93,6 +121,21 @@ public class Gameboard {
             for (int j = height - 2; j >= 0; j--) {
                 boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
             }
+            for (int j = 0; j < height - 1; j++){
+                if (checkTileForPlayerInt(location.getX(), j) == 0){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(3, newPlayerPos);
+                }
+            }
             boardTiles[location.getX()][0] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -103,6 +146,21 @@ public class Gameboard {
             removedTile = boardTiles[location.getX()][0];
             for (int j = 0; j < width - 1; j++) {
                 boardTiles[location.getX()][j] = boardTiles[location.getX()][j+1];
+            }
+            for (int j = height - 1; j > 0; j--){
+                if (checkTileForPlayerInt(location.getX(), j) == 0){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(3, newPlayerPos);
+                }
             }
             boardTiles[location.getX()][height - 1] = insertedTile;
             if (removedTile != null) {
@@ -270,6 +328,18 @@ public class Gameboard {
         return false;
     }
 
+    private int checkTileForPlayerInt (int x, int y){
+        //This is 4, as the 4 players are listed as 0,1,2, and 3, if it returns 4, then there is no player on this tile.
+        int playerNumber = 4;
+        for (int i = 0; i < playerLocations.length; i++){
+            Coordinate playerPos = playerLocations[i][playerLocations[i].length-1];
+            if (playerPos != null && playerPos.getX() == x && playerPos.getY() == y){
+               playerNumber = i;
+               return playerNumber;
+            }
+        }
+        return playerNumber;
+    }
 
     public Tile getPlayerTile(int player) {
         Coordinate location = getPlayerPos(player);
