@@ -36,7 +36,7 @@ public class GameLogic {
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
 	 */
-	public void newGame(String boardFile) throws IOException {
+	public void newGame(String boardFile) throws Exception {
 		gameSaver = new GameSave(boardFile, seed);
 		doubleMove = false;
 		currentPlayerNo = 0;

@@ -60,6 +60,8 @@ public class LoadGameController implements Initializable {
 			System.out.println("File not fonud please try again");
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

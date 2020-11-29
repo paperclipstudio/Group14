@@ -43,7 +43,11 @@ class SilkBagTest {
 		silkBag.insertTile(Tile.createTile(FROZEN));
 		silkBag.insertTile(Tile.createTile(CORNER));
 		silkBag.insertTile(Tile.createTile(BACKTRACK));
-		assertEquals(silkBag.getFloorTile().getType(), CORNER);
+		try {
+			assertEquals(silkBag.getFloorTile().getType(), CORNER);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 }

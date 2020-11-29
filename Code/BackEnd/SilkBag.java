@@ -61,7 +61,7 @@ public class SilkBag {
      * Gets a floor tile from bag for setup
      * @return a Tile
      */
-    public FloorTile getFloorTile () {
+    public FloorTile getFloorTile () throws Exception {
         int index = randomGenerator.nextInt(allTiles.size());
         int startIndex = index;
         Tile tile = allTiles.get(index);
@@ -70,11 +70,10 @@ public class SilkBag {
             index = (index + 1) % allTiles.size();
             if (index == startIndex) {
                 // We have looped and found no floor tile
-                System.out.println("No FloorTile in silkBag");
-                tile = new FloorTile(TileType.GOAL);
-                break;
+                throw new Exception("Empty Silk bag");
             }
         }
+        System.out.println("Drawing " + tile.getType());
         return (FloorTile) tile;
     }
 
@@ -83,6 +82,7 @@ public class SilkBag {
      * @param tile
      */
     public void insertTile (Tile tile) {
+        System.out.println("inserting " + tile.getType());
         allTiles.add(tile);
     }
 

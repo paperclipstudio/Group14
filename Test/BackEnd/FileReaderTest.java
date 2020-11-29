@@ -16,7 +16,9 @@ class FileReaderTest {
 		try {
 			output = FileReader.gameSetup("Gameboards\\ExampleInput.txt");
 		} catch (FileNotFoundException e) {
-			Assert.assertTrue(false);
+			fail();
+		} catch (Exception e) {
+			fail();
 		}
 
 

@@ -36,7 +36,7 @@ public class SettingsController implements Initializable {
 	private Slider sound;
 	@FXML
 	private ChoiceBox<String> resolution;
-	final static private String[] RESOLUTIONS = new String[]{"600x400", "1200x800"};
+	final static private String[] RESOLUTIONS = new String[]{"600x400", "900x600", "1200x800"};
 	private Stage ps;
 
 	@Override
@@ -84,6 +84,9 @@ public class SettingsController implements Initializable {
 			WindowLoader.updateResolution(600, 400);
 			Main.setResolution(RESOLUTION.SIX_BY_FOUR);
 		} else if (newResolution.equals(RESOLUTIONS[1])) {
+			Main.setResolution(RESOLUTION.NINE_BY_SIX);
+			WindowLoader.updateResolution(900, 600);
+		} else if (newResolution.equals(RESOLUTIONS[2])) {
 			Main.setResolution(RESOLUTION.TWELVE_BY_EIGHT);
 			WindowLoader.updateResolution(1200, 800);
 		}
@@ -127,6 +130,9 @@ public class SettingsController implements Initializable {
 			case SIX_BY_FOUR:
 				width = 600;
 				break;
+			case NINE_BY_SIX:
+				width = 900;
+				break;
 			case TWELVE_BY_EIGHT:
 				width = 1200;
 				break;
@@ -140,9 +146,13 @@ public class SettingsController implements Initializable {
 			case SIX_BY_FOUR:
 				height = 400;
 				break;
+			case NINE_BY_SIX:
+				height = 600;
+				break;
 			case TWELVE_BY_EIGHT:
 				height = 800;
 				break;
+
 		}
 		return height ;
 
@@ -154,5 +164,6 @@ enum RESOLUTION {
 	NINE_BY_SIX,
 	TWELVE_BY_EIGHT
 };
+
 
 

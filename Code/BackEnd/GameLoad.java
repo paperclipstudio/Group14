@@ -17,7 +17,7 @@ public class GameLoad {
 	 * @return
 	 * @throws IOException
 	 */
-	public static GameLogic loader(String fileName) throws IOException {
+	public static GameLogic loader(String fileName) throws Exception {
 		File loadFile = new File("SaveData\\GameSave\\" + fileName);
 		System.out.println("Loading:" + fileName);
 		Scanner in = new Scanner(loadFile);

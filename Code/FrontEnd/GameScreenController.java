@@ -90,6 +90,8 @@ public class GameScreenController implements Initializable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -374,7 +376,7 @@ public class GameScreenController implements Initializable {
 	 *
 	 * @param board path to board file
 	 */
-	public void startNewGame(String board) throws IOException {
+	public void startNewGame(String board) throws Exception {
 		gameLogic = new GameLogic();
 		gameLogic.newGame(board);
 		width = gameLogic.getWidth();
@@ -382,7 +384,7 @@ public class GameScreenController implements Initializable {
 		mainLoop();
 	}
 
-	private void loadGame(String loadFile) throws IOException {
+	private void loadGame(String loadFile) throws Exception {
 		gameLogic = GameLoad.loader(Main.getLoadFile());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
