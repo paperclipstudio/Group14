@@ -52,9 +52,9 @@ public class MessageOfTheDay{
             answer += newCharacter;
             i++;
         }
+
         return "CS-230"+ answer + ("CS-230" + answer).length();
 
-        String pushAnswer = urlString("http://cswebcat.swansea.ac.uk/puzzle");
     }
 /*
 <<<<<<< HEAD
