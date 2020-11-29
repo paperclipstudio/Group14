@@ -28,7 +28,7 @@ public class FileReader {
      * @return pair where first element is the gameboard and second is the players.
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkBagSeed) throws FileNotFoundException {
-        File input = new File(filename);
+        File input = new File("Gameboards\\" + filename);
         if (!input.exists()) {
             throw new FileNotFoundException(filename);
         }
@@ -67,6 +67,7 @@ public class FileReader {
         // for each tile type
         for (int tileType=0; tileType < NUM_OF_TILE_TYPES; tileType++) {
             int numberOfThisTile = tileTypeCount[tileType];
+            System.out.println(TileType.values()[tileType] + " :" + numberOfThisTile);
             // for each tile that need to be added to silkbag
             for (int i = 0; i < numberOfThisTile; i++) {
                 Tile newTile = Tile.createTile(TileType.values()[tileType]);

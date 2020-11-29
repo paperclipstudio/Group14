@@ -66,12 +66,13 @@ public class SilkBag {
         int startIndex = index;
         Tile tile = allTiles.get(index);
         while(!Tile.isFloorTile(tile)) {
-            //System.out.println(index);
             tile = allTiles.get(index);
             index = (index + 1) % allTiles.size();
             if (index == startIndex) {
                 // We have looped and found no floor tile
                 System.out.println("No FloorTile in silkBag");
+                tile = new FloorTile(TileType.GOAL);
+                break;
             }
         }
         return (FloorTile) tile;

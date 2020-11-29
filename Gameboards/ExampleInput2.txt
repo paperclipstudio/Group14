@@ -8,11 +8,11 @@ Goal 1 1 0
 0 Corner
 0 Straight
 4 T-Shape
-0 Goal
 0 Fire
 0 Ice
 0 Backtrack
 0 DoubleMove
+0 Goal
 0 0 Player1
 0 2 Player2
 2 2 Player3

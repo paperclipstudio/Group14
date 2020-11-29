@@ -25,11 +25,11 @@ public abstract class Tile {
     }
 
     static boolean isFloorTile(Tile tile) {
-        return isFloorTile(tile.getType());
+       return tile instanceof FloorTile;
     }
 
     static boolean isFloorTile(TileType type) {
-        if (type == CORNER || type == T_SHAPE || type == GOAL || type == GOAL) {
+        if (type == CORNER || type == T_SHAPE || type == STRAIGHT || type == GOAL) {
             return true;
         } else {
             return false;

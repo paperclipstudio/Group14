@@ -40,7 +40,6 @@ public class Assets {
 	 * @return loaded image.
 	 */
 	private static Image get(String name) {
-		System.out.println("Finding " + name + EXT);
 		Image image = cache.get(name.toLowerCase());
 		if (image == null) {
 			image = new Image(name + EXT);
