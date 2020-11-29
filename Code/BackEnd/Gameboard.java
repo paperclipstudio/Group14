@@ -369,13 +369,13 @@ public class Gameboard {
         FloorTile tileTwoTurns;
         FloorTile tileOneTurn;
         //gets the players current position.
-        int length = 0;
+        int length = -1;
         for (Coordinate coor : playerLocations[player]) {
             if (coor != null) {
                 length++;
             }
         }
-        if (length > 2){
+        if (length >= 2){
             //gets the tile, one and two turns ago that the player was on.
             posTwoTurnsAgo = playerLocations[player][length - 2];
             tileTwoTurns = boardTiles[posTwoTurnsAgo.getX()][posTwoTurnsAgo.getY()];
@@ -390,7 +390,7 @@ public class Gameboard {
             }
         }
 
-        if (length == 2) {
+        else if (length == 1) {
             posOneTurnAgo = playerLocations[player][length - 1];
             tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
             //checks to see if the tile one turn ago is on fire, if not sets that as the players position
