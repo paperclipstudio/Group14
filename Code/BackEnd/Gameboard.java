@@ -135,25 +135,25 @@ public class Gameboard {
             if (direction == Rotation.UP && location.getY() != height - 1) {
                 tileInDirection = boardTiles[location.getX()][location.getY() + 1];
                 flipDirection = Rotation.DOWN;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX(), location.getY() + 1)) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() + 1));
                 }
             } else if (direction == Rotation.DOWN && location.getY() != 0) {
                 tileInDirection = boardTiles[location.getX()][location.getY() - 1];
                 flipDirection = Rotation.UP;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX(),location.getY() - 1)) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() - 1));
                 }
             } else if (direction == Rotation.LEFT && location.getX() != 0) {
                 tileInDirection = boardTiles[location.getX() - 1][location.getY()];
                 flipDirection = Rotation.RIGHT;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX() - 1, location.getY())) {
                     moveLocations.add(new Coordinate(location.getX() - 1, location.getY()));
                 }
             } else if (direction == Rotation.RIGHT && location.getX() != width - 1) {
                 tileInDirection = boardTiles[location.getX() + 1][location.getY()];
                 flipDirection = Rotation.LEFT;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX() + 1, location.getY())) {
                     moveLocations.add(new Coordinate(location.getX() + 1, location.getY()));
                 }
             }
@@ -260,6 +260,16 @@ public class Gameboard {
         return false;
     }
 
+    private boolean checkTileForPlayer (int x, int y){
+        for (int i = 0; i < playerLocations.length; i++){
+            Coordinate playerPos = playerLocations[i][playerLocations[i].length-1];
+            if (playerPos != null && playerPos.getX() == x && playerPos.getY() == y){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public Tile getPlayerTile(int player) {
         Coordinate location = getPlayerPos(player);
@@ -272,14 +282,30 @@ public class Gameboard {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming 0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
                     boardTiles[i][j].setFire(); //mid
-                    boardTiles[i + 1][j].setFire(); //right
-                    boardTiles[i - 1][j].setFire(); //left
-                    boardTiles[i][j + 1].setFire(); //up
-                    boardTiles[i + 1][j + 1].setFire(); //upper right
-                    boardTiles[i - 1][j + 1].setFire(); //upper left
-                    boardTiles[i][j - 1].setFire(); //down
-                    boardTiles[i + 1][j - 1].setFire(); //down right
-                    boardTiles[i - 1][j - 1].setFire(); //down left
+                    if (i != width) {
+                        boardTiles[i + 1][j].setFire(); //right
+                    }
+                    if (i != 0) {
+                        boardTiles[i - 1][j].setFire(); //left
+                    }
+                    if (j != height) {
+                        boardTiles[i][j + 1].setFire(); //up
+                    }
+                    if (i != width && j != height) {
+                        boardTiles[i + 1][j + 1].setFire(); //upper right
+                    }
+                    if (i != 0 && j != height){
+                        boardTiles[i - 1][j + 1].setFire(); //upper left
+                    }
+                    if (j != 0) {
+                        boardTiles[i][j - 1].setFire(); //down
+                    }
+                    if (i != width && j != 0) {
+                        boardTiles[i + 1][j - 1].setFire(); //down right
+                    }
+                    if (i != 0 && j != 0 ) {
+                        boardTiles[i - 1][j - 1].setFire(); //down left
+                    }
                 }
             }
         }
@@ -291,14 +317,30 @@ public class Gameboard {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
                     boardTiles[i][j].setFrozen(); //mid
-                    boardTiles[i + 1][j].setFrozen(); //right
-                    boardTiles[i - 1][j].setFrozen(); //left
-                    boardTiles[i][j + 1].setFrozen(); //up
-                    boardTiles[i + 1][j + 1].setFrozen(); //upper right
-                    boardTiles[i - 1][j + 1].setFrozen(); //upper left
-                    boardTiles[i][j - 1].setFrozen(); //down
-                    boardTiles[i + 1][j - 1].setFrozen(); //down right
-                    boardTiles[i - 1][j - 1].setFrozen(); //down left
+                    if (i != width) {
+                        boardTiles[i + 1][j].setFrozen(); //right
+                    }
+                    if (i != 0) {
+                        boardTiles[i - 1][j].setFrozen(); //left
+                    }
+                    if (j != height) {
+                        boardTiles[i][j + 1].setFrozen(); //up
+                    }
+                    if (i != width && j != height) {
+                        boardTiles[i + 1][j + 1].setFrozen(); //upper right
+                    }
+                    if (i != 0 && j != height){
+                        boardTiles[i - 1][j + 1].setFrozen(); //upper left
+                    }
+                    if (j != 0) {
+                        boardTiles[i][j - 1].setFrozen(); //down
+                    }
+                    if (i != width && j != 0) {
+                        boardTiles[i + 1][j - 1].setFrozen(); //down right
+                    }
+                    if (i != 0 && j != 0 ) {
+                        boardTiles[i - 1][j - 1].setFrozen(); //down left
+                    }
                 }
             }
         }
@@ -340,10 +382,10 @@ public class Gameboard {
             posOneTurnAgo = playerLocations[player][length - 1];
             tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
             //checks to see if the tile two turns ago is on fire, if not, sets that as the players position
-            if (!tileTwoTurns.onFire() ) {
+            if (!tileTwoTurns.onFire() && !checkTileForPlayer(posTwoTurnsAgo.getX(), posTwoTurnsAgo.getY())) {
                 setPlayerPos(player, posTwoTurnsAgo);
             }
-            else if (!tileOneTurn.onFire()){
+            else if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo.getX(), posOneTurnAgo.getY())){
                 setPlayerPos(player, posOneTurnAgo);
             }
         }
@@ -352,7 +394,7 @@ public class Gameboard {
             posOneTurnAgo = playerLocations[player][length - 1];
             tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
             //checks to see if the tile one turn ago is on fire, if not sets that as the players position
-            if (!tileOneTurn.onFire()) {
+            if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo.getX(), posOneTurnAgo.getY())) {
                 setPlayerPos(player, posOneTurnAgo);
             }
         }

@@ -54,9 +54,18 @@ public class MessageOfTheDay{
         }
         return "CS-230"+ answer + ("CS-230" + answer).length();
     }
+/*
+<<<<<<< HEAD
+    public static void main(String[] args) throws StringIndexOutOfBoundsException {
+        System.out.println(shiftUrlString());
 
+
+=======
     public static void main(String[] args){
         System.out.println(shiftLetters());
+>>>>>>> 8ec3e1af330237d1f9d9b11b66f7571c57f2c165
 
     }
+
+ */
 }

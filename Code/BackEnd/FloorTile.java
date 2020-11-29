@@ -51,4 +51,11 @@ public class FloorTile extends Tile {
 		this.rotation= rotation;
 	}
 
+	//temp
+	public static void setFireTic (){
+		ticFire = 3;
+	}
+
+
+
 }
