@@ -40,21 +40,14 @@ public class FloorTile extends Tile {
 		return isFrozen;
 	}
 
-	public void setFire() {
-		this.isOnFire = true;
-	}
-
-	public void setFrozen() {
-		this.isFrozen = true;
-	}
-
 	public void setRotation(Rotation rotation) {
 		this.rotation= rotation;
 	}
 
 	//temp
 	public void setFireTic (){
-		ticFire = 3;
+		this.isOnFire = true;
+		ticFire = 3*2;
 	}
 
 	public void ticFire (){
@@ -65,6 +58,7 @@ public class FloorTile extends Tile {
 	}
 
 	public void setFrozenTic (){
+		isFrozen = true;
 		ticFrozen = 3;
 	}
 

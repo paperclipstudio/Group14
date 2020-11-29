@@ -351,30 +351,30 @@ public class Gameboard {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming 0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
-                    boardTiles[i][j].setFire(); //mid
+                    boardTiles[i][j].setFireTic(); //mid
                     if (i != width) {
-                        boardTiles[i + 1][j].setFire(); //right
+                        boardTiles[i + 1][j].setFireTic(); //right
                     }
                     if (i != 0) {
-                        boardTiles[i - 1][j].setFire(); //left
+                        boardTiles[i - 1][j].setFireTic(); //left
                     }
                     if (j != height) {
-                        boardTiles[i][j + 1].setFire(); //up
+                        boardTiles[i][j + 1].setFireTic(); //up
                     }
                     if (i != width && j != height) {
-                        boardTiles[i + 1][j + 1].setFire(); //upper right
+                        boardTiles[i + 1][j + 1].setFireTic(); //upper right
                     }
                     if (i != 0 && j != height){
-                        boardTiles[i - 1][j + 1].setFire(); //upper left
+                        boardTiles[i - 1][j + 1].setFireTic(); //upper left
                     }
                     if (j != 0) {
-                        boardTiles[i][j - 1].setFire(); //down
+                        boardTiles[i][j - 1].setFireTic(); //down
                     }
                     if (i != width && j != 0) {
-                        boardTiles[i + 1][j - 1].setFire(); //down right
+                        boardTiles[i + 1][j - 1].setFireTic(); //down right
                     }
                     if (i != 0 && j != 0 ) {
-                        boardTiles[i - 1][j - 1].setFire(); //down left
+                        boardTiles[i - 1][j - 1].setFireTic(); //down left
                     }
                 }
             }
@@ -386,30 +386,30 @@ public class Gameboard {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
-                    boardTiles[i][j].setFrozen(); //mid
+                    boardTiles[i][j].setFrozenTic(); //mid
                     if (i != width) {
-                        boardTiles[i + 1][j].setFrozen(); //right
+                        boardTiles[i + 1][j].setFrozenTic(); //right
                     }
                     if (i != 0) {
-                        boardTiles[i - 1][j].setFrozen(); //left
+                        boardTiles[i - 1][j].setFrozenTic(); //left
                     }
                     if (j != height) {
-                        boardTiles[i][j + 1].setFrozen(); //up
+                        boardTiles[i][j + 1].setFrozenTic(); //up
                     }
                     if (i != width && j != height) {
-                        boardTiles[i + 1][j + 1].setFrozen(); //upper right
+                        boardTiles[i + 1][j + 1].setFrozenTic(); //upper right
                     }
                     if (i != 0 && j != height){
-                        boardTiles[i - 1][j + 1].setFrozen(); //upper left
+                        boardTiles[i - 1][j + 1].setFrozenTic(); //upper left
                     }
                     if (j != 0) {
-                        boardTiles[i][j - 1].setFrozen(); //down
+                        boardTiles[i][j - 1].setFrozenTic(); //down
                     }
                     if (i != width && j != 0) {
-                        boardTiles[i + 1][j - 1].setFrozen(); //down right
+                        boardTiles[i + 1][j - 1].setFrozenTic(); //down right
                     }
                     if (i != 0 && j != 0 ) {
-                        boardTiles[i - 1][j - 1].setFrozen(); //down left
+                        boardTiles[i - 1][j - 1].setFrozenTic(); //down left
                     }
                 }
             }
