@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.Profile;
 import  javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.Set;
 
 /***
  * FrontEnd.Main class for this app, starts the window and opens up the 'Start' window
@@ -22,9 +22,10 @@ import java.util.Set;
  */
 
 public class Main extends Application {
+    public static Profile[] profiles;
     private static boolean fullScreen;
 	private static String boardFile;
-    private static int numberOfPlayer;
+    private static int numberOfPlayers;
     private static String loadFile;
     private static boolean loadedGameFile = false;
     private static int seed;
@@ -60,6 +61,7 @@ public class Main extends Application {
     public static void setResolution(RESOLUTION res) {
         Main.resolution = res;
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -151,12 +153,12 @@ public class Main extends Application {
         Main.boardFile = boardFile;
     }
 
-    public static int getNumberOfPlayer() {
-        return numberOfPlayer;
+    public static int getNumberOfPlayers() {
+        return numberOfPlayers;
     }
 
-    public static void setNumberOfPlayer(int numberOfPlayer) {
-        Main.numberOfPlayer = numberOfPlayer;
+    public static void setNumberOfPlayers(int numberOfPlayers) {
+        Main.numberOfPlayers = numberOfPlayers;
     }
 
     public static String getLoadFile() {

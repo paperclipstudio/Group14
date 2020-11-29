@@ -13,11 +13,17 @@ import static BackEnd.TileType.FROZEN;
 public class GameLoad {
 
 	public static GameLogic loader(String fileName) throws IOException {
-		Scanner in = verifyFile(fileName);
-		String gameboard = in.nextLine();
+		File loadFile = new File("SaveData\\GameSave\\" + fileName);
+		System.out.println("Loading:" + fileName);
+		Scanner in = new Scanner(loadFile);
+		if (!in.hasNextLine()) {
+			throw new IOException("Invalid file format, no game board file");
+		}
+		String gameBoard = in.nextLine();
+		System.out.println("Loading board " + gameBoard);
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
-		gameLogic.newGame(gameboard);
+		gameLogic.newGame("Gameboards\\" + gameBoard);
 
 		while (in.hasNextLine()) {
 			int x;
@@ -59,16 +65,4 @@ public class GameLoad {
 		}
 		return gameLogic;
 	}
-
-	private static Scanner verifyFile(String fileName) {
-		Scanner in = null;
-		try {
-			File loadFile = new File("SaveData\\GameSave\\" + fileName);
-			in = new Scanner(loadFile);
-		} catch (FileNotFoundException e) {
-			System.out.println("ERROR: " + fileName + " could not be found");
-		}
-		return in;
-	}
-
 }

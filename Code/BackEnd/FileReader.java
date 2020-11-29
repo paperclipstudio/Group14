@@ -27,10 +27,14 @@ public class FileReader {
      * @param filename The name of the level file format text file.
      * @return pair where first element is the gameboard and second is the players.
      */
-    public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkbagSeed) {
-        Scanner in = verifyFile(filename);
+    public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkBagSeed) throws FileNotFoundException {
+        File input = new File(filename);
+        if (!input.exists()) {
+            throw new FileNotFoundException(filename);
+        }
+        Scanner in = new Scanner(input);
         Scanner currentLine;
-        SilkBag silkBag = new SilkBag(silkbagSeed);
+        SilkBag silkBag = new SilkBag(silkBagSeed);
 
         //// board config
         currentLine = new Scanner (in.nextLine());
@@ -75,7 +79,6 @@ public class FileReader {
         int count = 0;
         while (gameboard.containsNull()) {
             count++;
-            System.out.println("Adding tile -> " + count);
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
             Coordinate toSlide = slideLocations[r.nextInt(slideLocations.length-1)];
@@ -97,21 +100,12 @@ public class FileReader {
 
     /**
      * This method takes in the given level format file, and checks to see that the file exists.
-     * @param filename The name of the level file format text file.
+     * @param gameBoard The name of the level file format text file.
      * @return in The scanner that iterates through the file.
      */
-    public static Scanner verifyFile(String filename) {
-        Scanner in = null;
-        try {
-            File input = new File(filename);
-            in = new Scanner(input);
-        } catch (FileNotFoundException e) {
-            System.out.println("ERROR : " + filename + " could not be found");
-        }
-        return in;
-    }
 
-	public static Pair<Gameboard, Player[]> gameSetup(String gameboard) {
-        return gameSetup(gameboard, (new Random()).nextInt());
+
+	public static Pair<Gameboard, Player[]> gameSetup(String gameBoard) throws FileNotFoundException {
+        return gameSetup(gameBoard, (new Random()).nextInt());
 	}
 }

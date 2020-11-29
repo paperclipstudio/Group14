@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.Optional;
@@ -35,4 +36,10 @@ public class StartScreenController implements Initializable {
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen");
     }
+
+    public void onMousePress(MouseEvent m) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("MenuScreen");
+    }
+
 }

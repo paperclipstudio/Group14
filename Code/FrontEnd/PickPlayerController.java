@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import BackEnd.Profile;
+
 public class PickPlayerController {
 
     @FXML
@@ -39,11 +41,20 @@ public class PickPlayerController {
     }
 
     public void returnPlayers() throws IOException {
-
         ObservableList<String> listOfPlayers = playerList.getSelectionModel().getSelectedItems();
+        // Create
+        // profiles[0] == profile of player 1
+        // profiles[1] == profile of player 2
+        playerList.setVisible(true);
+        Profile[] profiles = new Profile[Main.getNumberOfPlayers()];
+        Main.profiles = profiles;
         Map<String, String> playerProfileLoaded = new HashMap<>();
-
-        for (Object players : listOfPlayers){
+        if (listOfPlayers.size() < Main.getNumberOfPlayers()) {
+            System.out.println("Too few player selected, Pelase try again");
+        } else if (listOfPlayers.size() > Main.getNumberOfPlayers()) {
+            System.out.println("Too many players selected");
+        } else {
+        for (Object players : listOfPlayers) {
 
             Alert alert9 = new Alert(Alert.AlertType.INFORMATION);
             alert9.setTitle("New Player");
@@ -52,11 +63,11 @@ public class PickPlayerController {
             alert9.showAndWait();
 
             String line;
-            BufferedReader reader = new BufferedReader(new FileReader ("SaveData\\UserData\\" + players));
+            BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + players));
 
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":", 2);
-                if(parts.length >= 2){
+                if (parts.length >= 2) {
                     String getWins = parts[0];
                     String getLosses = parts[1];
                     playerProfileLoaded.put(getWins, getLosses);
@@ -69,7 +80,7 @@ public class PickPlayerController {
                     alert10.showAndWait();
 
 
-                }else {
+                } else {
                     Alert alert10 = new Alert(Alert.AlertType.INFORMATION);
                     alert10.setTitle("New Player");
                     alert10.setContentText("This profile has wrong pattern");
@@ -78,5 +89,6 @@ public class PickPlayerController {
                 }
             }
             reader.close();
+        }
     }
 }}

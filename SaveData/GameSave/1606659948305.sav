@@ -1,0 +1,14 @@
+ExampleInput.txt
+-1711971668
+draw
+floor T_SHAPE UP -1 3
+action DOUBLE_MOVE
+move 1 1
+move 1 1
+draw
+floor CORNER UP 8 1
+action DOUBLE_MOVE
+move 6 6
+move 6 6
+draw
+floor CORNER UP 8 1
