@@ -4,17 +4,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -41,6 +41,7 @@ public class SettingsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		fullscreen.setSelected(WindowLoader.getIsFullScreen());
 		for (String setting : RESOLUTIONS) {
 			resolution.getItems().add(setting);
@@ -81,20 +82,20 @@ public class SettingsController implements Initializable {
 	public void updateResolution(String newResolution) {
 		if (newResolution.equals(RESOLUTIONS[0])) {
 			WindowLoader.updateResolution(600, 400);
+			Main.setResolution(RESOLUTION.SIX_BY_FOUR);
 		} else if (newResolution.equals(RESOLUTIONS[1])) {
+			Main.setResolution(RESOLUTION.TWELVE_BY_EIGHT);
 			WindowLoader.updateResolution(1200, 800);
 		}
 	}
 
 	public void onSoundChange() {
-		System.out.println(sound.getValue());
 		Main.setVolume(sound.getValue() / 200.0);
 
 	}
 	public void onFullScreenChange() {
-		System.out.println("Boop");
-		boolean isFullscreen = fullscreen.isSelected();
-		WindowLoader.setFullScreen(isFullscreen);
+		Main.setFullScreen(fullscreen.isSelected());
+		WindowLoader.setFullScreen(Main.isFullScreen());
 	}
 
 
@@ -102,9 +103,55 @@ public class SettingsController implements Initializable {
 	 * Returns to menu screen
 	 * called by back button
 	 */
-	public void onBackButton() {
+	public void onBackButton() throws IOException {
+		String config = "";
+		config += Main.getVolumne() + " ";
+		config += Main.isFullScreen() + " ";
+		config += Main.getResolution().ordinal();
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
+		File configFile = new File("SaveData\\config.txt");
+		if (!configFile.exists()) {
+			configFile.createNewFile();
+		}
+		FileWriter configWriter = new FileWriter(configFile);
+		System.out.println(config);
+		configWriter.write(config);
+		configWriter.flush();
+		configWriter.close();
 	}
 
+	public static int getWidth(RESOLUTION res) {
+		int width = 600;
+		switch (res) {
+			case SIX_BY_FOUR:
+				width = 600;
+				break;
+			case TWELVE_BY_EIGHT:
+				width = 1200;
+				break;
+		}
+		return width;
+	}
+
+	public static int getHeight(RESOLUTION res) {
+		int height = 600;
+		switch (res) {
+			case SIX_BY_FOUR:
+				height = 400;
+				break;
+			case TWELVE_BY_EIGHT:
+				height = 800;
+				break;
+		}
+		return height ;
+
+	}
 }
+
+enum RESOLUTION {
+	SIX_BY_FOUR,
+	TWELVE_BY_EIGHT
+};
+
+

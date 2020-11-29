@@ -1,27 +1,42 @@
 package FrontEnd;
 
+import MessageOfTheDay.MessageOfTheDay;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
 /**
  * Use to control the GameScreen scene.
  * @author David Langmaid
  */
 public class MenuScreenController implements Initializable {
+
     @FXML
     private Button newGameButton;
+    @FXML
+    private Label MoTD;
 
     private WindowLoader wl;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String message = MessageOfTheDay.shiftLetters();
+        MoTD.setText(message);
+
     }
 
     /**
@@ -49,5 +64,10 @@ public class MenuScreenController implements Initializable {
     public void onPlayerProfiles() {
         wl = new WindowLoader(newGameButton);
         wl.load("Profiles");
+    }
+
+    public void onLeaderBoard(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("Leaderboard");
     }
 }

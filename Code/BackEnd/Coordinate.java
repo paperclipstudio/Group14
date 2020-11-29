@@ -75,6 +75,11 @@ public class Coordinate {
         return (x == input.getX()) && (y == input.getY());
     }
 
+
+    @Override
+    public String toString() {
+        return getX() + " " + getY();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

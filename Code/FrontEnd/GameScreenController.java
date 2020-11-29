@@ -9,9 +9,11 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -49,13 +51,15 @@ public class GameScreenController implements Initializable {
 	private Button drawButton;
 	@FXML
 	private Label phaseText;
+	@FXML
+	private MenuItem saveButton;
 
 
 	private int width;
 	private int height;
 	public Phase phase;
 	private GameLogic gameLogic;
-	public static int tileWidth = 25;
+	public static int tileWidth = 100;
 	//private ImageView[] players;
 
 	/***
@@ -67,13 +71,26 @@ public class GameScreenController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		try {
 			if (!Main.isLoadedGameFile()) {
+				if (Main.isLoadedGameFile()) {
+					
+					GameLoad.loader("");
+				}
 				startNewGame("Gameboards\\" + Main.getBoardFile());
 			} else {
 				// Load a game
 			}
 			updateBoard();
+			tiles.setRotationAxis(new Point3D(10,0,10));
+			tiles.setRotate(50);
+			players.setRotationAxis(new Point3D(10,0,10));
+			players.setRotate(50);
+			controls.setRotationAxis(new Point3D(10,0,10));
+			controls.setRotate(50);
+
 			mainLoop();
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -359,7 +376,7 @@ public class GameScreenController implements Initializable {
 	 *
 	 * @param board path to board file
 	 */
-	public void startNewGame(String board) throws FileNotFoundException {
+	public void startNewGame(String board) throws IOException {
 		gameLogic = new GameLogic();
 		gameLogic.newGame(board);
 		width = gameLogic.getWidth();
@@ -559,8 +576,13 @@ public class GameScreenController implements Initializable {
 	/***
 	 * Starts save game window.
 	 */
-	@SuppressWarnings("unused")
 	public void onSaveButton() {
+		try {
+			gameLogic.saveGame();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Game NOT saved");
+		}
 		System.out.println("Game Saved");
 	}
 

@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.Set;
 
 /***
  * FrontEnd.Main class for this app, starts the window and opens up the 'Start' window
@@ -18,13 +22,19 @@ import java.io.File;
  */
 
 public class Main extends Application {
-    private static String boardFile;
+    private static boolean fullScreen;
+	private static String boardFile;
     private static int numberOfPlayer;
     private static String loadFile;
     private static boolean loadedGameFile = false;
     private static int seed;
     private static double volume = 10;
     private static MediaPlayer mediaPlayer;
+    private static final double DEFAULT_SOUND_LEVEL = 0.0;
+    private static final boolean DEFAULT_FULLSCREEN = false;
+    private static final int DEFAULT_RESOLUTION = 0;
+
+    private static RESOLUTION resolution = RESOLUTION.SIX_BY_FOUR;
 
     public static int getSeed() {
         return seed;
@@ -34,16 +44,69 @@ public class Main extends Application {
         Main.seed = seed;
     }
 
+    public static boolean isFullScreen() {
+        return fullScreen;
+    }
+
+    public static void setFullScreen(boolean fullScreen) {
+
+        Main.fullScreen = fullScreen;
+    }
+
+    public static RESOLUTION getResolution() {
+        return Main.resolution;
+    }
+
+    public static void setResolution(RESOLUTION res) {
+        Main.resolution = res;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("Hello World");
         //Parent root = null;
         // You can use the line below to test out your own screens
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FrontEnd\\FXML\\MenuScreen.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FrontEnd\\FXML\\StartScreen.fxml")));
         Scene scene = new Scene(root);
-        primaryStage.setWidth(600);
-        primaryStage.setHeight(400);
-        primaryStage.setFullScreen(false);
+        Scanner in = null;
+        //  Default settings if no config file.
+        double soundLevel;
+        boolean fullscreen;
+        int resolution;
+        try {
+            File configFile = new File("SaveData\\config.txt");
+            in = new Scanner(configFile);
+            if (!in.hasNextDouble()) {
+                throw new NumberFormatException("Sound Level");
+            }
+            soundLevel = in.nextDouble();
+
+            if (!in.hasNextBoolean()) {
+                throw new NumberFormatException("Fullscreen");
+            }
+            fullscreen = in.nextBoolean();
+            if (!in.hasNextInt()) {
+                throw new NumberFormatException("Resolution");
+            }
+            resolution = in.nextInt();
+        } catch (NumberFormatException e) {
+            System.out.println("Config file incorrect format:" + e.getMessage());
+            soundLevel = DEFAULT_SOUND_LEVEL;
+            fullscreen = DEFAULT_FULLSCREEN;
+            resolution = DEFAULT_RESOLUTION;
+        } catch  (FileNotFoundException e) {
+            System.out.println("Config not found, using defaults");
+            soundLevel = DEFAULT_SOUND_LEVEL;
+            fullscreen = DEFAULT_FULLSCREEN;
+            resolution = DEFAULT_RESOLUTION;
+        }
+
+        Main.setVolume(soundLevel);
+        Main.setFullScreen(fullscreen);
+        Main.setResolution(RESOLUTION.values()[resolution]);
+        primaryStage.setWidth(SettingsController.getWidth(RESOLUTION.values()[resolution]));
+        primaryStage.setHeight(SettingsController.getHeight(RESOLUTION.values()[resolution]));
+        primaryStage.setFullScreen(fullScreen);
         primaryStage.setTitle("Covid Game?");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
@@ -62,7 +125,13 @@ public class Main extends Application {
     public static void setVolume(double volume) {
         System.out.println("Volume Changed");
         Main.volume = volume;
-        mediaPlayer.setVolume(volume);
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume);
+        }
+    }
+
+    public static double getVolumne() {
+        return Main.volume;
     }
 
     /***

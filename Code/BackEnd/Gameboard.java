@@ -63,6 +63,7 @@ public class Gameboard {
         this.playerLocations[player][length] = position;
     }
 
+    //TODO Movement of the player piece.
     public Tile playFloorTile(Coordinate location, FloorTile insertedTile) {
         // Inserting the new tile from the left.
         if (location.getX() == -1) {
@@ -77,22 +78,22 @@ public class Gameboard {
         }
         // Inserting the new tile from the right.
         else if (location.getX() == width) {
-            boardTiles[width - 1][location.getY()] = insertedTile;
             removedTile = boardTiles[0][location.getY()];
-            for (int j = width - 2; j >= 0; j--) {
-                boardTiles[j - 1][location.getY()] = boardTiles[j][location.getY()];
+            for (int j = 0; j < width - 1; j++) {
+                boardTiles[j][location.getY()] = boardTiles[j + 1][location.getY()];
             }
+            boardTiles[width - 1][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
         }
         // Inserting the new tile from the bottom.
         else if (location.getY() == -1) {
-            boardTiles[location.getX()][0] = insertedTile;
             removedTile = boardTiles[location.getX()][height - 1];
             for (int j = height - 2; j >= 0; j--) {
                 boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
             }
+            boardTiles[location.getX()][0] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
@@ -100,10 +101,10 @@ public class Gameboard {
         // The last remaining case: Inserting the new tile from the top.
         else {
             removedTile = boardTiles[location.getX()][0];
-            boardTiles[location.getX()][height - 1] = insertedTile;
-            for (int j = height - 2; j >= 0; j--) {
-                boardTiles[location.getX()][j - 1] = boardTiles[location.getX()][j];
+            for (int j = 0; j < width - 1; j++) {
+                boardTiles[location.getX()][j] = boardTiles[location.getX()][j+1];
             }
+            boardTiles[location.getX()][height - 1] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
             }
@@ -134,25 +135,25 @@ public class Gameboard {
             if (direction == Rotation.UP && location.getY() != height - 1) {
                 tileInDirection = boardTiles[location.getX()][location.getY() + 1];
                 flipDirection = Rotation.DOWN;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX(), location.getY() + 1)) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() + 1));
                 }
             } else if (direction == Rotation.DOWN && location.getY() != 0) {
                 tileInDirection = boardTiles[location.getX()][location.getY() - 1];
                 flipDirection = Rotation.UP;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX(),location.getY() - 1)) {
                     moveLocations.add(new Coordinate(location.getX(), location.getY() - 1));
                 }
             } else if (direction == Rotation.LEFT && location.getX() != 0) {
                 tileInDirection = boardTiles[location.getX() - 1][location.getY()];
                 flipDirection = Rotation.RIGHT;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX() - 1, location.getY())) {
                     moveLocations.add(new Coordinate(location.getX() - 1, location.getY()));
                 }
             } else if (direction == Rotation.RIGHT && location.getX() != width - 1) {
                 tileInDirection = boardTiles[location.getX() + 1][location.getY()];
                 flipDirection = Rotation.LEFT;
-                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire()) {
+                if (validMove(tileInDirection, flipDirection) && !tileInDirection.onFire() && !checkTileForPlayer(location.getX() + 1, location.getY())) {
                     moveLocations.add(new Coordinate(location.getX() + 1, location.getY()));
                 }
             }
@@ -254,6 +255,16 @@ public class Gameboard {
                 if (getPlayerPos(i) == goal){
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkTileForPlayer (int x, int y){
+        for (int i = 0; i < playerLocations.length; i++){
+            Coordinate playerPos = playerLocations[i][playerLocations[i].length-1];
+            if (playerPos != null && playerPos.getX() == x && playerPos.getY() == y){
+                return true;
             }
         }
         return false;
@@ -371,10 +382,10 @@ public class Gameboard {
             posOneTurnAgo = playerLocations[player][length - 1];
             tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
             //checks to see if the tile two turns ago is on fire, if not, sets that as the players position
-            if (!tileTwoTurns.onFire() ) {
+            if (!tileTwoTurns.onFire() && !checkTileForPlayer(posTwoTurnsAgo.getX(), posTwoTurnsAgo.getY())) {
                 setPlayerPos(player, posTwoTurnsAgo);
             }
-            else if (!tileOneTurn.onFire()){
+            else if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo.getX(), posOneTurnAgo.getY())){
                 setPlayerPos(player, posOneTurnAgo);
             }
         }
@@ -383,7 +394,7 @@ public class Gameboard {
             posOneTurnAgo = playerLocations[player][length - 1];
             tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
             //checks to see if the tile one turn ago is on fire, if not sets that as the players position
-            if (!tileOneTurn.onFire()) {
+            if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo.getX(), posOneTurnAgo.getY())) {
                 setPlayerPos(player, posOneTurnAgo);
             }
         }

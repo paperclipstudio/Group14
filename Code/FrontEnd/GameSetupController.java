@@ -80,7 +80,7 @@ public class GameSetupController implements Initializable {
 					writer.close();
 					//wl.load("GameScreen");
 				} else {
-					//TODO print some msg about file already existing
+					saveName.setText("Game already exists");
 				}
 			}
 		} catch (IOException e) {

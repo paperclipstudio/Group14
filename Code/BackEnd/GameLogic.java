@@ -4,6 +4,8 @@ package BackEnd;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Random;
 
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
@@ -15,6 +17,7 @@ import static BackEnd.TileType.DOUBLE_MOVE;
  * @author Christian Sanger
  */
 public class GameLogic {
+	private final int seed;
 	// Games parts
 	Gameboard gameboard;
 	Player[] players;
@@ -27,16 +30,18 @@ public class GameLogic {
 	// Special flags
 	// True if player gets two moves.
 	boolean doubleMove;
+	private GameSave gameSaver;
 
 	/**
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
 	 */
-	public void newGame(String boardFile) throws FileNotFoundException {
+	public void newGame(String boardFile) throws IOException {
+		gameSaver = new GameSave(boardFile, seed);
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;
-		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile);
+		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile, seed);
 		gameboard = gameItems.getKey();
 		players = gameItems.getValue();
 		numberOfPlayers = players.length;
@@ -56,6 +61,7 @@ public class GameLogic {
 	 * Lets the current player draw a card
 	 */
 	public void draw() {
+		gameSaver.draw();
 		currentPlayer.drawTile();
 		if (currentPlayer.isHolding() instanceof FloorTile) {
 			// If floorTile you may play it
@@ -93,6 +99,7 @@ public class GameLogic {
 	 * @param location where the tile should be played.
 	 */
 	public void floor(FloorTile tile, Coordinate location) {
+		gameSaver.playFloorTile(location, tile);
 		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
 		players[currentPlayerNo].playFloorTile(location, tile);
 		phase = ACTION;
@@ -128,6 +135,7 @@ public class GameLogic {
 	 * @param coordinate where it would like to be played
 	 */
 	public void action(ActionTile tile, Coordinate coordinate) {
+		gameSaver.playActionTile(coordinate, tile);
 		if (tile.getType() == DOUBLE_MOVE) {
 			doubleMove = true;
 		}
@@ -155,6 +163,7 @@ public class GameLogic {
 	 * @param location where the player wishes to move.
 	 */
 	public void move(Coordinate location) {
+		gameSaver.playerMove(location);
 		gameboard.setPlayerPos(currentPlayerNo, location);
 		if (doubleMove) {
 			doubleMove = false;
@@ -169,7 +178,12 @@ public class GameLogic {
 	 * Creates an empty game logic class, must run startNew or load before you
 	 * can play.
 	 */
+	public GameLogic(int seed) {
+		this.seed = seed;
+	}
+
 	public GameLogic() {
+		this.seed = (new Random()).nextInt();
 	}
 
 	/**
@@ -228,5 +242,9 @@ public class GameLogic {
 	 */
 	public Coordinate[] getMoveLocations() {
 		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
+	}
+
+	public void saveGame() throws IOException {
+		gameSaver.saveToFile();
 	}
 }
