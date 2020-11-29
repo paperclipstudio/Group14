@@ -3,6 +3,7 @@ package FrontEnd;
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.GameLogic;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -59,7 +60,7 @@ public class GameScreenController implements Initializable {
 	private int height;
 	public Phase phase;
 	private GameLogic gameLogic;
-	public static int tileWidth = 100;
+	public static int tileWidth = 25;
 	//private ImageView[] players;
 
 	/***
@@ -70,22 +71,19 @@ public class GameScreenController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		try {
-			if (!Main.isLoadedGameFile()) {
-				if (Main.isLoadedGameFile()) {
-					
-					GameLoad.loader("");
-				}
-				startNewGame("Gameboards\\" + Main.getBoardFile());
+			if (Main.isLoadedGameFile()) {
+				loadGame(Main.getLoadFile());
 			} else {
-				// Load a game
+				startNewGame(Main.getBoardFile());
 			}
 			updateBoard();
+			int rotate = 0;
 			tiles.setRotationAxis(new Point3D(10,0,10));
-			tiles.setRotate(50);
+			tiles.setRotate(rotate);
 			players.setRotationAxis(new Point3D(10,0,10));
-			players.setRotate(50);
+			players.setRotate(rotate);
 			controls.setRotationAxis(new Point3D(10,0,10));
-			controls.setRotate(50);
+			controls.setRotate(rotate);
 
 			mainLoop();
 		} catch (FileNotFoundException e) {
@@ -381,7 +379,14 @@ public class GameScreenController implements Initializable {
 		gameLogic.newGame(board);
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
-		drawButton.setVisible(true);
+		mainLoop();
+	}
+
+	private void loadGame(String loadFile) throws IOException {
+		gameLogic = GameLoad.loader(Main.getLoadFile());
+		width = gameLogic.getWidth();
+		height = gameLogic.getHeight();
+		mainLoop();
 	}
 
 	/**

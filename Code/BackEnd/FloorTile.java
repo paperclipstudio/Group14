@@ -43,6 +43,7 @@ public class FloorTile extends Tile {
 	public void setFire() {
 		this.isOnFire = true;
 	}
+
 	public void setFrozen() {
 		this.isFrozen = true;
 	}
@@ -52,8 +53,26 @@ public class FloorTile extends Tile {
 	}
 
 	//temp
-	public static void setFireTic (){
+	public void setFireTic (){
 		ticFire = 3;
+	}
+
+	public void ticFire (){
+		ticFire --;
+		if (ticFire == 0){
+			isOnFire = false;
+		}
+	}
+
+	public void setFrozenTic (){
+		ticFrozen = 3;
+	}
+
+	public void ticFrozen (){
+		ticFrozen --;
+		if (ticFrozen == 0){
+			isFrozen = false;
+		}
 	}
 
 

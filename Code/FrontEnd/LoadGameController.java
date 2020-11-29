@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import BackEnd.GameLoad;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,6 +52,8 @@ public class LoadGameController implements Initializable {
 	public void onPlayButton() {
 		try {
 			GameLoad.loader(selectGame.getValue());
+			Main.setLoadedGameFile(true);
+			Main.setLoadFile(selectGame.getValue());
 			WindowLoader wl = new WindowLoader(backButton);
 			wl.load("GameScreen");
 		} catch (FileNotFoundException e) {

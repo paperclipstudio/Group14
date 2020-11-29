@@ -20,14 +20,12 @@ public class GameSave {
     private String gameSaveString = "";
 
     public GameSave() throws IOException {
-        new GameSave("Gameboards\\ExampleInput.txt", (new Random()).nextInt());
+        new GameSave("ExampleInput.txt", (new Random()).nextInt());
     }
 
     public GameSave(String boardFile, int seed) throws IOException {
         gameSaveString = boardFile + "\n";
         gameSaveString += Integer.toString(seed);
-        gameSaveFile = new File("SaveData\\GameSave\\SaveFile" + (new Random()).nextInt() + ".sav");
-        gameSaveFile.createNewFile();
     }
 
     public void draw() {
@@ -49,6 +47,7 @@ public class GameSave {
         gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
     }
     public void saveToFile() throws IOException {
+        gameSaveFile = new File("SaveData\\GameSave\\" + System.currentTimeMillis() + ".sav");
         FileWriter writer = new FileWriter(gameSaveFile, true);
         writer.write(gameSaveString);
         writer.flush();

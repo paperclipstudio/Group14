@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
  * @author Brandon Chan
  * @version 1.0
  */
-public class PlayerProfile
+public class Profile
 {
     private Player player;
     private int[] wins;
@@ -16,7 +16,7 @@ public class PlayerProfile
     private String profileName;
     private Image profileIcon;
 
-    public PlayerProfile (String name, Image playerIcon)
+    public Profile(String name, Image playerIcon)
     {
         setName (name);
         setIcon (playerIcon);
