@@ -12,6 +12,11 @@ import static BackEnd.TileType.FROZEN;
 
 public class GameLoad {
 
+	/**
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
 	public static GameLogic loader(String fileName) throws IOException {
 		File loadFile = new File("SaveData\\GameSave\\" + fileName);
 		System.out.println("Loading:" + fileName);

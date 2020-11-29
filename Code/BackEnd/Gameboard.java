@@ -95,20 +95,18 @@ public class Gameboard {
                 boardTiles[j][location.getY()] = boardTiles[j + 1][location.getY()];
             }
             for (int j = width - 1; j > 0; j--){
+                Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
                 if (checkTileForPlayerInt(j, location.getY()) == 0){
-                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
                     setPlayerPos(0, newPlayerPos);
                 } else if (checkTileForPlayerInt(j, location.getY()) == 1){
-                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
                     setPlayerPos(1, newPlayerPos);
                 } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
-                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
                     setPlayerPos(2, newPlayerPos);
                 } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
-                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
                     setPlayerPos(3, newPlayerPos);
                 }
             }
+
             boardTiles[width - 1][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);

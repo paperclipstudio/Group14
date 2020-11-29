@@ -75,7 +75,6 @@ public class Coordinate {
         return (x == input.getX()) && (y == input.getY());
     }
 
-
     @Override
     public String toString() {
         return getX() + " " + getY();

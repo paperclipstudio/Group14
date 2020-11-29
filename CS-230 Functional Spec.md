@@ -9,7 +9,7 @@
 * Players can save game state at any time
 * Message of the day pulled from http://cswebcat.swan.ac.uk
 * Play end when a player lands on the goal tile.
-* Extra Features
+* Extra Features.
 * Save and load games.
 
 ## Overall idea and components
