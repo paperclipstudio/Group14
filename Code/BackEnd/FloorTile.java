@@ -68,7 +68,4 @@ public class FloorTile extends Tile {
 			isFrozen = false;
 		}
 	}
-
-
-
 }
