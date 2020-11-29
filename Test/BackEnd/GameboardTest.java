@@ -109,6 +109,15 @@ class GameboardTest {
 		assertEquals(0, gb.getPlayerPos(3).getY());
 	}
 
+	@Test
+	void placeFixedTile() {
+		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
+		assertEquals(CORNER, gb.TileAt(new Coordinate(2, 3)).getType());
+		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
+		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(3, 3)).getType());
+		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
+		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(2, 3)).getType());
+	}
 
 	@Test
 	void playFloorTile() {
@@ -182,12 +191,6 @@ class GameboardTest {
 		gb.getMoveDirections(2);
 		gb.getMoveDirections(3);
 
-	}
-
-	@Test
-	void placeFixedTile() {
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
-		//assertEquals(get);
 	}
 
 	@Test

@@ -47,7 +47,7 @@ public class FloorTile extends Tile {
 	//temp
 	public void setFireTic (){
 		this.isOnFire = true;
-		ticFire = 3*2;
+		ticFire = 3*2; //The 3 should be set to the number of players.
 	}
 
 	public void ticFire (){
@@ -59,7 +59,7 @@ public class FloorTile extends Tile {
 
 	public void setFrozenTic (){
 		isFrozen = true;
-		ticFrozen = 3;
+		ticFrozen = 3; //The 3 should be set to the number of players.
 	}
 
 	public void ticFrozen (){
