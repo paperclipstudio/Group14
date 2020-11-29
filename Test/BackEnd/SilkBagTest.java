@@ -11,7 +11,7 @@ class SilkBagTest {
 
 	@Test
 	void getTile() {
-		SilkBag silkBag = new SilkBag();
+		SilkBag silkBag = new SilkBag(91284098);
 		silkBag.insertTile(Tile.createTile(FIRE));
 		assertEquals(silkBag.getTile().getType(), FIRE);
 	}
@@ -38,7 +38,7 @@ class SilkBagTest {
 
 	@Test
 	void getFloorTile() {
-		SilkBag silkBag = new SilkBag();
+		SilkBag silkBag = new SilkBag(24423);
 		silkBag.insertTile(Tile.createTile(FIRE));
 		silkBag.insertTile(Tile.createTile(FROZEN));
 		silkBag.insertTile(Tile.createTile(CORNER));

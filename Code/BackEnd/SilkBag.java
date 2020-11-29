@@ -34,14 +34,6 @@ public class SilkBag {
 	}
 
     /**
-     * Second constructor of the silk bag, which initialises attributes.
-     */
-    public SilkBag() {
-        allTiles = new ArrayList<>();
-        randomGenerator = new Random();
-    }
-
-    /**
      * Returns the seed.
      */
     public int getSeed(){
@@ -62,9 +54,12 @@ public class SilkBag {
      * @return a Tile
      */
     public FloorTile getFloorTile () throws Exception {
+        // Create a random index.
         int index = randomGenerator.nextInt(allTiles.size());
+        // Note the index we started at.
         int startIndex = index;
         Tile tile = allTiles.get(index);
+        // Loop though from starting index until we have a floor tile
         while(!Tile.isFloorTile(tile)) {
             tile = allTiles.get(index);
             index = (index + 1) % allTiles.size();
@@ -73,7 +68,6 @@ public class SilkBag {
                 throw new Exception("Empty Silk bag");
             }
         }
-        System.out.println("Drawing " + tile.getType());
         return (FloorTile) tile;
     }
 
@@ -82,11 +76,6 @@ public class SilkBag {
      * @param tile
      */
     public void insertTile (Tile tile) {
-        System.out.println("inserting " + tile.getType());
         allTiles.add(tile);
-    }
-
-    private void removeTile(int index){
-        allTiles.remove(index);
     }
 }

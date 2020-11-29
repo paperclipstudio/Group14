@@ -8,7 +8,7 @@ import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameboardTest {
-	SilkBag sb = new SilkBag();
+	SilkBag sb = new SilkBag(234234234);
 	Gameboard gb = new Gameboard(3,3, sb);
 	Gameboard gb2 = new Gameboard(3,3, sb);
 	Gameboard gb3 = new Gameboard(3,3, sb);
