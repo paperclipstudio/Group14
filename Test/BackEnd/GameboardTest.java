@@ -203,10 +203,6 @@ class GameboardTest {
 	}
 
 	@Test
-	void testPlayFloorTile() {
-	}
-
-	@Test
 	void testGetWidth() {
 	}
 
