@@ -20,6 +20,12 @@ public class CardController implements Initializable {
 	// Reference to this whole card.
 	@FXML
 	private Pane fullCard;
+	@FXML
+	private ImageView button;
+	@FXML
+	private ImageView backing;
+
+
 
 	/***
 	 * Gets all resources for Card
@@ -28,14 +34,8 @@ public class CardController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		Image newCard = new Image("t_shape.png");
-		if ((new Random()).nextBoolean()) {
-			newCard = new Image("goal.png");
-		}
-		if (image == null) {
-			System.out.println("Image is NULL");
-		}
-		image.setImage(newCard);
+		image.setOnMouseClicked((e) -> onRotateRight());
+		button.setOnMouseClicked((e) -> onRotateRight());
 	}
 
 
@@ -60,17 +60,6 @@ public class CardController implements Initializable {
 	 */
 	public void offHover() {
 		fullCard.setEffect(null);
-	}
-
-	/***
-	 * Rotates the image on the card 90 degrees anti-clockwise
-	 */
-	public void onRotateLeft() {
-		double newAngle = image.getRotate() - 90;
-		if (newAngle < 0) {
-			newAngle += 360;
-		}
-		image.setRotate(newAngle);
 	}
 
 	/***

@@ -151,6 +151,7 @@ public class SettingsController implements Initializable {
 
 enum RESOLUTION {
 	SIX_BY_FOUR,
+	NINE_BY_SIX,
 	TWELVE_BY_EIGHT
 };
 

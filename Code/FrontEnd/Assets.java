@@ -6,6 +6,7 @@ import BackEnd.Tile;
 import BackEnd.TileType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -16,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
+
+import static BackEnd.TileType.*;
 
 /**
  * Used to cache assets and control reading image files.
@@ -43,7 +46,6 @@ public class Assets {
 			image = new Image(name + EXT);
 			cache.put(name, image);
 		}
-
 		return image;
 	}
 
@@ -124,9 +126,23 @@ public class Assets {
 		if (tile == null) {
 			throw new NullPointerException("Cannot create null tile");
 		}
+
+		HashMap<TileType, String> labels = new HashMap<>();
+		labels.put(FIRE, "Police Lookout");
+		labels.put(FROZEN, "Police Block");
+		labels.put(DOUBLE_MOVE, "NITRO");
+		labels.put(BACKTRACK, "Misdirection");
+		labels.put(CORNER, "");
+		labels.put(GOAL, "SafeHouse");
+		labels.put(STRAIGHT, "Bride Mayor");
+		labels.put(T_SHAPE, "You know a guy");
 		newCard = FXMLLoader.load(Objects.requireNonNull(GameScreenController.class.getClassLoader().getResource("FrontEnd\\FXML\\Card.fxml")));
 		ImageView newCardImage = ((ImageView)newCard.lookup("#image"));
 		newCardImage.setImage(Assets.get(tile.getType().toString()));
+		ImageView backing = ((ImageView)newCard.lookup("#backing"));
+		Label text = ((Label)newCard.lookup("#text"));
+		text.setText(labels.get(tile.getType()));
+		backing.setImage(Assets.get("CardBack"));
 		newCard.setOnMouseEntered(
 				e -> newCard.setEffect(new DropShadow(20, 0, 20, Color.BLACK)));
 		newCard.setOnMouseExited(e -> newCard.setEffect(null));
