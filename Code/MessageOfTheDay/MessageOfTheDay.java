@@ -38,7 +38,7 @@ public class MessageOfTheDay{
 
         while (puzzle.length() > answer.length() ){
             int position = letters.indexOf(puzzle.charAt(i));
-            if ((i +1) % 2 == 1){
+            if ((i + 1) % 2 == 1){
                 shift = (position - (i+1)) % letters.length();
                 if (shift < 0) {
                     shift = shift + letters.length();

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.PickPlayerController">
-   <ListView fx:id="playerList" layoutX="80.0" layoutY="120.0" prefHeight="191.0" prefWidth="437.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="120.0" />
-   <Label layoutX="80.0" layoutY="82.0" prefHeight="38.0" prefWidth="341.0" text="please using ctrl to select 2-4 players you want to play with" />
-   <Label layoutX="203.0" layoutY="27.0" prefHeight="47.0" prefWidth="193.0" text="Player Select">
+   <Label layoutX="55.0" layoutY="112.0" prefHeight="25.0" prefWidth="49.0" text="player1" />
+   <Label layoutX="203.0" layoutY="14.0" prefHeight="47.0" prefWidth="193.0" text="Player Selection">
       <font>
          <Font size="24.0" />
       </font>
    </Label>
-   <Button layoutX="481.0" layoutY="346.0" mnemonicParsing="false" onAction="#returnPlayers" prefHeight="25.0" prefWidth="80.0" text="Start" />
+   <Button layoutX="327.0" layoutY="346.0" mnemonicParsing="false" onAction="#returnPlayers" prefHeight="25.0" prefWidth="80.0" text="Start" />
+   <Label layoutX="310.0" layoutY="112.0" prefHeight="25.0" prefWidth="49.0" text="player2" />
+   <Label layoutX="310.0" layoutY="193.0" prefHeight="25.0" prefWidth="49.0" text="player4" />
+   <Label layoutX="55.0" layoutY="193.0" prefHeight="25.0" prefWidth="49.0" text="player3" />
+   <Button fx:id="backButton" layoutX="168.0" layoutY="346.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="80.0" text="Back" />
+   <ChoiceBox fx:id="playerList1" layoutX="104.0" layoutY="112.0" prefWidth="150.0" />
+   <ChoiceBox fx:id="playerList2" layoutX="367.0" layoutY="112.0" prefWidth="150.0" />
+   <ChoiceBox fx:id="playerList3" layoutX="104.0" layoutY="193.0" prefWidth="150.0" />
+   <ChoiceBox fx:id="playerList4" layoutX="367.0" layoutY="193.0" prefWidth="150.0" />
 </AnchorPane>

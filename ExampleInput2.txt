@@ -1,0 +1,15 @@
+3 3
+1
+Corner 1 1 0
+10 Corner
+10 Straight
+10 T_Shape
+2 Goal
+2 Fire
+2 Ice
+2 Backtrack
+2 DoubleMove
+0 0 Player1
+2 2 Player2
+0 2 Player3
+2 0 Player4

@@ -17,6 +17,7 @@ public class Gameboard {
     private Coordinate[][] playerLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
+    private FloorTile[][] fixedTiles;
     private FloorTile removedTile;
     private Coordinate[] slideLocations;
 
@@ -27,9 +28,8 @@ public class Gameboard {
         this.silkbag = silkBag;
         goalCoors = new ArrayList<>();
         slideLocations = new Coordinate[10];
-        //TODO turns out nothing has been initialised.
         boardTiles = new FloorTile[100][100];
-        //TODO third null pointer exception
+        fixedTiles =  new FloorTile[100][100];
         playerLocations = new Coordinate[4][1000];
     }
 
@@ -63,13 +63,27 @@ public class Gameboard {
         this.playerLocations[player][length] = position;
     }
 
-    //TODO Movement of the player piece.
     public Tile playFloorTile(Coordinate location, FloorTile insertedTile) {
         // Inserting the new tile from the left.
         if (location.getX() == -1) {
             removedTile = boardTiles[width - 1][location.getY()];
             for (int j = width - 2; j >= 0; j--) {
                 boardTiles[j + 1][location.getY()] = boardTiles[j][location.getY()];
+            }
+            for (int j = 0; j < width - 1; j++){
+                if (checkTileForPlayerInt(j, location.getY()) == 0){
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(j + 1, location.getY());
+                    setPlayerPos(3, newPlayerPos);
+                }
             }
             boardTiles[0][location.getY()] = insertedTile;
             if (removedTile != null) {
@@ -82,6 +96,21 @@ public class Gameboard {
             for (int j = 0; j < width - 1; j++) {
                 boardTiles[j][location.getY()] = boardTiles[j + 1][location.getY()];
             }
+            for (int j = width - 1; j > 0; j--){
+                if (checkTileForPlayerInt(j, location.getY()) == 0){
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(j - 1, location.getY());
+                    setPlayerPos(3, newPlayerPos);
+                }
+            }
             boardTiles[width - 1][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -93,6 +122,21 @@ public class Gameboard {
             for (int j = height - 2; j >= 0; j--) {
                 boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
             }
+            for (int j = 0; j < height - 1; j++){
+                if (checkTileForPlayerInt(location.getX(), j) == 0){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
+                    setPlayerPos(3, newPlayerPos);
+                }
+            }
             boardTiles[location.getX()][0] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -103,6 +147,21 @@ public class Gameboard {
             removedTile = boardTiles[location.getX()][0];
             for (int j = 0; j < width - 1; j++) {
                 boardTiles[location.getX()][j] = boardTiles[location.getX()][j+1];
+            }
+            for (int j = height - 1; j > 0; j--){
+                if (checkTileForPlayerInt(location.getX(), j) == 0){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(0, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 1){
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(1, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 2) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(2, newPlayerPos);
+                } else if (checkTileForPlayerInt(j, location.getY()) == 3) {
+                    Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
+                    setPlayerPos(3, newPlayerPos);
+                }
             }
             boardTiles[location.getX()][height - 1] = insertedTile;
             if (removedTile != null) {
@@ -232,6 +291,7 @@ public class Gameboard {
     //places a fixed floor tile in the coordinates specified.
     public void placeFixedTile(FloorTile tile, int x, int y) {
         boardTiles[x][y] = tile;
+        fixedTiles[x][y] = tile;
     }
 
     //Checks the board for goal tiles, sets their Coordinates.
@@ -270,6 +330,18 @@ public class Gameboard {
         return false;
     }
 
+    private int checkTileForPlayerInt (int x, int y){
+        //This is 4, as the 4 players are listed as 0,1,2, and 3, if it returns 4, then there is no player on this tile.
+        int playerNumber = 4;
+        for (int i = 0; i < playerLocations.length; i++){
+            Coordinate playerPos = playerLocations[i][playerLocations[i].length-1];
+            if (playerPos != null && playerPos.getX() == x && playerPos.getY() == y){
+               playerNumber = i;
+               return playerNumber;
+            }
+        }
+        return playerNumber;
+    }
 
     public Tile getPlayerTile(int player) {
         Coordinate location = getPlayerPos(player);
@@ -281,30 +353,30 @@ public class Gameboard {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming 0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
-                    boardTiles[i][j].setFire(); //mid
+                    boardTiles[i][j].setFireTic(); //mid
                     if (i != width) {
-                        boardTiles[i + 1][j].setFire(); //right
+                        boardTiles[i + 1][j].setFireTic(); //right
                     }
                     if (i != 0) {
-                        boardTiles[i - 1][j].setFire(); //left
+                        boardTiles[i - 1][j].setFireTic(); //left
                     }
                     if (j != height) {
-                        boardTiles[i][j + 1].setFire(); //up
+                        boardTiles[i][j + 1].setFireTic(); //up
                     }
                     if (i != width && j != height) {
-                        boardTiles[i + 1][j + 1].setFire(); //upper right
+                        boardTiles[i + 1][j + 1].setFireTic(); //upper right
                     }
                     if (i != 0 && j != height){
-                        boardTiles[i - 1][j + 1].setFire(); //upper left
+                        boardTiles[i - 1][j + 1].setFireTic(); //upper left
                     }
                     if (j != 0) {
-                        boardTiles[i][j - 1].setFire(); //down
+                        boardTiles[i][j - 1].setFireTic(); //down
                     }
                     if (i != width && j != 0) {
-                        boardTiles[i + 1][j - 1].setFire(); //down right
+                        boardTiles[i + 1][j - 1].setFireTic(); //down right
                     }
                     if (i != 0 && j != 0 ) {
-                        boardTiles[i - 1][j - 1].setFire(); //down left
+                        boardTiles[i - 1][j - 1].setFireTic(); //down left
                     }
                 }
             }
@@ -316,30 +388,30 @@ public class Gameboard {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
-                    boardTiles[i][j].setFrozen(); //mid
+                    boardTiles[i][j].setFrozenTic(); //mid
                     if (i != width) {
-                        boardTiles[i + 1][j].setFrozen(); //right
+                        boardTiles[i + 1][j].setFrozenTic(); //right
                     }
                     if (i != 0) {
-                        boardTiles[i - 1][j].setFrozen(); //left
+                        boardTiles[i - 1][j].setFrozenTic(); //left
                     }
                     if (j != height) {
-                        boardTiles[i][j + 1].setFrozen(); //up
+                        boardTiles[i][j + 1].setFrozenTic(); //up
                     }
                     if (i != width && j != height) {
-                        boardTiles[i + 1][j + 1].setFrozen(); //upper right
+                        boardTiles[i + 1][j + 1].setFrozenTic(); //upper right
                     }
                     if (i != 0 && j != height){
-                        boardTiles[i - 1][j + 1].setFrozen(); //upper left
+                        boardTiles[i - 1][j + 1].setFrozenTic(); //upper left
                     }
                     if (j != 0) {
-                        boardTiles[i][j - 1].setFrozen(); //down
+                        boardTiles[i][j - 1].setFrozenTic(); //down
                     }
                     if (i != width && j != 0) {
-                        boardTiles[i + 1][j - 1].setFrozen(); //down right
+                        boardTiles[i + 1][j - 1].setFrozenTic(); //down right
                     }
                     if (i != 0 && j != 0 ) {
-                        boardTiles[i - 1][j - 1].setFrozen(); //down left
+                        boardTiles[i - 1][j - 1].setFrozenTic(); //down left
                     }
                 }
             }
@@ -369,13 +441,13 @@ public class Gameboard {
         FloorTile tileTwoTurns;
         FloorTile tileOneTurn;
         //gets the players current position.
-        int length = 0;
+        int length = -1;
         for (Coordinate coor : playerLocations[player]) {
             if (coor != null) {
                 length++;
             }
         }
-        if (length > 2){
+        if (length >= 2){
             //gets the tile, one and two turns ago that the player was on.
             posTwoTurnsAgo = playerLocations[player][length - 2];
             tileTwoTurns = boardTiles[posTwoTurnsAgo.getX()][posTwoTurnsAgo.getY()];
@@ -390,7 +462,7 @@ public class Gameboard {
             }
         }
 
-        if (length == 2) {
+        else if (length == 1) {
             posOneTurnAgo = playerLocations[player][length - 1];
             tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
             //checks to see if the tile one turn ago is on fire, if not sets that as the players position

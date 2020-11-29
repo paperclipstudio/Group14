@@ -40,22 +40,32 @@ public class FloorTile extends Tile {
 		return isFrozen;
 	}
 
-	public void setFire() {
-		this.isOnFire = true;
-	}
-	public void setFrozen() {
-		this.isFrozen = true;
-	}
-
 	public void setRotation(Rotation rotation) {
 		this.rotation= rotation;
 	}
 
 	//temp
-	public static void setFireTic (){
-		ticFire = 3;
+	public void setFireTic (){
+		this.isOnFire = true;
+		ticFire = 3*2; //The 3 should be set to the number of players.
 	}
 
+	public void ticFire (){
+		ticFire --;
+		if (ticFire == 0){
+			isOnFire = false;
+		}
+	}
 
+	public void setFrozenTic (){
+		isFrozen = true;
+		ticFrozen = 3; //The 3 should be set to the number of players.
+	}
 
+	public void ticFrozen (){
+		ticFrozen --;
+		if (ticFrozen == 0){
+			isFrozen = false;
+		}
+	}
 }
