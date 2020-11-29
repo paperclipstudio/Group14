@@ -186,7 +186,8 @@ class GameboardTest {
 
 	@Test
 	void placeFixedTile() {
-		
+		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
+		//assertEquals(get);
 	}
 
 	@Test
