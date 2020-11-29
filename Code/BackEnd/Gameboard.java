@@ -17,6 +17,7 @@ public class Gameboard {
     private Coordinate[][] playerLocations;
     private ActionTileLocations[] actionTiles;
     private FloorTile[][] boardTiles;
+    private FloorTile[][] fixedTiles;
     private FloorTile removedTile;
     private Coordinate[] slideLocations;
 
@@ -28,6 +29,7 @@ public class Gameboard {
         goalCoors = new ArrayList<>();
         slideLocations = new Coordinate[10];
         boardTiles = new FloorTile[100][100];
+        fixedTiles =  new FloorTile[100][100];
         playerLocations = new Coordinate[4][1000];
     }
 
@@ -287,6 +289,7 @@ public class Gameboard {
     //places a fixed floor tile in the coordinates specified.
     public void placeFixedTile(FloorTile tile, int x, int y) {
         boardTiles[x][y] = tile;
+        fixedTiles[x][y] = tile;
     }
 
     //Checks the board for goal tiles, sets their Coordinates.
