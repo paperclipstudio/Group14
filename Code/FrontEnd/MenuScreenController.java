@@ -1,6 +1,6 @@
 package FrontEnd;
 
-import MessageOfTheDay.MessageOfTheDay;
+import MessageOfTheDay.MOTD;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +34,13 @@ public class MenuScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String message = MessageOfTheDay.shiftLetters();
+        String message = "";
+        try {
+            message = MOTD.puzzle();
+        } catch (Exception e) {
+            message = "Error with Server" + e.getCause();
+
+        }
         MoTD.setText(message);
 
     }

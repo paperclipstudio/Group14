@@ -337,23 +337,17 @@ public class GameScreenController implements Initializable {
 		tiles.getChildren().clear();
 		players.getChildren().clear();
 		controls.getChildren().clear();
+
 		// showing the tiles
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 
 				// Tile from the game board.
 				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
+
 				// What is going to be shown on screen
-				ImageView tileView;
 				// Get correct image
-				//tileView.setImage(assets.get(tile.getType().toString()));
-				tileView = Assets.getFloorTileImage(tile, x, y);
-
-				// Scale
-				tileView.setFitHeight(tileWidth);
-				tileView.setFitWidth(tileWidth);
-				// set ID
-
+				Node tileView = Assets.getFloorTileImage(tile, x, y);
 				tiles.getChildren().add(tileView);
 
 			}
@@ -611,7 +605,7 @@ public class GameScreenController implements Initializable {
 	 * Takes an id to match and a onClickFunction
 	 * puts that on all matching node with id starting with 'id'
 	 *
-	 * @param id   node to look for
+	 * @param group   node to look for
 	 * @param func function to apply to onClick
 	 */
 	private void applyOnClick(Pane group, EventHandler<MouseEvent> func) {
@@ -625,7 +619,7 @@ public class GameScreenController implements Initializable {
 	 * Takes an id to match and a function
 	 * puts that on all matching node with id starting with 'id'
 	 *
-	 * @param id   node to look for
+	 * @param group  node to look for
 	 * @param func function to apply to onHover
 	 */
 	private void applyOnHover(Pane group, EventHandler<MouseEvent> func) {
@@ -639,7 +633,7 @@ public class GameScreenController implements Initializable {
 	 * Takes an id to match and a function
 	 * puts that on all matching node with id starting with 'id'
 	 *
-	 * @param id   node to look for
+	 * @param group   node to look for
 	 * @param func function to apply to offHover
 	 */
 	private void applyOffHover(Pane group, EventHandler<MouseEvent> func) {

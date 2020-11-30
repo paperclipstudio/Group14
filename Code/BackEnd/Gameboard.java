@@ -119,9 +119,7 @@ public class Gameboard {
 		// Inserting the new tile from the bottom.
 		else if (location.getY() == -1) {
 			removedTile = boardTiles[location.getX()][height - 1];
-			for (int j = height - 2; j >= 0; j--) {
-				boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
-			}
+			System.arraycopy(boardTiles[location.getX()], 0, boardTiles[location.getX()], 1, height - 2 + 1);
 			for (int j = 0; j < height - 1; j++) {
 				if (checkTileForPlayerInt(location.getX(), j) == 0) {
 					Coordinate newPlayerPos = new Coordinate(location.getX(), j + 1);
@@ -145,9 +143,8 @@ public class Gameboard {
 		// The last remaining case: Inserting the new tile from the top.
 		else {
 			removedTile = boardTiles[location.getX()][0];
-			for (int j = 0; j < width - 1; j++) {
-				boardTiles[location.getX()][j] = boardTiles[location.getX()][j + 1];
-			}
+			if (width - 1 >= 0)
+				System.arraycopy(boardTiles[location.getX()], 1, boardTiles[location.getX()], 0, width - 1);
 			for (int j = height - 1; j > 0; j--) {
 				if (checkTileForPlayerInt(location.getX(), j) == 0) {
 					Coordinate newPlayerPos = new Coordinate(location.getX(), j - 1);
