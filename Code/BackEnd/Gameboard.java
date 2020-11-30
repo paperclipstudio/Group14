@@ -52,13 +52,6 @@ public class Gameboard {
 	}
 
 	public void setPlayerPos(int player, Coordinate position) {
-		System.out.println(player + " ");
-		for (Coordinate pos : playerLocations[player]) {
-			if (pos != null) {
-				System.out.print(pos.toString() + ", ");
-			}
-			System.out.print("\n");
-		}
 		playerLocations[player][2] = playerLocations[player][1];
 		playerLocations[player][1] = playerLocations[player][0];
 		playerLocations[player][0] = position;
