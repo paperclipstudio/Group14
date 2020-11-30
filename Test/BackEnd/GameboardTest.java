@@ -76,6 +76,7 @@ class GameboardTest {
 		Coordinate move1 = new Coordinate(2,1);
 		Coordinate move2 = new Coordinate(2, 2);
 		Coordinate fireLocation = new Coordinate(0, 0);
+		Coordinate frozenLocation = new Coordinate(0, 0);
 		assertEquals(startPos, gb.getPlayerPos(0));
 		gb.backtrack(0);
 		assertEquals(startPos, gb.getPlayerPos(0));
@@ -92,6 +93,7 @@ class GameboardTest {
 		gb.setPlayerPos(0, move2);
 		// Checking that it doesn't move a player onto a tile thats on fire
 		gb.playActionTile(fireLocation, new ActionTile(FIRE), 0);
+		gb.playActionTile(frozenLocation, new ActionTile(FROZEN),  0);
 		gb.backtrack(0);
 		assertEquals(move1, gb.getPlayerPos(0));
 
