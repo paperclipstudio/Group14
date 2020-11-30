@@ -480,7 +480,15 @@ public class Gameboard {
 
     public Coordinate[] getSlideLocations() {
         ArrayList<Coordinate> locations = new ArrayList<>();
-        return locations.toArray(new Coordinate[0]);
+        for (int x = 0; x < width; x++) {
+            locations.add(new Coordinate(x, -1));
+            locations.add(new Coordinate(x, height));
+        }
+        for (int y = 0; y < width; y++) {
+            locations.add(new Coordinate(-1, y));
+            locations.add(new Coordinate(width, y));
+        }
+        return locations.toArray(slideLocations);
     }
 
 	public FloorTile tileAt(Coordinate coordinate) {
