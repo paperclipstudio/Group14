@@ -108,7 +108,7 @@ public class SettingsController implements Initializable {
 	 */
 	public void onBackButton() throws IOException {
 		String config = "";
-		config += Main.getVolumne() + " ";
+		config += Main.getVolume() + " ";
 		config += Main.isFullScreen() + " ";
 		config += Main.getResolution().ordinal();
 		WindowLoader wl = new WindowLoader(backButton);
