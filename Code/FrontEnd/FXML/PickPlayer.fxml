@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.PickPlayerController">
-   <Label layoutX="55.0" layoutY="112.0" prefHeight="25.0" prefWidth="49.0" text="player1" />
-   <Label layoutX="179.0" layoutY="31.0" prefHeight="53.0" prefWidth="262.0" text="Player Selection">
-      <font>
-         <Font size="36.0" />
-      </font>
-   </Label>
-   <Button layoutX="327.0" layoutY="346.0" mnemonicParsing="false" onAction="#savePlayersAndStart" prefHeight="25.0" prefWidth="80.0" text="Start" />
-   <Label layoutX="310.0" layoutY="112.0" prefHeight="25.0" prefWidth="49.0" text="player2" />
-   <Label layoutX="310.0" layoutY="193.0" prefHeight="25.0" prefWidth="49.0" text="player4" />
-   <Label layoutX="55.0" layoutY="193.0" prefHeight="25.0" prefWidth="49.0" text="player3" />
-   <Button fx:id="backButton" layoutX="168.0" layoutY="346.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="80.0" text="Back" />
-   <ChoiceBox fx:id="playerList1" layoutX="104.0" layoutY="112.0" prefWidth="150.0" />
-   <ChoiceBox fx:id="playerList2" layoutX="367.0" layoutY="112.0" prefWidth="150.0" />
-   <ChoiceBox fx:id="playerList3" layoutX="104.0" layoutY="193.0" prefWidth="150.0" />
-   <ChoiceBox fx:id="playerList4" layoutX="367.0" layoutY="193.0" prefWidth="150.0" />
-   <Label fx:id="label" layoutX="261.0" layoutY="257.0" text="player number" />
-</AnchorPane>
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.PickPlayerController">
+   <center>
+      <VBox alignment="CENTER" layoutY="200.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+            <Label layoutX="70.0" layoutY="210.0" prefHeight="25.0" prefWidth="49.0" text="player3" textFill="#009e05" />
+            <Label layoutX="60.0" layoutY="14.0" prefHeight="94.0" prefWidth="480.0" text="Player Selection">
+               <font>
+                  <Font size="65.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop color="#009e05" />
+                        <Stop color="#024300" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="70.0" layoutY="150.0" prefHeight="25.0" prefWidth="49.0" text="player1" textFill="#009e05" />
+            <ChoiceBox fx:id="playerList1" layoutX="120.0" layoutY="150.0" prefWidth="150.0" />
+            <Button layoutX="385.0" layoutY="325.0" mnemonicParsing="false" onAction="#savePlayersAndStart" prefHeight="25.0" prefWidth="80.0" text="Start" textFill="#009e05" />
+            <Label layoutX="300.0" layoutY="150.0" prefHeight="25.0" prefWidth="49.0" text="player2" textFill="#009e05" />
+            <Label layoutX="300.0" layoutY="210.0" prefHeight="25.0" prefWidth="49.0" text="player4" textFill="#009e05" />
+            <Button fx:id="backButton" layoutX="155.0" layoutY="325.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="80.0" text="Back" textFill="#009e05" />
+            <ChoiceBox fx:id="playerList2" layoutX="350.0" layoutY="150.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="playerList3" layoutX="120.0" layoutY="210.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="playerList4" layoutX="350.0" layoutY="210.0" prefWidth="150.0" />
+            <Label fx:id="label" layoutX="260.0" layoutY="289.0" text="player number" textFill="#009e05" />
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+         </AnchorPane>
+      </VBox>
+   </center>
+</BorderPane>

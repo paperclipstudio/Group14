@@ -2,8 +2,6 @@ package FrontEnd;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 
 /**
@@ -43,12 +39,25 @@ public class PickPlayerController {
 
     /**
      * show player select scene
-     *      */
+     *
+     */
      public void initialize(){
 
-        String[] players;
-        File playerLocation = new File("SaveData\\UserData\\");
-        players = playerLocation.list();
+         File playerLocation = new File("SaveData\\UserData\\");
+
+         String[] players;
+         players = playerLocation.list();
+
+
+
+
+
+
+         //String[] players;
+
+        //File playerLocation = new File("SaveData\\UserData\\");
+        //players = playerLocation.list();
+
         label.setText("You decide to start a game with " + Main.getNumberOfPlayers() + " players");
 
         assert players != null;
@@ -89,9 +98,9 @@ public class PickPlayerController {
     }
 
     /**
-     * @param profileFile
-     * @return
-     * @throws IOException
+     * @param profileFile read files from UserData and turns them into profiles
+     * @return    get the profile output
+     * @throws IOException Wrong input
      */
     public Profile readProfile(File profileFile) throws IOException {
 

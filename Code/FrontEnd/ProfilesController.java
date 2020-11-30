@@ -60,8 +60,9 @@ public class ProfilesController {
 	}
 
 	/**
-	 * @throws IOException try to create a user file with name typed, create one in UserData if there is not a file with
+	 * try to create a user file with name typed, create one in UserData if there is not a file with
 	 * initialized data and send alert if there is one.
+	 * @throws IOException Wrong input
 	 */
 	public void createFile() throws IOException {
 		String newName = input.getText();
@@ -123,8 +124,9 @@ public class ProfilesController {
 	}
 
 	/**
-	 * @throws FileNotFoundException view the data saved in the file with same name as typed, send alert when there is
+	 * view the data saved in the file with same name as typed, send alert when there is
 	 * no such a file.
+	 * @throws FileNotFoundException File is not in the path
 	 */
 	public void viewData() throws FileNotFoundException {
 		String newName = input.getText();
