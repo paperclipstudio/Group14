@@ -356,7 +356,7 @@ public class Gameboard {
     public ArrayList<Coordinate> checkGoalTiles() {
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].getType() == TileType.GOAL) {
+                if (boardTiles[i][j] != null && boardTiles[i][j].getType() == TileType.GOAL) {
                     goalCoors.add(new Coordinate(i, j));
                 }
             }
@@ -366,11 +366,12 @@ public class Gameboard {
 
     //checks to see if a player is on goal by going through all the players' locations to see
     //if they match any of the goal coordinates.
-    private boolean isPlayerOnGoal() {
-        int numberOfPlayers = 4;
-        for (Coordinate goal : goalCoors) {
-            for (int i = 0; i < numberOfPlayers; i++) {
-                if (getPlayerPos(i) == goal) {
+    public boolean isPlayerOnGoal() {
+        int players = getNumOfPlayers();
+        goalCoors = checkGoalTiles();
+        for (int i = 0; i < goalCoors.size(); i++) {
+            for (int j = 0; j < players; j++) {
+                if (getPlayerPos(j).getX() == goalCoors.get(i).getX() && getPlayerPos(j).getY() == goalCoors.get(i).getY()) {
                     return true;
                 }
             }
