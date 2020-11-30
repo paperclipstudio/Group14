@@ -3,10 +3,17 @@ package FrontEnd;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.File;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 
 import BackEnd.Profile;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 
 /**
@@ -32,7 +39,7 @@ public class PickPlayerController {
     @FXML
     private Button backButton;
 
-    ArrayList<File> profiles = new ArrayList<>();
+    ArrayList<Profile> profiles = new ArrayList<>();
 
     /**
      * show player select scene
@@ -82,17 +89,53 @@ public class PickPlayerController {
     }
 
     /**
+     * @param profileFile
+     * @return
+     * @throws IOException
+     */
+    public Profile readProfile(File profileFile) throws IOException {
+
+         profileFile = new File("SaveData\\UserData\\" + profileFile);
+         String name = profileFile.getName();
+
+         Image playerIcon = null;
+
+         String line;
+         int wins = 0 ;
+         int losses = 0;
+         BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + profileFile));
+         while((line = reader.readLine()) != null){
+             String[] parts = line.split(":",2);
+
+                 if(parts.length >=2){
+                 wins = Integer.parseInt(parts[0]);
+                 losses = Integer.parseInt(parts[1]);
+                 }
+         }
+
+        return new Profile(name, playerIcon, wins, losses);
+
+    }
+
+
+    /**
      * add the chosen player's file to the arraylist and go to the game screen.
      */
     public void savePlayersAndStart() {
         WindowLoader wl = new WindowLoader(backButton);
         try {
 
+            Main.profiles = profiles.toArray(new Profile[0]); ////////////////////////////qus
+
             if(Main.getNumberOfPlayers() == 2) {
 
                 if(!playerList1.getValue().equals(playerList2.getValue())){
-                    profiles.add(new File(playerList1.getValue()));
-                    profiles.add(new File(playerList2.getValue()));
+
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
+
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
 
                     wl.load("GameScreen");
 
@@ -110,9 +153,12 @@ public class PickPlayerController {
                         !playerList1.getValue().equals(playerList3.getValue()) &&
                         !playerList2.getValue().equals(playerList3.getValue())
                    ){
-                    profiles.add(new File(playerList1.getValue()));
-                    profiles.add(new File(playerList2.getValue()));
-                    profiles.add(new File(playerList3.getValue()));
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList3.getValue() + ".txt")));
 
                     wl.load("GameScreen");
 
@@ -133,10 +179,15 @@ public class PickPlayerController {
                         !playerList2.getValue().equals(playerList4.getValue()) &&
                         !playerList3.getValue().equals(playerList4.getValue())
                    ){
-                    profiles.add(new File(playerList1.getValue()));
-                    profiles.add(new File(playerList2.getValue()));
-                    profiles.add(new File(playerList3.getValue()));
-                    profiles.add(new File(playerList4.getValue()));
+
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList3.getValue() + ".txt")));
+                    profiles.add(readProfile(
+                            new File("SaveData\\UserData\\" + playerList4.getValue() + ".txt")));
 
                     wl.load("GameScreen");
 
@@ -149,17 +200,9 @@ public class PickPlayerController {
                 }
             }
 
-
-
-
-            // Create
-            // profiles[0] == profile of player 1
-            // profiles[1] == profile of player 2
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Profile.getName(profiles);
 
     }
 
