@@ -2,6 +2,9 @@ package BackEnd;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  * Stores the data about a player's profile like their name or scores across maps.
  * @author Brandon Chan

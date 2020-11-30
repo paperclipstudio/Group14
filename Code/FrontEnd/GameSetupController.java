@@ -88,7 +88,7 @@ public class GameSetupController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		wl.load("GameScreen"); // here for testing
+		wl.load("PickPlayer"); // here for testing
 	}
 	/**
 	 * This returns the name of the save file
