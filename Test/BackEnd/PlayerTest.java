@@ -31,7 +31,7 @@ class PlayerTest {
 		silkBag.insertTile(Tile.createTile(CORNER));
 		player.drawTile();
 		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
-		FloorTile tile = board.TileAt(new Coordinate(0,0));
+		FloorTile tile = board.tileAt(new Coordinate(0,0));
 		assertNotNull(tile);
 		assertEquals(CORNER, tile.getType());
 		assertEquals(Rotation.UP, tile.getRotation());
@@ -39,31 +39,25 @@ class PlayerTest {
 
 	@Test
 	void playActionTile() {
+		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,1), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,1), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,1), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		player.playFloorTile(new Coordinate(-1,2), new FloorTile(CORNER));
+		// fill board with floor tiles for testing purposes
 		player.drawTile();
-		//Silk bag empty
+		// silk bag empty
 		silkBag.insertTile(Tile.createTile(FROZEN));
-		//silk bag just has Frozen tile.
+		// silk bag just has Frozen tile.
 		// now play valid tile.
 		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN), 0);
 		// it should now be frozen.
-		assertTrue(board.TileAt(new Coordinate(0,0)).isFrozen());
-	}
-
-	@Test
-	void playInvalidActionTile() {
-		player.drawTile();
-		//Silk bag empty
-		silkBag.insertTile(Tile.createTile(FROZEN));
-		//silk bag just has Frozen tile.
-		player.playActionTile(new Coordinate(0,0), new ActionTile(FIRE), 0);
-		// Player plays invalid card.
-		assertFalse(board.TileAt(new Coordinate(0,0)).onFire());
-		// check that its not frozen.
-		assertFalse(board.TileAt(new Coordinate(0,0)).isFrozen());
-		// now play valid tile.
-		player.playActionTile(new Coordinate(0,0), new ActionTile(FROZEN), 0);
-		// it should now be frozen.
-		assertTrue(board.TileAt(new Coordinate(0,0)).isFrozen());
+		assertTrue(board.tileAt(new Coordinate(0,0)).isFrozen());
 	}
 
 	@Test

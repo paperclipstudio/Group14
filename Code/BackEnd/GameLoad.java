@@ -30,7 +30,7 @@ public class GameLoad {
 		System.out.println("Loading board " + gameBoard);
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
-		gameLogic.newGame("Gameboards\\" + gameBoard);
+		gameLogic.newGame(gameBoard);
 
 		while (in.hasNextLine()) {
 			int x;
@@ -56,9 +56,9 @@ public class GameLoad {
 					if (tileType == FIRE || tileType == FROZEN) {
 						x = lineReader.nextInt();
 						y = lineReader.nextInt();
-						gameLogic.action(actionTile, new Coordinate(x, y));
+						gameLogic.action(actionTile, new Coordinate(x, y), -1);
 					} else {
-						gameLogic.action(actionTile, null);
+						gameLogic.action(actionTile, null, -1);
 					}
 					System.out.println("Action Card");
 					break;

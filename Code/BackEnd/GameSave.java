@@ -37,7 +37,7 @@ public class GameSave {
     public void playActionTile(Coordinate location, ActionTile tile) {
         gameSaveString += "\naction " + tile.getType();
         if (location != null) {
-            gameSaveString += location.toString();
+            gameSaveString += " " + location.toString();
         }
     }
     public void playBacktrack (int playerNum) {

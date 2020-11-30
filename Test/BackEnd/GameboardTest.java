@@ -118,58 +118,58 @@ class GameboardTest {
 	void playFloorTile() {
 		Coordinate[] locations = gb.getSlideLocations();
 
+        // Testing inserting from the left.
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(STRAIGHT,gb.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(2,2)).getType());
 		// Testing inserting from the left.
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(T_SHAPE, gb2.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(STRAIGHT, gb2.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb2.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(STRAIGHT, gb2.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(T_SHAPE, gb2.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(2,2)).getType());
 		// Testing inserting from the left.
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(T_SHAPE, gb2.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(STRAIGHT, gb2.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb2.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(STRAIGHT, gb2.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(T_SHAPE, gb2.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(2,2)).getType());
-		// Testing inserting from the left.
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(STRAIGHT, gb3.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(T_SHAPE, gb3.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb3.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(T_SHAPE, gb3.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(STRAIGHT, gb3.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(STRAIGHT, gb3.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(T_SHAPE, gb3.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb3.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(T_SHAPE, gb3.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(STRAIGHT, gb3.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(2,2)).getType());
 		// Testing inserting from the right.
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(STRAIGHT, gb4.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(T_SHAPE, gb4.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb4.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(T_SHAPE,gb4.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(STRAIGHT, gb4.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(STRAIGHT, gb4.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(T_SHAPE, gb4.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb4.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(T_SHAPE,gb4.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(STRAIGHT, gb4.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(2,2)).getType());
 	}
 
 	@Test
 	void placeFixedTile() {
 		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
-		assertEquals(CORNER, gb.TileAt(new Coordinate(2, 3)).getType());
+		assertEquals(CORNER, gb.tileAt(new Coordinate(2, 3)).getType());
 		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
-		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(3, 3)).getType());
+		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(3, 3)).getType());
 		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(2, 3)).getType());
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(2, 3)).getType());
 		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
-		assertEquals(GOAL, gb.TileAt(new Coordinate(2, 1)).getType());
+		assertEquals(GOAL, gb.tileAt(new Coordinate(2, 1)).getType());
 	}
 
 
