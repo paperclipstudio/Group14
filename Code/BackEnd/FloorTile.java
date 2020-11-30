@@ -45,9 +45,10 @@ public class FloorTile extends Tile {
 	}
 
 	//temp
-	public void setFireTic (){
+	public void setFireTic (int numOfPlayers){
 		this.isOnFire = true;
-		ticFire = 3*2; //The 3 should be set to the number of players.
+		ticFire = numOfPlayers * 2; //Fire tiles last for 2 cycles.
+		System.out.println("Fire Tiles: " + numOfPlayers * 2);
 	}
 
 	public void ticFire (){
@@ -57,9 +58,10 @@ public class FloorTile extends Tile {
 		}
 	}
 
-	public void setFrozenTic (){
+	public void setFrozenTic (int numOfPlayers){
 		isFrozen = true;
-		ticFrozen = 3; //The 3 should be set to the number of players.
+		ticFrozen = numOfPlayers; //Frozen tiles last for 1 cycle.
+		System.out.println("Frozen Tiles: " + numOfPlayers);
 	}
 
 	public void ticFrozen (){

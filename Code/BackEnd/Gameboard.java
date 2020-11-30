@@ -333,34 +333,35 @@ public class Gameboard {
 	}
 
 	private void setFireCoords(Coordinate location) {
+		int players = getNumOfPlayers();
 		for (int i = 0; i < boardTiles.length; i++) {
 			for (int j = 0; j < boardTiles[i].length; j++) {
 				if (i == location.getX() && j == location.getY()) {
 					//Assuming 0,0 is bottom left. Sets a 3x3 radius of the tiles on fire.
-					boardTiles[i][j].setFireTic(); //mid
+					boardTiles[i][j].setFireTic(players); //mid
 					if (i != width) {
-						boardTiles[i + 1][j].setFireTic(); //right
+						boardTiles[i + 1][j].setFireTic(players); //right
 					}
 					if (i != 0) {
-						boardTiles[i - 1][j].setFireTic(); //left
+						boardTiles[i - 1][j].setFireTic(players); //left
 					}
 					if (j != height) {
-						boardTiles[i][j + 1].setFireTic(); //up
+						boardTiles[i][j + 1].setFireTic(players); //up
 					}
 					if (i != width && j != height) {
-						boardTiles[i + 1][j + 1].setFireTic(); //upper right
+						boardTiles[i + 1][j + 1].setFireTic(players); //upper right
 					}
 					if (i != 0 && j != height) {
-						boardTiles[i - 1][j + 1].setFireTic(); //upper left
+						boardTiles[i - 1][j + 1].setFireTic(players); //upper left
 					}
 					if (j != 0) {
-						boardTiles[i][j - 1].setFireTic(); //down
+						boardTiles[i][j - 1].setFireTic(players); //down
 					}
 					if (i != width && j != 0) {
-						boardTiles[i + 1][j - 1].setFireTic(); //down right
+						boardTiles[i + 1][j - 1].setFireTic(players); //down right
 					}
 					if (i != 0 && j != 0) {
-						boardTiles[i - 1][j - 1].setFireTic(); //down left
+						boardTiles[i - 1][j - 1].setFireTic(players); //down left
 					}
 				}
 			}
@@ -368,34 +369,35 @@ public class Gameboard {
 	}
 
 	private void setFreezeCoords(Coordinate location) {
+		int players = getNumOfPlayers();
 		for (int i = 0; i < boardTiles.length; i++) {
 			for (int j = 0; j < boardTiles[i].length; j++) {
 				if (i == location.getX() && j == location.getY()) {
 					//Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
-					boardTiles[i][j].setFrozenTic(); //mid
+					boardTiles[i][j].setFrozenTic(players); //mid
 					if (i != width) {
-						boardTiles[i + 1][j].setFrozenTic(); //right
+						boardTiles[i + 1][j].setFrozenTic(players); //right
 					}
 					if (i != 0) {
-						boardTiles[i - 1][j].setFrozenTic(); //left
+						boardTiles[i - 1][j].setFrozenTic(players); //left
 					}
 					if (j != height) {
-						boardTiles[i][j + 1].setFrozenTic(); //up
+						boardTiles[i][j + 1].setFrozenTic(players); //up
 					}
 					if (i != width && j != height) {
-						boardTiles[i + 1][j + 1].setFrozenTic(); //upper right
+						boardTiles[i + 1][j + 1].setFrozenTic(players); //upper right
 					}
 					if (i != 0 && j != height) {
-						boardTiles[i - 1][j + 1].setFrozenTic(); //upper left
+						boardTiles[i - 1][j + 1].setFrozenTic(players); //upper left
 					}
 					if (j != 0) {
-						boardTiles[i][j - 1].setFrozenTic(); //down
+						boardTiles[i][j - 1].setFrozenTic(players); //down
 					}
 					if (i != width && j != 0) {
-						boardTiles[i + 1][j - 1].setFrozenTic(); //down right
+						boardTiles[i + 1][j - 1].setFrozenTic(players); //down right
 					}
 					if (i != 0 && j != 0) {
-						boardTiles[i - 1][j - 1].setFrozenTic(); //down left
+						boardTiles[i - 1][j - 1].setFrozenTic(players); //down left
 					}
 				}
 			}
@@ -462,5 +464,15 @@ public class Gameboard {
 			}
 		}
 		return false;
+	}
+
+	public int getNumOfPlayers(){
+		int numOfPlayers = 0;
+		for (int i = 0; i < playerLocations.length; i++){
+			if (playerLocations[i][0] != null){
+				numOfPlayers++;
+			}
+		}
+		return numOfPlayers;
 	}
 }
