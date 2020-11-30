@@ -1,73 +1,88 @@
 package MessageOfTheDay;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.*;
+import java.net.*;
 
 
-public class MessageOfTheDay{
-
-    private static String urlString(String urlName){
-        StringBuilder puzzle = new StringBuilder();
-        try {
-            URL url = new URL(urlName);
-            URLConnection urlConnection = url.openConnection();
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String line;
-            while ((line = in.readLine()) != null){
-                puzzle.append(line);
-            }
-            in.close();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return puzzle.toString();
-    }
-
-    public static String shiftLetters(){
-        String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String puzzle = urlString("http://cswebcat.swansea.ac.uk/puzzle");
-        String answer = "";
-        int i = 0;
-        int shift;
-        System.out.println(puzzle);
-
-        while (puzzle.length() > answer.length() ){
-            int position = letters.indexOf(puzzle.charAt(i));
-            if ((i + 1) % 2 == 1){
-                shift = (position - (i+1)) % letters.length();
-                if (shift < 0) {
-                    shift = shift + letters.length();
-                }
-            }
-            else {
-                shift = (position + (i+1)) % letters.length();
-            }
-
-            char newCharacter = letters.charAt(shift);
-            answer += newCharacter;
-            i++;
-        }
-
-        return "CS-230"+ answer + ("CS-230" + answer).length();
-
-    }
-/*
-<<<<<<< HEAD
-    public static void main(String[] args) throws StringIndexOutOfBoundsException {
-        System.out.println(shiftUrlString());
-
-
-=======
-    public static void main(String[] args){
-        System.out.println(shiftLetters());
->>>>>>> 8ec3e1af330237d1f9d9b11b66f7571c57f2c165
-
-    }
-
+/**
+ * This class is used for getting the message of the day.
+ *
+ * @author Christian Sanger
  */
+public class MessageOfTheDay {
+	private static final int A_NUM = 'A';
+	private static final int Z_NUM = 'Z';
+
+	/**
+	 * Reads in the MoTD string
+	 * @return the string that need to be converted
+	 * @throws Exception if URL can't be accessed
+	 */
+	private static String readInMOTD() throws Exception {
+		URL motdURL = new URL("http://cswebcat.swansea.ac.uk/puzzle");
+		URLConnection conn = motdURL.openConnection();
+		InputStream message = conn.getInputStream();
+		BufferedReader readIn = new BufferedReader(new InputStreamReader(message));
+		String puzzle = readIn.readLine();
+		readIn.close();
+		return (puzzle);
+	}
+
+	/**
+	 * Solves the puzzle
+	 * @param Messsage the encrypted message
+	 * @return the unencrypted message
+	 */
+	private static String processMOTD(String Messsage) {
+		char[] puzzle = Messsage.toCharArray();
+		for(int i = 0; i < Messsage.length(); i++) {
+			int charNum;
+			// apply shifting.
+			if (i % 2 == 0) {
+				charNum = puzzle[i] - i - 1;
+			} else {
+				charNum = puzzle[i] + i + 1;
+			}
+			// bring back in range of A-Z
+			while (charNum < A_NUM) {
+				charNum += 26;
+			}
+			while (charNum > Z_NUM) {
+				charNum -= 26;
+			}
+			puzzle[i] = (char) charNum;
+		}
+		String result = "CS-230" + String.valueOf(puzzle);
+		return result + result.length();
+	}
+
+	/**
+	 * Uses unencypted message to get final message from server
+	 * @param MOTD unencypted message
+	 * @return final Message of the day.
+	 * @throws IOException if URL or message incorrect.
+	 */
+	private static String confirmMOTD(String MOTD) throws IOException {
+		StringBuilder output = new StringBuilder();
+		System.out.println("http://cswebcat.swansea.ac.uk/message?solution=" + MOTD);
+		URL solutionCheckURL = new URL("http://cswebcat.swansea.ac.uk/message?solution=" + MOTD);
+		URLConnection conn = solutionCheckURL.openConnection();
+		InputStream message = conn.getInputStream();
+		BufferedReader readIn = new BufferedReader(new InputStreamReader(message));
+		output.append(readIn.readLine());
+		readIn.close();
+		return (output.toString());
+	}
+
+	/**
+	 * Reads the message of the day from the server
+	 * @return message from server
+	 * @throws Exception if error in solving puzzle
+	 */
+	public static String puzzle() throws Exception {
+		String toSolve = readInMOTD();
+		String solved = processMOTD(toSolve);
+		return confirmMOTD(solved);
+	}
+
 }
+

@@ -1,23 +1,15 @@
 package FrontEnd;
 
-import MessageOfTheDay.MOTD;
+import MessageOfTheDay.MessageOfTheDay;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 /**
  * Use to control the GameScreen scene.
@@ -36,7 +28,7 @@ public class MenuScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         String message = "";
         try {
-            message = MOTD.puzzle();
+            message = MessageOfTheDay.puzzle();
         } catch (Exception e) {
             message = "Error with Server" + e.getCause();
 
