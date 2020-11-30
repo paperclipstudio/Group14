@@ -1,5 +1,7 @@
 package BackEnd;
 
+import FrontEnd.Main;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,6 +31,8 @@ public class GameLoad {
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
 		gameLogic.newGame("Gameboards\\" + gameBoard);
+		int numOfPlayers = Integer.parseInt(in.nextLine());
+		Main.setNumberOfPlayers(numOfPlayers);
 
 		while (in.hasNextLine()) {
 			int x;
