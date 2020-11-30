@@ -34,9 +34,6 @@ public class PickPlayerController {
 
     ArrayList<File> profiles = new ArrayList<>();
 
-
-
-
     /**
      * show player select scene
      *      */
@@ -54,12 +51,16 @@ public class PickPlayerController {
 
                 playerList1.getItems().add(player);
                 playerList2.getItems().add(player);
+                playerList3.hide();
+                playerList4.hide();
+
 
             }else if(Main.getNumberOfPlayers() == 3){
 
                 playerList1.getItems().add(player);
                 playerList2.getItems().add(player);
                 playerList3.getItems().add(player);
+                playerList4.hide();
 
             }else if(Main.getNumberOfPlayers() == 4) {
 
@@ -89,22 +90,63 @@ public class PickPlayerController {
 
             if(Main.getNumberOfPlayers() == 2) {
 
-                profiles.add(new File(playerList1.getValue()));
-                profiles.add(new File(playerList2.getValue()));
+                if(!playerList1.getValue().equals(playerList2.getValue())){
+                    profiles.add(new File(playerList1.getValue()));
+                    profiles.add(new File(playerList2.getValue()));
+
+                    wl.load("GameScreen");
+
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("You can not select same players more than once.");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
 
             }else if(Main.getNumberOfPlayers() == 3){
 
-                profiles.add(new File(playerList1.getValue()));
-                profiles.add(new File(playerList2.getValue()));
-                profiles.add(new File(playerList3.getValue()));
+                if(!playerList1.getValue().equals(playerList2.getValue()) &&
+                        !playerList1.getValue().equals(playerList3.getValue()) &&
+                        !playerList2.getValue().equals(playerList3.getValue())
+                   ){
+                    profiles.add(new File(playerList1.getValue()));
+                    profiles.add(new File(playerList2.getValue()));
+                    profiles.add(new File(playerList3.getValue()));
+
+                    wl.load("GameScreen");
+
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("You can not select same players more than once.");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
 
             }else if(Main.getNumberOfPlayers() == 4){
 
-                profiles.add(new File(playerList1.getValue()));
-                profiles.add(new File(playerList2.getValue()));
-                profiles.add(new File(playerList3.getValue()));
-                profiles.add(new File(playerList4.getValue()));
+                if(!playerList1.getValue().equals(playerList2.getValue()) &&
+                        !playerList1.getValue().equals(playerList3.getValue()) &&
+                        !playerList1.getValue().equals(playerList4.getValue()) &&
+                        !playerList2.getValue().equals(playerList3.getValue()) &&
+                        !playerList2.getValue().equals(playerList4.getValue()) &&
+                        !playerList3.getValue().equals(playerList4.getValue())
+                   ){
+                    profiles.add(new File(playerList1.getValue()));
+                    profiles.add(new File(playerList2.getValue()));
+                    profiles.add(new File(playerList3.getValue()));
+                    profiles.add(new File(playerList4.getValue()));
 
+                    wl.load("GameScreen");
+
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("You can not select same players more than once.");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
             }
 
 
@@ -118,7 +160,6 @@ public class PickPlayerController {
             e.printStackTrace();
         }
         //Profile.getName(profiles);
-        wl.load("GameScreen");
 
     }
 
