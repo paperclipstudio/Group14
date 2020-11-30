@@ -55,12 +55,15 @@ public class PickPlayerController {
         playerList4.getSelectionModel().selectFirst();
 
     }
-
     /**
      * add the chosen player's file to the arraylist.
      * @throws IOException
      */
     public void returnPlayers() {
+        // for each player picked
+        // Read profile file to create a profile
+        //  Add this profile to arraylist
+        // Main.profiles = profiles.toArray(new Profile[]);
         try {
             profiles.add(new File(playerList1.getValue()));
             profiles.add(new File(playerList2.getValue()));

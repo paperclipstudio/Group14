@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -107,6 +108,8 @@ public class ProfilesController {
 		}
 
 	}
+
+
 
 	public void viewData() throws FileNotFoundException {
 		String newName = input.getText();

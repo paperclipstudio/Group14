@@ -3,6 +3,7 @@ package BackEnd;
 
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
+import sun.plugin2.gluegen.runtime.CPU;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ public class Gameboard {
 	private SilkBag silkbag;
 	private ArrayList<Coordinate> goalCoors;
 	private Coordinate[][] playerLocations;
-	private ActionTileLocations[] actionTiles;
 	private FloorTile[][] boardTiles;
 	private FloorTile[][] fixedTiles;
 	private FloorTile removedTile;
@@ -32,7 +32,7 @@ public class Gameboard {
 		slideLocations = new Coordinate[10];
 		boardTiles = new FloorTile[100][100];
 		fixedTiles = new FloorTile[100][100];
-		playerLocations = new Coordinate[4][1000];
+		playerLocations = new Coordinate[4][3];
 	}
 
 	public int getWidth() {
@@ -44,25 +44,24 @@ public class Gameboard {
 	}
 
 	public Coordinate getPlayerPos(int player) {
-		//gets the last location the player was in.
-		int length = 0;
-		for (Coordinate coor : playerLocations[player]) {
-			if (coor != null) {
-				length++;
-			}
-		}
-		return playerLocations[player][length - 1];
+		return playerLocations[player][0];
+	}
+
+	public Coordinate getPrevPlayerPos(int player, int history) {
+		return playerLocations[player][history];
 	}
 
 	public void setPlayerPos(int player, Coordinate position) {
-		//sets the last location the player was in.
-		int length = 0;
-		for (Coordinate coor : playerLocations[player]) {
-			if (coor != null) {
-				length++;
+		System.out.println(player + " ");
+		for (Coordinate pos : playerLocations[player]) {
+			if (pos != null) {
+				System.out.print(pos.toString() + ", ");
 			}
+			System.out.print("\n");
 		}
-		this.playerLocations[player][length] = position;
+		playerLocations[player][2] = playerLocations[player][1];
+		playerLocations[player][1] = playerLocations[player][0];
+		playerLocations[player][0] = position;
 	}
 
 	public Tile playFloorTile(Coordinate location, FloorTile insertedTile) {
@@ -189,12 +188,21 @@ public class Gameboard {
 			FloorTile tileInDirection;
 			Rotation flipDirection = flipDirection(direction);
 			Coordinate locationToCheck = shift(location, direction);
+			// Check if someone is standing on that tile
+			if(checkTileForPlayer(locationToCheck)) {
+				continue;
+			}
 			// check to see if new direction is off the board.
 			if ((locationToCheck.getX() < 0 || locationToCheck.getX() >= width) ||
 					(locationToCheck.getY() < 0 || locationToCheck.getY() >= height)) {
 				continue;
 			}
 			tileInDirection = boardTiles[locationToCheck.getX()][locationToCheck.getY()];
+			// Check if on fire.
+			if (tileInDirection.onFire()) {
+				continue;
+			}
+			// If tile passes all tests then it is a valid place to move
 			if (validMove(tileInDirection, flipDirection)) {
 				moveLocations.add(locationToCheck);
 			}
@@ -257,7 +265,7 @@ public class Gameboard {
 				shiftX = -1;
 				break;
 		}
-		return coordinate.shift(shiftX, shiftY);
+		return new Coordinate(coordinate.getX() + shiftX, coordinate.getY() + shiftY);
 	}
 
 
@@ -304,10 +312,9 @@ public class Gameboard {
 		return false;
 	}
 
-	private boolean checkTileForPlayer(int x, int y) {
-		for (int i = 0; i < playerLocations.length; i++) {
-			Coordinate playerPos = playerLocations[i][playerLocations[i].length - 1];
-			if (playerPos != null && playerPos.getX() == x && playerPos.getY() == y) {
+	private boolean checkTileForPlayer(Coordinate toCheck) {
+		for (Coordinate[] playerLocation : playerLocations) {
+			if (playerLocation[0] != null && playerLocation[0].equals(toCheck)) {
 				return true;
 			}
 		}
@@ -415,42 +422,30 @@ public class Gameboard {
 		return locations.toArray(slideLocations);
 	}
 
-	public FloorTile TileAt(Coordinate coordinate) {
+	public FloorTile tileAt(Coordinate coordinate) {
 		return boardTiles[coordinate.getX()][coordinate.getY()];
 	}
 
 	public void backtrack(int player) {
-		Coordinate posTwoTurnsAgo;
-		Coordinate posOneTurnAgo;
-		FloorTile tileTwoTurns;
-		FloorTile tileOneTurn;
 		//gets the players current position.
-		int length = -1;
-		for (Coordinate coor : playerLocations[player]) {
-			if (coor != null) {
-				length++;
-			}
-		}
-		if (length >= 2) {
-			//gets the tile, one and two turns ago that the player was on.
-			posTwoTurnsAgo = playerLocations[player][length - 2];
-			tileTwoTurns = boardTiles[posTwoTurnsAgo.getX()][posTwoTurnsAgo.getY()];
-			posOneTurnAgo = playerLocations[player][length - 1];
-			tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
-			//checks to see if the tile two turns ago is on fire, if not, sets that as the players position
-			if (!tileTwoTurns.onFire() && !checkTileForPlayer(posTwoTurnsAgo.getX(), posTwoTurnsAgo.getY())) {
+		Coordinate posOneTurnAgo = getPrevPlayerPos(player, 1);
+		FloorTile tileOneTurn = tileAt(posOneTurnAgo);//gets the tile, one and two turns ago that the player was on.
+		Coordinate posTwoTurnsAgo = getPrevPlayerPos(player, 2);
+		FloorTile tileTwoTurn = tileAt(getPrevPlayerPos(player, 2));
+
+		//checks to see if the tile two turns ago is on fire, if not, sets that as the players position
+		if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo)) {
+			if (!tileTwoTurn.onFire() && !checkTileForPlayer(posTwoTurnsAgo)) {
+				// They can move two steps back
 				setPlayerPos(player, posTwoTurnsAgo);
-			} else if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo.getX(), posOneTurnAgo.getY())) {
-				setPlayerPos(player, posOneTurnAgo);
-			}
-		} else if (length == 1) {
-			posOneTurnAgo = playerLocations[player][length - 1];
-			tileOneTurn = boardTiles[posOneTurnAgo.getX()][posOneTurnAgo.getY()];
-			//checks to see if the tile one turn ago is on fire, if not sets that as the players position
-			if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo.getX(), posOneTurnAgo.getY())) {
+			} else {
+				// They can only move one step back
 				setPlayerPos(player, posOneTurnAgo);
 			}
 		}
+		// they can't move backward
+
+
 	}
 
 	public boolean containsNull() {

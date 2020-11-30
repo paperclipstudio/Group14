@@ -1,7 +1,9 @@
 package BackEnd;
-public class FloorTile extends Tile {
 
-	boolean	isFixed;
+import java.util.Random;
+
+public class FloorTile extends Tile {
+	private boolean	isFixed;
 	TileType type;
 	Rotation rotation;
 	//Added by Atif as a temp way to distinguish if a tile is on fire.
@@ -24,14 +26,14 @@ public class FloorTile extends Tile {
 		this.type = type;
 	}
 
-	public TileType getType() { return type;
+	public TileType getType() {
+		return type;
 	}
 
 	public Rotation getRotation() {
 		return rotation;
 	}
 
-	// change by Atif to return the attribute.
 	public Boolean onFire() {
 		return isOnFire;
 	}
@@ -44,7 +46,6 @@ public class FloorTile extends Tile {
 		this.rotation= rotation;
 	}
 
-	//temp
 	public void setFireTic (){
 		this.isOnFire = true;
 		ticFire = 3*2; //The 3 should be set to the number of players.
@@ -67,5 +68,14 @@ public class FloorTile extends Tile {
 		if (ticFrozen == 0){
 			isFrozen = false;
 		}
+	}
+
+	public boolean isFixed() {
+
+		return (new Random()).nextBoolean();
+	}
+
+	public void setFixed(boolean fixed) {
+		isFixed = fixed;
 	}
 }

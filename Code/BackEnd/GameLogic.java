@@ -3,9 +3,7 @@ package BackEnd;
 
 import javafx.util.Pair;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Random;
 
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
@@ -134,12 +132,15 @@ public class GameLogic {
 	 * @param tile which tile to play
 	 * @param coordinate where it would like to be played
 	 */
-	public void action(ActionTile tile, Coordinate coordinate) {
-		gameSaver.playActionTile(coordinate, tile);
-		if (tile.getType() == DOUBLE_MOVE) {
-			doubleMove = true;
+	public void action(ActionTile tile, Coordinate coordinate, int playerNo) {
+		// If tile is null then player didn't/can't play an action card.
+		if (tile != null) {
+			gameSaver.playActionTile(coordinate, tile);
+			if (tile.getType() == DOUBLE_MOVE) {
+				doubleMove = true;
+			}
+			players[currentPlayerNo].playActionTile(coordinate, tile, playerNo);
 		}
-		players[currentPlayerNo].playActionTile(coordinate, tile, 0);
 		phase = MOVE;
 	}
 
@@ -148,14 +149,7 @@ public class GameLogic {
 	 * @return array of all playable tiles.
 	 */
 	public ActionTile[] getActionCards() {
-		//TODO FIX JUST FOR TESTING
-		System.out.println("FAKE GET ACTION CARDS");
-		ActionTile[] result = new ActionTile[4];
-		result[0] = new ActionTile(DOUBLE_MOVE);
-		result[1] = new ActionTile(TileType.BACKTRACK);
-		result[2] = new ActionTile(TileType.FIRE);
-		result[3] = new ActionTile(TileType.FROZEN);
-		return result;
+		return currentPlayer.getInventory().toArray(new ActionTile[0]);
 	}
 
 	/**
@@ -182,9 +176,9 @@ public class GameLogic {
 		this.seed = seed;
 	}
 
-	public GameLogic() {
-		this.seed = (new Random()).nextInt();
-	}
+	//public GameLogic() {
+	//	this.seed = (new Random()).nextInt();
+	//}
 
 	/**
 	 * Returns what floor tile is at a given location on the board.
@@ -192,7 +186,7 @@ public class GameLogic {
 	 * @return tile at location.
 	 */
 	public FloorTile getTileAt(Coordinate location) {
-		return gameboard.TileAt(location);
+		return gameboard.tileAt(location);
 	}
 
 	/**

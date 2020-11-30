@@ -29,12 +29,12 @@ public class MessageOfTheDay {
 
 	/**
 	 * Solves the puzzle
-	 * @param Messsage the encrypted message
+	 * @param Message the encrypted message
 	 * @return the unencrypted message
 	 */
-	private static String processMOTD(String Messsage) {
-		char[] puzzle = Messsage.toCharArray();
-		for(int i = 0; i < Messsage.length(); i++) {
+	private static String processMOTD(String Message) {
+		char[] puzzle = Message.toCharArray();
+		for(int i = 0; i < Message.length(); i++) {
 			int charNum;
 			// apply shifting.
 			if (i % 2 == 0) {

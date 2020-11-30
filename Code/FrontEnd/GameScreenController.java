@@ -24,11 +24,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import BackEnd.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Box;
 import javafx.util.Duration;
 
 import static BackEnd.Phase.MOVE;
@@ -41,7 +44,7 @@ import static BackEnd.TileType.*;
  */
 public class GameScreenController implements Initializable {
 	@FXML
-	private HBox cards;
+	private VBox cards;
 	@FXML
 	private Pane tiles;
 	@FXML
@@ -76,7 +79,6 @@ public class GameScreenController implements Initializable {
 			} else {
 				startNewGame(Main.getBoardFile());
 			}
-			updateBoard();
 			int rotate = 0;
 			tiles.setRotationAxis(new Point3D(10,0,10));
 			tiles.setRotate(rotate);
@@ -84,7 +86,8 @@ public class GameScreenController implements Initializable {
 			players.setRotate(rotate);
 			controls.setRotationAxis(new Point3D(10,0,10));
 			controls.setRotate(rotate);
-
+			tileWidth = 400 / gameLogic.getHeight();
+			updateBoard();
 			mainLoop();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -107,7 +110,7 @@ public class GameScreenController implements Initializable {
 	private void mainLoop() {
 
 		//tiles.setRotate(tiles.getRotate() + 10);
-		//updateBoard();
+		updateBoard();
 		phase = gameLogic.getGamePhase();
 		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug");
@@ -218,7 +221,7 @@ public class GameScreenController implements Initializable {
 			default:
 				throw new IllegalStateException("Unexpected value: " + direction);
 		}
-		ImageView tileView = Assets.getFloorTileImage(newTile, newTileLocation);
+		Pane tileView = Assets.getFloorTileImage(newTile, newTileLocation);
 		tiles.getChildren().add(tileView);
 
 		// Shift players
@@ -371,7 +374,7 @@ public class GameScreenController implements Initializable {
 	 * @param board path to board file
 	 */
 	public void startNewGame(String board) throws Exception {
-		gameLogic = new GameLogic();
+		gameLogic = new GameLogic((new Random()).nextInt());
 		gameLogic.newGame(board);
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
@@ -398,119 +401,131 @@ public class GameScreenController implements Initializable {
 	private void setupActionPhase() throws IOException {
 		cards.getChildren().clear();
 		ActionTile[] tiles = gameLogic.getActionCards();
-		for (ActionTile tile : tiles) {
-			final Node vCard = Assets.createCard(tile);
-			vCard.setOnMouseClicked((e) -> {
-			});
-			cards.getChildren().add(vCard);
-			switch (tile.getType()) {
-				case DOUBLE_MOVE:
-					vCard.setOnMouseClicked((e) -> {
-						vCard.setEffect(new Bloom(0.03));
-						vCard.setOnMouseClicked((e2) -> {
-							gameLogic.action(new ActionTile(DOUBLE_MOVE), null);
-							for (Node player : players.getChildren()) {
-								player.setEffect(new Bloom(999));
-								player.setOnMouseClicked(e3 -> {
-								});
-							}
-							mainLoop();
+		if (tiles.length == 0) {
+			// If no cards continue
+			gameLogic.action(null, null, 0);
+			mainLoop();
+		} else {
+			// Add a skip button
+			Button skip = new Button();
+			skip.setText("skip");
+
+
+			for (ActionTile tile : tiles) {
+				final Node vCard = Assets.createCard(tile);
+				vCard.setOnMouseClicked((e) -> {
+				});
+				cards.getChildren().add(vCard);
+				switch (tile.getType()) {
+					case DOUBLE_MOVE:
+						vCard.setOnMouseClicked((e) -> {
+							vCard.setEffect(new Bloom(0.03));
+							vCard.setOnMouseClicked((e2) -> {
+								gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
+								for (Node player : players.getChildren()) {
+									player.setEffect(new Bloom(999));
+									player.setOnMouseClicked(e3 -> {
+									});
+								}
+								mainLoop();
+							});
 						});
-					});
-					break;
-				case BACKTRACK:
-					vCard.setOnMouseClicked((e) -> {
-						hideAllControls();
-						// Get all players that can be back tracked
-						boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
-						Node[] playerSelectControls = new Node[validPlayers.length];
-						for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
-							if (validPlayers[i]) {
-								// For each valid player
-								final int playerNumber = i;
-								// make them glow
-								Node fakePlayer = Assets.getPlayer(i);
-								fakePlayer.setTranslateX(gameLogic.getPlayerLocations()[i].getX() * tileWidth);
-								fakePlayer.setTranslateY(gameLogic.getPlayerLocations()[i].getY() * tileWidth);
-								fakePlayer.setEffect(new Bloom(0.1));
-								controls.getChildren().add(fakePlayer);
-								// Set them into an active button
-								fakePlayer.setOnMouseClicked(e2 -> {
-									hideAllControls();
-									gameLogic.backtrack(playerNumber);
+						break;
+					case BACKTRACK:
+						vCard.setOnMouseClicked((e) -> {
+							hideAllControls();
+							// Get all players that can be back tracked
+							boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
+							Node[] playerSelectControls = new Node[validPlayers.length];
+							for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
+								if (validPlayers[i]) {
+									// For each valid player
+									final int playerNumber = i;
+									// make them glow
+									Node fakePlayer = Assets.getPlayer(i);
+									fakePlayer.setTranslateX(gameLogic.getPlayerLocations()[i].getX() * tileWidth);
+									fakePlayer.setTranslateY(gameLogic.getPlayerLocations()[i].getY() * tileWidth);
+									fakePlayer.setEffect(new Bloom(0.1));
+									controls.getChildren().add(fakePlayer);
+									// Set them into an active button
+									fakePlayer.setOnMouseClicked(e2 -> {
+										hideAllControls();
+										gameLogic.action(new ActionTile(BACKTRACK), null, playerNumber);
+										updateBoard();
+										mainLoop();
+									});
+								}
+
+							}
+						});
+
+						break;
+					case FIRE:
+						vCard.setOnMouseClicked((e) -> {
+							hideAllControls();
+							Node fire = Assets.getFireEffect();
+							controls.getChildren().add(fire);
+							controls.setOnMouseMoved((e2) -> {
+								System.out.println("boop");
+								int getX = (int) (e2.getX() / tileWidth);
+								int getY = (int) (e2.getY() / tileWidth);
+								if (getX < 1) {
+									getX = 1;
+								}
+								if (getX > width - 2) {
+									getX = width - 2;
+								}
+								if (getY < 1) {
+									getY = 1;
+								}
+								if (getY > height - 2) {
+									getY = height - 2;
+								}
+								final int x = getX;
+								final int y = getY;
+								fire.setTranslateX((getX - 1) * tileWidth);
+								fire.setTranslateY((getY - 1) * tileWidth);
+								fire.setOnMouseClicked((e3) -> {
+									gameLogic.action(new ActionTile(FIRE), new Coordinate(x, y), -1);
 									mainLoop();
 								});
-							}
-
-						}
-					});
-
-					break;
-				case FIRE:
-					vCard.setOnMouseClicked((e) -> {
-						hideAllControls();
-						Node fire = Assets.getFireEffect();
-						controls.getChildren().add(fire);
-						controls.setOnMouseMoved((e2) -> {
-							System.out.println("boop");
-							int getX = (int) (e2.getX()/tileWidth);
-							int getY = (int) (e2.getY()/tileWidth);
-							if (getX < 1) {
-								getX = 1;
-							}
-							if (getX > width - 2) {
-								getX = width - 2;
-							}
-							if (getY < 1) {
-								getY = 1;
-							}
-							if (getY > height - 2) {
-								getY = height - 2;
-							}
-							final int x = getX;
-							final int y = getY;
-							fire.setTranslateX((getX - 1) * tileWidth);
-							fire.setTranslateY((getY - 1) * tileWidth);
-							fire.setOnMouseClicked((e3) -> {
-								gameLogic.action(new ActionTile(FIRE), new Coordinate(x, y));
-								mainLoop();
 							});
-						});
 
-					});
-					break;
-				case FROZEN:
-					vCard.setOnMouseClicked((e) -> {
-						hideAllControls();
-						Node frozen = Assets.getFrozenEffect();
-						controls.getChildren().add(frozen);
-						controls.setOnMouseMoved((e2) -> {
-							int getX = (int) (e2.getX()/tileWidth);
-							int getY = (int) (e2.getY()/tileWidth);
-							if (getX < 1) {
-								getX = 1;
-							}
-							if (getX > width - 2) {
-								getX = width - 2;
-							}
-							if (getY < 1) {
-								getY = 1;
-							}
-							if (getY > height - 2) {
-								getY = height - 2;
-							}
-							final int x = getX;
-							final int y = getY;
-							frozen.setTranslateX((getX - 1) * tileWidth);
-							frozen.setTranslateY((getY - 1) * tileWidth);
-							frozen.setOnMouseClicked((e3) -> {
-								gameLogic.action(new ActionTile(FROZEN), new Coordinate(x, y));
-								mainLoop();
+						});
+						break;
+					case FROZEN:
+						vCard.setOnMouseClicked((e) -> {
+							hideAllControls();
+							Node frozen = Assets.getFrozenEffect();
+							controls.getChildren().add(frozen);
+							controls.setOnMouseMoved((e2) -> {
+								int getX = (int) (e2.getX() / tileWidth);
+								int getY = (int) (e2.getY() / tileWidth);
+								if (getX < 1) {
+									getX = 1;
+								}
+								if (getX > width - 2) {
+									getX = width - 2;
+								}
+								if (getY < 1) {
+									getY = 1;
+								}
+								if (getY > height - 2) {
+									getY = height - 2;
+								}
+								final int x = getX;
+								final int y = getY;
+								frozen.setTranslateX((getX - 1) * tileWidth);
+								frozen.setTranslateY((getY - 1) * tileWidth);
+								frozen.setOnMouseClicked((e3) -> {
+									gameLogic.action(new ActionTile(FROZEN), new Coordinate(x, y), -1);
+									mainLoop();
+								});
 							});
-						});
 
-					});
-					break;
+						});
+						break;
+				}
 			}
 		}
 	}

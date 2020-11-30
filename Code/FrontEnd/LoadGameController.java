@@ -50,19 +50,10 @@ public class LoadGameController implements Initializable {
 	 * Called by start button.
 	 */
 	public void onPlayButton() {
-		try {
-			GameLoad.loader(selectGame.getValue());
-			Main.setLoadedGameFile(true);
-			Main.setLoadFile(selectGame.getValue());
-			WindowLoader wl = new WindowLoader(backButton);
-			wl.load("GameScreen");
-		} catch (FileNotFoundException e) {
-			System.out.println("File not fonud please try again");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Main.setLoadedGameFile(true);
+		Main.setLoadFile(selectGame.getValue());
+		WindowLoader wl = new WindowLoader(backButton);
+		wl.load("GameScreen");
 	}
 
 
