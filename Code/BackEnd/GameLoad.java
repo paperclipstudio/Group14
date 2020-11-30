@@ -31,8 +31,6 @@ public class GameLoad {
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
 		gameLogic.newGame("Gameboards\\" + gameBoard);
-		int numOfPlayers = Integer.parseInt(in.nextLine());
-		Main.setNumberOfPlayers(numOfPlayers);
 
 		while (in.hasNextLine()) {
 			int x;
