@@ -17,7 +17,7 @@ class GameboardTest {
 	Gameboard gb4 = new Gameboard(3,3, sb);
 
 	@BeforeEach
-	void setUp() {
+	void setUp() throws Exception {
 
 		gb.setPlayerPos(0, new Coordinate(1,1));
 		gb.setPlayerPos(1, new Coordinate( 2,1));

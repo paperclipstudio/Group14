@@ -96,7 +96,7 @@ public class GameLogic {
 	 * @param tile tile to be played
 	 * @param location where the tile should be played.
 	 */
-	public void floor(FloorTile tile, Coordinate location) {
+	public void floor(FloorTile tile, Coordinate location) throws Exception {
 		gameSaver.playFloorTile(location, tile);
 		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
 		players[currentPlayerNo].playFloorTile(location, tile);

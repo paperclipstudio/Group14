@@ -26,7 +26,7 @@ class PlayerTest {
 	}
 
 	@Test
-	void playFloorTile() {
+	void playFloorTile() throws Exception {
 		silkBag.getTile();
 		silkBag.insertTile(Tile.createTile(CORNER));
 		player.drawTile();
@@ -38,7 +38,7 @@ class PlayerTest {
 	}
 
 	@Test
-	void playActionTile() {
+	void playActionTile() throws Exception {
 		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
 		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));
 		player.playFloorTile(new Coordinate(-1,0), new FloorTile(CORNER));

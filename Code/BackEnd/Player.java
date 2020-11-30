@@ -88,7 +88,7 @@ public class Player
      * @param slideLocations Where the player wants to slide a tile in from
      * @param tile What tile the player wants to play
      */
-    public void playFloorTile (Coordinate slideLocations, FloorTile tile)    {
+    public void playFloorTile (Coordinate slideLocations, FloorTile tile) throws Exception {
         gameboard.playFloorTile(slideLocations, tile);
         lastDrawnTile = null;
     }

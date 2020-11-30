@@ -32,6 +32,7 @@ import BackEnd.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Box;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import static BackEnd.Phase.MOVE;
@@ -63,7 +64,7 @@ public class GameScreenController implements Initializable {
 	private int height;
 	public Phase phase;
 	private GameLogic gameLogic;
-	public static int tileWidth = 25;
+	public static int tileWidth = 50;
 	//private ImageView[] players;
 
 	/***
@@ -86,7 +87,7 @@ public class GameScreenController implements Initializable {
 			players.setRotate(rotate);
 			controls.setRotationAxis(new Point3D(10,0,10));
 			controls.setRotate(rotate);
-			tileWidth = 400 / gameLogic.getHeight();
+			tileWidth = 30;//(int) (ps.getHeight() / gameLogic.getHeight()) + 50;
 			updateBoard();
 			mainLoop();
 		} catch (FileNotFoundException e) {
@@ -189,8 +190,12 @@ public class GameScreenController implements Initializable {
 					playerTileChoice.setRotation(LEFT);
 				}
 				shiftTiles(direction, where, playerTileChoice);
-				gameLogic.floor(playerTileChoice, coordinate);
-				mainLoop();
+				try {
+					gameLogic.floor(playerTileChoice, coordinate);
+					mainLoop();
+				} catch (Exception exception) {
+					exception.printStackTrace();
+				}
 
 			});
 			controls.getChildren().add(arrow);
