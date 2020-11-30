@@ -86,10 +86,9 @@ public class Player
     /**
      * Play a floor tile in a given location and rotation.
      * @param slideLocations Where the player wants to slide a tile in from
-     * @param rotation What orientation the player wants the tile to be slid in at
+     * @param tile What tile the player wants to play
      */
     public void playFloorTile (Coordinate slideLocations, FloorTile tile)    {
-        //TODO call a playFloorTile function from the gameboard
         gameboard.playFloorTile(slideLocations, tile);
         lastDrawnTile = null;
     }
