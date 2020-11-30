@@ -64,7 +64,7 @@ public class WindowLoader {
 		} else {
 			w.getScene().setRoot(root);
 		}
-		w.setFullScreen(isFullscreen);
+		w.setFullScreen(Main.isFullScreen());
 	}
 
 	/**
