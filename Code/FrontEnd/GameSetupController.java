@@ -3,10 +3,7 @@ package FrontEnd;
 import BackEnd.SilkBag;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +27,12 @@ public class GameSetupController implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> selectGameboard;
+
+	@FXML
+	private ToggleGroup playerCount;
+
+	@FXML
+	private RadioButton selectedToggle;
 
 	private static String gameSaveName;
 
@@ -62,8 +65,9 @@ public class GameSetupController implements Initializable {
 		WindowLoader wl = new WindowLoader(backButton);
 		Main.setSeed((new Random()).nextInt());
 		Main.setBoardFile( selectGameboard.getValue());
-		// Get number of players from the radio buttons
-		//Main.setNumberOfPlayer();
+		selectedToggle = (RadioButton) playerCount.getSelectedToggle();
+		int numOfPlayers = Integer.parseInt(selectedToggle.getText());
+		Main.setNumberOfPlayers(numOfPlayers);
 		try {
 			this.gameSaveName = (saveName.getText());
 			if (!(gameSaveName.equals(""))) {
