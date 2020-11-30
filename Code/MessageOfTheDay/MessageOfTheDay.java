@@ -56,8 +56,8 @@ public class MessageOfTheDay {
 	}
 
 	/**
-	 * Uses unencypted message to get final message from server
-	 * @param MOTD unencypted message
+	 * Uses unencrypted message to get final message from server
+	 * @param MOTD unencrypted message
 	 * @return final Message of the day.
 	 * @throws IOException if URL or message incorrect.
 	 */

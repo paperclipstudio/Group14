@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import BackEnd.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,6 +11,7 @@ import java.util.Scanner;
 
 /***
  * Screen used to create edit and delete profiles.
+ * @author zhan zhang
  */
 public class ProfilesController {
 	@FXML
@@ -28,6 +28,9 @@ public class ProfilesController {
 	@FXML
 	private ListView<String> playerList;
 
+	/**
+	 * show file we have in the save data folder to the list when this page is open
+	 */
 	public void initialize(){
 
 		File file = new File("SaveData\\UserData\\");
@@ -48,11 +51,18 @@ public class ProfilesController {
 
 	}
 
+	/**
+	 * the action on the button back, back to the menus screen.
+	 */
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}
 
+	/**
+	 * @throws IOException try to create a user file with name typed, create one in UserData if there is not a file with
+	 * initialized data and send alert if there is one.
+	 */
 	public void createFile() throws IOException {
 		String newName = input.getText();
 
@@ -83,6 +93,9 @@ public class ProfilesController {
 
 	}
 
+	/**
+	 * delete the file with name entered and send alert when there is no file with same name.
+	 */
 	public void deleteFile() {
 		String newName = input.getText();
 
@@ -109,8 +122,10 @@ public class ProfilesController {
 
 	}
 
-
-
+	/**
+	 * @throws FileNotFoundException view the data saved in the file with same name as typed, send alert when there is
+	 * no such a file.
+	 */
 	public void viewData() throws FileNotFoundException {
 		String newName = input.getText();
 		File user = new File("SaveData\\UserData\\" + newName + ".txt");

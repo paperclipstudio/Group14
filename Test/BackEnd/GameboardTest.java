@@ -3,6 +3,9 @@ package BackEnd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
+import static BackEnd.Rotation.UP;
 import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -75,6 +78,7 @@ class GameboardTest {
 		Coordinate move1 = new Coordinate(2,1);
 		Coordinate move2 = new Coordinate(2, 2);
 		Coordinate fireLocation = new Coordinate(0, 0);
+		Coordinate frozenLocation = new Coordinate(0, 0);
 		assertEquals(startPos, gb.getPlayerPos(0));
 		gb.backtrack(0);
 		assertEquals(startPos, gb.getPlayerPos(0));
@@ -91,6 +95,7 @@ class GameboardTest {
 		gb.setPlayerPos(0, move2);
 		// Checking that it doesn't move a player onto a tile thats on fire
 		gb.playActionTile(fireLocation, new ActionTile(FIRE), 0);
+		gb.playActionTile(frozenLocation, new ActionTile(FROZEN),  0);
 		gb.backtrack(0);
 		assertEquals(move1, gb.getPlayerPos(0));
 
@@ -108,15 +113,6 @@ class GameboardTest {
 		assertEquals(0, gb.getPlayerPos(3).getY());
 	}
 
-	@Test
-	void placeFixedTile() {
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
-		assertEquals(CORNER, gb.tileAt(new Coordinate(2, 3)).getType());
-		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
-		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(3, 3)).getType());
-		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
-		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(2, 3)).getType());
-	}
 
 	@Test
 	void playFloorTile() {
@@ -165,6 +161,19 @@ class GameboardTest {
 	}
 
 	@Test
+	void placeFixedTile() {
+		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
+		assertEquals(CORNER, gb.tileAt(new Coordinate(2, 3)).getType());
+		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
+		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(3, 3)).getType());
+		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(2, 3)).getType());
+		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
+		assertEquals(GOAL, gb.tileAt(new Coordinate(2, 1)).getType());
+	}
+
+
+	@Test
 	void getWidth() {
 		assertEquals(3, gb.getWidth());
 		Gameboard gb2 = new Gameboard(0,3, sb);
@@ -199,41 +208,47 @@ class GameboardTest {
 
 	@Test
 	void testGetPlayerPos() {
+		Coordinate t1 = new Coordinate(1, 1);
+		Coordinate t2 = new Coordinate(2, 1);
+		Coordinate t3 = new Coordinate(2, 2);
+		Coordinate t4 = new Coordinate(2, 0);
+		assertEquals(t1, gb.getPlayerPos(0));
+		assertEquals(t2, gb.getPlayerPos(1));
+		assertEquals(t3, gb.getPlayerPos(2));
+		assertEquals(t4, gb.getPlayerPos(3));
+		t1 = new Coordinate(1, 1);
+		gb.setPlayerPos(0, t1);
+		assertEquals(t1, gb.getPlayerPos(0));
 	}
 
 	@Test
 	void testSetPlayerPos() {
+		Coordinate t1 = new Coordinate(2, 1);
+		Coordinate t2 = new Coordinate(3, 1);
+		Coordinate t3 = new Coordinate(2, 2);
+		gb.setPlayerPos(0, t1);
+		assertEquals(t1, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, t2);
+		assertEquals(t2, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, t3);
+		assertEquals(t3, gb.getPlayerPos(0));
 	}
 
-	@Test
-	void testGetWidth() {
-	}
-
-	@Test
-	void testGetHeight() {
-	}
-
-	@Test
-	void testPlaceFixedTile() {
-	}
 
 	@Test
 	void setGoalCoor() {
-	}
-
-	@Test
-	void getGoalCoor() {
+		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
+		Coordinate goalPos = new Coordinate(2, 1);
+		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
+		assertEquals(goalPos, goalTiles.get(1));
 	}
 
 	@Test
 	void isPlayerOnGoal() {
-	}
 
-	@Test
-	void testGetSlideLocations() {
-	}
+		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
+		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
+		assertEquals(true, gb.isPlayerOnGoal());
 
-	@Test
-	void tileAt() {
 	}
 }

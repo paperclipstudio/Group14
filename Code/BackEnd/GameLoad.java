@@ -1,5 +1,7 @@
 package BackEnd;
 
+import FrontEnd.Main;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;

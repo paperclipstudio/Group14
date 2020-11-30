@@ -86,7 +86,7 @@ public class Player
     /**
      * Play a floor tile in a given location and rotation.
      * @param slideLocations Where the player wants to slide a tile in from
-     * @param tile the tile the user wants to player.
+     * @param tile What tile the player wants to play
      */
     public void playFloorTile (Coordinate slideLocations, FloorTile tile)    {
         gameboard.playFloorTile(slideLocations, tile);
