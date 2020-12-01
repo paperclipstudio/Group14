@@ -69,6 +69,11 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		// TODO just for testing
+		Profile[] profiles = new Profile[4];
+		for (int i = 0; i < 4; i++) {
+			profiles[i] = new Profile("player " + i,"icon" + i, 2, 2);
+		}
 		try {
 			if (Main.isLoadedGameFile()) {
 				loadGame(Main.getLoadFile());
