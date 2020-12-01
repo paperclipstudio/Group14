@@ -98,6 +98,9 @@ class GameboardTest {
 		assertEquals(startPos, gb.getPlayerPos(0));
 		setUp();
 		// Move twice then backtrack.
+		for (int i = 1; i < 4; i++) {
+			gb.setPlayerPos(i, new Coordinate(5,5));
+		}
 		gb.setPlayerPos(0, move1);
 		gb.setPlayerPos(0, move2);
 		assertEquals(move2, gb.getPlayerPos(0));
