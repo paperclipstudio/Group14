@@ -145,7 +145,7 @@ public class GameLogic {
 			}
 			players[currentPlayerNo].playActionTile(coordinate, tile, playerNo);
 		}
-		if (gameboard.isPlayerOnGoal()) {
+		if (gameboard.isPlayerOnGoal() != -1) {
 			phase = WIN;
 		} else {
 		phase = MOVE;
@@ -167,7 +167,7 @@ public class GameLogic {
 	public void move(Coordinate location) {
 		gameSaver.playerMove(location);
 		gameboard.setPlayerPos(currentPlayerNo, location);
-		if (gameboard.isPlayerOnGoal()) {
+		if (gameboard.isPlayerOnGoal() != -1) {
 			phase = WIN;
 		} else if (doubleMove) {
 			doubleMove = false;
@@ -243,5 +243,9 @@ public class GameLogic {
 	 */
 	public void saveGame() throws IOException {
 		gameSaver.saveToFile();
+	}
+
+	public int getWinner() {
+		return gameboard.isPlayerOnGoal();
 	}
 }

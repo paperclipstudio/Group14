@@ -40,7 +40,7 @@ public class LoadGameController implements Initializable {
 	 * Returns to menu screen
 	 * Called my backButton
 	 */
-	public void onBackButton() {
+	public void onBackButton() throws IOException {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}
@@ -49,7 +49,7 @@ public class LoadGameController implements Initializable {
 	 * Continues to load game.
 	 * Called by start button.
 	 */
-	public void onPlayButton() {
+	public void onPlayButton() throws IOException {
 		Main.setLoadedGameFile(true);
 		Main.setLoadFile(selectGame.getValue());
 		WindowLoader wl = new WindowLoader(backButton);

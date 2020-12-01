@@ -53,7 +53,7 @@ public class GameSetupController implements Initializable {
 	/***
 	 * Returns to main menu
 	 */
-	public void onBackButton() {
+	public void onBackButton() throws IOException {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}
@@ -61,7 +61,7 @@ public class GameSetupController implements Initializable {
 	/***
 	 * This copys the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
-	public void onStartButton() {
+	public void onStartButton() throws IOException {
 		WindowLoader wl = new WindowLoader(backButton);
 		Main.setSeed((new Random()).nextInt());
 		Main.setBoardFile( selectGameboard.getValue());

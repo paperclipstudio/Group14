@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,18 +14,19 @@ public class WinScreenController implements Initializable {
     private Button returnButton;
 
     @FXML
-    private static Text winner;
+    private Text winner;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public static void setPlayerNum(int playerNum){
+    public void setPlayerNum(int playerNum){
         //change to profile name
+        Main.getWinner();
         winner.setText("Congratulations Player " + playerNum + "!");
     }
 
-    public void onReturnButton() {
+    public void onReturnButton() throws IOException {
         WindowLoader wl = new WindowLoader(returnButton);
         wl.load("MenuScreen");
     }

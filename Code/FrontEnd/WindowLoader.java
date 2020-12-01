@@ -56,7 +56,7 @@ public class WindowLoader {
 		try {
 			root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fileLocation + window + ".fxml")));
 		} catch (IOException e) {
-			System.out.print(e.getLocalizedMessage());
+			System.out.println(window + " Failed to load due to " + e.getMessage());
 			e.printStackTrace();
 		}
 		if (root == null) {

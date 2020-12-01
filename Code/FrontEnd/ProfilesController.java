@@ -54,7 +54,7 @@ public class ProfilesController {
 	/**
 	 * the action on the button back, back to the menus screen.
 	 */
-	public void onBackButton() {
+	public void onBackButton() throws IOException {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}

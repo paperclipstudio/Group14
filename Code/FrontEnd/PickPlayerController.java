@@ -195,7 +195,7 @@ public class PickPlayerController {
     /**
      * return to previous page
      */
-    public void onBackButton() {
+    public void onBackButton() throws IOException {
         WindowLoader wl = new WindowLoader(backButton);
         wl.load("GameSetup");
     }
