@@ -288,17 +288,17 @@ public class Gameboard {
 
 	//checks to see if a player is on goal by going through all the players' locations to see
 	//if they match any of the goal coordinates.
-	public boolean isPlayerOnGoal() {
+	public int isPlayerOnGoal() {
 		int players = getNumOfPlayers();
 		goalCoors = checkGoalTiles();
 		for (int i = 0; i < goalCoors.size(); i++) {
 			for (int j = 0; j < players; j++) {
 				if (getPlayerPos(j).getX() == goalCoors.get(i).getX() && getPlayerPos(j).getY() == goalCoors.get(i).getY()) {
-					return true;
+					return j;
 				}
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	private boolean checkTileForPlayer(Coordinate toCheck) {

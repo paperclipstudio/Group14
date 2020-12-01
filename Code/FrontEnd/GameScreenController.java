@@ -138,13 +138,17 @@ public class GameScreenController implements Initializable {
 				setupMovePhase();
 				break;
 			case WIN:
-				setupWinScreen();
+				try {
+					setupWinScreen();
+				} catch (IOException e) {
+					phaseText.setText(e.getMessage());
+				}
 		}
 	}
 
-	private void setupWinScreen() {
+	private void setupWinScreen() throws IOException {
 		WindowLoader wl = new WindowLoader(drawButton);
-		WinScreenController.setPlayerNum(gameLogic.getPlayersTurn());
+		Main.setWinner(gameLogic.getWinner());
 		wl.load("WinScreen");
 		phaseText.setText("Game has been won");
 	}

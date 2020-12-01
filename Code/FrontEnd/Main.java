@@ -28,6 +28,7 @@ public class Main extends Application {
     private static int numberOfPlayers;
     private static String loadFile;
     private static boolean loadedGameFile = false;
+    private static int winner;
     private static int seed;
     private static double volume = 10;
     private static MediaPlayer mediaPlayer;
@@ -68,6 +69,14 @@ public class Main extends Application {
 
     public static void setProfiles(Profile[] profiles) {
         Main.profiles = profiles;
+    }
+
+    public static int getWinner() {
+        return winner;
+    }
+
+    public static void setWinner(int winner) {
+        Main.winner = winner;
     }
 
 

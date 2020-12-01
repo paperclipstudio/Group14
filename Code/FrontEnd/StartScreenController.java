@@ -9,6 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -27,17 +28,17 @@ public class StartScreenController implements Initializable {
         Platform.exit();;
     }
 
-    public void onNewGame() {
+    public void onNewGame() throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("GameSetup");
     }
 
-    public void OnKeyPressed(KeyEvent keyEvent) {
+    public void OnKeyPressed(KeyEvent keyEvent) throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen");
     }
 
-    public void onMousePress(MouseEvent m) {
+    public void onMousePress(MouseEvent m) throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen");
     }

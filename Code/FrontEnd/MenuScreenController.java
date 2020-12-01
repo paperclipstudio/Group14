@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,27 +45,27 @@ public class MenuScreenController implements Initializable {
         Platform.exit();;
     }
 
-    public void onNewGame() {
+    public void onNewGame() throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("GameSetup");
     }
 
-    public void onLoadGame() {
+    public void onLoadGame() throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("LoadGame");
     }
 
-    public void onSettings() {
+    public void onSettings() throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("Settings");
     }
 
-    public void onPlayerProfiles() {
+    public void onPlayerProfiles() throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("Profiles");
     }
 
-    public void onLeaderBoard(ActionEvent actionEvent) {
+    public void onLeaderBoard(ActionEvent actionEvent) throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("Leaderboard");
     }
