@@ -3,7 +3,6 @@ package FrontEnd;
 import BackEnd.Coordinate;
 import BackEnd.FloorTile;
 import BackEnd.GameLogic;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -18,7 +17,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,11 +29,8 @@ import java.util.function.Function;
 import BackEnd.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Box;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static BackEnd.Phase.MOVE;
 import static BackEnd.Rotation.*;
 import static BackEnd.TileType.*;
 
@@ -81,11 +76,11 @@ public class GameScreenController implements Initializable {
 				startNewGame(Main.getBoardFile());
 			}
 			int rotate = 0;
-			tiles.setRotationAxis(new Point3D(10,0,10));
+			tiles.setRotationAxis(new Point3D(10, 0, 10));
 			tiles.setRotate(rotate);
-			players.setRotationAxis(new Point3D(10,0,10));
+			players.setRotationAxis(new Point3D(10, 0, 10));
 			players.setRotate(rotate);
-			controls.setRotationAxis(new Point3D(10,0,10));
+			controls.setRotationAxis(new Point3D(10, 0, 10));
 			controls.setRotate(rotate);
 			tileWidth = 30;//(int) (ps.getHeight() / gameLogic.getHeight()) + 50;
 			updateBoard();
@@ -237,7 +232,7 @@ public class GameScreenController implements Initializable {
 		tiles.getChildren().add(tileView);
 
 		// Shift players
-		applyToAll(players,  player -> {
+		applyToAll(players, player -> {
 			int x = ((int) player.getTranslateX()) / tileWidth;
 			int y = ((int) player.getTranslateY()) / tileWidth;
 			TranslateTransition smooth = new TranslateTransition();
@@ -421,6 +416,13 @@ public class GameScreenController implements Initializable {
 			// Add a skip button
 			Button skip = new Button();
 			skip.setText("skip");
+			cards.getChildren().add(skip);
+			skip.setOnMouseClicked((e) -> {
+						gameLogic.action(null, null, 0);
+						mainLoop();
+					}
+
+			);
 
 
 			for (ActionTile tile : tiles) {
@@ -478,29 +480,7 @@ public class GameScreenController implements Initializable {
 							Node fire = Assets.getFireEffect();
 							controls.getChildren().add(fire);
 							controls.setOnMouseMoved((e2) -> {
-								System.out.println("boop");
-								int getX = (int) (e2.getX() / tileWidth);
-								int getY = (int) (e2.getY() / tileWidth);
-								if (getX < 1) {
-									getX = 1;
-								}
-								if (getX > width - 2) {
-									getX = width - 2;
-								}
-								if (getY < 1) {
-									getY = 1;
-								}
-								if (getY > height - 2) {
-									getY = height - 2;
-								}
-								final int x = getX;
-								final int y = getY;
-								fire.setTranslateX((getX - 1) * tileWidth);
-								fire.setTranslateY((getY - 1) * tileWidth);
-								fire.setOnMouseClicked((e3) -> {
-									gameLogic.action(new ActionTile(FIRE), new Coordinate(x, y), -1);
-									mainLoop();
-								});
+								LocationSelectOnClick(fire, e2, FIRE);
 							});
 
 						});
@@ -511,35 +491,46 @@ public class GameScreenController implements Initializable {
 							Node frozen = Assets.getFrozenEffect();
 							controls.getChildren().add(frozen);
 							controls.setOnMouseMoved((e2) -> {
-								int getX = (int) (e2.getX() / tileWidth);
-								int getY = (int) (e2.getY() / tileWidth);
-								if (getX < 1) {
-									getX = 1;
-								}
-								if (getX > width - 2) {
-									getX = width - 2;
-								}
-								if (getY < 1) {
-									getY = 1;
-								}
-								if (getY > height - 2) {
-									getY = height - 2;
-								}
-								final int x = getX;
-								final int y = getY;
-								frozen.setTranslateX((getX - 1) * tileWidth);
-								frozen.setTranslateY((getY - 1) * tileWidth);
-								frozen.setOnMouseClicked((e3) -> {
-									gameLogic.action(new ActionTile(FROZEN), new Coordinate(x, y), -1);
-									mainLoop();
-								});
+								LocationSelectOnClick(frozen, e2, FROZEN);
 							});
-
 						});
 						break;
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sets up what happens when a fire / frozen card is clicked
+	 * so that now you can choose a location on the board
+	 *
+	 * @param card     the card that has been clicked on
+	 * @param e2       the mouse event
+	 * @param tileType what tile type it is.
+	 */
+	private void LocationSelectOnClick(Node card, MouseEvent e2, TileType tileType) {
+		int getX = (int) (e2.getX() / tileWidth);
+		int getY = (int) (e2.getY() / tileWidth);
+		if (getX < 1) {
+			getX = 1;
+		}
+		if (getX > width - 2) {
+			getX = width - 2;
+		}
+		if (getY < 1) {
+			getY = 1;
+		}
+		if (getY > height - 2) {
+			getY = height - 2;
+		}
+		final int x = getX;
+		final int y = getY;
+		card.setTranslateX((getX - 1) * tileWidth);
+		card.setTranslateY((getY - 1) * tileWidth);
+		card.setOnMouseClicked((e3) -> {
+			gameLogic.action(new ActionTile(tileType), new Coordinate(x, y), -1);
+			mainLoop();
+		});
 	}
 
 	private void setupMovePhase() {
@@ -575,7 +566,7 @@ public class GameScreenController implements Initializable {
 	/**
 	 * Called when Draw button is pressed
 	 */
-	public void onDrawButton() throws IOException{
+	public void onDrawButton() throws IOException {
 		gameLogic.draw();
 		//TODO just show drawn card.
 		cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
@@ -632,8 +623,8 @@ public class GameScreenController implements Initializable {
 	 * Takes an id to match and a onClickFunction
 	 * puts that on all matching node with id starting with 'id'
 	 *
-	 * @param group   node to look for
-	 * @param func function to apply to onClick
+	 * @param group node to look for
+	 * @param func  function to apply to onClick
 	 */
 	private void applyOnClick(Pane group, EventHandler<MouseEvent> func) {
 		applyToAll(group, v -> {
@@ -646,8 +637,8 @@ public class GameScreenController implements Initializable {
 	 * Takes an id to match and a function
 	 * puts that on all matching node with id starting with 'id'
 	 *
-	 * @param group  node to look for
-	 * @param func function to apply to onHover
+	 * @param group node to look for
+	 * @param func  function to apply to onHover
 	 */
 	private void applyOnHover(Pane group, EventHandler<MouseEvent> func) {
 		applyToAll(group, (n) -> {
@@ -660,8 +651,8 @@ public class GameScreenController implements Initializable {
 	 * Takes an id to match and a function
 	 * puts that on all matching node with id starting with 'id'
 	 *
-	 * @param group   node to look for
-	 * @param func function to apply to offHover
+	 * @param group node to look for
+	 * @param func  function to apply to offHover
 	 */
 	private void applyOffHover(Pane group, EventHandler<MouseEvent> func) {
 		applyToAll(group, n -> {
