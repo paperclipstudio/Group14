@@ -43,21 +43,11 @@ public class PickPlayerController {
      */
      public void initialize(){
 
-         File playerLocation = new File("SaveData\\UserData\\");
-
          String[] players;
+
+         File playerLocation = new File("SaveData\\UserData\\");
          players = playerLocation.list();
-
-
-
-
-
-
-         //String[] players;
-
-        //File playerLocation = new File("SaveData\\UserData\\");
-        //players = playerLocation.list();
-
+         
         label.setText("You decide to start a game with " + Main.getNumberOfPlayers() + " players");
 
         assert players != null;
