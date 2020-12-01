@@ -20,6 +20,7 @@ public class WinScreenController implements Initializable {
     }
 
     public static void setPlayerNum(int playerNum){
+        //change to profile name
         winner.setText("Congratulations Player " + playerNum + "!");
     }
 
