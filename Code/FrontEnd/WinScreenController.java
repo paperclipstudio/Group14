@@ -13,11 +13,15 @@ public class WinScreenController implements Initializable {
     private Button returnButton;
 
     @FXML
-    private Text winner;
+    private static Text winner;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        winner.setText("Congratulations" +  "!");
+    }
+
+    public static void setPlayerNum(int playerNum){
+        //change to profile name
+        winner.setText("Congratulations Player " + playerNum + "!");
     }
 
     public void onReturnButton() {

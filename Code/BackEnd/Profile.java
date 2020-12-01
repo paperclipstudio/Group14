@@ -17,9 +17,9 @@ public class Profile
     private int losses;
     private int mapsPlayed;
     private String profileName;
-    private Image profileIcon;
+    private String profileIcon;
 
-    public Profile(String name, Image playerIcon, int wins, int losses){
+    public Profile(String name, String playerIcon, int wins, int losses){
         setName (name);
         setIcon (playerIcon);
         setWins (wins);
@@ -30,7 +30,7 @@ public class Profile
         profileName = name;
     }
 
-    public void setIcon (Image playerIcon){
+    public void setIcon (String playerIcon){
         profileIcon = playerIcon;
     }
 
@@ -62,4 +62,7 @@ public class Profile
         losses = losses + 1;
     }
 
+	public String getIcon() {
+        return this.profileIcon;
+	}
 }

@@ -69,6 +69,11 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		// TODO just for testing
+		Profile[] profiles = new Profile[4];
+		for (int i = 0; i < 4; i++) {
+			profiles[i] = new Profile("player " + i,"icon" + i, 2, 2);
+		}
 		try {
 			if (Main.isLoadedGameFile()) {
 				loadGame(Main.getLoadFile());
@@ -139,6 +144,8 @@ public class GameScreenController implements Initializable {
 
 	private void setupWinScreen() {
 		WindowLoader wl = new WindowLoader(drawButton);
+		WinScreenController.setPlayerNum(gameLogic.getPlayersTurn());
+		wl.load("WinScreen");
 		phaseText.setText("Game has been won");
 	}
 
@@ -383,6 +390,7 @@ public class GameScreenController implements Initializable {
 	public void startNewGame(String board) throws Exception {
 		gameLogic = new GameLogic((new Random()).nextInt());
 		gameLogic.newGame(board);
+		//gameLogic.setPlayerCount(Main.getNumberOfPlayers());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
 		mainLoop();

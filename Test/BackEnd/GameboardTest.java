@@ -18,11 +18,12 @@ class GameboardTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		sb = new SilkBag(234234234);
+		gb = new Gameboard(3, 3, sb);
+		gb2 = new Gameboard(3,3, sb);
+		gb3 = new Gameboard(3,3, sb);
+		gb4 = new Gameboard(3,3, sb);
 
-		gb.setPlayerPos(0, new Coordinate(1,1));
-		gb.setPlayerPos(1, new Coordinate( 2,1));
-		gb.setPlayerPos(2, new Coordinate( 2,2));
-		gb.setPlayerPos(3, new Coordinate( 2,0));
 		//Inserting from the left.
 		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(CORNER));
 		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(T_SHAPE));
@@ -63,6 +64,11 @@ class GameboardTest {
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(T_SHAPE));
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
+
+		gb.setPlayerPos(0, new Coordinate(1,1));
+		gb.setPlayerPos(1, new Coordinate( 2,1));
+		gb.setPlayerPos(2, new Coordinate( 2,2));
+		gb.setPlayerPos(3, new Coordinate( 2,0));
 	}
 
 	@Test
@@ -73,19 +79,25 @@ class GameboardTest {
 	}
 
 	@Test
-	void playBackTrack() {
+	void playBackTrack() throws Exception {
 		Coordinate startPos = new Coordinate(1,1);
 		Coordinate move1 = new Coordinate(2,1);
 		Coordinate move2 = new Coordinate(2, 2);
 		Coordinate fireLocation = new Coordinate(0, 0);
 		Coordinate frozenLocation = new Coordinate(0, 0);
+		// Checking start pos
 		assertEquals(startPos, gb.getPlayerPos(0));
+		// Check backtrack does nothing
 		gb.backtrack(0);
 		assertEquals(startPos, gb.getPlayerPos(0));
+		// Move once and then backTrack
+		setUp();
 		gb.setPlayerPos(0, move1);
 		assertEquals(move1, gb.getPlayerPos(0));
 		gb.backtrack(0);
 		assertEquals(startPos, gb.getPlayerPos(0));
+		setUp();
+		// Move twice then backtrack.
 		gb.setPlayerPos(0, move1);
 		gb.setPlayerPos(0, move2);
 		assertEquals(move2, gb.getPlayerPos(0));
