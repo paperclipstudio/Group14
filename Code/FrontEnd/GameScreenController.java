@@ -15,9 +15,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -53,6 +55,8 @@ public class GameScreenController implements Initializable {
 	private Label phaseText;
 	@FXML
 	private MenuItem saveButton;
+	@FXML
+	private Pane fixed;
 
 
 	private int width;
@@ -72,7 +76,7 @@ public class GameScreenController implements Initializable {
 		// TODO just for testing
 		Profile[] profiles = new Profile[4];
 		for (int i = 0; i < 4; i++) {
-			profiles[i] = new Profile("player " + i,"icon" + i, 2, 2);
+			profiles[i] = new Profile("player " + i, "icon" + i, 2, 2);
 		}
 		try {
 			if (Main.isLoadedGameFile()) {
@@ -355,7 +359,11 @@ public class GameScreenController implements Initializable {
 		controls.setPrefHeight((height + 4) * tileWidth);
 		players.setPrefHeight((height + 4) * tileWidth);
 		players.setPrefWidth((width + 4) * tileWidth);
+		fixed.setPrefWidth((width + 4) * tileWidth);
+		fixed.setPrefHeight((width + 4) * tileWidth);
+
 		tiles.getChildren().clear();
+		fixed.getChildren().clear();
 		players.getChildren().clear();
 		controls.getChildren().clear();
 
@@ -375,6 +383,13 @@ public class GameScreenController implements Initializable {
 
 		}
 
+		// Adding fixed tiles overLay
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+			}
+
+
+		}
 		// showing the player locations
 		//players = new ImageView[gameLogic.getNumberOfPlayers()];
 		for (int i = 0; i < gameLogic.getPlayerLocations().length; i++) {
@@ -390,6 +405,7 @@ public class GameScreenController implements Initializable {
 	 * Clears the game and starts a new one with given starting board
 	 *
 	 * @param board path to board file
+	 * @throws Exception if issue with board file.
 	 */
 	public void startNewGame(String board) throws Exception {
 		gameLogic = new GameLogic((new Random()).nextInt());
@@ -420,97 +436,102 @@ public class GameScreenController implements Initializable {
 	private void setupActionPhase() throws IOException {
 		cards.getChildren().clear();
 		ActionTile[] tiles = gameLogic.getActionCards();
-		if (tiles.length == 0) {
-			// If no cards continue
-			gameLogic.action(null, null, 0);
-			mainLoop();
-		} else {
-			// Add a skip button
-			Button skip = new Button();
-			skip.setText("skip");
-			cards.getChildren().add(skip);
-			skip.setOnMouseClicked((e) -> {
-						gameLogic.action(null, null, 0);
-						mainLoop();
-					}
-
-			);
-
-
-			for (ActionTile tile : tiles) {
-				final Node vCard = Assets.createCard(tile);
-				vCard.setOnMouseClicked((e) -> {
-				});
-				cards.getChildren().add(vCard);
-				switch (tile.getType()) {
-					case DOUBLE_MOVE:
-						vCard.setOnMouseClicked((e) -> {
-							vCard.setEffect(new Bloom(0.03));
-							vCard.setOnMouseClicked((e2) -> {
-								gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
-								for (Node player : players.getChildren()) {
-									player.setEffect(new Bloom(999));
-									player.setOnMouseClicked(e3 -> {
-									});
-								}
-								mainLoop();
-							});
-						});
-						break;
-					case BACKTRACK:
-						vCard.setOnMouseClicked((e) -> {
-							hideAllControls();
-							// Get all players that can be back tracked
-							boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
-							Node[] playerSelectControls = new Node[validPlayers.length];
-							for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
-								if (validPlayers[i]) {
-									// For each valid player
-									final int playerNumber = i;
-									// make them glow
-									Node fakePlayer = Assets.getPlayer(i);
-									fakePlayer.setTranslateX(gameLogic.getPlayerLocations()[i].getX() * tileWidth);
-									fakePlayer.setTranslateY(gameLogic.getPlayerLocations()[i].getY() * tileWidth);
-									fakePlayer.setEffect(new Bloom(0.1));
-									controls.getChildren().add(fakePlayer);
-									// Set them into an active button
-									fakePlayer.setOnMouseClicked(e2 -> {
-										hideAllControls();
-										gameLogic.action(new ActionTile(BACKTRACK), null, playerNumber);
-										updateBoard();
-										mainLoop();
-									});
-								}
-
-							}
-						});
-
-						break;
-					case FIRE:
-						vCard.setOnMouseClicked((e) -> {
-							hideAllControls();
-							Node fire = Assets.getFireEffect();
-							controls.getChildren().add(fire);
-							controls.setOnMouseMoved((e2) -> {
-								LocationSelectOnClick(fire, e2, FIRE);
-							});
-
-						});
-						break;
-					case FROZEN:
-						vCard.setOnMouseClicked((e) -> {
-							hideAllControls();
-							Node frozen = Assets.getFrozenEffect();
-							controls.getChildren().add(frozen);
-							controls.setOnMouseMoved((e2) -> {
-								LocationSelectOnClick(frozen, e2, FROZEN);
-							});
-						});
-						break;
+		// Add a skip button
+		Button skip = new Button();
+		skip.setText("skip");
+		cards.getChildren().add(skip);
+		skip.setOnMouseClicked((e) -> {
+					gameLogic.action(null, null, 0);
+					mainLoop();
 				}
+		);
+		Node drawnCard = Assets.createCard(gameLogic.drawnCard());
+		ColorAdjust dim = new ColorAdjust();
+		dim.setBrightness(0.6);
+		dim.setSaturation(0.5);
+		drawnCard.setEffect(dim);
+		drawnCard.setOnMouseClicked((e) -> {});
+		drawnCard.setOnMouseEntered((e) -> {});
+		drawnCard.setOnMouseExited((e) -> {});
+		cards.getChildren().add(drawnCard);
+
+
+
+		for (ActionTile tile : tiles) {
+			final Node vCard = Assets.createCard(tile);
+			vCard.setOnMouseClicked((e) -> {
+			});
+			cards.getChildren().add(vCard);
+			switch (tile.getType()) {
+				case DOUBLE_MOVE:
+					vCard.setOnMouseClicked((e) -> {
+						vCard.setEffect(new Bloom(0.03));
+						vCard.setOnMouseClicked((e2) -> {
+							gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
+							for (Node player : players.getChildren()) {
+								player.setEffect(new Bloom(999));
+								player.setOnMouseClicked(e3 -> {
+								});
+							}
+							mainLoop();
+						});
+					});
+					break;
+				case BACKTRACK:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						// Get all players that can be back tracked
+						boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
+						Node[] playerSelectControls = new Node[validPlayers.length];
+						for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
+							if (validPlayers[i]) {
+								// For each valid player
+								final int playerNumber = i;
+								// make them glow
+								Node fakePlayer = Assets.getPlayer(i);
+								fakePlayer.setTranslateX(gameLogic.getPlayerLocations()[i].getX() * tileWidth);
+								fakePlayer.setTranslateY(gameLogic.getPlayerLocations()[i].getY() * tileWidth);
+								fakePlayer.setEffect(new Bloom(0.1));
+								controls.getChildren().add(fakePlayer);
+								// Set them into an active button
+								fakePlayer.setOnMouseClicked(e2 -> {
+									hideAllControls();
+									gameLogic.action(new ActionTile(BACKTRACK), null, playerNumber);
+									updateBoard();
+									mainLoop();
+								});
+							}
+
+						}
+					});
+
+					break;
+				case FIRE:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						Node fire = Assets.getFireEffect();
+						controls.getChildren().add(fire);
+						controls.setOnMouseMoved((e2) -> {
+							LocationSelectOnClick(fire, e2, FIRE);
+						});
+
+					});
+					break;
+				case FROZEN:
+					vCard.setOnMouseClicked((e) -> {
+						hideAllControls();
+						Node frozen = Assets.getFrozenEffect();
+						controls.getChildren().add(frozen);
+						controls.setOnMouseMoved((e2) -> {
+							LocationSelectOnClick(frozen, e2, FROZEN);
+						});
+					});
+					break;
 			}
 		}
 	}
+
+
 
 	/**
 	 * Sets up what happens when a fire / frozen card is clicked

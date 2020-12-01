@@ -52,9 +52,9 @@ public class Gameboard {
         this.height = height;
         this.silkbag = silkBag;
         goalCoors = new ArrayList<>();
-        slideLocations = new Coordinate[10];
-        boardTiles = new FloorTile[100][100];
-        fixedTiles = new FloorTile[100][100];
+        slideLocations = new Coordinate[10];  //TODO change this.
+        boardTiles = new FloorTile[100][100]; //TODO change this.
+        fixedTiles = new FloorTile[100][100]; //TODO change this.
         playerLocations = new Coordinate[4][3];
     }
 
@@ -83,7 +83,7 @@ public class Gameboard {
      * @return The coordinates of the specified player.
      */
     public Coordinate getPlayerPos(int player) {
-        return playerLocations[player][0];
+        return getPrevPlayerPos(player, 0);
     }
 
     /**
@@ -122,7 +122,7 @@ public class Gameboard {
      * @param insertedTile The floorTile to slide into that location.
      * @return removedTile The floorTile that was on the opposite edge and was pushed off of the Gameboard.
      */
-    public Tile playFloorTile(Coordinate location, FloorTile insertedTile) throws Exception {
+    public void playFloorTile(Coordinate location, FloorTile insertedTile) throws Exception {
         // Shifting the player.
         Rotation direction;
         Coordinate shiftAmount;
@@ -217,7 +217,6 @@ public class Gameboard {
                 silkbag.insertTile(removedTile);
             }
         }
-        return removedTile;
     }
 
     /**
@@ -393,17 +392,17 @@ public class Gameboard {
      */
     //checks to see if a player is on goal by going through all the players' locations to see
     //if they match any of the goal coordinates.
-    public boolean isPlayerOnGoal() {
+    public int isPlayerOnGoal() {
         int players = getNumOfPlayers();
         goalCoors = checkGoalTiles();
         for (int i = 0; i < goalCoors.size(); i++) {
             for (int j = 0; j < players; j++) {
                 if (getPlayerPos(j).getX() == goalCoors.get(i).getX() && getPlayerPos(j).getY() == goalCoors.get(i).getY()) {
-                    return true;
+                    return j;
                 }
             }
         }
-        return false;
+        return -1;
     }
 
     /**
@@ -511,15 +510,17 @@ public class Gameboard {
      * @return the ArrayList of slide locations.
      */
     public Coordinate[] getSlideLocations() {
+
         ArrayList<Coordinate> locations = new ArrayList<>();
-        for (int x = 0; x < height; x++) {
+        for (int x = 0; x < width; x++) {
             locations.add(new Coordinate(x, -1));
-            locations.add(new Coordinate(x, width));
+            locations.add(new Coordinate(x, height));
         }
-        for (int y = 0; y < width; y++) {
+        for (int y = 0; y < height; y++) {
             locations.add(new Coordinate(-1, y));
-            locations.add(new Coordinate(height, y));
+            locations.add(new Coordinate(width, y));
         }
+        /*
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (boardTiles[i] != null && fixedTiles[i] != null) {
@@ -537,7 +538,8 @@ public class Gameboard {
                 }
             }
         }
-        return locations.toArray(slideLocations);
+        */
+        return locations.toArray(new Coordinate[0]);
     }
 
     /**

@@ -71,8 +71,8 @@ public class Assets {
 			fireImage.setFitWidth(GameScreenController.tileWidth);
 			tileView.getChildren().add(fireImage);
 		}
-
-		if (tile.isFixed()) {
+		// TODO when we find out how things are fixed?
+		if (false) {
 			ImageView lockImage = new ImageView(get("fixed"));
 			lockImage.setFitWidth(GameScreenController.tileWidth);
 			lockImage.setFitHeight(GameScreenController.tileWidth);
