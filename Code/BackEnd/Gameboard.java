@@ -344,6 +344,12 @@ public class Gameboard {
         return new Coordinate(coordinate.getX() + shiftX, coordinate.getY() + shiftY);
     }
 
+    /**
+     * This function is used to play action tiles depending on their type
+     * @param location to put tile
+     * @param tile type
+     * @param player refers to the player
+     */
     public void playActionTile(Coordinate location, ActionTile tile, int player) {
         if (tile.getType() == TileType.FROZEN) {
             setFreezeCoords(location);
@@ -354,13 +360,21 @@ public class Gameboard {
         }
     }
 
-    //places a fixed floor tile in the coordinates specified.
+    /**
+     * places a fixed floor tile in the coordinates specified.
+     * @param tile to be placed
+     * @param x co-ordinate
+     * @param y co-ordinate
+     */
     public void placeFixedTile(FloorTile tile, int x, int y) {
         boardTiles[x][y] = tile;
         fixedTiles[x][y] = tile;
     }
 
-    //Checks the board for goal tiles, sets their Coordinates.
+    /**
+     * //Checks the board for goal tiles, sets their Coordinates.
+     * @return goal tile co-ordinates.
+     */
     public ArrayList<Coordinate> checkGoalTiles() {
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
