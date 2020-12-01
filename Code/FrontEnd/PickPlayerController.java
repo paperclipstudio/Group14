@@ -52,15 +52,17 @@ public class PickPlayerController {
 
         assert players != null;
         for (String player : players){
-            playerList1.getItems().add(player);
+            String playerName = player.substring(0, player.length() - 4);
+
+            playerList1.getItems().add(playerName);
             if(Main.getNumberOfPlayers() >= 2){
-                playerList2.getItems().add(player);
+                playerList2.getItems().add(playerName);
             }
             if(Main.getNumberOfPlayers() >= 3){
-                playerList3.getItems().add(player);
+                playerList3.getItems().add(playerName);
             }
             if(Main.getNumberOfPlayers() >= 4) {
-                playerList4.getItems().add(player);
+                playerList4.getItems().add(playerName);
             }
 
         }
@@ -69,6 +71,7 @@ public class PickPlayerController {
         playerList2.getSelectionModel().selectFirst();
         playerList3.getSelectionModel().selectFirst();
         playerList4.getSelectionModel().selectFirst();
+        playerList4.setVisible(false);
 
     }
 
@@ -81,7 +84,7 @@ public class PickPlayerController {
 
          profileFile = new File("SaveData\\UserData\\" + profileFile);
          String name = profileFile.getName();
-
+        
          Image playerIcon = null;
 
          String line;
