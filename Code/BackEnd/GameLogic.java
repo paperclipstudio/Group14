@@ -33,6 +33,7 @@ public class GameLogic {
 	/**
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
+	 * @throws Exception if issue with board file.
 	 */
 	public void newGame(String boardFile) throws Exception {
 		gameSaver = new GameSave(boardFile, seed);
@@ -95,6 +96,7 @@ public class GameLogic {
 	 * a tile in.
 	 * @param tile tile to be played
 	 * @param location where the tile should be played.
+	 * @throws Exception if silkbag is empty
 	 */
 	public void floor(FloorTile tile, Coordinate location) throws Exception {
 		gameSaver.playFloorTile(location, tile);
@@ -130,7 +132,8 @@ public class GameLogic {
 	/**
 	 * Plays an Action tile at location.
 	 * @param tile which tile to play
-	 * @param coordinate where it would like to be played
+	 * @param coordinate where it would like to be played (if its played at a location)
+	 * @param playerNo which player this card effect (if it does)
 	 */
 	public void action(ActionTile tile, Coordinate coordinate, int playerNo) {
 		// If tile is null then player didn't/can't play an action card.
@@ -177,6 +180,7 @@ public class GameLogic {
 	/**
 	 * Creates an empty game logic class, must run startNew or load before you
 	 * can play.
+	 * @param seed seed used with random generator
 	 */
 	public GameLogic(int seed) {
 		this.seed = seed;
@@ -232,6 +236,10 @@ public class GameLogic {
 		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
 	}
 
+	/**
+	 * Saves the game to file
+	 * @throws IOException if error with file
+	 */
 	public void saveGame() throws IOException {
 		gameSaver.saveToFile();
 	}
