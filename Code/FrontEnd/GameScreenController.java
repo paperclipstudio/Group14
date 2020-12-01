@@ -139,6 +139,7 @@ public class GameScreenController implements Initializable {
 
 	private void setupWinScreen() {
 		WindowLoader wl = new WindowLoader(drawButton);
+		WinScreenController.setPlayerNum(gameLogic.getPlayersTurn());
 		wl.load("WinScreen");
 		phaseText.setText("Game has been won");
 	}
