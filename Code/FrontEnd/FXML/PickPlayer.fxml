@@ -38,7 +38,7 @@
             <ChoiceBox fx:id="playerList2" layoutX="350.0" layoutY="150.0" prefWidth="150.0" />
             <ChoiceBox fx:id="playerList3" layoutX="120.0" layoutY="210.0" prefWidth="150.0" />
             <ChoiceBox fx:id="playerList4" layoutX="350.0" layoutY="210.0" prefWidth="150.0" />
-            <Label fx:id="label" layoutX="260.0" layoutY="289.0" text="player number" textFill="#009e05" />
+            <Label fx:id="label" layoutX="200.0" layoutY="277.0" prefHeight="20.0" prefWidth="200.0" text="player number" textFill="#009e05" />
             <VBox.margin>
                <Insets />
             </VBox.margin>

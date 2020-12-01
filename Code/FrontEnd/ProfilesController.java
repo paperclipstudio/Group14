@@ -87,7 +87,7 @@ public class ProfilesController {
 			playerList.getItems().addAll(newName + ".txt");
 
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
-			newUser.write("Game Wins: 0  Game Loss: 0");
+			newUser.write("0 0 icon0");
 			newUser.close();
 
 		}
@@ -139,7 +139,7 @@ public class ProfilesController {
 			while (scan.hasNextLine()){
 				Alert alert7 = new Alert(Alert.AlertType.INFORMATION);
 				alert7.setTitle("Player Profile");
-				alert7.setContentText("Player " + newName + " has record with " + scan.nextLine());
+				alert7.setContentText("Player " + newName + " has winning losing record and Icon ID with " + scan.nextLine());
 				alert7.setHeaderText(null);
 				alert7.showAndWait();
 			}
