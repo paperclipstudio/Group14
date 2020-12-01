@@ -82,15 +82,14 @@ public class PickPlayerController {
      */
     public Profile readProfile(File profileFile) throws IOException {
 
-         profileFile = new File("SaveData\\UserData\\" + profileFile);
          String name = profileFile.getName();
-        
+
          Image playerIcon = null;
 
          String line;
          int wins = 0 ;
          int losses = 0;
-         BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + profileFile));
+         BufferedReader reader = new BufferedReader(new FileReader(profileFile));
          while((line = reader.readLine()) != null){
              String[] parts = line.split(":",2);
 
