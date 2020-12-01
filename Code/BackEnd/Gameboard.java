@@ -18,7 +18,7 @@ public class Gameboard {
     /**
      * These attributes store information about the gameboard, such as its' width and height, and the SilkBag that it
      * is connected to.
-     * */
+     */
 
     private int width;
     private int height;
@@ -42,8 +42,9 @@ public class Gameboard {
      * This constructor of Gameboard initializes all of the attributes, save the removedTile, which gets initialized
      * in playFloorTile. It takes in the width, and height of the Gameboard, as well as the SilkBag that the board
      * is connected to.
-     * @param width The width of the gameboard.
-     * @param height The height of the gameboard.
+     *
+     * @param width   The width of the gameboard.
+     * @param height  The height of the gameboard.
      * @param silkBag The SilkBag that this gameboard is connected to.
      */
     public Gameboard(int width, int height, SilkBag silkBag) {
@@ -59,38 +60,47 @@ public class Gameboard {
 
     /**
      * This method returns the width of the gameboard.
+     *
      * @return width The width of the gameboard.
      */
     public int getWidth() {
         return width;
     }
+
     /**
      * This method returns the height of the gameboard.
+     *
      * @return height The height of the gameboard.
      */
     public int getHeight() {
         return height;
     }
+
     /**
      * This method returns the position of the specified player.
+     *
      * @param player The player whose position we want.
      * @return The coordinates of the specified player.
      */
     public Coordinate getPlayerPos(int player) {
         return playerLocations[player][0];
     }
+
     /**
      * This method returns the position of the specified player at a given number of turns ago.
-     * @param player The player whose position we want.
+     *
+     * @param player  The player whose position we want.
      * @param history How many turns ago we want to know the player's position.
      * @return The coordinates of the specified player at that given history.
      */
     public Coordinate getPrevPlayerPos(int player, int history) {
         return playerLocations[player][history];
     }
+
     /**
      * This method sets the position of the specified player.
-     * @param player The player whose position we want to set.
+     *
+     * @param player   The player whose position we want to set.
      * @param position The position to set.
      */
     public void setPlayerPos(int player, Coordinate position) {
@@ -98,16 +108,22 @@ public class Gameboard {
         playerLocations[player][1] = playerLocations[player][0];
         playerLocations[player][0] = position;
     }
+
     /**
      * This method plays a floorTile in a given row/column, and moves every floorTile in that direction, if it isn't
      * fixed or frozen. Once a floorTile is inserted, the tile that is on the end is placed into the SilkBag, and the
      * player piece that is on the end is now placed on the newly inserted tile. Inserting from the left is denoted as
      * selecting a location with a x-coordinate of -1, inserting from the bottom is denoted as selecting a location
-     * with a y-coordinate of -1, inserting
-     * @param location The
-     * */
+     * with a y-coordinate of -1, inserting from the right is denoted as selecting a location with a y-coordinate
+     * of the width of the board, and inserting from the top is denoted as selecting a location with a y-coordinate
+     * of the height of the board.
+     *
+     * @param location     The location of the given side to slide in the floorTile from.
+     * @param insertedTile The floorTile to slide into that location.
+     * @return removedTile The floorTile that was on the opposite edge and was pushed off of the Gameboard.
+     */
     public Tile playFloorTile(Coordinate location, FloorTile insertedTile) throws Exception {
-        // Shifting player
+        // Shifting the player.
         Rotation direction;
         Coordinate shiftAmount;
         if (location.getX() <= -1) {
@@ -125,7 +141,7 @@ public class Gameboard {
         } else {
             throw new Exception("Invalid slide location");
         }
-        // Shift all players on the correct row // column
+        // Shift all players on the correct row // column.
         if (direction == LEFT || direction == RIGHT) {
             for (int i = 0; i < getNumOfPlayers(); i++) {
                 Coordinate current = getPlayerPos(i);
@@ -141,7 +157,7 @@ public class Gameboard {
                 }
             }
         }
-        // Check too see if any players are out of bounds
+        // Check to see if any players are out-of-bounds.
         for (int i = 0; i < getNumOfPlayers(); i++) {
             Coordinate current = getPlayerPos(i);
             if (current.getX() < 0) {
@@ -174,7 +190,6 @@ public class Gameboard {
             for (int j = 0; j < width - 1; j++) {
                 boardTiles[j][location.getY()] = boardTiles[j + 1][location.getY()];
             }
-
             boardTiles[width - 1][location.getY()] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -186,7 +201,6 @@ public class Gameboard {
             for (int j = height - 2; j >= 0; j--) {
                 boardTiles[location.getX()][j + 1] = boardTiles[location.getX()][j];
             }
-
             boardTiles[location.getX()][0] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -198,7 +212,6 @@ public class Gameboard {
             for (int j = 0; j < width - 1; j++) {
                 boardTiles[location.getX()][j] = boardTiles[location.getX()][j + 1];
             }
-
             boardTiles[location.getX()][height - 1] = insertedTile;
             if (removedTile != null) {
                 silkbag.insertTile(removedTile);
@@ -207,6 +220,12 @@ public class Gameboard {
         return removedTile;
     }
 
+    /**
+     * This method returns the move directions a player could possible move in as an arrayList
+	 * for the specified player.
+	 * @param player The player whose move directions is to be obtained.
+	 * @return moveLocations The move directions for the specified player.
+     */
     public ArrayList<Coordinate> getMoveDirections(int player) {
         Rotation[] directions = new Rotation[]{UP, DOWN, LEFT, RIGHT};
         ArrayList<Rotation> validDirections = new ArrayList<>();
@@ -221,27 +240,28 @@ public class Gameboard {
             }
         }
 
-        //Loops through all connected valid directions, gets the tile in that valid direction to see if it
-        //connects with the tile the player is on by flipping the rotation, if yes add it as a coordinate to move locations.
+        /* Loops through all connected valid directions, and gets the tile in that valid direction to see if it
+        connects with the tile the player is on by flipping the rotation.
+        If it does, it is then added as a coordinate to move locations. */
         for (Rotation direction : validDirections) {
             FloorTile tileInDirection;
             Rotation flipDirection = flipDirection(direction);
             Coordinate locationToCheck = shift(location, direction);
-            // Check if someone is standing on that tile
+            // Check if a player piece is on the tile.
             if (checkTileForPlayer(locationToCheck)) {
                 continue;
             }
-            // check to see if new direction is off the board.
+            // Check if the new direction is off of the board.
             if ((locationToCheck.getX() < 0 || locationToCheck.getX() >= width) ||
                     (locationToCheck.getY() < 0 || locationToCheck.getY() >= height)) {
                 continue;
             }
             tileInDirection = boardTiles[locationToCheck.getX()][locationToCheck.getY()];
-            // Check if on fire.
+            // Check if the tile on fire.
             if (tileInDirection.onFire()) {
                 continue;
             }
-            // If tile passes all tests then it is a valid place to move
+            // If tile passes all previous tests then it is a valid place to move.
             if (validMove(tileInDirection, flipDirection)) {
                 moveLocations.add(locationToCheck);
             }
@@ -250,6 +270,14 @@ public class Gameboard {
     }
 
     //Method checks to see if its possible for the player to move in that direction.
+	/**
+	 * This method checks to see if it is possible for a player to move in a given direction, and returns a
+	 * boolean, stating whether it is possible to move in that direction (true) or not possible to move in that
+	 * direction (false).
+	 * @param playerTile The floorTile that the player piece is currently on.
+	 * @param direction The direction the player would like to move in.
+	 * @return result Either true or false, depending on whether or not you can move in that direction.
+	 * */
     private boolean validMove(FloorTile playerTile, Rotation direction) {
         Rotation rotation = playerTile.getRotation();
         boolean result = false;
@@ -272,7 +300,11 @@ public class Gameboard {
         }
         return result;
     }
-
+	/**
+	 * This method flips a given direction, and returns the opposite direction.
+	 * @param rotation The given direction to be flipped.
+	 * @return The flipped direction.
+	 * */
     private Rotation flipDirection(Rotation rotation) {
         switch (rotation) {
             case UP:
@@ -286,7 +318,12 @@ public class Gameboard {
         }
         return UP;
     }
-
+	/**
+	 * This method shifts in a given direction, depending on what direction it is, and returns the shifted coordinate.
+	 * @param coordinate The coordinate to be shifted.
+	 * @param direction The direction to be shifted in.
+	 * @return The newly shifted coordinate.
+	 * */
     private Coordinate shift(Coordinate coordinate, Rotation direction) {
         int shiftX = 0;
         int shiftY = 0;
@@ -306,7 +343,6 @@ public class Gameboard {
         }
         return new Coordinate(coordinate.getX() + shiftX, coordinate.getY() + shiftY);
     }
-
 
     public void playActionTile(Coordinate location, ActionTile tile, int player) {
         if (tile.getType() == TileType.FROZEN) {
@@ -448,7 +484,7 @@ public class Gameboard {
         }
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].isFrozen()){
+                if (boardTiles[i][j].isFrozen()) {
                     locations.remove(i);
                 }
             }
