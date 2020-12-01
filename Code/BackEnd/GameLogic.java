@@ -134,14 +134,18 @@ public class GameLogic {
 	 */
 	public void action(ActionTile tile, Coordinate coordinate, int playerNo) {
 		// If tile is null then player didn't/can't play an action card.
+		gameSaver.playActionTile(coordinate, tile, playerNo);
 		if (tile != null) {
-			gameSaver.playActionTile(coordinate, tile);
 			if (tile.getType() == DOUBLE_MOVE) {
 				doubleMove = true;
 			}
 			players[currentPlayerNo].playActionTile(coordinate, tile, playerNo);
 		}
+		if (gameboard.isPlayerOnGoal()) {
+			phase = WIN;
+		} else {
 		phase = MOVE;
+		}
 	}
 
 	/**
@@ -159,7 +163,9 @@ public class GameLogic {
 	public void move(Coordinate location) {
 		gameSaver.playerMove(location);
 		gameboard.setPlayerPos(currentPlayerNo, location);
-		if (doubleMove) {
+		if (gameboard.isPlayerOnGoal()) {
+			phase = WIN;
+		} else if (doubleMove) {
 			doubleMove = false;
 		} else {
 			phase = DRAW;
@@ -175,10 +181,6 @@ public class GameLogic {
 	public GameLogic(int seed) {
 		this.seed = seed;
 	}
-
-	//public GameLogic() {
-	//	this.seed = (new Random()).nextInt();
-	//}
 
 	/**
 	 * Returns what floor tile is at a given location on the board.
@@ -213,14 +215,6 @@ public class GameLogic {
 		return numberOfPlayers;
 	}
 
-	/**
-	 * Called when User wants to play a backtrack card.
-	 * @param playerNumber which player to use backtrack on.
-	 */
-	public void backtrack(int playerNumber) {
-		currentPlayer.playActionTile(null, new ActionTile(TileType.BACKTRACK), playerNumber);
-		phase = MOVE;
-	}
 
 	/**
 	 * Finds out which players turn it is.

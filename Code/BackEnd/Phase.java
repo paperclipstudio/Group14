@@ -1,5 +1,5 @@
 package BackEnd;
 
 public enum Phase {
-	DRAW, FLOOR, ACTION, MOVE
+	DRAW, FLOOR, ACTION, MOVE, WIN
 }

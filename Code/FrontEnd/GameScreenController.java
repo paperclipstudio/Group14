@@ -137,7 +137,14 @@ public class GameScreenController implements Initializable {
 			case MOVE:
 				setupMovePhase();
 				break;
+			case WIN:
+				setupWinScreen();
 		}
+	}
+
+	private void setupWinScreen() {
+		WindowLoader wl = new WindowLoader(drawButton);
+		phaseText.setText("Game has been won");
 	}
 
 	private void setupFloorPhase() throws IOException {
