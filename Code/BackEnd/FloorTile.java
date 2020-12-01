@@ -2,81 +2,150 @@ package BackEnd;
 
 import java.util.Random;
 
+/**
+ * The FloorTile class will be the floor tiles of the Game board. These will hold information about the floor tile
+ * such as the tile type, if the tile is on fire and the rotaion of the tile.
+ * @author Atif Ishaq & Joshua Oladitan
+ * @version 1.0
+ */
 public class FloorTile extends Tile {
+
+	/**
+	 * These attributes hold information about the floor tile. Information such as if the tile is on fire in the form
+	 * of a boolean and information such as TileType which is in the form of an enum.
+	 */
 	private boolean	isFixed;
 	TileType type;
 	Rotation rotation;
 	private boolean isOnFire;
 	private boolean isFrozen;
 
-	//These will be used for the tics, it will stop the tiles being affected after 3 turns.
+	/**
+	 * These static attributes, will be used for the action tiles freeze and fire and tick down after every players
+	 * turn.
+	 */
 	private static int ticFire;
 	private static int ticFrozen;
 
-	public	FloorTile(TileType type){
+	/**
+	 * This constructor of FloorTile initiates all the attributes apart from the static attributes, takes in a
+	 * TileType and initiates it. Sets the default rotation to UP.
+	 * @param type This is the type of tile that in the form of an enum.
+	 */
+	public FloorTile (TileType type) {
 		this.type = type;
 		this.rotation = Rotation.UP;
 		this.isOnFire = false;
 		this.isFrozen = false;
 	}
 
-	public FloorTile(TileType type, Rotation rotation) {
+	/**
+	 * This constructor of FloorTile initiates all attributes apart from the static ones. Takes in a TileType and
+	 * Rotation in the form of enums and sets the corresponding attributes.
+	 * @param type This is the type of tile that in the form of an enum.
+	 * @param rotation This is the rotation of the tile in the form of an enum.
+	 */
+	public FloorTile (TileType type, Rotation rotation) {
 		this.rotation = rotation;
 		this.type = type;
+		this.isOnFire = false;
+		this.isFrozen = false;
 	}
 
-	public TileType getType() {
-		return type;
+	/**
+	 * This method returns the type of the tile.
+	 * @return returns TileType.
+	 */
+	public TileType getType () {
+		return this.type;
 	}
 
-	public Rotation getRotation() {
-		return rotation;
+	/**
+	 * This method returns the rotation of the tile.
+	 * @return returns rotation.
+	 */
+	public Rotation getRotation () {
+		return this.rotation;
 	}
 
-	public Boolean onFire() {
-		return isOnFire;
+	/**
+	 * This method checks if the tile is on fire.
+	 * @return true if the tile is on fire, else false otherwise.
+	 */
+	public Boolean onFire () {
+		return this.isOnFire;
 	}
 
-	public Boolean isFrozen() {
-		return isFrozen;
+	/**
+	 * This method checks if the tile is frozen.
+	 * @return true if the tile is frozen, else false otherwise.
+	 */
+	public Boolean isFrozen () {
+		return this.isFrozen;
 	}
 
-	public void setRotation(Rotation rotation) {
-		this.rotation= rotation;
+	/**
+	 * This method sets the rotation of the tile.
+	 * @param rotation this is the rotation the tile is set to.
+	 */
+	public void setRotation (Rotation rotation) {
+		this.rotation = rotation;
 	}
 
-	public void setFireTic (int numOfPlayers){
+	/**
+	 * This method sets the boolean onFire to true, which means the tile is now on fire
+	 * also ticks down until two player cycles has happened. isOnFire is then set to false as the
+	 * fire has worn out.
+	 * @param numOfPlayers This lets us know how many ticks are in one cycle. Each player is one tick.
+	 */
+	public void setFireTic (int numOfPlayers) {
 		this.isOnFire = true;
 		ticFire = numOfPlayers * 2; //Fire tiles last for 2 cycles.
 		System.out.println("Fire Tiles: " + numOfPlayers * 2);
 	}
 
-	public void ticFire (){
+	/**
+	 * This method decrements the ticFire after every players turn. If it reaches zero, sets isOnFire to false.
+	 */
+	public void ticFire () {
 		ticFire --;
 		if (ticFire == 0){
 			isOnFire = false;
 		}
 	}
 
-	public void setFrozenTic (int numOfPlayers){
-		isFrozen = true;
+	/**
+	 * This method sets the boolean isFrozen to true, which means the tile is now frozen
+	 * also ticks down until one player cycles has happened. isFrozen is then set to false as the
+	 * freeze has worn out.
+	 * @param numOfPlayers This lets us know how many ticks are in one cycle. Each player is one tick.
+	 */
+	public void setFrozenTic (int numOfPlayers) {
+		this.isFrozen = true;
 		ticFrozen = numOfPlayers; //Frozen tiles last for 1 cycle.
 		System.out.println("Frozen Tiles: " + numOfPlayers);
 	}
 
-	public void ticFrozen (){
+	/**
+	 * This method decrements the ticFrozen after every players turn. If it reaches zero, sets isFrozen to false.
+	 */
+	public void ticFrozen () {
 		ticFrozen --;
 		if (ticFrozen == 0){
 			isFrozen = false;
 		}
 	}
 
+	/*
 	public boolean isFixed() {
 
 		return (new Random()).nextBoolean();
 	}
+	 */
 
+	/*
 	public void setFixed(boolean fixed) {
 		isFixed = fixed;
 	}
+	 */
 }

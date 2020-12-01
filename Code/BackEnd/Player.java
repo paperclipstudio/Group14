@@ -43,18 +43,12 @@ public class Player
     private Gameboard gameboard;
 
     /**
-     * @param x The starting x coordinate of the Player object
-     * @param y The starting y coordinate of the Player object
-     */
-
-
-    /**
      * Create a player and give them the silk bag and gameboard references.
      * @param playerNumber The player's number, used to distinguish who's turn it is.
      * @param silkBag Reference to the game's silk bag object.
      * @param gameboard Reference to the game's gameboard object.
      */
-    public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
+    public Player (int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
         this.playerNumber = playerNumber;
         this.inventory = new ArrayList<>();

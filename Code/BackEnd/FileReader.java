@@ -10,7 +10,7 @@ import java.util.*;
  * and create the gameboard, along with the fixed tiles in their correct locations, the players in their correct
  * locations, and the amount and type of each floor/action tile that will populate the silk bag.
  *
- * @author Atif Ishaq and Joshua Oladitan.
+ * @author George Sanger, Atif Ishaq and Joshua Oladitan.
  * @version 1.0
  */
 

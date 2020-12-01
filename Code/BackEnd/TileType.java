@@ -1,7 +1,9 @@
 package BackEnd;
 
 /**
- * List of all tile types.
+ * This enum class stores the different tile types that a tile might be.
+ * @author George Sanger
+ * @version 1.0
  */
 
 public enum TileType {

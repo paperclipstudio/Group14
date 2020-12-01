@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 /**
  * Holds information on the number of wins for one level.
- *
  * @author Christian Sanger
+ * @version 1.0
  */
 
 public class Leaderboard {

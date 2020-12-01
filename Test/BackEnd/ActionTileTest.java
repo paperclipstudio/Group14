@@ -11,5 +11,4 @@ class ActionTileTest {
 		ActionTile tile = new ActionTile(FIRE);
 		assertEquals(tile.getType(), FIRE);
 	}
-
 }

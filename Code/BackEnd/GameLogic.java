@@ -13,6 +13,7 @@ import static BackEnd.TileType.DOUBLE_MOVE;
  * and the state of the game. Also lets the UI tell it the User choices, basically
  * acts and an API for the front end.
  * @author Christian Sanger
+ * @version 1.0
  */
 public class GameLogic {
 	private final int seed;

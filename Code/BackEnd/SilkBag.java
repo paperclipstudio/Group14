@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * This class represents a Silk bag that holds and distributes tiles for the game.
- *  @author James Sam
- *  @version 1.0
+ * This class represents the Silk bag that holds and distributes tiles for the game.
+ * @author James Sam
+ * @version 1.0
  */
 
-
 public class SilkBag {
+
     /**
      * These are variables are used for the silk bag, a list to hold all tiles and
      * a random generator to generate a random tile.
@@ -34,15 +34,16 @@ public class SilkBag {
 	}
 
     /**
-     * Returns the seed.
+     * This method returns the seed of the silk bag.
+     * @return the seed of the silk bag.
      */
     public int getSeed(){
         return SEED;
     }
 
     /**
-     * Get a tile from bag.
-     * @return a Tile
+     * This method gets a random tile from the bag, also removes it from the bag
+     * @return Tile, A random tile that was generated.
      */
     public Tile getTile() {
         int index = randomGenerator.nextInt(allTiles.size());
@@ -50,8 +51,8 @@ public class SilkBag {
     }
 
     /**
-     * Gets a floor tile from bag for setup
-     * @return a Tile
+     * This method gets a floor tile, for the game setup of the board.
+     * @return tile, A random floor tile.
      */
     public FloorTile getFloorTile () throws Exception {
         // Create a random index.
@@ -73,8 +74,8 @@ public class SilkBag {
     }
 
     /**
-     * Inserts tile into the bag.
-     * @param tile
+     * This method inserts a tile into the bag.
+     * @param tile, tile to be inserted into the bag.
      */
     public void insertTile (Tile tile) {
         allTiles.add(tile);
