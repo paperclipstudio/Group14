@@ -345,10 +345,10 @@ public class Gameboard {
     }
 
     /**
-     * This function is used to play action tiles depending on their type
-     * @param location to put tile
-     * @param tile type
-     * @param player refers to the player
+     * This function is used to play action tiles depending on the action tile given.
+     * @param location to use action tile
+     * @param tile type of action tile
+     * @param player refers to the player that's using the tile.
      */
     public void playActionTile(Coordinate location, ActionTile tile, int player) {
         if (tile.getType() == TileType.FROZEN) {
@@ -361,7 +361,7 @@ public class Gameboard {
     }
 
     /**
-     * places a fixed floor tile in the coordinates specified.
+     * places a fixed floor tile and board tile in the coordinates specified.
      * @param tile to be placed
      * @param x co-ordinate
      * @param y co-ordinate
@@ -372,8 +372,8 @@ public class Gameboard {
     }
 
     /**
-     * //Checks the board for goal tiles, sets their Coordinates.
-     * @return goal tile co-ordinates.
+     * Checks the board for goal tiles, adds the coordinates to the ArrayList.
+     * @return the ArrayList of goal tile locations.
      */
     public ArrayList<Coordinate> checkGoalTiles() {
         for (int i = 0; i < boardTiles.length; i++) {
@@ -386,6 +386,11 @@ public class Gameboard {
         return goalCoors;
     }
 
+    /**
+     * Checks to see if a player is on goal by going through all the players' locations to see
+     * if they match the goal coordinates.
+     * @return if a player coordinate matches a goal coordinate, return true, else false.
+     */
     //checks to see if a player is on goal by going through all the players' locations to see
     //if they match any of the goal coordinates.
     public boolean isPlayerOnGoal() {
@@ -401,6 +406,11 @@ public class Gameboard {
         return false;
     }
 
+    /**
+     * Checks the given coordinates if there is a player on that tile.
+     * @param toCheck coordinates to be checked
+     * @return true, if there is player on the given tile, else false.
+     */
     private boolean checkTileForPlayer(Coordinate toCheck) {
         for (Coordinate[] playerLocation : playerLocations) {
             if (playerLocation[0] != null && playerLocation[0].equals(toCheck)) {
@@ -410,6 +420,8 @@ public class Gameboard {
         return false;
     }
 
+
+    /*
     private int checkTileForPlayerInt(int x, int y) {
         //This is 4, as the 4 players are listed as 0,1,2, and 3, if it returns 4, then there is no player on this tile.
         int playerNumber = 4;
@@ -422,12 +434,23 @@ public class Gameboard {
         }
         return playerNumber;
     }
+     */
 
+    /**
+     * This method returns the tile that the player is currently on.
+     * @param player the player to be checked
+     * @return the tile that the player is on.
+     */
     public Tile getPlayerTile(int player) {
         Coordinate location = getPlayerPos(player);
         return boardTiles[location.getX()][location.getY()];
     }
 
+    /**
+     * This method sets fire in a 3x3 radius to the given coordinates. Making sure that the tiles
+     * its setting fire to are on the board.
+     * @param location the 3x3 area to set fire to.
+     */
     private void setFireCoords(Coordinate location) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
@@ -440,6 +463,11 @@ public class Gameboard {
         }
     }
 
+    /**
+     * This method freezes in a 3x3 radius to the given coordinates. Making sure that the tiles
+     * its getting froze to are on the board.
+     * @param location the 3x3 area to freeze.
+     */
     private void setFreezeCoords(Coordinate location) {
         int players = getNumOfPlayers();
         for (int i = 0; i < boardTiles.length; i++) {
@@ -476,6 +504,12 @@ public class Gameboard {
         }
     }
 
+    /**
+     * This method gets the slide locations that a player can play a floor tile. It does this by
+     * checking every row/column and checking if there is a fixed tile in that row/column. If there isnt
+     * add it to the slide locations.
+     * @return the ArrayList of slide locations.
+     */
     public Coordinate[] getSlideLocations() {
         ArrayList<Coordinate> locations = new ArrayList<>();
         for (int x = 0; x < height; x++) {
@@ -506,10 +540,21 @@ public class Gameboard {
         return locations.toArray(slideLocations);
     }
 
+    /**
+     * This method gives the tile from the given coordinates.
+     * @param coordinate the tile to be checked.
+     * @return the tile at the given coordinates.
+     */
     public FloorTile tileAt(Coordinate coordinate) {
         return boardTiles[coordinate.getX()][coordinate.getY()];
     }
 
+    /**
+     * This method check the players previous two locations, if the player has moved one or more times
+     * and the previous location is not on fire and there is not a player on that tile. Then backtrack is valid.
+     * The player will move back one or two positions if backtrack is played on the player.
+     * @param player
+     */
     public void backtrack(int player) {
         //gets the players current position.
         Coordinate posOneTurnAgo = getPrevPlayerPos(player, 1);
@@ -538,6 +583,11 @@ public class Gameboard {
 
     }
 
+    /**
+     * This method goes through the board width and height checking the tiles to see if any of them are null
+     * (they dont contain a tile). If at least one tile doesn't contain a tile return true.
+     * @return true, if there is a null location on the board. Else false.
+     */
     public boolean containsNull() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -549,6 +599,11 @@ public class Gameboard {
         return false;
     }
 
+    /**
+     * This method gets the number of players by checking the playerLocations array. Incrementing the number of players
+     * if the array is not equal to null.
+     * @return the number of players.
+     */
     public int getNumOfPlayers() {
         int numOfPlayers = 0;
         for (int i = 0; i < playerLocations.length; i++) {
