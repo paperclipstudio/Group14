@@ -390,6 +390,7 @@ public class GameScreenController implements Initializable {
 	public void startNewGame(String board) throws Exception {
 		gameLogic = new GameLogic((new Random()).nextInt());
 		gameLogic.newGame(board);
+		//gameLogic.setPlayerCount(Main.getNumberOfPlayers());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
 		mainLoop();

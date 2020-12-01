@@ -396,13 +396,19 @@ public class Gameboard {
 	public void backtrack(int player) {
 		//gets the players current position.
 		Coordinate posOneTurnAgo = getPrevPlayerPos(player, 1);
-		FloorTile tileOneTurn = tileAt(posOneTurnAgo);//gets the tile, one and two turns ago that the player was on.
+		FloorTile tileOneTurn = null;
+		if (posOneTurnAgo != null) {
+			tileOneTurn = tileAt(posOneTurnAgo);//gets the tile, one and two turns ago that the player was on.
+		}
 		Coordinate posTwoTurnsAgo = getPrevPlayerPos(player, 2);
-		FloorTile tileTwoTurn = tileAt(getPrevPlayerPos(player, 2));
+		FloorTile tileTwoTurn = null;
+		if (posTwoTurnsAgo != null) {
+			tileTwoTurn = tileAt(posTwoTurnsAgo);
+		}
 
 		//checks to see if the tile two turns ago is on fire, if not, sets that as the players position
-		if (!tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo)) {
-			if (!tileTwoTurn.onFire() && !checkTileForPlayer(posTwoTurnsAgo)) {
+		if (tileOneTurn != null && !tileOneTurn.onFire() && !checkTileForPlayer(posOneTurnAgo)) {
+			if (tileTwoTurn != null && !tileTwoTurn.onFire() && !checkTileForPlayer(posTwoTurnsAgo)) {
 				// They can move two steps back
 				setPlayerPos(player, posTwoTurnsAgo);
 			} else {

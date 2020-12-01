@@ -22,7 +22,7 @@ import java.util.Scanner;
  */
 
 public class Main extends Application {
-    public static Profile[] profiles;
+    private static Profile[] profiles;
     private static boolean fullScreen;
 	private static String boardFile;
     private static int numberOfPlayers;
@@ -60,6 +60,14 @@ public class Main extends Application {
 
     public static void setResolution(RESOLUTION res) {
         Main.resolution = res;
+    }
+
+    public static Profile[] getProfiles() {
+        return profiles;
+    }
+
+    public static void setProfiles(Profile[] profiles) {
+        Main.profiles = profiles;
     }
 
 

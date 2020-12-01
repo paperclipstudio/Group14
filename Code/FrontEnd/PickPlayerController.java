@@ -84,7 +84,7 @@ public class PickPlayerController {
 
          String name = profileFile.getName();
 
-         Image playerIcon = null;
+         String playerIcon = null;
 
          String line;
          int wins = 0 ;
@@ -111,8 +111,7 @@ public class PickPlayerController {
         WindowLoader wl = new WindowLoader(backButton);
         try {
 
-            Main.profiles = profiles.toArray(new Profile[0]); ////////////////////////////qus
-
+            Main.setProfiles(profiles.toArray(new Profile[0]));
             if(Main.getNumberOfPlayers() == 2) {
 
                 if(!playerList1.getValue().equals(playerList2.getValue())){

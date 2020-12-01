@@ -201,4 +201,9 @@ public class Assets {
 		frozenEffect.setFitHeight(GameScreenController.tileWidth * 3);
 		return frozenEffect;
 	}
+
+	public static Image getProfile(int i) {
+		Image icon = get(Main.getProfiles()[i].getIcon());
+		return icon;
+	}
 }
