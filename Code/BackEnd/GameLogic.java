@@ -3,9 +3,7 @@ package BackEnd;
 
 import javafx.util.Pair;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Random;
 
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
@@ -35,6 +33,7 @@ public class GameLogic {
 	/**
 	 * Creates a new game from the given board file
 	 * @param boardFile Paths to board file
+	 * @throws Exception if issue with board file.
 	 */
 	public void newGame(String boardFile) throws Exception {
 		gameSaver = new GameSave(boardFile, seed);
@@ -97,8 +96,9 @@ public class GameLogic {
 	 * a tile in.
 	 * @param tile tile to be played
 	 * @param location where the tile should be played.
+	 * @throws Exception if silkbag is empty
 	 */
-	public void floor(FloorTile tile, Coordinate location) {
+	public void floor(FloorTile tile, Coordinate location) throws Exception {
 		gameSaver.playFloorTile(location, tile);
 		assert(tile.getType().equals(currentPlayer.isHolding().getType()));
 		players[currentPlayerNo].playFloorTile(location, tile);
@@ -132,15 +132,23 @@ public class GameLogic {
 	/**
 	 * Plays an Action tile at location.
 	 * @param tile which tile to play
-	 * @param coordinate where it would like to be played
+	 * @param coordinate where it would like to be played (if its played at a location)
+	 * @param playerNo which player this card effect (if it does)
 	 */
-	public void action(ActionTile tile, Coordinate coordinate) {
-		gameSaver.playActionTile(coordinate, tile);
-		if (tile.getType() == DOUBLE_MOVE) {
-			doubleMove = true;
+	public void action(ActionTile tile, Coordinate coordinate, int playerNo) {
+		// If tile is null then player didn't/can't play an action card.
+		gameSaver.playActionTile(coordinate, tile, playerNo);
+		if (tile != null) {
+			if (tile.getType() == DOUBLE_MOVE) {
+				doubleMove = true;
+			}
+			players[currentPlayerNo].playActionTile(coordinate, tile, playerNo);
 		}
-		players[currentPlayerNo].playActionTile(coordinate, tile, 0);
+		if (gameboard.isPlayerOnGoal()) {
+			phase = WIN;
+		} else {
 		phase = MOVE;
+		}
 	}
 
 	/**
@@ -148,14 +156,7 @@ public class GameLogic {
 	 * @return array of all playable tiles.
 	 */
 	public ActionTile[] getActionCards() {
-		//TODO FIX JUST FOR TESTING
-		System.out.println("FAKE GET ACTION CARDS");
-		ActionTile[] result = new ActionTile[4];
-		result[0] = new ActionTile(DOUBLE_MOVE);
-		result[1] = new ActionTile(TileType.BACKTRACK);
-		result[2] = new ActionTile(TileType.FIRE);
-		result[3] = new ActionTile(TileType.FROZEN);
-		return result;
+		return currentPlayer.getInventory().toArray(new ActionTile[0]);
 	}
 
 	/**
@@ -165,7 +166,9 @@ public class GameLogic {
 	public void move(Coordinate location) {
 		gameSaver.playerMove(location);
 		gameboard.setPlayerPos(currentPlayerNo, location);
-		if (doubleMove) {
+		if (gameboard.isPlayerOnGoal()) {
+			phase = WIN;
+		} else if (doubleMove) {
 			doubleMove = false;
 		} else {
 			phase = DRAW;
@@ -177,13 +180,10 @@ public class GameLogic {
 	/**
 	 * Creates an empty game logic class, must run startNew or load before you
 	 * can play.
+	 * @param seed seed used with random generator
 	 */
 	public GameLogic(int seed) {
 		this.seed = seed;
-	}
-
-	public GameLogic() {
-		this.seed = (new Random()).nextInt();
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class GameLogic {
 	 * @return tile at location.
 	 */
 	public FloorTile getTileAt(Coordinate location) {
-		return gameboard.TileAt(location);
+		return gameboard.tileAt(location);
 	}
 
 	/**
@@ -219,14 +219,6 @@ public class GameLogic {
 		return numberOfPlayers;
 	}
 
-	/**
-	 * Called when User wants to play a backtrack card.
-	 * @param playerNumber which player to use backtrack on.
-	 */
-	public void backtrack(int playerNumber) {
-		currentPlayer.playActionTile(null, new ActionTile(TileType.BACKTRACK), playerNumber);
-		phase = MOVE;
-	}
 
 	/**
 	 * Finds out which players turn it is.
@@ -244,6 +236,10 @@ public class GameLogic {
 		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
 	}
 
+	/**
+	 * Saves the game to file
+	 * @throws IOException if error with file
+	 */
 	public void saveGame() throws IOException {
 		gameSaver.saveToFile();
 	}

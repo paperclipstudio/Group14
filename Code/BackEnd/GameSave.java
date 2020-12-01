@@ -34,10 +34,11 @@ public class GameSave {
     public void playFloorTile(Coordinate slideLocations, FloorTile tile){
         gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
     }
-    public void playActionTile(Coordinate location, ActionTile tile) {
-        gameSaveString += "\naction " + tile.getType();
+    public void playActionTile(Coordinate location, ActionTile tile, int playerNo) {
+        String type = tile == null ? "null" : tile.getType().toString();
+        gameSaveString += "\naction " + type + playerNo;
         if (location != null) {
-            gameSaveString += location.toString();
+            gameSaveString += " " + location.toString();
         }
     }
     public void playBacktrack (int playerNum) {

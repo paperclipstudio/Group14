@@ -86,10 +86,9 @@ public class Player
     /**
      * Play a floor tile in a given location and rotation.
      * @param slideLocations Where the player wants to slide a tile in from
-     * @param rotation What orientation the player wants the tile to be slid in at
+     * @param tile What tile the player wants to play
      */
-    public void playFloorTile (Coordinate slideLocations, FloorTile tile)    {
-        //TODO call a playFloorTile function from the gameboard
+    public void playFloorTile (Coordinate slideLocations, FloorTile tile) throws Exception {
         gameboard.playFloorTile(slideLocations, tile);
         lastDrawnTile = null;
     }
@@ -97,8 +96,9 @@ public class Player
 
     /**
      * Method for playing a freeze or fire tile
-     * @param location The center of the freeze/fire location
+     * @param location The center of the freeze/fire location null if action doesn't has a location
      * @param tile The freeze or fire action tile
+     * @param playerNumber the player that this is played on. ignored if action isn't played on a player.
      */
     public void playActionTile (Coordinate location, ActionTile tile, int playerNumber) {
         gameboard.playActionTile(location, tile, playerNumber);

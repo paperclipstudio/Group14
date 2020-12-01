@@ -81,17 +81,11 @@ public class Coordinate {
     }
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof Coordinate)) {
-            return false;
-        }
-
-        Coordinate coor = (Coordinate) o;
-        return this.equals(coor);
+        return (o instanceof Coordinate) &&
+                ((Coordinate) o).getX() == this.getX() &&
+                ((Coordinate) o).getY() == this.getY();
     }
+
 
     /**
      * Shifts a Coordinate by a given amount

@@ -5,12 +5,14 @@ import BackEnd.FloorTile;
 import BackEnd.Tile;
 import BackEnd.TileType;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.FileNotFoundException;
@@ -43,7 +45,7 @@ public class Assets {
 		Image image = cache.get(name.toLowerCase());
 		if (image == null) {
 			image = new Image(name + EXT);
-			cache.put(name, image);
+			cache.put(name.toLowerCase(), image);
 		}
 		return image;
 	}
@@ -55,12 +57,27 @@ public class Assets {
 	 * @param y the Y coordinate of this tile
 	 * @return view of that tile.
 	 */
-	public static ImageView getFloorTileImage(FloorTile tile, int x, int y) {
-		ImageView tileView = new ImageView(get(tile.getType().toString().toLowerCase()));
-		tileView.setFitWidth(GameScreenController.tileWidth);
-		tileView.setFitHeight(GameScreenController.tileWidth);
+	public static Pane getFloorTileImage(FloorTile tile, int x, int y) {
+		Pane tileView = new Pane();
+		ImageView tileImage = new ImageView(get(tile.getType().toString()));
+		tileImage.setFitWidth(GameScreenController.tileWidth);
+		tileImage.setFitHeight(GameScreenController.tileWidth);
+		tileView.getChildren().add(tileImage);
 		tileView.setTranslateX(x * GameScreenController.tileWidth);
 		tileView.setTranslateY(y * GameScreenController.tileWidth);
+		if (tile.onFire()) {
+			ImageView fireImage = new ImageView(get("tilefire"));
+			fireImage.setFitHeight(GameScreenController.tileWidth);
+			fireImage.setFitWidth(GameScreenController.tileWidth);
+			tileView.getChildren().add(fireImage);
+		}
+
+		if (tile.isFixed()) {
+			ImageView lockImage = new ImageView(get("fixed"));
+			lockImage.setFitWidth(GameScreenController.tileWidth);
+			lockImage.setFitHeight(GameScreenController.tileWidth);
+			tileView.getChildren().add(lockImage);
+		};
 
 		switch (tile.getRotation()) {
 			case UP:
@@ -80,8 +97,6 @@ public class Assets {
 			tileView.setRotate(0);
 		}
 		tileView.setId("tile " + x + " " + y);
-		tileView.setTranslateZ(FLOOR_HEIGHT);
-		tileView.toBack();
 		return tileView;
 	}
 	/**
@@ -90,7 +105,7 @@ public class Assets {
 	 * @param coordinate the coordinate of this tile
 	 * @return view of that tile.
 	 */
-	public static ImageView getFloorTileImage(FloorTile tile, Coordinate coordinate) {
+	public static Pane getFloorTileImage(FloorTile tile, Coordinate coordinate) {
 		return getFloorTileImage(tile, coordinate.getX(), coordinate.getY());
 	}
 
@@ -99,7 +114,7 @@ public class Assets {
 	 * @param tile to create ImageView of
 	 * @return view of that tile.
 	 */
-	public static ImageView getFloorTileImage(FloorTile tile) {
+	public static Pane getFloorTileImage(FloorTile tile) {
 		return getFloorTileImage(tile, 0,0);
 	}
 	/**

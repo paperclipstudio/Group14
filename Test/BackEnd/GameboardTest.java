@@ -3,6 +3,8 @@ package BackEnd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static BackEnd.Rotation.UP;
 import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +17,7 @@ class GameboardTest {
 	Gameboard gb4 = new Gameboard(3,3, sb);
 
 	@BeforeEach
-	void setUp() {
+	void setUp() throws Exception {
 
 		gb.setPlayerPos(0, new Coordinate(1,1));
 		gb.setPlayerPos(1, new Coordinate( 2,1));
@@ -111,61 +113,65 @@ class GameboardTest {
 		assertEquals(0, gb.getPlayerPos(3).getY());
 	}
 
-	@Test
-	void placeFixedTile() {
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
-		assertEquals(CORNER, gb.TileAt(new Coordinate(2, 3)).getType());
-		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
-		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(3, 3)).getType());
-		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(2, 3)).getType());
-	}
 
 	@Test
 	void playFloorTile() {
 		Coordinate[] locations = gb.getSlideLocations();
 
         // Testing inserting from the left.
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(STRAIGHT, gb.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(STRAIGHT,gb.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(T_SHAPE, gb.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(STRAIGHT,gb.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb.tileAt(new Coordinate(2,2)).getType());
 		// Testing inserting from the left.
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(T_SHAPE, gb2.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(STRAIGHT, gb2.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb2.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(STRAIGHT, gb2.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(T_SHAPE, gb2.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb2.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(T_SHAPE, gb2.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(STRAIGHT, gb2.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb2.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(STRAIGHT, gb2.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(T_SHAPE, gb2.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb2.tileAt(new Coordinate(2,2)).getType());
 		// Testing inserting from the left.
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(STRAIGHT, gb3.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(T_SHAPE, gb3.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb3.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(T_SHAPE, gb3.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(STRAIGHT, gb3.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb3.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(STRAIGHT, gb3.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(T_SHAPE, gb3.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb3.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(T_SHAPE, gb3.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(STRAIGHT, gb3.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb3.tileAt(new Coordinate(2,2)).getType());
 		// Testing inserting from the right.
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(0,0)).getType());
-		assertEquals(STRAIGHT, gb4.TileAt(new Coordinate(1,0)).getType());
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(2,0)).getType());
-		assertEquals(T_SHAPE, gb4.TileAt(new Coordinate(0,1)).getType());
-		assertEquals(GOAL,    gb4.TileAt(new Coordinate(1,1)).getType());
-		assertEquals(T_SHAPE,gb4.TileAt(new Coordinate(2,1)).getType());
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(0,2)).getType());
-		assertEquals(STRAIGHT, gb4.TileAt(new Coordinate(1,2)).getType());
-		assertEquals(CORNER,  gb4.TileAt(new Coordinate(2,2)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(0,0)).getType());
+		assertEquals(STRAIGHT, gb4.tileAt(new Coordinate(1,0)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(2,0)).getType());
+		assertEquals(T_SHAPE, gb4.tileAt(new Coordinate(0,1)).getType());
+		assertEquals(GOAL,    gb4.tileAt(new Coordinate(1,1)).getType());
+		assertEquals(T_SHAPE,gb4.tileAt(new Coordinate(2,1)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(0,2)).getType());
+		assertEquals(STRAIGHT, gb4.tileAt(new Coordinate(1,2)).getType());
+		assertEquals(CORNER,  gb4.tileAt(new Coordinate(2,2)).getType());
 	}
+
+	@Test
+	void placeFixedTile() {
+		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
+		assertEquals(CORNER, gb.tileAt(new Coordinate(2, 3)).getType());
+		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
+		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(3, 3)).getType());
+		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(2, 3)).getType());
+		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
+		assertEquals(GOAL, gb.tileAt(new Coordinate(2, 1)).getType());
+	}
+
 
 	@Test
 	void getWidth() {
@@ -202,41 +208,47 @@ class GameboardTest {
 
 	@Test
 	void testGetPlayerPos() {
+		Coordinate t1 = new Coordinate(1, 1);
+		Coordinate t2 = new Coordinate(2, 1);
+		Coordinate t3 = new Coordinate(2, 2);
+		Coordinate t4 = new Coordinate(2, 0);
+		assertEquals(t1, gb.getPlayerPos(0));
+		assertEquals(t2, gb.getPlayerPos(1));
+		assertEquals(t3, gb.getPlayerPos(2));
+		assertEquals(t4, gb.getPlayerPos(3));
+		t1 = new Coordinate(1, 1);
+		gb.setPlayerPos(0, t1);
+		assertEquals(t1, gb.getPlayerPos(0));
 	}
 
 	@Test
 	void testSetPlayerPos() {
+		Coordinate t1 = new Coordinate(2, 1);
+		Coordinate t2 = new Coordinate(3, 1);
+		Coordinate t3 = new Coordinate(2, 2);
+		gb.setPlayerPos(0, t1);
+		assertEquals(t1, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, t2);
+		assertEquals(t2, gb.getPlayerPos(0));
+		gb.setPlayerPos(0, t3);
+		assertEquals(t3, gb.getPlayerPos(0));
 	}
 
-	@Test
-	void testGetWidth() {
-	}
-
-	@Test
-	void testGetHeight() {
-	}
-
-	@Test
-	void testPlaceFixedTile() {
-	}
 
 	@Test
 	void setGoalCoor() {
-	}
-
-	@Test
-	void getGoalCoor() {
+		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
+		Coordinate goalPos = new Coordinate(2, 1);
+		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
+		assertEquals(goalPos, goalTiles.get(1));
 	}
 
 	@Test
 	void isPlayerOnGoal() {
-	}
 
-	@Test
-	void testGetSlideLocations() {
-	}
+		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
+		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
+		assertEquals(true, gb.isPlayerOnGoal());
 
-	@Test
-	void tileAt() {
 	}
 }

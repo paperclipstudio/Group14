@@ -68,6 +68,7 @@ public class SilkBag {
                 throw new Exception("Empty Silk bag");
             }
         }
+        allTiles.remove(tile);
         return (FloorTile) tile;
     }
 

@@ -19,12 +19,11 @@ public class FileReader {
     private static final int MAX_NUM_OF_PLAYERS = 4;
 
     /**
-     * This method takes in the given level format file, verifies it using the verifyFile method,
-     * before checking each line of the file, creating the gameboard with the correct width and height,
-     * with the fixed tiles and players in the correct locations, and populating the silk bag with the correct
-     * amount and type of each floor or action tile.
+     * This method takes in the given level format file,
+     * and create a gameboard and players for that game.
      *
      * @param filename The name of the level file format text file.
+     * @param silkBagSeed The seed used for this game.
      * @return pair where first element is the gameboard and second is the players.
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkBagSeed) throws Exception {
@@ -103,8 +102,6 @@ public class FileReader {
      * @param gameBoard The name of the level file format text file.
      * @return in The scanner that iterates through the file.
      */
-
-
 	public static Pair<Gameboard, Player[]> gameSetup(String gameBoard) throws Exception {
         return gameSetup(gameBoard, (new Random()).nextInt());
 	}

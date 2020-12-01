@@ -132,7 +132,7 @@ public class Main extends Application {
         }
     }
 
-    public static double getVolumne() {
+    public static double getVolume() {
         return Main.volume;
     }
 

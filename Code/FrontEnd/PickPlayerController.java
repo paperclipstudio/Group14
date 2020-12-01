@@ -52,30 +52,15 @@ public class PickPlayerController {
 
         assert players != null;
         for (String player : players){
-
-            if(Main.getNumberOfPlayers() == 2){
-
-                playerList1.getItems().add(player);
+            playerList1.getItems().add(player);
+            if(Main.getNumberOfPlayers() >= 2){
                 playerList2.getItems().add(player);
-                playerList3.hide();
-                playerList4.hide();
-
-
-            }else if(Main.getNumberOfPlayers() == 3){
-
-                playerList1.getItems().add(player);
-                playerList2.getItems().add(player);
+            }
+            if(Main.getNumberOfPlayers() >= 3){
                 playerList3.getItems().add(player);
-                playerList4.hide();
-
-            }else if(Main.getNumberOfPlayers() == 4) {
-
-
-                playerList1.getItems().add(player);
-                playerList2.getItems().add(player);
-                playerList3.getItems().add(player);
+            }
+            if(Main.getNumberOfPlayers() >= 4) {
                 playerList4.getItems().add(player);
-
             }
 
         }

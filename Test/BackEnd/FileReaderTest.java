@@ -14,10 +14,11 @@ class FileReaderTest {
 		Pair<Gameboard, Player[]> output = null;
 
 		try {
-			output = FileReader.gameSetup("Gameboards\\ExampleInput.txt");
+			output = FileReader.gameSetup("ExampleInput.txt");
 		} catch (FileNotFoundException e) {
 			fail();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			fail();
 		}
 
