@@ -6,7 +6,6 @@ public class FloorTile extends Tile {
 	private boolean	isFixed;
 	TileType type;
 	Rotation rotation;
-	//Added by Atif as a temp way to distinguish if a tile is on fire.
 	private boolean isOnFire;
 	private boolean isFrozen;
 
