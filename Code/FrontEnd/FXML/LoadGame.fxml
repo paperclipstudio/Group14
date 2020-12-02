@@ -22,6 +22,7 @@
       <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="ALWAYS" />
       <RowConstraints fillHeight="false" maxHeight="102.0" minHeight="10.0" percentHeight="15.0" prefHeight="102.0" vgrow="ALWAYS" />
       <RowConstraints fillHeight="false" maxHeight="48.0" minHeight="3.0" percentHeight="15.0" prefHeight="3.0" vgrow="ALWAYS" />
+      <RowConstraints fillHeight="false" maxHeight="48.0" minHeight="3.0" percentHeight="15.0" prefHeight="3.0" vgrow="ALWAYS" />
       <RowConstraints maxHeight="47.0" minHeight="10.0" percentHeight="15.0" prefHeight="12.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="92.0" minHeight="10.0" percentHeight="15.0" prefHeight="92.0" vgrow="SOMETIMES" />
    </rowConstraints>
@@ -39,10 +40,13 @@
             </RadialGradient>
          </fill>
       </Text>
-      <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="2" />
+      <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPlayButton" prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.rowSpan="2" />
       <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Game file" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2" />
+      <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
       <ChoiceBox fx:id="selectGame" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButton" text="Delete Game" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButton" prefHeight="25.0" prefWidth="100.0" text="Delete Game" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <Button fx:id="yesButton" mnemonicParsing="false" onAction="#onYesButton" prefHeight="25.0" prefWidth="100.0" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button fx:id="noButton" mnemonicParsing="false" onAction="#onNoButton" prefHeight="25.0" prefWidth="100.0" text="No" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Text fx:id="confirm" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
    </children>
 </GridPane>
