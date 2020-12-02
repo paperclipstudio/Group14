@@ -5,7 +5,6 @@ import BackEnd.FloorTile;
 import BackEnd.Tile;
 import BackEnd.TileType;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
@@ -15,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
@@ -202,8 +200,10 @@ public class Assets {
 		return frozenEffect;
 	}
 
-	public static Image getProfile(int i) {
-		Image icon = get(Main.getProfiles()[i].getIcon());
-		return icon;
+	public static Node getProfile(int i) {
+		ImageView profile = new ImageView(get(Main.getProfiles()[i].getIcon()));
+		profile.setFitWidth(100);
+		profile.setFitHeight(100);
+		return (Node) profile;
 	}
 }

@@ -57,6 +57,8 @@ public class GameScreenController implements Initializable {
 	private MenuItem saveButton;
 	@FXML
 	private Pane fixed;
+	@FXML
+	private Pane profile;
 
 
 	private int width;
@@ -78,6 +80,7 @@ public class GameScreenController implements Initializable {
 		for (int i = 0; i < 4; i++) {
 			profiles[i] = new Profile("player " + i, "icon" + i, 2, 2);
 		}
+		Main.setProfiles(profiles);
 		try {
 			if (Main.isLoadedGameFile()) {
 				loadGame(Main.getLoadFile());
@@ -113,6 +116,9 @@ public class GameScreenController implements Initializable {
 	mainLoop() -> show buttons -> wait for call back from button -> mainLoop()
 	 */
 	private void mainLoop() {
+		// Update current player
+
+		profile.getChildren().add(Assets.getProfile(gameLogic.getPlayersTurn()));
 
 		//tiles.setRotate(tiles.getRotate() + 10);
 		updateBoard();

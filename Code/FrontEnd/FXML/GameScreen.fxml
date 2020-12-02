@@ -38,7 +38,7 @@
                    <MenuItem mnemonicParsing="false" text="About" />
                </Menu>
            </MenuBar>
-           <Label fx:id="phaseText" text="Phase" textFill="#a7c3a7">
+           <Label fx:id="phaseText" alignment="CENTER" contentDisplay="RIGHT" layoutX="150.0" rotate="9.5" text="Phase" textAlignment="RIGHT" textFill="#a7c3a7" translateX="150.0">
               <font>
                   <Font name="Book Antiqua" size="22.0" />
               </font>
@@ -46,7 +46,7 @@
        </VBox>
       <Button id="addCard" mnemonicParsing="false" onAction="#onButtonPressed" prefWidth="100.0" text="AddCard" GridPane.columnIndex="4" GridPane.rowIndex="2" />
       <Pane fx:id="tiles" layoutX="200.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
-      <Pane fx:id="fixed" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
+      <Pane fx:id="fixed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
       <Pane fx:id="players" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
       <Pane fx:id="controls" layoutX="310.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
        <ScrollPane GridPane.columnIndex="4" GridPane.rowSpan="3">
@@ -55,5 +55,6 @@
          </content>
        </ScrollPane>
       <Button fx:id="drawButton" mnemonicParsing="false" onAction="#onDrawButton" text="Draw" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Pane fx:id="profile" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
    </children>
 </GridPane>
