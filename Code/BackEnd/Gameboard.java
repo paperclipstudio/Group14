@@ -451,7 +451,7 @@ public class Gameboard {
      * its setting fire to are on the board.
      * @param location the 3x3 area to set fire to.
      */
-    private void setFireCoords(Coordinate location) {
+    public void setFireCoords(Coordinate location) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 Coordinate toSetOnFire = location.shift(i, j);
@@ -468,36 +468,39 @@ public class Gameboard {
      * its getting froze to are on the board.
      * @param location the 3x3 area to freeze.
      */
-    private void setFreezeCoords(Coordinate location) {
+    public void setFreezeCoords(Coordinate location) {
         int players = getNumOfPlayers();
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
                     boardTiles[i][j].setFrozenTic(players); //mid
-                    if (i != width) {
+                    if (i != width - 1) {
                         boardTiles[i + 1][j].setFrozenTic(players); //right
                     }
                     if (i != 0) {
                         boardTiles[i - 1][j].setFrozenTic(players); //left
                     }
-                    if (j != height) {
+                    if (j != height - 1) {
                         boardTiles[i][j + 1].setFrozenTic(players); //up
                     }
-                    if (i != width && j != height) {
+                    if (i != width - 1 && j != height - 1) {
                         boardTiles[i + 1][j + 1].setFrozenTic(players); //upper right
                     }
-                    if (i != 0 && j != height) {
+                    if (i != 0 && j != height - 1) {
                         boardTiles[i - 1][j + 1].setFrozenTic(players); //upper left
                     }
                     if (j != 0) {
                         boardTiles[i][j - 1].setFrozenTic(players); //down
                     }
-                    if (i != width && j != 0) {
+                    if (i != width - 1 && j != 0) {
                         boardTiles[i + 1][j - 1].setFrozenTic(players); //down right
                     }
                     if (i != 0 && j != 0) {
                         boardTiles[i - 1][j - 1].setFrozenTic(players); //down left
+                    }
+                    if (boardTiles[i][j].isFrozen()){
+                        System.out.println(i + " " + j);
                     }
                 }
             }
@@ -611,5 +614,18 @@ public class Gameboard {
      */
     public int getNumOfPlayers() {
         return numOfPlayers;
+    }
+
+    public void ticTiles(){
+        for (int i = 0; i < boardTiles.length; i++){
+            for (int j = 0; j < boardTiles[i].length; j++ ){
+                if (boardTiles[i][j].isFrozen()){
+                    boardTiles[i][j].ticFrozen();
+                }
+                if (boardTiles[i][j].onFire()){
+                    boardTiles[i][j].ticFire();
+                }
+            }
+        }
     }
 }

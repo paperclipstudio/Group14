@@ -147,8 +147,8 @@ public class FloorTile extends Tile {
 	/**
 	 * This method sets the isFixed value of a given tile to either true, or false.
 	 * */
-	public void setFixed(FloorTile tile, boolean fixed) {
-		tile.isFixed = fixed;
+	public void setFixed(FloorTile tile) {
+		tile.isFixed = true;
 	}
 
 }

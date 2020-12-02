@@ -277,4 +277,10 @@ class GameboardTest {
 		assertEquals(true, gb.isPlayerOnGoal());
 
 	}
+
+	@Test
+	void setFreezeCoors() {
+		gb.setFreezeCoords(new Coordinate(0, 0));
+
+	}
 }
