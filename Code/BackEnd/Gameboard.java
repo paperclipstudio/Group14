@@ -16,12 +16,13 @@ import static BackEnd.Rotation.*;
 public class Gameboard {
 
     /*
-     * These attributes store information about the gameboard, such as its' width and height, and the SilkBag that it
-     * is connected to.
+     * These attributes store information about the gameboard, such as its' width and height, the number of players
+     * and the SilkBag that it is connected to.
      */
 
     private int width;
     private int height;
+    private int numOfPlayers;
     private SilkBag silkbag;
     private FloorTile removedTile;
 
@@ -601,18 +602,16 @@ public class Gameboard {
         return false;
     }
 
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
     /**
      * This method gets the number of players by checking the playerLocations array. Incrementing the number of players
      * if the array is not equal to null.
      * @return the number of players.
      */
     public int getNumOfPlayers() {
-        int numOfPlayers = 0;
-        for (int i = 0; i < playerLocations.length; i++) {
-            if (playerLocations[i][0] != null) {
-                numOfPlayers++;
-            }
-        }
         return numOfPlayers;
     }
 }
