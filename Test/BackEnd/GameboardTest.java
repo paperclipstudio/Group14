@@ -23,6 +23,22 @@ class GameboardTest {
 		gb2 = new Gameboard(3,3, sb);
 		gb3 = new Gameboard(3,3, sb);
 		gb4 = new Gameboard(3,3, sb);
+		gb.setPlayerPos(0, new Coordinate(1,1));
+		gb.setPlayerPos(1, new Coordinate( 2,1));
+		gb.setPlayerPos(2, new Coordinate( 2,2));
+		gb.setPlayerPos(3, new Coordinate( 2,0));
+		gb2.setPlayerPos(0, new Coordinate(1,1));
+		gb2.setPlayerPos(1, new Coordinate( 2,1));
+		gb2.setPlayerPos(2, new Coordinate( 2,2));
+		gb2.setPlayerPos(3, new Coordinate( 2,0));
+		gb3.setPlayerPos(0, new Coordinate(1,1));
+		gb3.setPlayerPos(1, new Coordinate( 2,1));
+		gb3.setPlayerPos(2, new Coordinate( 2,2));
+		gb3.setPlayerPos(3, new Coordinate( 2,0));
+		gb4.setPlayerPos(0, new Coordinate(1,1));
+		gb4.setPlayerPos(1, new Coordinate( 2,1));
+		gb4.setPlayerPos(2, new Coordinate( 2,2));
+		gb4.setPlayerPos(3, new Coordinate( 2,0));
 
 		//Inserting from the left.
 		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(CORNER));
@@ -64,11 +80,6 @@ class GameboardTest {
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(T_SHAPE));
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
-
-		gb.setPlayerPos(0, new Coordinate(1,1));
-		gb.setPlayerPos(1, new Coordinate( 2,1));
-		gb.setPlayerPos(2, new Coordinate( 2,2));
-		gb.setPlayerPos(3, new Coordinate( 2,0));
 	}
 
 	@Test
@@ -177,12 +188,12 @@ class GameboardTest {
 
 	@Test
 	void placeFixedTile() {
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 2, 3);
-		assertEquals(CORNER, gb.tileAt(new Coordinate(2, 3)).getType());
-		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 3, 3);
-		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(3, 3)).getType());
-		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 2, 3);
-		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(2, 3)).getType());
+		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 1, 2);
+		assertEquals(CORNER, gb.tileAt(new Coordinate(1, 2)).getType());
+		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 2, 2);
+		assertEquals(STRAIGHT, gb.tileAt(new Coordinate(2, 2)).getType());
+		gb.placeFixedTile(new FloorTile(T_SHAPE, Rotation.LEFT), 1, 1);
+		assertEquals(T_SHAPE, gb.tileAt(new Coordinate(1, 1)).getType());
 		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
 		assertEquals(GOAL, gb.tileAt(new Coordinate(2, 1)).getType());
 	}
@@ -264,6 +275,12 @@ class GameboardTest {
 		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
 		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
 		assertEquals(true, gb.isPlayerOnGoal());
+
+	}
+
+	@Test
+	void setFreezeCoors() {
+		gb.setFreezeCoords(new Coordinate(0, 0));
 
 	}
 }

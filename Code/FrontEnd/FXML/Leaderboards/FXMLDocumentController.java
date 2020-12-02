@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -54,18 +55,32 @@ public class FXMLDocumentController {
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
-    public void handleButton2Action(javafx.event.ActionEvent actionEvent) {
-        System.out.println("Yo clicked me!");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("Screen2");
-        mainPane.setCenter(view);
+    public void handleButton2Action(javafx.event.ActionEvent actionEvent) throws IOException {
+        Leaderboard example2 = new Leaderboard("example2");
+        example2.loadFile();
+        highScore.setItems(example2.getObservableList());
+        TableColumn<Score, String> nameColumn = new TableColumn<Score, String>("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        TableColumn<Score, String> winsColumn = new TableColumn<Score, String>("Wins");
+        winsColumn.setCellValueFactory(new PropertyValueFactory("wins"));
+        TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
+        lossesColumn.setCellValueFactory(new PropertyValueFactory("loss"));
+
+        highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
-    public void handleButton3Action(javafx.event.ActionEvent actionEvent) {
-        System.out.println("Yo clicked me!");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("Screen3");
-        mainPane.setCenter(view);
+    public void handleButton3Action(javafx.event.ActionEvent actionEvent) throws IOException {
+        Leaderboard example3 = new Leaderboard("example3");
+        example3.loadFile();
+        highScore.setItems(example3.getObservableList());
+        TableColumn<Score, String> nameColumn = new TableColumn<Score, String>("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        TableColumn<Score, String> winsColumn = new TableColumn<Score, String>("Wins");
+        winsColumn.setCellValueFactory(new PropertyValueFactory("wins"));
+        TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
+        lossesColumn.setCellValueFactory(new PropertyValueFactory("loss"));
+
+        highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
 
