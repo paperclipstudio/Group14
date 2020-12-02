@@ -582,8 +582,6 @@ public class Gameboard {
             }
         }
         // they can't move backward
-
-
     }
 
     /**

@@ -136,16 +136,15 @@ public class FloorTile extends Tile {
 		}
 	}
 
-	/*
 	public boolean isFixed() {
-
-		return (new Random()).nextBoolean();
+		if(isFixed == true){
+			return true;
+		}
+		return false;
 	}
-	 */
 
-	/*
 	public void setFixed(boolean fixed) {
 		isFixed = fixed;
 	}
-	 */
+
 }
