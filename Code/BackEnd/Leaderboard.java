@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -85,6 +86,14 @@ public class Leaderboard {
 		writer.close();
 	}
 
+	/**
+	 * Returns all scores as array.
+	 * @return array of scores
+	 */
+	Score[] getAllScores() {
+		return scores.toArray(new Score[0]);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder fileData = new StringBuilder();
@@ -94,42 +103,12 @@ public class Leaderboard {
 		}
 		return fileData.toString();
 	}
+
+
 	public String getGameBoard() {
 		return gameBoard;
 	}
 
-	/**
-	 * Stores the wins/loss for one profile
-	 *
-	 * @author Christian Sanger
-	 */
-	private static class Score {
-		private final String name;
-		private final int wins;
-		private final int loss;
 
-		public Score(String name, int wins, int loss) {
-			this.name = name;
-			this.wins = wins;
-			this.loss = loss;
-		}
-
-		public int getWins() {
-			return wins;
-		}
-
-		public int getLoss() {
-			return loss;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return getName() + " " + getWins() + " " + getLoss();
-		}
-	}
 
 }
