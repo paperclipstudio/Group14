@@ -56,5 +56,11 @@ public class LoadGameController implements Initializable {
 		wl.load("GameScreen");
 	}
 
+	public void onDeleteButton() {
+		File saveFile = new File("SaveData\\GameSave\\" + selectGame.getValue());
+		saveFile.delete();
+		selectGame.getItems().remove(selectGame.getValue());
+		selectGame.getSelectionModel().selectFirst();
+	}
 
 }
