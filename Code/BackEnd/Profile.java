@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Profile {
 
-    /**
+    /*
      * These attributes hold information about the player, such as, wins, losses and maps played.
      */
     private Player player;
