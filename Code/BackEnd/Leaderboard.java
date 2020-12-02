@@ -1,6 +1,8 @@
 package BackEnd;
 
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.FXCollections.*;
 import javafx.collections.ObservableList;
 
 import java.io.File;
@@ -36,9 +38,7 @@ public class Leaderboard {
 		boolean failed;
 		this.gameBoard = gameBoard;
 		failed = file.createNewFile();
-		if (failed) {
-			throw new IOException("Leaderboard failed to create file");
-		}
+		// File is already there
 		loadFile();
 	}
 
@@ -114,13 +114,7 @@ public class Leaderboard {
 	}
 
 	public ObservableList<Score> getObservableList(){
-
-		SimpleListProperty<Score> allscores = new SimpleListProperty<Score>();
-		allscores.addAll(scores);
-
-		return allscores;
-
-
+		return FXCollections.observableArrayList(scores);
 	}
 
 
