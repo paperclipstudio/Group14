@@ -7,7 +7,7 @@ package BackEnd;
  */
 
 public class Coordinate {
-    /**
+    /*
      * These are variables to represent the x and y coordinate pairs.
      */
     private int x;

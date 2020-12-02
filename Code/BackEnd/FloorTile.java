@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class FloorTile extends Tile {
 
-	/**
+	/*
 	 * These attributes hold information about the floor tile. Information such as if the tile is on fire in the form
 	 * of a boolean and information such as TileType which is in the form of an enum.
 	 */
@@ -20,7 +20,7 @@ public class FloorTile extends Tile {
 	private boolean isOnFire;
 	private boolean isFrozen;
 
-	/**
+	/*
 	 * These static attributes, will be used for the action tiles freeze and fire and tick down after every players
 	 * turn.
 	 */

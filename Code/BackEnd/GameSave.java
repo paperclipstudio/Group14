@@ -15,24 +15,23 @@ import java.util.Random;
  */
 public class GameSave {
 
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
+    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".sav");
+    private boolean isGameSaved = false;
 
-    private String gameSaveString = "";
+    private String gameSaveString;
 
-    public GameSave() throws IOException {
-        new GameSave("ExampleInput.txt", (new Random()).nextInt());
-    }
 
-    public GameSave(String boardFile, int seed) throws IOException {
-        gameSaveString = boardFile + "\n";
-        gameSaveString += Integer.toString(seed);
+    public GameSave(int seed) {
+        gameSaveString = "\n" + seed;
     }
 
     public void draw() {
         gameSaveString += "\ndraw";
+        isGameSaved = false;
     }
     public void playFloorTile(Coordinate slideLocations, FloorTile tile){
         gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
+        isGameSaved = false;
     }
     public void playActionTile(Coordinate location, ActionTile tile, int playerNo) {
         String type = tile == null ? "null " : tile.getType().toString();
@@ -40,18 +39,27 @@ public class GameSave {
         if (location != null) {
             gameSaveString += " " + location.toString();
         }
+        isGameSaved = false;
     }
     public void playBacktrack (int playerNum) {
         gameSaveString = gameSaveString + "\naction BACKTRACK " + playerNum;
     }
+
     public void playerMove(Coordinate location) {
         gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
+        isGameSaved = false;
     }
+
+    public boolean isGameSaved() {
+        return isGameSaved;
+    }
+
     public void saveToFile() throws IOException {
-        gameSaveFile = new File("SaveData\\GameSave\\" + System.currentTimeMillis() + ".sav");
+        //gameSaveFile = new File("SaveData\\GameSave\\" + System.currentTimeMillis() + ".sav");
         FileWriter writer = new FileWriter(gameSaveFile, true);
         writer.write(gameSaveString);
         writer.flush();
         writer.close();
+        isGameSaved = true;
     }
 }

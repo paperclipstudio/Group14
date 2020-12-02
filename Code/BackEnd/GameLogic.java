@@ -37,7 +37,7 @@ public class GameLogic {
 	 * @throws Exception if issue with board file.
 	 */
 	public void newGame(String boardFile) throws Exception {
-		gameSaver = new GameSave(boardFile, seed);
+		gameSaver = new GameSave(seed);
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;

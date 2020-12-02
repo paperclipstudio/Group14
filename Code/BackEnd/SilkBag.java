@@ -10,14 +10,14 @@ import java.util.Random;
 
 public class SilkBag {
 
-    /**
+    /*
      * These are variables are used for the silk bag, a list to hold all tiles and
      * a random generator to generate a random tile.
      */
     private final ArrayList<Tile> allTiles;
     private final Random randomGenerator;
 
-    /**
+    /*
      * This is a constant to save the seed for loading the game.
      */
     private int SEED;

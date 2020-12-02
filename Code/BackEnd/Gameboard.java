@@ -15,7 +15,7 @@ import static BackEnd.Rotation.*;
 
 public class Gameboard {
 
-    /**
+    /*
      * These attributes store information about the gameboard, such as its' width and height, and the SilkBag that it
      * is connected to.
      */
@@ -25,7 +25,7 @@ public class Gameboard {
     private SilkBag silkbag;
     private FloorTile removedTile;
 
-    /**
+    /*
      * These arrays store information about tiles, and locations on the gameboard.
      * goalCoors stores the coordinates of every goal tile currently on the board.
      * playerLocations and slideLocations store the locations of every player and slide-able row/column respectively.
@@ -53,8 +53,8 @@ public class Gameboard {
         this.silkbag = silkBag;
         goalCoors = new ArrayList<>();
         slideLocations = new Coordinate[10];  //TODO change this.
-        boardTiles = new FloorTile[100][100]; //TODO change this.
-        fixedTiles = new FloorTile[100][100]; //TODO change this.
+        boardTiles = new FloorTile[width][height];
+        fixedTiles = new FloorTile[width][height];
         playerLocations = new Coordinate[4][3];
     }
 

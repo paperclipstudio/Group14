@@ -53,7 +53,7 @@ public class GameSetupController implements Initializable {
 	/***
 	 * Returns to main menu
 	 */
-	public void onBackButton() throws IOException {
+	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}
@@ -61,7 +61,7 @@ public class GameSetupController implements Initializable {
 	/***
 	 * This copys the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
-	public void onStartButton() throws IOException {
+	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		Main.setSeed((new Random()).nextInt());
 		Main.setBoardFile( selectGameboard.getValue());
@@ -71,18 +71,16 @@ public class GameSetupController implements Initializable {
 		try {
 			this.gameSaveName = (saveName.getText());
 			if (!(gameSaveName.equals(""))) {
-				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".txt");
+				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
 				if(!(gameSaveFile.exists())){
-					// there is no silk bag right now.
-					// so seed can be created here.
-					int seed = (new Random()).nextInt();
 					FileWriter writer = new FileWriter(gameSaveFile, true);
-					writer.write(selectGameboard.getValue() + "\n" + seed);
+					selectedToggle = (RadioButton) playerCount.getSelectedToggle();
+					writer.write(selectGameboard.getValue() + "\n" + selectedToggle.getText());
 					writer.flush();
 					writer.close();
-					//wl.load("GameScreen");
+					//wl.load("PickPlayer");
 				} else {
-					saveName.setText("Game already exists");
+					saveName.setText("Game already exists - Please enter new name");
 				}
 			}
 		} catch (IOException e) {

@@ -18,12 +18,7 @@ public class WinScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
-
-    public void setPlayerNum(int playerNum){
-        //change to profile name
-        Main.getWinner();
-        winner.setText("Congratulations Player " + playerNum + "!");
+        winner.setText("Congratulations Player " + (Main.getWinner() + 1) + "!");
     }
 
     public void onReturnButton() throws IOException {

@@ -625,10 +625,19 @@ public class GameScreenController implements Initializable {
 	}
 
 	/***
-	 * Quits the whole application.
+	 * Quits to main menu.
 	 */
 	public void onQuitButton() {
-		Platform.exit();
+		WindowLoader wl = new WindowLoader(drawButton);
+		wl.load("MenuScreen");
+	}
+
+	/***
+	 * Quits to the load game screen.
+	 */
+	public void onLoadButton() {
+		WindowLoader wl = new WindowLoader(drawButton);
+		wl.load("LoadGame");
 	}
 
 	/***

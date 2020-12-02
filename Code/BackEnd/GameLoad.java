@@ -28,9 +28,11 @@ public class GameLoad {
 		}
 		String gameBoard = in.nextLine();
 		System.out.println("Loading board " + gameBoard);
+		int playerCount = Integer.parseInt(in.nextLine());
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
 		gameLogic.newGame(gameBoard);
+
 
 		while (in.hasNextLine()) {
 			int x;

@@ -8,7 +8,7 @@ package BackEnd;
  */
 public class ActionTile extends Tile {
 
-    /**
+    /*
      * This type relates to the enum TileType, which every floor and action tile has one of.
      */
     TileType type;
