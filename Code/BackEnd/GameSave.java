@@ -15,19 +15,14 @@ import java.util.Random;
  */
 public class GameSave {
 
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".txt");
-    private boolean isGameSaved;
+    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".sav");
+    private boolean isGameSaved = false;
 
-    private String gameSaveString = "";
+    private String gameSaveString;
 
-    public GameSave() throws IOException {
-        new GameSave("ExampleInput.txt", (new Random()).nextInt());
-    }
 
-    public GameSave(String boardFile, int seed) throws IOException {
-        gameSaveString = boardFile + "\n";
-        gameSaveString += Integer.toString(seed);
-        isGameSaved =false;
+    public GameSave(int seed) {
+        gameSaveString = "\n" + seed;
     }
 
     public void draw() {
@@ -49,6 +44,7 @@ public class GameSave {
     public void playBacktrack (int playerNum) {
         gameSaveString = gameSaveString + "\naction BACKTRACK " + playerNum;
     }
+
     public void playerMove(Coordinate location) {
         gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
         isGameSaved = false;
@@ -59,7 +55,7 @@ public class GameSave {
     }
 
     public void saveToFile() throws IOException {
-        gameSaveFile = new File("SaveData\\GameSave\\" + System.currentTimeMillis() + ".sav");
+        //gameSaveFile = new File("SaveData\\GameSave\\" + System.currentTimeMillis() + ".sav");
         FileWriter writer = new FileWriter(gameSaveFile, true);
         writer.write(gameSaveString);
         writer.flush();

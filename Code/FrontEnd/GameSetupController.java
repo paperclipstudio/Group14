@@ -71,14 +71,11 @@ public class GameSetupController implements Initializable {
 		try {
 			this.gameSaveName = (saveName.getText());
 			if (!(gameSaveName.equals(""))) {
-				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".txt");
+				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
 				if(!(gameSaveFile.exists())){
-					// there is no silk bag right now.
-					// so seed can be created here.
-					int seed = (new Random()).nextInt();
 					FileWriter writer = new FileWriter(gameSaveFile, true);
 					selectedToggle = (RadioButton) playerCount.getSelectedToggle();
-					writer.write(selectGameboard.getValue() + "\n" + seed + "\n" + selectedToggle.getText());
+					writer.write(selectGameboard.getValue() + "\n" + selectedToggle.getText());
 					writer.flush();
 					writer.close();
 					//wl.load("PickPlayer");
