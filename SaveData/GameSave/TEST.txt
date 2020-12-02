@@ -1,5 +1,0 @@
-ExampleInput.txt
--1717093711
-draw
-move 5 5
-draw
