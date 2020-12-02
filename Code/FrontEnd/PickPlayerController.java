@@ -45,19 +45,8 @@ public class PickPlayerController {
 
 		File playerLocation = new File("SaveData\\UserData\\");
 
-		String playerFileName =  playerLocation.getName();
-
-		ArrayList<String> playerName2 = new ArrayList<>();
-
-		String playerName = playerFileName.substring(0, playerFileName.length() - 4);
-
-		playerName2.add(playerName);
-
-
 		String[] players = playerLocation.list();
-
-
-
+		
 		label.setText("You decide to start a game with " + Main.getNumberOfPlayers() + " players");
 
 		ChoiceBox<String>[] playerLists = new ChoiceBox[]{playerList1, playerList2, playerList3, playerList4};
@@ -74,7 +63,7 @@ public class PickPlayerController {
 
 		assert players != null;
 		for (String player : players) {
-			String playerName1 = player.substring(0, player.length() - 4);
+			String playerName = player.substring(0, player.length() - 4);
 			playerList1.setVisible(true);
 			if (Main.getNumberOfPlayers() >= 2) {
 				playerList2.setVisible(true);
