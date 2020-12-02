@@ -1,2 +1,0 @@
-ExampleInput.txt
-628549243
