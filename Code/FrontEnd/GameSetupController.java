@@ -81,9 +81,9 @@ public class GameSetupController implements Initializable {
 					writer.write(selectGameboard.getValue() + "\n" + seed + "\n" + selectedToggle.getText());
 					writer.flush();
 					writer.close();
-					//wl.load("GameScreen");
+					//wl.load("PickPlayer");
 				} else {
-					saveName.setText("Game already exists");
+					saveName.setText("Game already exists - Please enter new name");
 				}
 			}
 		} catch (IOException e) {
