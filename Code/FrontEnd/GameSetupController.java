@@ -34,7 +34,7 @@ public class GameSetupController implements Initializable {
 	@FXML
 	private RadioButton selectedToggle;
 
-	private static String gameSaveName;
+	private String gameSaveName;
 
 	/**
 	 * Populates the choice box with available gameboards when the page is initialized.
@@ -70,6 +70,7 @@ public class GameSetupController implements Initializable {
 		Main.setNumberOfPlayers(numOfPlayers);
 		try {
 			this.gameSaveName = (saveName.getText());
+			Main.setSaveFile(gameSaveName);
 			if (!(gameSaveName.equals(""))) {
 				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
 				if(!(gameSaveFile.exists())){
@@ -86,11 +87,5 @@ public class GameSetupController implements Initializable {
 			e.printStackTrace();
 		}
 		wl.load("PickPlayer"); // here for testing
-	}
-	/**
-	 * This returns the name of the save file
-	 */
-	public static String getSaveName() {
-		return gameSaveName;
 	}
 }
