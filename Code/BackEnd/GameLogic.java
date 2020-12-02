@@ -245,6 +245,17 @@ public class GameLogic {
 		gameSaver.saveToFile();
 	}
 
+	/**
+	 * checks ig game is saved
+	 * @return true or false depending on
+	 */
+	public boolean isGameSaved() {
+		return gameSaver.isGameSaved();
+	}
+	/**
+	 * gets the winner of the game
+	 * @return the player number of the winning player
+	 */
 	public int getWinner() {
 		return gameboard.isPlayerOnGoal();
 	}
