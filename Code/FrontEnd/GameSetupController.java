@@ -77,7 +77,8 @@ public class GameSetupController implements Initializable {
 					// so seed can be created here.
 					int seed = (new Random()).nextInt();
 					FileWriter writer = new FileWriter(gameSaveFile, true);
-					writer.write(selectGameboard.getValue() + "\n" + seed);
+					selectedToggle = (RadioButton) playerCount.getSelectedToggle();
+					writer.write(selectGameboard.getValue() + "\n" + seed + "\n" + selectedToggle.getText());
 					writer.flush();
 					writer.close();
 					//wl.load("GameScreen");
