@@ -1,6 +1,8 @@
 package BackEnd;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import static BackEnd.Rotation.*;
 
@@ -368,7 +370,7 @@ public class Gameboard {
      */
     public void placeFixedTile(FloorTile tile, int x, int y) {
         boardTiles[x][y] = tile;
-        fixedTiles[x][y] = tile;
+        boardTiles[x][y].setFixed();
     }
 
     /**
@@ -499,9 +501,6 @@ public class Gameboard {
                     if (i != 0 && j != 0) {
                         boardTiles[i - 1][j - 1].setFrozenTic(players); //down left
                     }
-                    if (boardTiles[i][j].isFrozen()){
-                        System.out.println(i + " " + j);
-                    }
                 }
             }
         }
@@ -513,37 +512,34 @@ public class Gameboard {
      * add it to the slide locations.
      * @return the ArrayList of slide locations.
      */
-    public Coordinate[] getSlideLocations() {
+    public ArrayList<Coordinate> getSlideLocations() {
 
         ArrayList<Coordinate> locations = new ArrayList<>();
+        ArrayList<Coordinate> slideLocations = new ArrayList<>();
+        int counterX = 0;
+        int counterY = 0;
+
+        for (int i = 0; i < boardTiles.length; i++) {
+            for (int j = 0; j < boardTiles[i].length; j++) {
+                if (boardTiles[i][j] != null && !boardTiles[i][j].isFixed() && !boardTiles[i][j].isFrozen()) {
+                    locations.add(new Coordinate(i, j));
+                }
+            }
+        }
+
         for (int x = 0; x < width; x++) {
-            locations.add(new Coordinate(x, -1));
-            locations.add(new Coordinate(x, height));
+            if (Collections.frequency(locations,locations.get(x)) == height) {
+                slideLocations.add(new Coordinate(x, -1));
+                slideLocations.add(new Coordinate (x, width));
+            }
         }
         for (int y = 0; y < height; y++) {
-            locations.add(new Coordinate(-1, y));
-            locations.add(new Coordinate(width, y));
-        }
-        /*
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i] != null && fixedTiles[i] != null) {
-                    locations.remove(i);
-                }
-                if (boardTiles[j] != null && fixedTiles[j] != null) {
-                    locations.remove(j);
-                }
+            if (Collections.frequency(locations,locations.get(y)) == width) {
+                slideLocations.add(new Coordinate(-1, y));
+                slideLocations.add(new Coordinate (height,y));
             }
         }
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].isFrozen()) {
-                    locations.remove(i);
-                }
-            }
-        }
-        */
-        return locations.toArray(new Coordinate[0]);
+        return slideLocations;
     }
 
     /**

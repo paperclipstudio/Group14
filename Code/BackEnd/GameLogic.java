@@ -4,6 +4,7 @@ package BackEnd;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static BackEnd.Phase.*;
 import static BackEnd.TileType.DOUBLE_MOVE;
@@ -88,7 +89,8 @@ public class GameLogic {
 	 * location (-1,0) would be used.
 	 * @return list of every allowed slide location
 	 */
-	public Coordinate[] getSlideLocations() {
+	public ArrayList<Coordinate> getSlideLocations() {
+
 		return gameboard.getSlideLocations();
 	}
 

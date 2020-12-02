@@ -142,7 +142,7 @@ class GameboardTest {
 
 	@Test
 	void playFloorTile() {
-		Coordinate[] locations = gb.getSlideLocations();
+		ArrayList<Coordinate> locations = gb.getSlideLocations();
 
         // Testing inserting from the left.
 		assertEquals(CORNER,  gb.tileAt(new Coordinate(0,0)).getType());
@@ -279,8 +279,8 @@ class GameboardTest {
 	}
 
 	@Test
-	void setFreezeCoors() {
-		gb.setFreezeCoords(new Coordinate(0, 0));
-
+	void setFireCoors() throws Exception {
+		gb.setFireCoords(new Coordinate(0, 0));
+		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(CORNER));
 	}
 }
