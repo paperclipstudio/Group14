@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.Leaderboard;
 import BackEnd.Profile;
 import  javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -119,6 +120,13 @@ public class Main extends Application {
             fullscreen = DEFAULT_FULLSCREEN;
             resolution = DEFAULT_RESOLUTION;
         }
+
+        Leaderboard test1 = new Leaderboard("example1");
+        test1.update("George", 100, 0);
+        test1.update("Daniel", 90, 10);
+        test1.update("Mathew", 50, 50);
+        test1.saveFile();
+
 
         Main.setVolume(soundLevel);
         Main.setFullScreen(fullscreen);

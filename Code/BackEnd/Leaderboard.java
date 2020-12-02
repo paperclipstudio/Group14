@@ -1,10 +1,14 @@
 package BackEnd;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -108,6 +112,18 @@ public class Leaderboard {
 	public String getGameBoard() {
 		return gameBoard;
 	}
+
+	public ObservableList<Score> getObservableList(){
+
+		SimpleListProperty<Score> allscores = new SimpleListProperty<Score>();
+		allscores.addAll(scores);
+
+		return allscores;
+
+
+	}
+
+
 
 
 

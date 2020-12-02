@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -59,4 +61,13 @@
          </BorderPane.margin>
       </VBox>
    </top>
+   <center>
+      <TableView fx:id="highScore" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Name" />
+          <TableColumn prefWidth="75.0" text="Wins" />
+            <TableColumn prefWidth="75.0" text="Losses" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>

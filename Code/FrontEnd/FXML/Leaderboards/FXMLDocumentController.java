@@ -1,9 +1,13 @@
 package FrontEnd.FXML.Leaderboards;
 
+import BackEnd.Leaderboard;
+import BackEnd.Score;
 import FrontEnd.WindowLoader;
+import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -14,9 +18,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -30,6 +31,8 @@ public class FXMLDocumentController {
     private Button newGameButton;
     @FXML
     private HBox allButtons;
+    @FXML
+    private TableView highScore;
 
     private WindowLoader wl;
 
@@ -37,11 +40,18 @@ public class FXMLDocumentController {
     private BorderPane mainPane;
 
 
-    public void handleButton1Action(javafx.event.ActionEvent actionEvent) {
-        System.out.println("Yo clicked me!");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("Screen1");
-        mainPane.setCenter(view);
+    public void handleButton1Action(javafx.event.ActionEvent actionEvent) throws IOException {
+        Leaderboard example1 = new Leaderboard("example1");
+        example1.loadFile();
+        highScore.setItems(example1.getObservableList());
+        TableColumn<Score, String> nameColumn = new TableColumn<Score, String>("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        TableColumn<Score, String> winsColumn = new TableColumn<Score, String>("Wins");
+        winsColumn.setCellValueFactory(new PropertyValueFactory("wins"));
+        TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
+        lossesColumn.setCellValueFactory(new PropertyValueFactory("loss"));
+
+        highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
     public void handleButton2Action(javafx.event.ActionEvent actionEvent) {
@@ -69,5 +79,8 @@ public class FXMLDocumentController {
         Platform.exit();
         ;
     }
+
+
+
 
 }
