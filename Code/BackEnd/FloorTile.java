@@ -135,16 +135,20 @@ public class FloorTile extends Tile {
 			isFrozen = false;
 		}
 	}
-
-	public boolean isFixed() {
-		if(isFixed == true){
+	/**
+	 * This method checks whether a given floorTile is fixed or not, it returns true if it is, and false if it isn't.
+	 */
+	public boolean isFixed(FloorTile tile) {
+		if(tile.isFixed == true){
 			return true;
 		}
 		return false;
 	}
-
-	public void setFixed(boolean fixed) {
-		isFixed = fixed;
+	/**
+	 * This method sets the isFixed value of a given tile to either true, or false.
+	 * */
+	public void setFixed(FloorTile tile, boolean fixed) {
+		tile.isFixed = fixed;
 	}
 
 }

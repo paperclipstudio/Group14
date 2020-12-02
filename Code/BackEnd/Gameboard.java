@@ -22,7 +22,7 @@ public class Gameboard {
 
     private int width;
     private int height;
-    private int numOfPlayers;
+    private int numOfPlayers = 4; //Currently initialized as 4 for testing. Can be set to another value.
     private SilkBag silkbag;
     private FloorTile removedTile;
 
@@ -56,7 +56,7 @@ public class Gameboard {
         slideLocations = new Coordinate[10];  //TODO change this.
         boardTiles = new FloorTile[width][height];
         fixedTiles = new FloorTile[width][height];
-        playerLocations = new Coordinate[4][3];
+        playerLocations = new Coordinate[numOfPlayers][3];
     }
 
     /**
