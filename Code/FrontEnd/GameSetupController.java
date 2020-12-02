@@ -74,8 +74,7 @@ public class GameSetupController implements Initializable {
 				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
 				if(!(gameSaveFile.exists())){
 					FileWriter writer = new FileWriter(gameSaveFile, true);
-					selectedToggle = (RadioButton) playerCount.getSelectedToggle();
-					writer.write(selectGameboard.getValue() + "\n" + selectedToggle.getText());
+					writer.write(selectGameboard.getValue() + "\n" + numOfPlayers);
 					writer.flush();
 					writer.close();
 					//wl.load("PickPlayer");
