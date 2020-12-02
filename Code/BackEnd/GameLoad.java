@@ -51,16 +51,22 @@ public class GameLoad {
 					gameLogic.floor(tile, new Coordinate(x, y));
 					break;
 				case "action":
-					TileType tileType = TileType.valueOf(lineReader.next());
-					ActionTile actionTile = new ActionTile(tileType);
-					if (tileType == FIRE || tileType == FROZEN) {
-						x = lineReader.nextInt();
-						y = lineReader.nextInt();
-						gameLogic.action(actionTile, new Coordinate(x, y), -1);
-					} else {
-						gameLogic.action(actionTile, null, -1);
-					}
 					System.out.println("Action Card");
+					String type = lineReader.next();
+					if (type.equals("null")) {
+						gameLogic.action(null, null, -1);
+					} else {
+						TileType tileType = TileType.valueOf(type);
+						ActionTile actionTile = new ActionTile(tileType);
+						if (tileType == FIRE || tileType == FROZEN) {
+							x = lineReader.nextInt();
+							y = lineReader.nextInt();
+							gameLogic.action(actionTile, new Coordinate(x, y), -1);
+						} else {
+							int playerNum = lineReader.nextInt();
+							gameLogic.action(actionTile, null, playerNum);
+						}
+					}
 					break;
 				case "move":
 					System.out.println("Move Action");
