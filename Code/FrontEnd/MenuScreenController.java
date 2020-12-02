@@ -67,6 +67,7 @@ public class MenuScreenController implements Initializable {
 
     public void onLeaderBoard(ActionEvent actionEvent) throws IOException {
         wl = new WindowLoader(newGameButton);
-        wl.load("Leaderboard");
+        wl.load("/Leaderboards/FXMLDocument");
+
     }
 }

@@ -41,6 +41,7 @@ public class StartScreenController implements Initializable {
     public void onMousePress(MouseEvent m) throws IOException {
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen");
+
     }
 
 }
