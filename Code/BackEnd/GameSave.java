@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class GameSave {
 
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" +GameSetupController.getSaveName() + ".sav");
+    private static File gameSaveFile = new File("SaveData\\GameSave\\" + GameSetupController.getSaveName() + ".sav");
     private boolean isGameSaved = false;
 
     private String gameSaveString;
