@@ -43,7 +43,7 @@ public class ProfilesController {
 			alert9.setHeaderText(null);
 			alert9.showAndWait();
 
-		}else {
+		} else {
 			for (String filename : children) {
 				playerList.getItems().addAll(filename);
 			}
@@ -77,7 +77,7 @@ public class ProfilesController {
 			alert1.setHeaderText(null);
 			alert1.showAndWait();
 
-		}else{
+		} else {
 
 			Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
 			alert2.setTitle("Welcome");
@@ -154,6 +154,4 @@ public class ProfilesController {
 		}
 
 	}
-
-
 }
