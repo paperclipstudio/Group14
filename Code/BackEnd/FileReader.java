@@ -53,20 +53,6 @@ public class FileReader {
             players[i] = new Player(i, silkBag, gameboard);
         }
 
-        //// Fixed tiles
-        currentLine = new Scanner(in.nextLine());
-        int numberOfFixedTiles = currentLine.nextInt();
-        for (int i= 0; i < numberOfFixedTiles; i++) {
-           currentLine = new Scanner(in.nextLine());
-           TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
-           int x = currentLine.nextInt();
-           int y = currentLine.nextInt();
-           int rotationInt = currentLine.nextInt();
-           Rotation rotation = Rotation.values()[rotationInt];
-           FloorTile tile = new FloorTile(tileType, rotation);
-           gameboard.placeFixedTile(tile, x, y);
-        }
-
         //// Filling SilkBag
         int[] tileTypeCount = new int[NUM_OF_TILE_TYPES];
         // Reading how many of each tile
@@ -84,6 +70,7 @@ public class FileReader {
                 silkBag.insertTile(newTile);
             }
         }
+
         //// Fill with random tiles
         Random r = new Random(silkBagSeed);
         ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
@@ -104,6 +91,22 @@ public class FileReader {
                 gameboard.playFloorTile(toSlide, tile);
             }
         }
+        //// Fixed tiles
+        currentLine = new Scanner(in.nextLine());
+        int numberOfFixedTiles = currentLine.nextInt();
+        for (int i= 0; i < numberOfFixedTiles; i++) {
+           currentLine = new Scanner(in.nextLine());
+           TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
+           int x = currentLine.nextInt();
+           int y = currentLine.nextInt();
+           Coordinate location = new Coordinate(x, y);
+           int rotationInt = currentLine.nextInt();
+           Rotation rotation = Rotation.values()[rotationInt];
+           FloorTile tile = new FloorTile(tileType, rotation);
+           gameboard.placeFixedTile(tile, location);
+        }
+
+
 
         return new Pair<>(gameboard, players);
     }

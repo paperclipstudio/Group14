@@ -369,9 +369,12 @@ public class Gameboard {
      * @param x co-ordinate
      * @param y co-ordinate
      */
-    public void placeFixedTile(FloorTile tile, int x, int y) {
-        boardTiles[x][y] = tile;
-        boardTiles[x][y].setFixed();
+    public void placeFixedTile(FloorTile tile, Coordinate location) {
+    	if (tileAt(location) != null) {
+    	    silkbag.insertTile(tileAt(location));
+        }
+        boardTiles[location.getX()][location.getY()] = tile;
+        boardTiles[location.getX()][location.getY()].setFixed();
     }
 
     /**
@@ -646,5 +649,9 @@ public class Gameboard {
                 }
             }
         }
+    }
+
+    public void placeFixedTile(FloorTile floorTile, int x, int y) {
+        placeFixedTile(floorTile, new Coordinate(x, y));
     }
 }
