@@ -113,6 +113,20 @@ public class Gameboard {
 		playerLocations[player][0] = position;
 	}
 
+	public void printboard() {
+		for (int y = 0; y < height; y++) {
+			for ( int x = 0; x < width; x++) {
+				FloorTile tileHere = tileAt(new Coordinate(y, x));
+				if (tileHere == null) {
+					System.out.print("X");
+				} else {
+					System.out.print(tileHere.getType().toString().substring(0, 1));
+				}
+			}
+			System.out.print("\n");
+		}
+		System.out.print("--------------\n");
+	}
 	/**
 	 * This method plays a floorTile in a given row/column, and moves every floorTile in that direction, if it isn't
 	 * fixed or frozen. Once a floorTile is inserted, the tile that is on the end is placed into the SilkBag, and the
@@ -127,6 +141,7 @@ public class Gameboard {
 	 * @return removedTile The floorTile that was on the opposite edge and was pushed off of the Gameboard.
 	 */
 	public void playFloorTile(Coordinate location, FloorTile insertedTile) throws Exception {
+		printboard();
 		// Shifting the player.
 		Rotation direction;
 		Coordinate shiftAmount;
@@ -178,6 +193,8 @@ public class Gameboard {
 			}
 		}
 		// Inserting the new tile from the left.
+		insertedTile.setLocation(location);
+		boardTiles.add(insertedTile);
 		switch (direction) {
 			case LEFT:
 			case RIGHT:
@@ -221,20 +238,18 @@ public class Gameboard {
 		}
 
 		if (tilesToRemove.size() == 1) {
-			silkbag.insertTile(tilesToRemove.get(0));
 			removeTile(tilesToRemove.get(0));
 		}
 	}
 
 	private void removeTile(FloorTile floorTile) {
+			silkbag.insertTile(floorTile);
 			boardTiles.remove(floorTile);
 	}
 
 	private void forAllFloorTiles(Function<FloorTile, Void> func) throws Exception {
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				func.apply(tileAt(new Coordinate(x, y)));
-			}
+		for (FloorTile tile : boardTiles) {
+			func.apply(tile);
 		}
 	}
 
@@ -247,7 +262,7 @@ public class Gameboard {
 	FloorTile tileAt(Coordinate location) {
 		FloorTile found = null;
 		for (FloorTile tile : boardTiles) {
-			if (location == tile.getLocation()) {
+			if (location.equals(tile.getLocation())) {
 				if (found == null) {
 					found = tile;
 				} else {
@@ -545,51 +560,30 @@ public class Gameboard {
 
 	public ArrayList<Coordinate> getSlideLocations() throws Exception {
 
-		ArrayList<Coordinate> locations = new ArrayList<>();
-		ArrayList<Coordinate> slideLocations = new ArrayList<>();
-		ArrayList<Integer> xSlideLocations = new ArrayList<>();
-		ArrayList<Integer> ySlideLocations = new ArrayList<>();
+		ArrayList<Coordinate> allSlideLocations = new ArrayList<>();
+
+		// Add all directions someone could slide
+		for (int x = 0; x < width; x++) {
+			allSlideLocations.add(new Coordinate(x, -1));
+			allSlideLocations.add(new Coordinate(x, height));
+		}
+
+		for (int y = 0; y < width; y++) {
+			allSlideLocations.add(new Coordinate(-1, y));
+			allSlideLocations.add(new Coordinate(width, y));
+		}
 
 		forAllFloorTiles((t) -> {
-			if (t == null || (!t.isFixed() && !t.isFrozen())) {
-				locations.add(t.getLocation());
+			if (t != null && (!t.isFixed() && !t.isFrozen())) {
+				// If fixed or Frozen
+				// Remove all matching slide locations
+				allSlideLocations.removeIf((c) -> (
+						c.getX() == t.getLocation().getX() ||
+						c.getY() == t.getLocation().getY()));
 			}
 			return null;
 		});
-
-		for (Coordinate location : locations) {
-			xSlideLocations.add(location.getX());
-		}
-
-		for (Coordinate location : locations) {
-			ySlideLocations.add(location.getY());
-		}
-		Collections.sort(ySlideLocations);
-
-        for (int x1 = 0; x1 < xSlideLocations.size();){
-            if (Collections.frequency(xSlideLocations,xSlideLocations.get(x1)) == height) {
-                slideLocations.add(new Coordinate(xSlideLocations.get(x1), -1));
-                slideLocations.add(new Coordinate (xSlideLocations.get(x1), height));
-                x1 += width;
-            }
-            else {
-                x1++;
-            }
-        }
-        for (int y1 = 0; y1 < ySlideLocations.size();) {
-            if (Collections.frequency(ySlideLocations,ySlideLocations.get(y1)) == width) {
-                slideLocations.add(new Coordinate(-1, ySlideLocations.get(y1)));
-                slideLocations.add(new Coordinate (width, ySlideLocations.get(y1)));
-                y1 += height;
-            }
-            else {
-                y1++;
-            }
-        }
-        for(int k = 0; k < slideLocations.size(); k++){
-           System.out.println(slideLocations.get(k));
-        }
-        return slideLocations;
+        return allSlideLocations;
     }
 
 

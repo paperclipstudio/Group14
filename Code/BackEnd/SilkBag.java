@@ -66,7 +66,7 @@ public class SilkBag {
             index = (index + 1) % allTiles.size();
             if (index == startIndex) {
                 // We have looped and found no floor tile
-                throw new Exception("Empty Silk bag");
+                throw new Exception("No FloorTile in Silk bag");
             }
         }
         allTiles.remove(tile);

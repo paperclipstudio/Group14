@@ -77,14 +77,14 @@ public class FileReader {
         int count = 0;
         while (gameboard.isBoardNotFull()) {
             count++;
-            FloorTile tile = silkBag.getFloorTile();
-            tile.setRotation(Rotation.values()[r.nextInt(4)]);
             Coordinate toSlide = null;
             if (slideLocations.size() == 0) {
                 throw new Exception("No slide locations");
             }
             for(int i = 0; i < slideLocations.size(); i++){
-                toSlide = slideLocations.get(i);
+                FloorTile tile = silkBag.getFloorTile();
+                tile.setRotation(Rotation.values()[r.nextInt(4)]);
+                toSlide = slideLocations.get(r.nextInt(slideLocations.size()));
                 if (toSlide == null) {
                     throw new Exception("Null Slide location");
                 }
