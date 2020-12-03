@@ -81,6 +81,9 @@ public class FileReader {
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
             Coordinate toSlide = null;
+            if (slideLocations.size() == 0) {
+                throw new Exception("No slide locations");
+            }
             for(int i = 0; i < slideLocations.size() - 1; i++){
                 toSlide = slideLocations.get(i);
             }
