@@ -635,7 +635,7 @@ public class GameScreenController implements Initializable {
 	}
 
 	/***
-	 * Quits to main menu.
+	 * Quits to main menu unless the game is unsaved.
 	 */
 	public void onQuitButton() {
 		if(gameLogic.isGameSaved()) {
@@ -646,18 +646,9 @@ public class GameScreenController implements Initializable {
 		}
 	}
 
-	/***
-	 * Quits to the load game screen.
+	/**
+	 * Saves the game and quits to main menu
 	 */
-	public void onLoadButton() {
-		if(gameLogic.isGameSaved()) {
-			WindowLoader wl = new WindowLoader(drawButton);
-			wl.load("LoadScreen");
-		} else {
-			confirmation.setVisible(true);
-		}
-	}
-
 	public void onYes() {
 		try {
 			gameLogic.saveGame();
@@ -670,6 +661,9 @@ public class GameScreenController implements Initializable {
 		wl.load("MenuScreen");
 	}
 
+	/**
+	 * quits to main menu without saving
+	 */
 	public void onNo() {
 		WindowLoader wl = new WindowLoader(drawButton);
 		wl.load("MenuScreen");
