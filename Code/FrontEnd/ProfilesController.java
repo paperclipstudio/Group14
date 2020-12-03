@@ -37,15 +37,16 @@ public class ProfilesController {
 		String[] children = file.list();
 
 		if(children == null){
-			Alert alert9 = new Alert(Alert.AlertType.INFORMATION);
-			alert9.setTitle("New Player");
-			alert9.setContentText("There is no player yet! Go and create one.");
-			alert9.setHeaderText(null);
-			alert9.showAndWait();
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("New Player");
+			alert.setContentText("There is no player yet! Go and create one.");
+			alert.setHeaderText(null);
+			alert.showAndWait();
 
 		} else {
 			for (String filename : children) {
-				playerList.getItems().addAll(filename);
+
+				playerList.getItems().addAll(filename.substring(0, filename.length() - 4));
 			}
 		}
 
@@ -54,7 +55,7 @@ public class ProfilesController {
 	/**
 	 * the action on the button back, back to the menus screen.
 	 */
-	public void onBackButton() throws IOException {
+	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen");
 	}
@@ -71,20 +72,20 @@ public class ProfilesController {
 
 		if(user.exists() && !user.isDirectory()){
 
-			Alert alert1 = new Alert(Alert.AlertType.ERROR);
-			alert1.setTitle("error");
-			alert1.setContentText("Player already exists. Please use another name.");
-			alert1.setHeaderText(null);
-			alert1.showAndWait();
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("error");
+			alert.setContentText("Player already exists. Please use another name.");
+			alert.setHeaderText(null);
+			alert.showAndWait();
 
 		} else {
 
-			Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-			alert2.setTitle("Welcome");
-			alert2.setContentText("Welcome " + newName + ", have fun!");
-			alert2.setHeaderText(null);
-			alert2.showAndWait();
-			playerList.getItems().addAll(newName + ".txt");
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Welcome");
+			alert.setContentText("Welcome " + newName + ", have fun!");
+			alert.setHeaderText(null);
+			alert.showAndWait();
+			playerList.getItems().addAll(newName);
 
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
 			newUser.write("0 0 icon0");
@@ -104,20 +105,21 @@ public class ProfilesController {
 
 		if(user.delete()){
 
-			Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
-			alert3.setTitle("Delete File");
-			alert3.setContentText("File successful delete.");
-			alert3.setHeaderText(null);
-			alert3.showAndWait();
-			playerList.getItems().remove(newName + ".txt");
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Delete File");
+			alert.setContentText("File successful delete.");
+			alert.setHeaderText(null);
+			alert.showAndWait();
+			playerList.getItems().remove(newName);
 
 		}else{
 
-			Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
-			alert4.setTitle("Delete File");
-			alert4.setContentText("File can not be found, please try another name.");
-			alert4.setHeaderText(null);
-			alert4.showAndWait();
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Delete File");
+			alert.setContentText("File can not be found, please try another name.");
+			alert.setHeaderText(null);
+			alert.showAndWait();
 
 		}
 

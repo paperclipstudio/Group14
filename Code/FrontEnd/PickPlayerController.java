@@ -43,18 +43,22 @@ public class PickPlayerController {
 	 */
 	public void initialize() {
 
-		String[] players;
-
 		File playerLocation = new File("SaveData\\UserData\\");
-		players = playerLocation.list();
 
+		String[] players = playerLocation.list();
+		
 		label.setText("You decide to start a game with " + Main.getNumberOfPlayers() + " players");
 
 		ChoiceBox<String>[] playerLists = new ChoiceBox[]{playerList1, playerList2, playerList3, playerList4};
 		for (ChoiceBox<String> playerList : playerLists) {
+
 			playerList.setVisible(false);
 			playerList.getSelectionModel().selectFirst();
-			playerList.getItems().addAll(players);
+			assert players != null;
+			for(String player : players){
+				playerList.getItems().addAll(player.substring(0, player.length() - 4));
+			}
+
 		}
 
 		assert players != null;
@@ -115,10 +119,10 @@ public class PickPlayerController {
 				if (!playerList1.getValue().equals(playerList2.getValue())) {
 
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList1.getValue())));
+							new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
 
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList2.getValue())));
+							new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
 
 					wl.load("GameScreen");
 
@@ -137,11 +141,11 @@ public class PickPlayerController {
 						!playerList2.getValue().equals(playerList3.getValue())
 				) {
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList1.getValue())));
+							new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList2.getValue())));
+							new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList3.getValue())));
+							new File("SaveData\\UserData\\" + playerList3.getValue() + ".txt")));
 
 					wl.load("GameScreen");
 
@@ -164,13 +168,13 @@ public class PickPlayerController {
 				) {
 
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList1.getValue())));
+							new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList2.getValue())));
+							new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList3.getValue())));
+							new File("SaveData\\UserData\\" + playerList3.getValue() + ".txt")));
 					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList4.getValue())));
+							new File("SaveData\\UserData\\" + playerList4.getValue() + ".txt")));
 
 					wl.load("GameScreen");
 
@@ -193,7 +197,7 @@ public class PickPlayerController {
 	/**
 	 * return to previous page
 	 */
-	public void onBackButton() throws IOException {
+	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameSetup");
 	}

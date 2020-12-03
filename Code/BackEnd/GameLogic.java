@@ -261,4 +261,8 @@ public class GameLogic {
 	public int getWinner() throws Exception {
 		return gameboard.isPlayerOnGoal();
 	}
+
+	public void emptyGameSaver () {
+		gameSaver.emptyGameSaveString();
+	}
 }

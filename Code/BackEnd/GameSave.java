@@ -1,6 +1,7 @@
 package BackEnd;
 
 import FrontEnd.GameSetupController;
+import FrontEnd.Main;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,7 +16,7 @@ import java.util.Random;
  */
 public class GameSave {
 
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" + GameSetupController.getSaveName() + ".sav");
+    private static File gameSaveFile = new File("SaveData\\GameSave\\" + Main.getSaveFile() + ".sav");
     private boolean isGameSaved = false;
 
     private String gameSaveString;
@@ -41,9 +42,6 @@ public class GameSave {
         }
         isGameSaved = false;
     }
-    public void playBacktrack (int playerNum) {
-        gameSaveString = gameSaveString + "\naction BACKTRACK " + playerNum;
-    }
 
     public void playerMove(Coordinate location) {
         gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
@@ -62,6 +60,10 @@ public class GameSave {
         writer.write(gameSaveString);
         writer.flush();
         writer.close();
+        isGameSaved = true;
+    }
+    public void emptyGameSaveString() {
+        gameSaveString = "";
         isGameSaved = true;
     }
 }

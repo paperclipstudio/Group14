@@ -27,6 +27,7 @@ public class Main extends Application {
     private static boolean fullScreen;
 	private static String boardFile;
     private static int numberOfPlayers;
+    private static String saveFile;
     private static String loadFile;
     private static boolean loadedGameFile = false;
     private static int winner;
@@ -194,4 +195,13 @@ public class Main extends Application {
     public static void setLoadedGameFile(boolean loadedGameFile) {
         Main.loadedGameFile = loadedGameFile;
     }
+
+    public static void setSaveFile(String fileName) {
+        saveFile = fileName;
+    }
+
+    public static String getSaveFile() {
+        return saveFile;
+    }
+
 }

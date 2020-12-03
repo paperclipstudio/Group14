@@ -68,6 +68,7 @@ public class LoadGameController implements Initializable {
 	public void onPlayButton() throws IOException {
 		Main.setLoadedGameFile(true);
 		Main.setLoadFile(selectGame.getValue());
+		Main.setSaveFile(selectGame.getValue());
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameScreen");
 	}
