@@ -42,9 +42,6 @@ public class GameSave {
         }
         isGameSaved = false;
     }
-    public void playBacktrack (int playerNum) {
-        gameSaveString = gameSaveString + "\naction BACKTRACK " + playerNum;
-    }
 
     public void playerMove(Coordinate location) {
         gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
@@ -67,5 +64,6 @@ public class GameSave {
     }
     public void emptyGameSaveString() {
         gameSaveString = "";
+        isGameSaved = true;
     }
 }
