@@ -518,7 +518,7 @@ public class Gameboard {
 	 *
 	 * @param location the 3x3 area to set fire to.
 	 */
-	public void setFireCoords(Coordinate location) throws Exception {
+	public void setFireCoords(Coordinate location) {
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
 				Coordinate toSetOnFire = location.shift(i, j);

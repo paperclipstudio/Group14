@@ -463,15 +463,20 @@ public class GameScreenController implements Initializable {
 					}
 				}
 		);
-		Node drawnCard = Assets.createCard(gameLogic.drawnCard());
-		ColorAdjust dim = new ColorAdjust();
-		dim.setBrightness(0.6);
-		dim.setSaturation(0.5);
-		drawnCard.setEffect(dim);
-		drawnCard.setOnMouseClicked((e) -> {});
-		drawnCard.setOnMouseEntered((e) -> {});
-		drawnCard.setOnMouseExited((e) -> {});
-		cards.getChildren().add(drawnCard);
+		if (gameLogic.drawnCard() != null) {
+			Node drawnCard = Assets.createCard(gameLogic.drawnCard());
+			ColorAdjust dim = new ColorAdjust();
+			dim.setBrightness(0.6);
+			dim.setSaturation(0.5);
+			drawnCard.setEffect(dim);
+			drawnCard.setOnMouseClicked((e) -> {
+			});
+			drawnCard.setOnMouseEntered((e) -> {
+			});
+			drawnCard.setOnMouseExited((e) -> {
+			});
+			cards.getChildren().add(drawnCard);
+		}
 
 
 

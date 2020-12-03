@@ -91,6 +91,7 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is on fire, else false otherwise.
 	 */
 	public Boolean onFire () {
+		System.out.println("tile has fire of" + ticFire);
 		return ticFire != 0;
 	}
 
