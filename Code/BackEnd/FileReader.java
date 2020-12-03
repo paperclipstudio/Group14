@@ -96,7 +96,7 @@ public class FileReader {
             if (slideLocations.size() == 0) {
                 throw new Exception("No slide locations");
             }
-            for(int i = 0; i < slideLocations.size() - 1; i++){
+            for(int i = 0; i < slideLocations.size(); i++){
                 toSlide = slideLocations.get(i);
                 if (toSlide == null) {
                     throw new Exception("Null Slide location");

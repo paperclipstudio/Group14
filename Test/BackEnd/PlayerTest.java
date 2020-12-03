@@ -15,7 +15,6 @@ class PlayerTest {
 	void setUp() throws Exception {
 		silkBag = new SilkBag(234234234);
 		Pair<Gameboard, Player[]> pair = FileReader.gameSetup("ExampleInput.txt");
-
 		board = pair.getKey();
 		player = pair.getValue()[0];
 
@@ -29,8 +28,10 @@ class PlayerTest {
 		assertEquals(FROZEN, player.isHolding().getType());
 	}
 
+
 	@Test
 	void playFloorTile() throws Exception {
+		board.getSlideLocations();
 		silkBag.getTile();
 		silkBag.insertTile(Tile.createTile(CORNER));
 		player.drawTile();

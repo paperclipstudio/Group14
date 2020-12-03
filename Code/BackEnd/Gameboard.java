@@ -541,7 +541,7 @@ public class Gameboard {
         for (int x1 = 0; x1 < xSlideLocations.size();){
             if (Collections.frequency(xSlideLocations,xSlideLocations.get(x1)) == height) {
                 slideLocations.add(new Coordinate(xSlideLocations.get(x1), -1));
-                slideLocations.add(new Coordinate (xSlideLocations.get(x1), width));
+                slideLocations.add(new Coordinate (xSlideLocations.get(x1), height));
                 x1 += width;
             }
             else {
@@ -551,7 +551,7 @@ public class Gameboard {
         for (int y1 = 0; y1 < ySlideLocations.size();) {
             if (Collections.frequency(ySlideLocations,ySlideLocations.get(y1)) == width) {
                 slideLocations.add(new Coordinate(-1, ySlideLocations.get(y1)));
-                slideLocations.add(new Coordinate (height, ySlideLocations.get(y1)));
+                slideLocations.add(new Coordinate (width, ySlideLocations.get(y1)));
                 y1 += height;
             }
             else {
