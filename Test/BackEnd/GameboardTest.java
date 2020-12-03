@@ -229,13 +229,21 @@ class GameboardTest {
 
 	@Test
 	void getSlideLocations() {
+		gb = new Gameboard(3,3, sb);
+		ArrayList<Coordinate> slides = gb.getSlideLocations();
+		assertEquals(12, slides.size());
+		assertFalse(slides.contains(null));
 		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 0);
 		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 1);
 		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 2);
 		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 0);
 		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 1);
 		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 2);
-		gb.getSlideLocations();
+		slides = gb.getSlideLocations();
+		assertEquals(2, slides.size());
+		Coordinate[] expected = new Coordinate[]{new Coordinate(-1, 2), new Coordinate(3,2)};
+		assertArrayEquals(expected, slides.toArray(new Coordinate[0]));
+		assertFalse(slides.contains(null));
 	}
 
 	@Test

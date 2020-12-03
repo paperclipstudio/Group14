@@ -1,6 +1,7 @@
 package BackEnd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -621,6 +622,7 @@ public class Gameboard {
     }
 
     public void setNumOfPlayers(int numOfPlayers) {
+        playerLocations = Arrays.copyOf(playerLocations,numOfPlayers);
         this.numOfPlayers = numOfPlayers;
     }
 

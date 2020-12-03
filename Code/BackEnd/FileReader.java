@@ -86,8 +86,8 @@ public class FileReader {
             }
             for(int i = 0; i < slideLocations.size() - 1; i++){
                 toSlide = slideLocations.get(i);
+                gameboard.playFloorTile(toSlide, tile);
             }
-            gameboard.playFloorTile(toSlide, tile);
         }
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];
