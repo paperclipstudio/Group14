@@ -26,7 +26,7 @@ public class Gameboard {
 
 	private final int width;
 	private final int height;
-	private int numOfPlayers = 4; //Currently initialized as 4 for testing. Can be set to another value.
+	private int numOfPlayers; //Currently initialized as 4 for testing. Can be set to another value.
 	private final SilkBag silkbag;
 
 	/*
@@ -55,7 +55,7 @@ public class Gameboard {
 		this.silkbag = silkBag;
 		goalCoors = new ArrayList<>();
 		boardTiles = new ArrayList<>(width * height);
-		playerLocations = new Coordinate[numOfPlayers][3];
+		playerLocations = new Coordinate[4][3];
 	}
 
 	/**
