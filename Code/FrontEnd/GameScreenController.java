@@ -435,6 +435,7 @@ public class GameScreenController implements Initializable {
 		gameLogic = GameLoad.loader(Main.getLoadFile());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
+		gameLogic.emptyGameSaver();
 		mainLoop();
 	}
 

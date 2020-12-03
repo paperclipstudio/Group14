@@ -261,4 +261,8 @@ public class GameLogic {
 	public int getWinner() {
 		return gameboard.isPlayerOnGoal();
 	}
+
+	public void emptyGameSaver () {
+		gameSaver.emptyGameSaveString();
+	}
 }

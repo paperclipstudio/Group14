@@ -65,4 +65,7 @@ public class GameSave {
         writer.close();
         isGameSaved = true;
     }
+    public void emptyGameSaveString() {
+        gameSaveString = "";
+    }
 }
