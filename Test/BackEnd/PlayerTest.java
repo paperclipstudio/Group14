@@ -1,5 +1,6 @@
 package BackEnd;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +12,12 @@ class PlayerTest {
 	SilkBag silkBag;
 	Gameboard board;
 	@BeforeEach
-	void setUp() {
+	void setUp() throws Exception {
 		silkBag = new SilkBag(234234234);
-		board = new Gameboard(3,3, silkBag);
-		player = new Player(2, silkBag, board);
+		Pair<Gameboard, Player[]> pair = FileReader.gameSetup("ExampleInput.txt");
+		board = pair.getKey();
+		player = pair.getValue()[0];
+
 		silkBag.insertTile(Tile.createTile(FROZEN));
 	}
 
@@ -24,6 +27,7 @@ class PlayerTest {
 		player.drawTile();
 		assertEquals(FROZEN, player.isHolding().getType());
 	}
+
 
 	@Test
 	void playFloorTile() throws Exception {

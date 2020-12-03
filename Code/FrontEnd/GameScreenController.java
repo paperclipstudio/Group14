@@ -23,12 +23,14 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import BackEnd.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -59,6 +61,9 @@ public class GameScreenController implements Initializable {
 	private Pane fixed;
 	@FXML
 	private Pane profile;
+	@FXML
+	private HBox confirmation;
+
 
 
 	private int width;
@@ -66,6 +71,9 @@ public class GameScreenController implements Initializable {
 	public Phase phase;
 	private GameLogic gameLogic;
 	public static int tileWidth = 50;
+
+	public GameScreenController() {
+	}
 	//private ImageView[] players;
 
 	/***
@@ -104,6 +112,7 @@ public class GameScreenController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		confirmation.setVisible(false);
 	}
 
 	/*
@@ -164,7 +173,7 @@ public class GameScreenController implements Initializable {
 	}
 
 	private void setupFloorPhase() throws IOException {
-		Coordinate[] locations = gameLogic.getSlideLocations();
+		ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
 		for (Coordinate coordinate : locations) {
 			ImageView arrow = Assets.makeArrow();
 			final Rotation direction;
@@ -426,6 +435,7 @@ public class GameScreenController implements Initializable {
 		gameLogic = GameLoad.loader(Main.getLoadFile());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
+		gameLogic.emptyGameSaver();
 		mainLoop();
 	}
 
@@ -625,21 +635,39 @@ public class GameScreenController implements Initializable {
 	}
 
 	/***
-	 * Quits to main menu.
+	 * Quits to main menu unless the game is unsaved.
 	 */
 	public void onQuitButton() {
+		if(gameLogic.isGameSaved()) {
+			WindowLoader wl = new WindowLoader(drawButton);
+			wl.load("MenuScreen");
+		} else {
+			confirmation.setVisible(true);
+		}
+	}
+
+	/**
+	 * Saves the game and quits to main menu
+	 */
+	public void onYes() {
+		try {
+			gameLogic.saveGame();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Game NOT saved");
+		}
+		System.out.println("Game Saved");
 		WindowLoader wl = new WindowLoader(drawButton);
 		wl.load("MenuScreen");
 	}
 
-	/***
-	 * Quits to the load game screen.
+	/**
+	 * quits to main menu without saving
 	 */
-	public void onLoadButton() {
+	public void onNo() {
 		WindowLoader wl = new WindowLoader(drawButton);
-		wl.load("LoadGame");
+		wl.load("MenuScreen");
 	}
-
 	/***
 	 * Starts save game window.
 	 */

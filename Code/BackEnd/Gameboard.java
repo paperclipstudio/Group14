@@ -1,6 +1,9 @@
 package BackEnd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 import static BackEnd.Rotation.*;
 
@@ -16,12 +19,13 @@ import static BackEnd.Rotation.*;
 public class Gameboard {
 
     /*
-     * These attributes store information about the gameboard, such as its' width and height, and the SilkBag that it
-     * is connected to.
+     * These attributes store information about the gameboard, such as its' width and height, the number of players
+     * and the SilkBag that it is connected to.
      */
 
     private int width;
     private int height;
+    private int numOfPlayers = 4; //Currently initialized as 4 for testing. Can be set to another value.
     private SilkBag silkbag;
     private FloorTile removedTile;
 
@@ -55,7 +59,7 @@ public class Gameboard {
         slideLocations = new Coordinate[10];  //TODO change this.
         boardTiles = new FloorTile[width][height];
         fixedTiles = new FloorTile[width][height];
-        playerLocations = new Coordinate[4][3];
+        playerLocations = new Coordinate[numOfPlayers][3];
     }
 
     /**
@@ -139,7 +143,7 @@ public class Gameboard {
             direction = DOWN;
             shiftAmount = new Coordinate(0, -1);
         } else {
-            throw new Exception("Invalid slide location");
+            throw new Exception("Invalid slide location :" + location.toString());
         }
         // Shift all players on the correct row // column.
         if (direction == LEFT || direction == RIGHT) {
@@ -367,7 +371,7 @@ public class Gameboard {
      */
     public void placeFixedTile(FloorTile tile, int x, int y) {
         boardTiles[x][y] = tile;
-        fixedTiles[x][y] = tile;
+        boardTiles[x][y].setFixed();
     }
 
     /**
@@ -450,7 +454,7 @@ public class Gameboard {
      * its setting fire to are on the board.
      * @param location the 3x3 area to set fire to.
      */
-    private void setFireCoords(Coordinate location) {
+    public void setFireCoords(Coordinate location) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 Coordinate toSetOnFire = location.shift(i, j);
@@ -467,32 +471,32 @@ public class Gameboard {
      * its getting froze to are on the board.
      * @param location the 3x3 area to freeze.
      */
-    private void setFreezeCoords(Coordinate location) {
+    public void setFreezeCoords(Coordinate location) {
         int players = getNumOfPlayers();
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
                 if (i == location.getX() && j == location.getY()) {
                     //Assuming  0,0 is bottom left. Freezes a 3x3 radius of tiles.
                     boardTiles[i][j].setFrozenTic(players); //mid
-                    if (i != width) {
+                    if (i != width - 1) {
                         boardTiles[i + 1][j].setFrozenTic(players); //right
                     }
                     if (i != 0) {
                         boardTiles[i - 1][j].setFrozenTic(players); //left
                     }
-                    if (j != height) {
+                    if (j != height - 1) {
                         boardTiles[i][j + 1].setFrozenTic(players); //up
                     }
-                    if (i != width && j != height) {
+                    if (i != width - 1 && j != height - 1) {
                         boardTiles[i + 1][j + 1].setFrozenTic(players); //upper right
                     }
-                    if (i != 0 && j != height) {
+                    if (i != 0 && j != height - 1) {
                         boardTiles[i - 1][j + 1].setFrozenTic(players); //upper left
                     }
                     if (j != 0) {
                         boardTiles[i][j - 1].setFrozenTic(players); //down
                     }
-                    if (i != width && j != 0) {
+                    if (i != width - 1 && j != 0) {
                         boardTiles[i + 1][j - 1].setFrozenTic(players); //down right
                     }
                     if (i != 0 && j != 0) {
@@ -509,37 +513,55 @@ public class Gameboard {
      * add it to the slide locations.
      * @return the ArrayList of slide locations.
      */
-    public Coordinate[] getSlideLocations() {
+
+    public ArrayList<Coordinate> getSlideLocations() {
 
         ArrayList<Coordinate> locations = new ArrayList<>();
-        for (int x = 0; x < width; x++) {
-            locations.add(new Coordinate(x, -1));
-            locations.add(new Coordinate(x, height));
-        }
-        for (int y = 0; y < height; y++) {
-            locations.add(new Coordinate(-1, y));
-            locations.add(new Coordinate(width, y));
-        }
-        /*
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i] != null && fixedTiles[i] != null) {
-                    locations.remove(i);
-                }
-                if (boardTiles[j] != null && fixedTiles[j] != null) {
-                    locations.remove(j);
+        ArrayList<Coordinate> slideLocations = new ArrayList<>();
+        ArrayList<Integer> xSlideLocations = new ArrayList<>();
+        ArrayList<Integer> ySlideLocations = new ArrayList<>();
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (boardTiles[i][j] == null || (!boardTiles[i][j].isFixed() && !boardTiles[i][j].isFrozen())) {
+                    locations.add(new Coordinate(i, j));
                 }
             }
         }
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j].isFrozen()) {
-                    locations.remove(i);
-                }
+
+        for (int x = 0; x < locations.size(); x++) {
+            xSlideLocations.add(locations.get(x).getX());
+        }
+
+        for (int y = 0; y < locations.size(); y++) {
+            ySlideLocations.add(locations.get(y).getY());
+        }
+        Collections.sort(ySlideLocations);
+
+        for (int x1 = 0; x1 < xSlideLocations.size();){
+            if (Collections.frequency(xSlideLocations,xSlideLocations.get(x1)) == height) {
+                slideLocations.add(new Coordinate(xSlideLocations.get(x1), -1));
+                slideLocations.add(new Coordinate (xSlideLocations.get(x1), height));
+                x1 += width;
+            }
+            else {
+                x1++;
             }
         }
-        */
-        return locations.toArray(new Coordinate[0]);
+        for (int y1 = 0; y1 < ySlideLocations.size();) {
+            if (Collections.frequency(ySlideLocations,ySlideLocations.get(y1)) == width) {
+                slideLocations.add(new Coordinate(-1, ySlideLocations.get(y1)));
+                slideLocations.add(new Coordinate (width, ySlideLocations.get(y1)));
+                y1 += height;
+            }
+            else {
+                y1++;
+            }
+        }
+        for(int k = 0; k < slideLocations.size(); k++){
+           System.out.println(slideLocations.get(k));
+        }
+        return slideLocations;
     }
 
     /**
@@ -581,8 +603,6 @@ public class Gameboard {
             }
         }
         // they can't move backward
-
-
     }
 
     /**
@@ -601,18 +621,30 @@ public class Gameboard {
         return false;
     }
 
+    public void setNumOfPlayers(int numOfPlayers) {
+        playerLocations = Arrays.copyOf(playerLocations,numOfPlayers);
+        this.numOfPlayers = numOfPlayers;
+    }
+
     /**
      * This method gets the number of players by checking the playerLocations array. Incrementing the number of players
      * if the array is not equal to null.
      * @return the number of players.
      */
     public int getNumOfPlayers() {
-        int numOfPlayers = 0;
-        for (int i = 0; i < playerLocations.length; i++) {
-            if (playerLocations[i][0] != null) {
-                numOfPlayers++;
+        return numOfPlayers;
+    }
+
+    public void ticTiles(){
+        for (int i = 0; i < boardTiles.length; i++){
+            for (int j = 0; j < boardTiles[i].length; j++ ){
+                if (boardTiles[i][j].isFrozen()){
+                    boardTiles[i][j].ticFrozen();
+                }
+                if (boardTiles[i][j].onFire()){
+                    boardTiles[i][j].ticFire();
+                }
             }
         }
-        return numOfPlayers;
     }
 }

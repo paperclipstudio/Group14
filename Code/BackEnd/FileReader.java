@@ -1,6 +1,7 @@
 package BackEnd;
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -41,6 +42,18 @@ public class FileReader {
         int height = currentLine.nextInt();
         Gameboard gameboard = new Gameboard(width, height, silkBag);
 
+        //// Creating players
+        Player[] players = new Player[MAX_NUM_OF_PLAYERS];
+        for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
+            String nextLine = in.nextLine();
+            currentLine = new Scanner(nextLine);
+            System.out.println(nextLine);
+            int x = currentLine.nextInt();
+            int y = currentLine.nextInt();
+            gameboard.setPlayerPos(i, new Coordinate(x, y));
+            players[i] = new Player(i, silkBag, gameboard);
+        }
+
         //// Fixed tiles
         currentLine = new Scanner(in.nextLine());
         int numberOfFixedTiles = currentLine.nextInt();
@@ -74,26 +87,23 @@ public class FileReader {
         }
         //// Fill with random tiles
         Random r = new Random(silkBagSeed);
-        Coordinate[] slideLocations = gameboard.getSlideLocations();
+        ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
         int count = 0;
-        while (gameboard.containsNull()) {
-            count++;
+        while (count != slideLocations.size()) {
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
-            Coordinate toSlide = slideLocations[r.nextInt(slideLocations.length-1)];
+            Coordinate toSlide = null;
+            if (slideLocations.size() == 0) {
+                throw new Exception("No slide locations");
+            }
+            toSlide = slideLocations.get(count);
+            if (toSlide == null) {
+                throw new Exception("Null Slide location");
+            }
             gameboard.playFloorTile(toSlide, tile);
+            count++;
         }
-        //// Creating players
-        Player[] players = new Player[MAX_NUM_OF_PLAYERS];
-        for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
-            String nextLine = in.nextLine();
-            currentLine = new Scanner(nextLine);
-            System.out.println(nextLine);
-            int x = currentLine.nextInt();
-            int y = currentLine.nextInt();
-            gameboard.setPlayerPos(i, new Coordinate(x, y));
-            players[i] = new Player(i, silkBag, gameboard);
-        }
+
         return new Pair<>(gameboard, players);
     }
 
