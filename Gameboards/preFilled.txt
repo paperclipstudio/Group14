@@ -1,4 +1,8 @@
 3 3
+0 0 Player1
+0 2 Player2
+2 2 Player3
+2 0 Player4
 9
 Corner 0 0 1
 Corner 2 0 2
@@ -17,7 +21,3 @@ Goal 1 1 0
 0 Backtrack
 0 DoubleMove
 0 Goal
-0 0 Player1
-0 2 Player2
-2 2 Player3
-2 0 Player4

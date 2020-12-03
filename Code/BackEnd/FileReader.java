@@ -41,6 +41,18 @@ public class FileReader {
         int height = currentLine.nextInt();
         Gameboard gameboard = new Gameboard(width, height, silkBag);
 
+        //// Creating players
+        Player[] players = new Player[MAX_NUM_OF_PLAYERS];
+        for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
+            String nextLine = in.nextLine();
+            currentLine = new Scanner(nextLine);
+            System.out.println(nextLine);
+            int x = currentLine.nextInt();
+            int y = currentLine.nextInt();
+            gameboard.setPlayerPos(i, new Coordinate(x, y));
+            players[i] = new Player(i, silkBag, gameboard);
+        }
+
         //// Fixed tiles
         currentLine = new Scanner(in.nextLine());
         int numberOfFixedTiles = currentLine.nextInt();
@@ -86,20 +98,13 @@ public class FileReader {
             }
             for(int i = 0; i < slideLocations.size() - 1; i++){
                 toSlide = slideLocations.get(i);
+                if (toSlide == null) {
+                    throw new Exception("Null Slide location");
+                }
                 gameboard.playFloorTile(toSlide, tile);
             }
         }
-        //// Creating players
-        Player[] players = new Player[MAX_NUM_OF_PLAYERS];
-        for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
-            String nextLine = in.nextLine();
-            currentLine = new Scanner(nextLine);
-            System.out.println(nextLine);
-            int x = currentLine.nextInt();
-            int y = currentLine.nextInt();
-            gameboard.setPlayerPos(i, new Coordinate(x, y));
-            players[i] = new Player(i, silkBag, gameboard);
-        }
+
         return new Pair<>(gameboard, players);
     }
 
