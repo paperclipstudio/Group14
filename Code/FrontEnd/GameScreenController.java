@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import BackEnd.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -60,6 +61,9 @@ public class GameScreenController implements Initializable {
 	private Pane fixed;
 	@FXML
 	private Pane profile;
+	@FXML
+	private HBox confirmation;
+
 
 
 	private int width;
@@ -67,6 +71,9 @@ public class GameScreenController implements Initializable {
 	public Phase phase;
 	private GameLogic gameLogic;
 	public static int tileWidth = 50;
+
+	public GameScreenController() {
+	}
 	//private ImageView[] players;
 
 	/***
@@ -105,6 +112,7 @@ public class GameScreenController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		confirmation.setVisible(false);
 	}
 
 	/*
@@ -629,18 +637,42 @@ public class GameScreenController implements Initializable {
 	 * Quits to main menu.
 	 */
 	public void onQuitButton() {
-		WindowLoader wl = new WindowLoader(drawButton);
-		wl.load("MenuScreen");
+		if(gameLogic.isGameSaved()) {
+			WindowLoader wl = new WindowLoader(drawButton);
+			wl.load("MenuScreen");
+		} else {
+			confirmation.setVisible(true);
+		}
 	}
 
 	/***
 	 * Quits to the load game screen.
 	 */
 	public void onLoadButton() {
-		WindowLoader wl = new WindowLoader(drawButton);
-		wl.load("LoadGame");
+		if(gameLogic.isGameSaved()) {
+			WindowLoader wl = new WindowLoader(drawButton);
+			wl.load("LoadScreen");
+		} else {
+			confirmation.setVisible(true);
+		}
 	}
 
+	public void onYes() {
+		try {
+			gameLogic.saveGame();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Game NOT saved");
+		}
+		System.out.println("Game Saved");
+		WindowLoader wl = new WindowLoader(drawButton);
+		wl.load("MenuScreen");
+	}
+
+	public void onNo() {
+		WindowLoader wl = new WindowLoader(drawButton);
+		wl.load("MenuScreen");
+	}
 	/***
 	 * Starts save game window.
 	 */
