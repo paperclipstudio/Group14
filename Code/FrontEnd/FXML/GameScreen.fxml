@@ -34,7 +34,6 @@
            <MenuBar>
                <Menu mnemonicParsing="false" text="File">
                    <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveButton" text="Save" />
-                   <MenuItem mnemonicParsing="false" onAction="#onLoadButton" text="Load" />
                    <MenuItem mnemonicParsing="false" onAction="#onQuitButton" text="Quit" />
                </Menu>
                <Menu mnemonicParsing="false" text="Help">
