@@ -31,7 +31,6 @@ class PlayerTest {
 
 	@Test
 	void playFloorTile() throws Exception {
-		board.getSlideLocations();
 		silkBag.getTile();
 		silkBag.insertTile(Tile.createTile(CORNER));
 		player.drawTile();

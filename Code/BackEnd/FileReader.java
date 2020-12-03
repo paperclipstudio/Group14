@@ -1,6 +1,7 @@
 package BackEnd;
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -88,21 +89,19 @@ public class FileReader {
         Random r = new Random(silkBagSeed);
         ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
         int count = 0;
-        while (gameboard.containsNull()) {
-            count++;
+        while (count != slideLocations.size()) {
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
             Coordinate toSlide = null;
             if (slideLocations.size() == 0) {
                 throw new Exception("No slide locations");
             }
-            for(int i = 0; i < slideLocations.size(); i++){
-                toSlide = slideLocations.get(i);
-                if (toSlide == null) {
-                    throw new Exception("Null Slide location");
-                }
-                gameboard.playFloorTile(toSlide, tile);
+            toSlide = slideLocations.get(count);
+            if (toSlide == null) {
+                throw new Exception("Null Slide location");
             }
+            gameboard.playFloorTile(toSlide, tile);
+            count++;
         }
 
         return new Pair<>(gameboard, players);
