@@ -40,6 +40,7 @@ public class FloorTile extends Tile {
 
 	}
 
+
 	/**
 	 * This constructor of FloorTile initiates all attributes apart from the static ones. Takes in a TileType and
 	 * Rotation in the form of enums and sets the corresponding attributes.
@@ -100,7 +101,7 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is frozen, else false otherwise.
 	 */
 	public Boolean isFrozen () {
-		return false;//ticFrozen != 0;
+		return ticFrozen != 0;
 	}
 
 	/**

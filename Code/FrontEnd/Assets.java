@@ -69,6 +69,12 @@ public class Assets {
 			fireImage.setFitWidth(GameScreenController.tileWidth);
 			tileView.getChildren().add(fireImage);
 		}
+		if (tile.isFrozen()) {
+			ImageView fireImage = new ImageView(get("frozen"));
+			fireImage.setFitHeight(GameScreenController.tileWidth);
+			fireImage.setFitWidth(GameScreenController.tileWidth);
+			tileView.getChildren().add(fireImage);
+		}
 		if (tile.isFixed()) {
 			ImageView lockImage = new ImageView(get("fixed"));
 			lockImage.setFitWidth(GameScreenController.tileWidth);
