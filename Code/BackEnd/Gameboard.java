@@ -617,6 +617,7 @@ public class Gameboard {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (boardTiles[x][y] == null) {
+                    System.out.println(x + "," + y);
                     return true;
                 }
             }
