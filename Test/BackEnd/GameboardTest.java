@@ -229,8 +229,14 @@ class GameboardTest {
 
 	@Test
 	void getSlideLocations() {
+		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 0);
+		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 1);
+		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 2);
+		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 0);
+		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 1);
+		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 2);
+		gb.getSlideLocations();
 	}
-
 
 	@Test
 	void testGetPlayerPos() {

@@ -512,12 +512,13 @@ public class Gameboard {
      * add it to the slide locations.
      * @return the ArrayList of slide locations.
      */
+
     public ArrayList<Coordinate> getSlideLocations() {
 
         ArrayList<Coordinate> locations = new ArrayList<>();
         ArrayList<Coordinate> slideLocations = new ArrayList<>();
-        int counterX = 0;
-        int counterY = 0;
+        ArrayList<Integer> xSlideLocations = new ArrayList<>();
+        ArrayList<Integer> ySlideLocations = new ArrayList<>();
 
         for (int i = 0; i < boardTiles.length; i++) {
             for (int j = 0; j < boardTiles[i].length; j++) {
@@ -527,17 +528,37 @@ public class Gameboard {
             }
         }
 
-        for (int x = 0; x < width; x++) {
-            if (Collections.frequency(locations,locations.get(x)) == height) {
-                slideLocations.add(new Coordinate(x, -1));
-                slideLocations.add(new Coordinate (x, width));
+        for (int x = 0; x < locations.size(); x++) {
+            xSlideLocations.add(locations.get(x).getX());
+        }
+
+        for (int y = 0; y < locations.size(); y++) {
+            ySlideLocations.add(locations.get(y).getY());
+        }
+        Collections.sort(ySlideLocations);
+
+        for (int x1 = 0; x1 < xSlideLocations.size();){
+            if (Collections.frequency(xSlideLocations,xSlideLocations.get(x1)) == height) {
+                slideLocations.add(new Coordinate(xSlideLocations.get(x1), -1));
+                slideLocations.add(new Coordinate (xSlideLocations.get(x1), width));
+                x1 += width;
+            }
+            else {
+                x1++;
             }
         }
-        for (int y = 0; y < height; y++) {
-            if (Collections.frequency(locations,locations.get(y)) == width) {
-                slideLocations.add(new Coordinate(-1, y));
-                slideLocations.add(new Coordinate (height,y));
+        for (int y1 = 0; y1 < ySlideLocations.size();) {
+            if (Collections.frequency(ySlideLocations,ySlideLocations.get(y1)) == width) {
+                slideLocations.add(new Coordinate(-1, ySlideLocations.get(y1)));
+                slideLocations.add(new Coordinate (height, ySlideLocations.get(y1)));
+                y1 += height;
             }
+            else {
+                y1++;
+            }
+        }
+        for(int k = 0; k < slideLocations.size(); k++){
+           System.out.println(slideLocations.get(k));
         }
         return slideLocations;
     }
