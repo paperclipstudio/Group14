@@ -89,7 +89,7 @@ public class GameLogic {
 	 * location (-1,0) would be used.
 	 * @return list of every allowed slide location
 	 */
-	public ArrayList<Coordinate> getSlideLocations() {
+	public ArrayList<Coordinate> getSlideLocations() throws Exception {
 
 		return gameboard.getSlideLocations();
 	}
@@ -138,7 +138,7 @@ public class GameLogic {
 	 * @param coordinate where it would like to be played (if its played at a location)
 	 * @param playerNo which player this card effect (if it does)
 	 */
-	public void action(ActionTile tile, Coordinate coordinate, int playerNo) {
+	public void action(ActionTile tile, Coordinate coordinate, int playerNo) throws Exception {
 		// If tile is null then player didn't/can't play an action card.
 		gameSaver.playActionTile(coordinate, tile, playerNo);
 		if (tile != null) {
@@ -166,7 +166,7 @@ public class GameLogic {
 	 * moves the current player to another location.
 	 * @param location where the player wishes to move.
 	 */
-	public void move(Coordinate location) {
+	public void move(Coordinate location) throws Exception {
 		gameSaver.playerMove(location);
 		gameboard.setPlayerPos(currentPlayerNo, location);
 		if (gameboard.isPlayerOnGoal() != -1) {
@@ -194,7 +194,7 @@ public class GameLogic {
 	 * @param location which tile you want.
 	 * @return tile at location.
 	 */
-	public FloorTile getTileAt(Coordinate location) {
+	public FloorTile getTileAt(Coordinate location) throws Exception {
 		return gameboard.tileAt(location);
 	}
 
@@ -235,7 +235,7 @@ public class GameLogic {
 	 * gets all move locations that it is valid for the current player to move to.
 	 * @return all valid move locations
 	 */
-	public Coordinate[] getMoveLocations() {
+	public Coordinate[] getMoveLocations() throws Exception {
 		return gameboard.getMoveDirections(currentPlayerNo).toArray(new Coordinate[0]);
 	}
 
@@ -258,7 +258,7 @@ public class GameLogic {
 	 * gets the winner of the game
 	 * @return the player number of the winning player
 	 */
-	public int getWinner() {
+	public int getWinner() throws Exception {
 		return gameboard.isPlayerOnGoal();
 	}
 
