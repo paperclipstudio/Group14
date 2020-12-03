@@ -120,7 +120,6 @@ public class FloorTile extends Tile {
 	 */
 	public void setFireTic (int numOfPlayers) {
 		ticFire = numOfPlayers * 2; //Fire tiles last for 2 cycles.
-		System.out.println("Fire Tiles: " + numOfPlayers * 2);
 	}
 
 	private void clearTic() {

@@ -75,10 +75,8 @@ public class FileReader {
         //// Fill with random tiles
         Random r = new Random(silkBagSeed);
         ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
-        int count = 0;
 
         while (gameboard.isBoardNotFull()) {
-            count++;
             Coordinate toSlide = null;
             if (slideLocations.size() == 0) {
                 throw new Exception("No slide locations");
@@ -93,8 +91,6 @@ public class FileReader {
                 }
                 gameboard.playFloorTile(toSlide, tile);
             }
-            gameboard.playFloorTile(toSlide, tile);
-            count++;
         }
         //// Fixed tiles
         currentLine = new Scanner(in.nextLine());
