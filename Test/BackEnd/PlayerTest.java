@@ -15,7 +15,6 @@ class PlayerTest {
 	void setUp() throws Exception {
 		silkBag = new SilkBag(234234234);
 		Pair<Gameboard, Player[]> pair = FileReader.gameSetup("ExampleInput.txt");
-
 		board = pair.getKey();
 		player = pair.getValue()[0];
 

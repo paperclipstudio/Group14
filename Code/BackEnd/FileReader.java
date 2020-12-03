@@ -88,7 +88,7 @@ public class FileReader {
         Random r = new Random(silkBagSeed);
         ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
         int count = 0;
-        while (gameboard.containsNull()) {
+        while (gameboard.isBoardNotFull()) {
             count++;
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);

@@ -94,7 +94,7 @@ public class Player
      * @param tile The freeze or fire action tile
      * @param playerNumber the player that this is played on. ignored if action isn't played on a player.
      */
-    public void playActionTile (Coordinate location, ActionTile tile, int playerNumber) {
+    public void playActionTile (Coordinate location, ActionTile tile, int playerNumber) throws Exception {
         gameboard.playActionTile(location, tile, playerNumber);
         removeFromInventory(tile);
     }
