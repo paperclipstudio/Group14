@@ -74,13 +74,16 @@ public class FileReader {
         }
         //// Fill with random tiles
         Random r = new Random(silkBagSeed);
-        Coordinate[] slideLocations = gameboard.getSlideLocations();
+        ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
         int count = 0;
         while (gameboard.containsNull()) {
             count++;
             FloorTile tile = silkBag.getFloorTile();
             tile.setRotation(Rotation.values()[r.nextInt(4)]);
-            Coordinate toSlide = slideLocations[r.nextInt(slideLocations.length-1)];
+            Coordinate toSlide = null;
+            for(int i = 0; i < slideLocations.size() - 1; i++){
+                toSlide = slideLocations.get(i);
+            }
             gameboard.playFloorTile(toSlide, tile);
         }
         //// Creating players

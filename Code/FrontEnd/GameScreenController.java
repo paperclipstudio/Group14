@@ -23,6 +23,7 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -164,7 +165,7 @@ public class GameScreenController implements Initializable {
 	}
 
 	private void setupFloorPhase() throws IOException {
-		Coordinate[] locations = gameLogic.getSlideLocations();
+		ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
 		for (Coordinate coordinate : locations) {
 			ImageView arrow = Assets.makeArrow();
 			final Rotation direction;
