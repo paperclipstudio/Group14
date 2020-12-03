@@ -28,8 +28,10 @@ class PlayerTest {
 		assertEquals(FROZEN, player.isHolding().getType());
 	}
 
+
 	@Test
 	void playFloorTile() throws Exception {
+		board.getSlideLocations();
 		silkBag.getTile();
 		silkBag.insertTile(Tile.createTile(CORNER));
 		player.drawTile();

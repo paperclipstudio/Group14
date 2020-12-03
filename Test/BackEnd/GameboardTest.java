@@ -15,6 +15,7 @@ class GameboardTest {
 	Gameboard gb2 = new Gameboard(3,3, sb);
 	Gameboard gb3 = new Gameboard(3,3, sb);
 	Gameboard gb4 = new Gameboard(3,3, sb);
+	Gameboard gbSlide = new Gameboard(8, 10, sb);
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -23,6 +24,7 @@ class GameboardTest {
 		gb2 = new Gameboard(3,3, sb);
 		gb3 = new Gameboard(3,3, sb);
 		gb4 = new Gameboard(3,3, sb);
+		gbSlide = new Gameboard(8, 10, sb);
 		gb.setPlayerPos(0, new Coordinate(1,1));
 		gb.setPlayerPos(1, new Coordinate( 2,1));
 		gb.setPlayerPos(2, new Coordinate( 2,2));
@@ -39,6 +41,10 @@ class GameboardTest {
 		gb4.setPlayerPos(1, new Coordinate( 2,1));
 		gb4.setPlayerPos(2, new Coordinate( 2,2));
 		gb4.setPlayerPos(3, new Coordinate( 2,0));
+		gbSlide.setPlayerPos(0, new Coordinate(1,1));
+		gbSlide.setPlayerPos(1, new Coordinate( 2,1));
+		gbSlide.setPlayerPos(2, new Coordinate( 2,2));
+		gbSlide.setPlayerPos(3, new Coordinate( 2,0));
 
 		//Inserting from the left.
 		gb.playFloorTile(new Coordinate(-1, 0), new FloorTile(CORNER));
@@ -80,6 +86,101 @@ class GameboardTest {
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(T_SHAPE));
 		gb4.playFloorTile(new Coordinate(2, gb4.getHeight()), new FloorTile(CORNER));
+
+		gbSlide.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 4, 5);
+
+		gbSlide.getSlideLocations();
+
+		gbSlide.playFloorTile(new Coordinate(0, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(0, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(0, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(0, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(0, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(0, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(0, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(0, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(0, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(0, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(1, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(1, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(1, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(1, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(1, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(1, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(1, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(1, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(1, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(1, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(2, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(2, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(2, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(2, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(2, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(2, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(2, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(2, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(2, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(2, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(3, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(3, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(3, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(3, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(3, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(3, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(3, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(3, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(3, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(3, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(4, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(4, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(4, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(4, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(4, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(4, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(4, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(4, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(4, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(4, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(5, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(5, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(5, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(5, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(5, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(5, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(5, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(5, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(5, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(5, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(6, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(6, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(6, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(6, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(6, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(6, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(6, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(6, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(6, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(6, 9), new FloorTile(CORNER));
+
+		gbSlide.playFloorTile(new Coordinate(7, 0), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(7, 1), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(7, 2), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(7, 3), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(7, 4), new FloorTile(GOAL));
+		gbSlide.playFloorTile(new Coordinate(7, 5), new FloorTile(STRAIGHT));
+		gbSlide.playFloorTile(new Coordinate(7, 6), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(7, 7), new FloorTile(T_SHAPE));
+		gbSlide.playFloorTile(new Coordinate(7, 8), new FloorTile(CORNER));
+		gbSlide.playFloorTile(new Coordinate(7, 9), new FloorTile(CORNER));
+
+
+
 	}
 
 	@Test
@@ -242,6 +343,7 @@ class GameboardTest {
 		gb.getSlideLocations();
 		 */
 
+		/*
 		gb = new Gameboard(3,3, sb);
 		ArrayList<Coordinate> slides = gb.getSlideLocations();
 		assertEquals(12, slides.size());
@@ -257,6 +359,9 @@ class GameboardTest {
 		Coordinate[] expected = new Coordinate[]{new Coordinate(2, -1), new Coordinate(2,3)};
 		assertArrayEquals(expected, slides.toArray(new Coordinate[0]));
 		assertFalse(slides.contains(null));
+		*/
+
+		//gbSlide.getSlideLocations();
 	}
 
 	@Test

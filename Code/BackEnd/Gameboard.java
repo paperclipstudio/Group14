@@ -244,14 +244,14 @@ public class Gameboard {
 	 * @param location to found tile at.
 	 * @return the tile at the given coordinates.
 	 */
-	FloorTile tileAt(Coordinate location) throws Exception {
+	FloorTile tileAt(Coordinate location) {
 		FloorTile found = null;
 		for (FloorTile tile : boardTiles) {
 			if (location == tile.getLocation()) {
 				if (found == null) {
 					found = tile;
 				} else {
-					throw new Exception("Two tiles are the same location");
+					System.out.println("Two tiles at" + location.toString());
 				}
 			}
 		}
@@ -406,18 +406,20 @@ public class Gameboard {
 		}
 	}
 
-	/**
-	 * places a fixed floor tile and board tile in the coordinates specified.
-	 *
-	 * @param tile to be placed
-	 * @param x    co-ordinate
-	 * @param y    co-ordinate
-	 */
-	public void placeFixedTile(FloorTile tile, int x, int y) {
-		tile.setLocation(new Coordinate(x,y));
-		tile.setFixed();
-		boardTiles.add(tile);
-	}
+    /**
+     * places a fixed floor tile and board tile in the coordinates specified.
+     * @param tile to be placed
+     * @param x co-ordinate
+     * @param y co-ordinate
+     */
+    public void placeFixedTile(FloorTile tile, Coordinate location) {
+    	if (tileAt(location) != null) {
+    	    silkbag.insertTile(tileAt(location));
+        }
+    	tile.setFixed();
+    	tile.setLocation(location);
+        boardTiles.add(tile);
+    }
 
 	/**
 	 * Checks the board for goal tiles, adds the coordinates to the ArrayList.
@@ -564,29 +566,31 @@ public class Gameboard {
 		}
 		Collections.sort(ySlideLocations);
 
-		for (int x1 = 0; x1 < xSlideLocations.size(); ) {
-			if (Collections.frequency(xSlideLocations, xSlideLocations.get(x1)) == height) {
-				slideLocations.add(new Coordinate(xSlideLocations.get(x1), -1));
-				slideLocations.add(new Coordinate(xSlideLocations.get(x1), width));
-				x1 += width;
-			} else {
-				x1++;
-			}
-		}
-		for (int y1 = 0; y1 < ySlideLocations.size(); ) {
-			if (Collections.frequency(ySlideLocations, ySlideLocations.get(y1)) == width) {
-				slideLocations.add(new Coordinate(-1, ySlideLocations.get(y1)));
-				slideLocations.add(new Coordinate(height, ySlideLocations.get(y1)));
-				y1 += height;
-			} else {
-				y1++;
-			}
-		}
-		for (int k = 0; k < slideLocations.size(); k++) {
-			System.out.println(slideLocations.get(k));
-		}
-		return slideLocations;
-	}
+        for (int x1 = 0; x1 < xSlideLocations.size();){
+            if (Collections.frequency(xSlideLocations,xSlideLocations.get(x1)) == height) {
+                slideLocations.add(new Coordinate(xSlideLocations.get(x1), -1));
+                slideLocations.add(new Coordinate (xSlideLocations.get(x1), height));
+                x1 += width;
+            }
+            else {
+                x1++;
+            }
+        }
+        for (int y1 = 0; y1 < ySlideLocations.size();) {
+            if (Collections.frequency(ySlideLocations,ySlideLocations.get(y1)) == width) {
+                slideLocations.add(new Coordinate(-1, ySlideLocations.get(y1)));
+                slideLocations.add(new Coordinate (width, ySlideLocations.get(y1)));
+                y1 += height;
+            }
+            else {
+                y1++;
+            }
+        }
+        for(int k = 0; k < slideLocations.size(); k++){
+           System.out.println(slideLocations.get(k));
+        }
+        return slideLocations;
+    }
 
 
 	/**
@@ -662,5 +666,9 @@ public class Gameboard {
 			}
 			return null;
 		});
+	}
+
+	public void placeFixedTile(FloorTile floorTile, int x, int y) {
+		placeFixedTile(floorTile, new Coordinate(x,y));
 	}
 }

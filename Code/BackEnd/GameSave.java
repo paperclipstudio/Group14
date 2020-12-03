@@ -57,6 +57,8 @@ public class GameSave {
     public void saveToFile() throws IOException {
         //gameSaveFile = new File("SaveData\\GameSave\\" + System.currentTimeMillis() + ".sav");
         FileWriter writer = new FileWriter(gameSaveFile, true);
+        gameSaveFile.delete();
+        gameSaveFile.createNewFile();
         writer.write(gameSaveString);
         writer.flush();
         writer.close();
