@@ -2,8 +2,8 @@
 9
 Corner 0 0 0
 Corner 7 0 1
-Corner 7 9 2
-Corner 0 9 3
+Corner 7 5 2
+Corner 0 5 3
 Straight 2 3 1
 T_Shape 5 3 1
 T_Shape 2 6 3

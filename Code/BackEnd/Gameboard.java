@@ -1,6 +1,7 @@
 package BackEnd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -520,9 +521,9 @@ public class Gameboard {
         ArrayList<Integer> xSlideLocations = new ArrayList<>();
         ArrayList<Integer> ySlideLocations = new ArrayList<>();
 
-        for (int i = 0; i < boardTiles.length; i++) {
-            for (int j = 0; j < boardTiles[i].length; j++) {
-                if (boardTiles[i][j] != null && !boardTiles[i][j].isFixed() && !boardTiles[i][j].isFrozen()) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (boardTiles[i][j] == null || (!boardTiles[i][j].isFixed() && !boardTiles[i][j].isFrozen())) {
                     locations.add(new Coordinate(i, j));
                 }
             }
@@ -621,6 +622,7 @@ public class Gameboard {
     }
 
     public void setNumOfPlayers(int numOfPlayers) {
+        playerLocations = Arrays.copyOf(playerLocations,numOfPlayers);
         this.numOfPlayers = numOfPlayers;
     }
 
