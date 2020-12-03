@@ -463,7 +463,7 @@ public class Gameboard {
 		goalCoors = checkGoalTiles();
 		for (Coordinate goalCoor : goalCoors) {
 			for (int j = 0; j < players; j++) {
-				if (getPlayerPos(j) == goalCoor) {
+				if (getPlayerPos(j).equals(goalCoor)) {
 					return j;
 				}
 			}
