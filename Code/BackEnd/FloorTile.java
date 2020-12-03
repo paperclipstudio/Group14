@@ -91,7 +91,7 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is on fire, else false otherwise.
 	 */
 	public Boolean onFire () {
-		return false;// ticFire != 0;
+		return ticFire != 0;
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class FloorTile extends Tile {
 	 * This method checks whether a given floorTile is fixed or not, it returns true if it is, and false if it isn't.
 	 */
 	public boolean isFixed () {
-		return false;//isFixed;
+		return isFixed;
 	}
 	/**
 	 * This method sets the isFixed value of a given tile to either true, or false.

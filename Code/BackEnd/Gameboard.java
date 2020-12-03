@@ -426,6 +426,8 @@ public class Gameboard {
     public void placeFixedTile(FloorTile tile, Coordinate location) {
     	if (tileAt(location) != null) {
     	    silkbag.insertTile(tileAt(location));
+    	    removeTile(tileAt(location));
+
         }
     	tile.setFixed();
     	tile.setLocation(location);

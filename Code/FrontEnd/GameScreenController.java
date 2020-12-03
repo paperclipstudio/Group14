@@ -405,14 +405,6 @@ public class GameScreenController implements Initializable {
 			}
 
 		}
-
-		// Adding fixed tiles overLay
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-			}
-
-
-		}
 		// showing the player locations
 		//players = new ImageView[gameLogic.getNumberOfPlayers()];
 		for (int i = 0; i < gameLogic.getPlayerLocations().length; i++) {
