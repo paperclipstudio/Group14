@@ -24,7 +24,7 @@ public class Player
     /**
      * inventory variable is a list of the player tiles that he holds in his inventory.
      */
-    private ArrayList<Tile> inventory;
+    private ArrayList<ActionTile> inventory;
     /**
      * silkbag is an instance of the SilkBag class.
      */
@@ -61,7 +61,7 @@ public class Player
      * Method to get the action tiles in the player's inventory.
      * @return inventory The action tiles in the player's inventory.
      */
-    public ArrayList<Tile> getInventory () {
+    public ArrayList<ActionTile> getInventory () {
         return inventory;
     }
 
@@ -71,7 +71,11 @@ public class Player
      */
     public void drawTile()    {
         if (isHolding() != null) {
-            inventory.add(isHolding());
+            if (isHolding() instanceof ActionTile) {
+                inventory.add((ActionTile) isHolding());
+            } else {
+                System.out.println("Left over floor tile");
+            }
         }
         lastDrawnTile = silkBag.getTile();
     }

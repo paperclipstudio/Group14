@@ -179,6 +179,9 @@ public class GameScreenController implements Initializable {
 
 	private void setupFloorPhase() throws Exception {
 		ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
+		if (locations.size() == 0) {
+			throw new Exception("No slide locations");
+		}
 		for (Coordinate coordinate : locations) {
 			ImageView arrow = Assets.makeArrow();
 			final Rotation direction;

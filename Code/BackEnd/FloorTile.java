@@ -14,7 +14,6 @@ public class FloorTile extends Tile {
 	 * These attributes hold information about the floor tile. Information such as if the tile is on fire in the form
 	 * of a boolean and information such as TileType which is in the form of an enum.
 	 */
-	private boolean	isFixed;
 	TileType type;
 	Rotation rotation;
 	private Coordinate location;
@@ -25,6 +24,7 @@ public class FloorTile extends Tile {
 	 */
 	private static int ticFire;
 	private static int ticFrozen;
+	private boolean isFixed;
 
 	/**
 	 * This constructor of FloorTile initiates all the attributes apart from the static attributes, takes in a
@@ -35,6 +35,8 @@ public class FloorTile extends Tile {
 		this.type = type;
 		this.rotation = Rotation.UP;
 		this.location = null;
+		ticFrozen = 0;
+		ticFire = 0;
 
 	}
 
@@ -89,7 +91,7 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is on fire, else false otherwise.
 	 */
 	public Boolean onFire () {
-		return ticFire != 0;
+		return false;// ticFire != 0;
 	}
 
 	/**
@@ -97,7 +99,7 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is frozen, else false otherwise.
 	 */
 	public Boolean isFrozen () {
-		return ticFrozen != 0;
+		return false;//ticFrozen != 0;
 	}
 
 	/**
@@ -151,7 +153,7 @@ public class FloorTile extends Tile {
 	 * This method checks whether a given floorTile is fixed or not, it returns true if it is, and false if it isn't.
 	 */
 	public boolean isFixed () {
-		return isFixed;
+		return false;//isFixed;
 	}
 	/**
 	 * This method sets the isFixed value of a given tile to either true, or false.

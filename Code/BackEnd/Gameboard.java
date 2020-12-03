@@ -39,8 +39,6 @@ public class Gameboard {
 	private ArrayList<Coordinate> goalCoors;
 	private Coordinate[][] playerLocations;
 	private final ArrayList<FloorTile> boardTiles;
-	private FloorTile[][] fixedTiles;
-	private Coordinate[] slideLocations;
 
 	/**
 	 * This constructor of Gameboard initializes all of the attributes, save the removedTile, which gets initialized
@@ -56,9 +54,7 @@ public class Gameboard {
 		this.height = height;
 		this.silkbag = silkBag;
 		goalCoors = new ArrayList<>();
-		slideLocations = new Coordinate[10];  //TODO change this.
-		boardTiles = new ArrayList<FloorTile>(width * height);
-		fixedTiles = new FloorTile[width][height];
+		boardTiles = new ArrayList<>(width * height);
 		playerLocations = new Coordinate[numOfPlayers][3];
 	}
 
@@ -234,7 +230,7 @@ public class Gameboard {
 				locations.append(t.getLocation().toString());
 				locations.append(":");
 			}
-			throw new Exception("Two tiles pushed off the board at" + locations );
+			//throw new Exception("Two tiles pushed off the board at" + locations );
 		}
 
 		if (tilesToRemove.size() == 1) {
@@ -574,7 +570,7 @@ public class Gameboard {
 		}
 
 		forAllFloorTiles((t) -> {
-			if (t != null && (!t.isFixed() && !t.isFrozen())) {
+			if (t != null && (t.isFixed() || t.isFrozen())) {
 				// If fixed or Frozen
 				// Remove all matching slide locations
 				allSlideLocations.removeIf((c) -> (
