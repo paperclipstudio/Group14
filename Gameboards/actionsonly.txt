@@ -3,10 +3,10 @@
 7 0 Player2
 0 9 Player3
 7 9 Player4
-20 Corner
-20 Straight
-20 T-Shape
-5 Fire
+0 Corner
+0 Straight
+70 T-Shape
+6000 Fire
 5 Ice
 5 Backtrack
 5 DoubleMove

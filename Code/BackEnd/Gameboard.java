@@ -524,6 +524,7 @@ public class Gameboard {
 				Coordinate toSetOnFire = location.shift(i, j);
 				if (toSetOnFire.getX() >= 0 && toSetOnFire.getX() < width &&
 						toSetOnFire.getY() >= 0 && toSetOnFire.getY() < height) {
+					System.out.println("setting one tile on file:" + toSetOnFire.getX() + " " + toSetOnFire.getY());
 					tileAt(toSetOnFire).setFireTic(getNumOfPlayers());
 				}
 			}

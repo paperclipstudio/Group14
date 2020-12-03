@@ -127,7 +127,6 @@ public class GameScreenController implements Initializable {
 			System.exit(1);
 		}
 		phase = gameLogic.getGamePhase();
-		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug");
 		hideAllControls();
 		switch (phase) {
@@ -457,7 +456,7 @@ public class GameScreenController implements Initializable {
 		cards.getChildren().add(skip);
 		skip.setOnMouseClicked(e1 -> {
 					try {
-						actionCardOnCLick(e1);
+						skipActionOnCLick(e1);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -491,7 +490,7 @@ public class GameScreenController implements Initializable {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked(e2 -> {
 							try {
-								ActionCardOnCLick(e2);
+								doubleMoveActoon(e2);
 							} catch (Exception exception) {
 								exception.printStackTrace();
 							}
@@ -752,12 +751,12 @@ public class GameScreenController implements Initializable {
 		});
 	}
 
-	private void actionCardOnCLick(MouseEvent e) throws Exception {
+	private void skipActionOnCLick(MouseEvent e) throws Exception {
 		gameLogic.action(null, null, 0);
 		mainLoop();
 	}
 
-	private void ActionCardOnCLick(MouseEvent e2) throws Exception {
+	private void doubleMoveActoon(MouseEvent e2) throws Exception {
 		gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
 		for (Node player : players.getChildren()) {
 			player.setEffect(new Bloom(999));

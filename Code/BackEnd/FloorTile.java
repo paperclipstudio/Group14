@@ -22,8 +22,8 @@ public class FloorTile extends Tile {
 	 * These static attributes, will be used for the action tiles freeze and fire and tick down after every players
 	 * turn.
 	 */
-	private static int ticFire;
-	private static int ticFrozen;
+	private int ticFire;
+	private int ticFrozen;
 	private boolean isFixed;
 
 	/**
@@ -35,8 +35,8 @@ public class FloorTile extends Tile {
 		this.type = type;
 		this.rotation = Rotation.UP;
 		this.location = null;
-		ticFrozen = 0;
-		ticFire = 0;
+		this.ticFrozen = 0;
+		this.ticFire = 0;
 
 	}
 
