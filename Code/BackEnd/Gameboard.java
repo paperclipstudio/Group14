@@ -143,7 +143,7 @@ public class Gameboard {
             direction = DOWN;
             shiftAmount = new Coordinate(0, -1);
         } else {
-            throw new Exception("Invalid slide location");
+            throw new Exception("Invalid slide location :" + location.toString());
         }
         // Shift all players on the correct row // column.
         if (direction == LEFT || direction == RIGHT) {
