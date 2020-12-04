@@ -1,15 +1,12 @@
 package BackEnd;
 
-import javafx.scene.image.Image;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Stores the data about a player's profile such as their name or scores across maps.
+ *
  * @author Brandon Chan
  * @version 1.0
  */
@@ -25,20 +22,22 @@ public class Profile {
 
     /**
      * This constructor initialises attributes from the parameters provided.
-     * @param name name of the player.
+     *
+     * @param name       name of the player.
      * @param playerIcon this is the player icon.
-     * @param wins the amount of wins a player has.
-     * @param losses the amount of losses a player has.
+     * @param wins       the amount of wins a player has.
+     * @param losses     the amount of losses a player has.
      */
     public Profile(String name, String playerIcon, int wins, int losses) {
-        setName (name);
-        setIcon (playerIcon);
-        setWins (wins);
-        setlosses (losses);
+        setName(name);
+        setIcon(playerIcon);
+        setWins(wins);
+        setlosses(losses);
     }
 
     /**
      * This method sets the name of the player.
+     *
      * @param name name of the player.
      */
     public void setName(String name) {
@@ -47,6 +46,7 @@ public class Profile {
 
     /**
      * This method sets the players icon.
+     *
      * @param playerIcon player's icon.
      */
     public void setIcon(String playerIcon) {
@@ -55,22 +55,25 @@ public class Profile {
 
     /**
      * This method sets the number of wins for the player.
+     *
      * @param wins number of wins of the player
      */
-    public void setWins(int wins){
+    public void setWins(int wins) {
         this.wins = wins;
     }
 
     /**
      * This method sets the number of losses for the player.
+     *
      * @param losses number of losses of the player.
      */
-    public void setlosses(int losses){
+    public void setlosses(int losses) {
         this.losses = losses;
     }
 
     /**
      * This method gets the name of the player.
+     *
      * @return the name of the player.
      */
     public String getName() {
@@ -79,6 +82,7 @@ public class Profile {
 
     /**
      * This method gets the wins of the player.
+     *
      * @return the wins of the player.
      */
     public int getWins() {
@@ -87,6 +91,7 @@ public class Profile {
 
     /**
      * This method gets the losses of the player.
+     *
      * @return the losses of the player.
      */
     public int getLosses() {
@@ -109,11 +114,12 @@ public class Profile {
 
     /**
      * This method returns the icon of the player.
+     *
      * @return the icon of the player.
      */
-	public String getIcon() {
+    public String getIcon() {
         return this.profileIcon;
-	}
+    }
 
 
     /**

@@ -2,6 +2,7 @@ package BackEnd;
 
 /**
  * This enum class stores the different tile types that a tile might be.
+ *
  * @author Christian Sanger
  * @version 1.0
  */

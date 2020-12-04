@@ -1,8 +1,7 @@
 package FrontEnd;
 
-import BackEnd.Leaderboard;
 import BackEnd.Profile;
-import  javafx.application.Application;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,7 +24,7 @@ import java.util.Scanner;
 public class Main extends Application {
     private static Profile[] profiles;
     private static boolean fullScreen;
-	private static String boardFile;
+    private static String boardFile;
     private static int numberOfPlayers;
     private static String saveFile;
     private static String loadFile;
@@ -115,7 +114,7 @@ public class Main extends Application {
             soundLevel = DEFAULT_SOUND_LEVEL;
             fullscreen = DEFAULT_FULLSCREEN;
             resolution = DEFAULT_RESOLUTION;
-        } catch  (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Config not found, using defaults");
             soundLevel = DEFAULT_SOUND_LEVEL;
             fullscreen = DEFAULT_FULLSCREEN;
@@ -127,7 +126,7 @@ public class Main extends Application {
         Main.setResolution(RESOLUTION.values()[resolution]);
         primaryStage.setWidth(SettingsController.getWidth(RESOLUTION.values()[resolution]));
         primaryStage.setHeight(SettingsController.getHeight(RESOLUTION.values()[resolution]));
-        primaryStage.setFullScreen(false    );
+        primaryStage.setFullScreen(false);
         primaryStage.setTitle("Covid Game?");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
@@ -138,7 +137,7 @@ public class Main extends Application {
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setCycleCount(100);
 
-        mediaPlayer.setVolume(volume/100.0);
+        mediaPlayer.setVolume(volume / 100.0);
         mediaPlayer.play();
         primaryStage.show();
     }

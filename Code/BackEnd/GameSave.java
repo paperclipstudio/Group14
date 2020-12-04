@@ -1,22 +1,21 @@
 package BackEnd;
 
-import FrontEnd.GameSetupController;
 import FrontEnd.Main;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
 
 /**
  * This class records each players decisions.
  * We can then read this file and put it into gameLogic to load the game.
+ *
  * @author David Langmaid
  * @version 1.0
  */
 public class GameSave {
 
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" + Main.getSaveFile() + ".sav");
+    private static final File gameSaveFile = new File("SaveData\\GameSave\\" + Main.getSaveFile() + ".sav");
     private boolean isGameSaved = false;
 
     private String gameSaveString;
@@ -24,9 +23,9 @@ public class GameSave {
 
     public GameSave(int seed) {
         gameSaveString = "\n" + seed;
-        gameSaveString = gameSaveString +  "\n" + Main.getNumberOfPlayers();
-        for (Profile profile: Main.getProfiles()) {
-            gameSaveString = gameSaveString +  "\n" + profile.getName();
+        gameSaveString = gameSaveString + "\n" + Main.getNumberOfPlayers();
+        for (Profile profile : Main.getProfiles()) {
+            gameSaveString = gameSaveString + "\n" + profile.getName();
         }
     }
 
@@ -34,10 +33,12 @@ public class GameSave {
         gameSaveString += "\ndraw";
         isGameSaved = false;
     }
+
     public void playFloorTile(Coordinate slideLocations, FloorTile tile) {
         gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
         isGameSaved = false;
     }
+
     public void playActionTile(Coordinate location, ActionTile tile, int playerNo) {
         String type = tile == null ? "null " : tile.getType().toString();
         gameSaveString += "\naction " + type + " " + playerNo;
@@ -66,6 +67,7 @@ public class GameSave {
         writer.close();
         isGameSaved = true;
     }
+
     public void emptyGameSaveString() {
         gameSaveString = "";
         isGameSaved = true;

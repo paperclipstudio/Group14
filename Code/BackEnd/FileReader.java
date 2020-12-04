@@ -1,10 +1,12 @@
 package BackEnd;
+
 import javafx.util.Pair;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class is a file reader class which will take in a given level file format text file, verify it
@@ -28,7 +30,7 @@ public class FileReader {
      * This method takes in the given level format file,
      * and create a gameboard and players for that game.
      *
-     * @param filename The name of the level file format text file.
+     * @param filename    The name of the level file format text file.
      * @param silkBagSeed The seed used for this game.
      * @return pair where first element is the gameboard and second is the players.
      */
@@ -42,7 +44,7 @@ public class FileReader {
         SilkBag silkBag = new SilkBag(silkBagSeed);
 
         //// board config
-        currentLine = new Scanner (in.nextLine());
+        currentLine = new Scanner(in.nextLine());
         int width = currentLine.nextInt();
         int height = currentLine.nextInt();
         Gameboard gameboard = new Gameboard(width, height, silkBag);
@@ -101,18 +103,17 @@ public class FileReader {
         //// Fixed tiles
         currentLine = new Scanner(in.nextLine());
         int numberOfFixedTiles = currentLine.nextInt();
-        for (int i= 0; i < numberOfFixedTiles; i++) {
-           currentLine = new Scanner(in.nextLine());
-           TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
-           int x = currentLine.nextInt();
-           int y = currentLine.nextInt();
-           Coordinate location = new Coordinate(x, y);
-           int rotationInt = currentLine.nextInt();
-           Rotation rotation = Rotation.values()[rotationInt];
-           FloorTile tile = new FloorTile(tileType, rotation);
-           gameboard.placeFixedTile(tile, location);
+        for (int i = 0; i < numberOfFixedTiles; i++) {
+            currentLine = new Scanner(in.nextLine());
+            TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
+            int x = currentLine.nextInt();
+            int y = currentLine.nextInt();
+            Coordinate location = new Coordinate(x, y);
+            int rotationInt = currentLine.nextInt();
+            Rotation rotation = Rotation.values()[rotationInt];
+            FloorTile tile = new FloorTile(tileType, rotation);
+            gameboard.placeFixedTile(tile, location);
         }
-
 
 
         return new Pair<>(gameboard, players);
@@ -120,10 +121,11 @@ public class FileReader {
 
     /**
      * This method takes in the given level format file, and checks to see that the file exists.
+     *
      * @param gameBoard The name of the level file format text file.
      * @return in The scanner that iterates through the file.
      */
-	public static Pair<Gameboard, Player[]> gameSetup(String gameBoard) throws Exception {
+    public static Pair<Gameboard, Player[]> gameSetup(String gameBoard) throws Exception {
         return gameSetup(gameBoard, (new Random()).nextInt());
-	}
+    }
 }

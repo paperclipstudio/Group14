@@ -1,7 +1,9 @@
 package BackEnd;
+
 /**
  * This class is a coordinate class which will hold an integer coordinate pair X and Y
  * for a particular object or item.
+ *
  * @author Atif Ishaq & Joshua Oladitan.
  * @version 1.0
  */
@@ -16,6 +18,7 @@ public class Coordinate {
 
     /**
      * Constructor takes in a coordinate with x and y.
+     *
      * @param xCoor the X coordinate
      * @param yCoor the Y coordinate
      */
@@ -26,6 +29,7 @@ public class Coordinate {
 
     /**
      * This method gets the x Coordinate.
+     *
      * @return the x Coordinate.
      */
     public int getX() {
@@ -34,6 +38,7 @@ public class Coordinate {
 
     /**
      * This method sets the x Coordinate.
+     *
      * @param xCoor This parameter would be set as the x Coordinate.
      */
     public void setX(int xCoor) {
@@ -42,6 +47,7 @@ public class Coordinate {
 
     /**
      * This method gets the y Coordinate.
+     *
      * @return the y Coordinate.
      */
     public int getY() {
@@ -50,6 +56,7 @@ public class Coordinate {
 
     /**
      * This method sets the y Coordinate.
+     *
      * @param yCoor This parameter would be set as the y Coordinate.
      */
     public void setY(int yCoor) {
@@ -58,6 +65,7 @@ public class Coordinate {
 
     /**
      * This method sets both the x and y coordinate.
+     *
      * @param x This parameter would be set as the x Coordinate.
      * @param y This parameter would be set as the y Coordinate.
      */
@@ -68,6 +76,7 @@ public class Coordinate {
 
     /**
      * Checks if too coordinates are equal.
+     *
      * @param input coordinate to check
      * @return true if showing the same location.
      */
@@ -77,6 +86,7 @@ public class Coordinate {
 
     /**
      * This method returns the coordinates x and y to a string.
+     *
      * @return A string consisting of the coordinates.
      */
     @Override
@@ -86,6 +96,7 @@ public class Coordinate {
 
     /**
      * In this method were checking if two coordinates are equal of different objects.
+     *
      * @param o This is an object which contains coordinates.
      * @return true if the coordinates are equal, else false.
      */
@@ -99,21 +110,23 @@ public class Coordinate {
     /**
      * Shifts a Coordinate by a given amount
      * does not mutate original object
+     *
      * @param x amount to shift right
      * @param y amount to shift down
      * @return a new Coordinate in shifted location.
      */
-	public Coordinate shift(int x, int y) {
+    public Coordinate shift(int x, int y) {
         return shift(new Coordinate(x, y));
-	}
+    }
 
     /**
      * Shifts a Coordinate by a given amount
      * does not mutate original object
+     *
      * @param shiftAmount amount to shift right and down
      * @return a new Coordinate in shifted location.
      */
-	public Coordinate shift(Coordinate shiftAmount) {
+    public Coordinate shift(Coordinate shiftAmount) {
         return new Coordinate(shiftAmount.getX() + x, shiftAmount.getY() + y);
     }
 }

@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 /**
  * Use to control the GameScreen scene.
+ *
  * @author David Langmaid
  */
 public class MenuScreenController implements Initializable {
@@ -42,7 +43,7 @@ public class MenuScreenController implements Initializable {
      * Used to exit the application
      */
     public void onQuitButton() {
-        Platform.exit();;
+        Platform.exit();
     }
 
     public void onNewGame() throws IOException {

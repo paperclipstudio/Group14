@@ -1,14 +1,17 @@
 package FrontEnd;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 import java.io.*;
 
 /***
- * A controller class for profiles.fxml which shows player profiles saved, create new player profiles, delete player profiles
- * and view player profiles.
- * Load by actions from MenuScreen and return to MenuScreen with an action.
+ * A controller class for profiles.fxml which allows a user to show the player profiles saved, create new player
+ * profiles, delete player profiles and view player profiles.
+ * It is loaded by clicking from it in the MenuScreen and allows the user to return to the MenuScreen with an action.
  * @author Zhan Zhang
  * @version 1.0
  */
@@ -30,7 +33,7 @@ public class ProfilesController {
     private ListView<String> playerList;
 
     /**
-     * show file we have in the SaveData\\UserData folder to the listview when this page running.
+     * This shows the files we have in the SaveData\\UserData folder as a list when this page is running.
      */
     public void initialize() {
         File file = new File("SaveData\\UserData\\");
@@ -43,7 +46,7 @@ public class ProfilesController {
     }
 
     /**
-     * the action on the button backButton, back to the menus screen.
+     * Returns the user to the main menu screen.
      */
 
     public void onBackButton() {
@@ -52,10 +55,11 @@ public class ProfilesController {
     }
 
     /**
-     * try to create a user file with name typed, create one in UserData if there is not a file with
-     * initialized data and turn text field to red if there is one.
+     * Creates a user file with name typed, creates one in UserData if there is not a file with
+     * that given name and turn text field to red if there is one (i.e, you cannot create a user with the same name
+     * as an already created user.)
      *
-     * @throws IOException when FileWriter failed to write the file.
+     * @throws IOException When the FileWriter fails to write the file.
      */
     public void createFile() throws IOException {
         String newName = input.getText();
@@ -64,10 +68,9 @@ public class ProfilesController {
             playerRecord.setText("Please enter a player name, before creating a new profile!");
         } else {
             File user = new File("SaveData\\UserData\\" + newName + ".txt");
-
             if (user.exists() && !user.isDirectory()) {
                 input.setStyle("-fx-border-color: red");
-
+                playerRecord.setText("That name already exists, please use another name!");
             } else {
                 input.setStyle("-fx-border-color: default");
                 playerList.getItems().addAll(newName);
@@ -79,7 +82,7 @@ public class ProfilesController {
     }
 
     /**
-     * Delete the file choose in view list, turn the text field back to white if it is not.
+     * Deletes the file selected in the list, and turns the text field back to white if it is not.
      */
     public void deleteFile() {
         String newName = playerList.getSelectionModel().getSelectedItem();
@@ -94,7 +97,8 @@ public class ProfilesController {
     }
 
     /**
-     * View the data saved in the file with same name as choose in the view list, no response when there is no such a file.
+     * View the data saved in the file with same name as selected in the view list, when that file doesn't exist,
+     * print an error message.
      */
     public void viewData() {
         String playerPicked = playerList.getSelectionModel().getSelectedItem();

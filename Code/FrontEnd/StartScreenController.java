@@ -22,7 +22,7 @@ public class StartScreenController implements Initializable {
     }
 
     public void onQuitButton() {
-        Platform.exit();;
+        Platform.exit();
     }
 
     public void onNewGame() throws IOException {
