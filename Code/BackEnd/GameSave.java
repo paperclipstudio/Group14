@@ -24,9 +24,9 @@ public class GameSave {
 
     public GameSave(int seed) {
         gameSaveString = "\n" + seed;
-        gameSaveString = "\n" + Main.getNumberOfPlayers();
+        gameSaveString = gameSaveString +  "\n" + Main.getNumberOfPlayers();
         for (Profile profile: Main.getProfiles()) {
-            gameSaveString = "\n" + profile.getName();
+            gameSaveString = gameSaveString +  "\n" + profile.getName();
         }
     }
 
