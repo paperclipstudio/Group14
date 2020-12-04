@@ -34,7 +34,7 @@ public class GameSave {
         gameSaveString += "\ndraw";
         isGameSaved = false;
     }
-    public void playFloorTile(Coordinate slideLocations, FloorTile tile){
+    public void playFloorTile(Coordinate slideLocations, FloorTile tile) {
         gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
         isGameSaved = false;
     }

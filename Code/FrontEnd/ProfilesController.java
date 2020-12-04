@@ -66,10 +66,10 @@ public class ProfilesController {
             File user = new File("SaveData\\UserData\\" + newName + ".txt");
 
             if (user.exists() && !user.isDirectory()) {
-                input.setStyle("-fx-background-color: red");
+                input.setStyle("-fx-border-color: red");
 
             } else {
-                input.setStyle("-fx-background-color: white");
+                input.setStyle("-fx-border-color: default");
                 playerList.getItems().addAll(newName);
                 PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
                 newUser.write("0 0 icon0");
@@ -85,11 +85,11 @@ public class ProfilesController {
         String newName = playerList.getSelectionModel().getSelectedItem();
         File user = new File("SaveData\\UserData\\" + newName + ".txt");
         if (user.delete()) {
-            input.setStyle("-fx-background-color: white");
+            input.setStyle("-fx-border-color: default");
             playerList.getItems().remove(newName);
 
         } else {
-            input.setStyle("-fx-background-color: white");
+            input.setStyle("-fx-border-color: default");
         }
     }
 
@@ -99,6 +99,7 @@ public class ProfilesController {
     public void viewData() {
         String playerPicked = playerList.getSelectionModel().getSelectedItem();
         String line;
+        input.setStyle("-fx-border-color: default");
         try {
             BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + playerPicked + ".txt"));
             int getWin = 0;

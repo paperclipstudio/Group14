@@ -19,7 +19,7 @@ public class FloorTile extends Tile {
 	private Coordinate location;
 
 	/*
-	 * These static attributes, will be used for the action tiles freeze and fire and tick down after every players
+	 * These attributes will be used for the action tiles freeze and fire and tick down after every players
 	 * turn.
 	 */
 	private int ticFire;
@@ -31,7 +31,7 @@ public class FloorTile extends Tile {
 	 * TileType and initiates it. Sets the default rotation to UP.
 	 * @param type This is the type of tile that in the form of an enum.
 	 */
-	public FloorTile (TileType type) {
+	public FloorTile(TileType type) {
 		this.type = type;
 		this.rotation = Rotation.UP;
 		this.location = null;
@@ -47,12 +47,13 @@ public class FloorTile extends Tile {
 	 * @param type This is the type of tile that in the form of an enum.
 	 * @param rotation This is the rotation of the tile in the form of an enum.
 	 */
-	public FloorTile (TileType type, Rotation rotation) {
+	public FloorTile(TileType type, Rotation rotation) {
 		this.rotation = rotation;
 		this.type = type;
 	}
 
 	/**
+	 * This method sets the location of the tile.
 	 * @param location setTheCurrentLocationOfTile;
 	 */
 	public void setLocation(Coordinate location) {
@@ -60,12 +61,17 @@ public class FloorTile extends Tile {
 	}
 
 	/**
+	 * This method returns the location of the tile.
 	 * @return The current location of this tile.
 	 */
 	public Coordinate getLocation() {
 		return this.location;
 	}
 
+	/**
+	 * This method sets the location of the tile to null as its no longer present
+	 * on the board.
+	 */
 	public void notOnBoard() {
 		location = null;
 		clearTic();
@@ -75,7 +81,7 @@ public class FloorTile extends Tile {
 	 * This method returns the type of the tile.
 	 * @return returns TileType.
 	 */
-	public TileType getType () {
+	public TileType getType() {
 		return this.type;
 	}
 
@@ -83,7 +89,7 @@ public class FloorTile extends Tile {
 	 * This method returns the rotation of the tile.
 	 * @return returns rotation.
 	 */
-	public Rotation getRotation () {
+	public Rotation getRotation() {
 		return this.rotation;
 	}
 
@@ -91,7 +97,7 @@ public class FloorTile extends Tile {
 	 * This method checks if the tile is on fire.
 	 * @return true if the tile is on fire, else false otherwise.
 	 */
-	public Boolean onFire () {
+	public Boolean onFire() {
 		return ticFire != 0;
 	}
 
@@ -99,7 +105,7 @@ public class FloorTile extends Tile {
 	 * This method checks if the tile is frozen.
 	 * @return true if the tile is frozen, else false otherwise.
 	 */
-	public Boolean isFrozen () {
+	public Boolean isFrozen() {
 		return ticFrozen != 0;
 	}
 
@@ -107,7 +113,7 @@ public class FloorTile extends Tile {
 	 * This method sets the rotation of the tile.
 	 * @param rotation this is the rotation the tile is set to.
 	 */
-	public void setRotation (Rotation rotation) {
+	public void setRotation(Rotation rotation) {
 		this.rotation = rotation;
 	}
 
@@ -117,7 +123,7 @@ public class FloorTile extends Tile {
 	 * fire has worn out.
 	 * @param numOfPlayers This lets us know how many ticks are in one cycle. Each player is one tick.
 	 */
-	public void setFireTic (int numOfPlayers) {
+	public void setFireTic(int numOfPlayers) {
 		ticFire = numOfPlayers * 2; //Fire tiles last for 2 cycles.
 	}
 
@@ -129,7 +135,7 @@ public class FloorTile extends Tile {
 	/**
 	 * This method decrements the ticFire after every players turn. If it reaches zero, sets isOnFire to false.
 	 */
-	public void ticFire () {
+	public void ticFire() {
 		ticFire --;
 	}
 
@@ -139,20 +145,20 @@ public class FloorTile extends Tile {
 	 * freeze has worn out.
 	 * @param numOfPlayers This lets us know how many ticks are in one cycle. Each player is one tick.
 	 */
-	public void setFrozenTic (int numOfPlayers) {
+	public void setFrozenTic(int numOfPlayers) {
 		ticFrozen = numOfPlayers; //Frozen tiles last for 1 cycle.
 	}
 
 	/**
 	 * This method decrements the ticFrozen after every players turn. If it reaches zero, sets isFrozen to false.
 	 */
-	public void ticFrozen () {
+	public void ticFrozen() {
 		ticFrozen --;
 	}
 	/**
 	 * This method checks whether a given floorTile is fixed or not, it returns true if it is, and false if it isn't.
 	 */
-	public boolean isFixed () {
+	public boolean isFixed() {
 		return isFixed;
 	}
 	/**

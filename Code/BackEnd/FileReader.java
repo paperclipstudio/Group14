@@ -11,11 +11,16 @@ import java.util.*;
  * and create the gameboard, along with the fixed tiles in their correct locations, the players in their correct
  * locations, and the amount and type of each floor/action tile that will populate the silk bag.
  *
- * @author George Sanger, Atif Ishaq and Joshua Oladitan.
+ * @author Christian Sanger, Atif Ishaq and Joshua Oladitan.
  * @version 1.0
  */
 
 public class FileReader {
+
+    /*
+    These static variables hold information about the number of players and the number
+    of different tile types.
+     */
     private static final int NUM_OF_TILE_TYPES = TileType.values().length;
     private static final int MAX_NUM_OF_PLAYERS = 4;
 
@@ -58,13 +63,13 @@ public class FileReader {
         //// Filling SilkBag
         int[] tileTypeCount = new int[NUM_OF_TILE_TYPES];
         // Reading how many of each tile
-        for(int tileType = 0; tileType < NUM_OF_TILE_TYPES; tileType++) {
+        for (int tileType = 0; tileType < NUM_OF_TILE_TYPES; tileType++) {
             currentLine = new Scanner(in.nextLine());
             tileTypeCount[tileType] = currentLine.nextInt();
         }
         // putting them in the bag
         // for each tile type
-        for (int tileType=0; tileType < NUM_OF_TILE_TYPES; tileType++) {
+        for (int tileType = 0; tileType < NUM_OF_TILE_TYPES; tileType++) {
             int numberOfThisTile = tileTypeCount[tileType];
             // for each tile that need to be added to silkbag
             for (int i = 0; i < numberOfThisTile; i++) {
@@ -83,7 +88,7 @@ public class FileReader {
                 throw new Exception("No slide locations");
             }
 
-            for(int i = 0; i < slideLocations.size(); i++){
+            for (int i = 0; i < slideLocations.size(); i++) {
                 FloorTile tile = silkBag.getFloorTile();
                 tile.setRotation(Rotation.values()[r.nextInt(4)]);
                 toSlide = slideLocations.get(r.nextInt(slideLocations.size()));
