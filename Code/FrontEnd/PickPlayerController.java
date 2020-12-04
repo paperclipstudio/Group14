@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 
 /**
- * After game setup, show numbers of choiceBox to let players select player profile for different player, set these files
- * to a array list for game board to use and run the game board.
- *
+ * After game setup, show numbers of choiceBox to let players select a player profile for different players, set these files
+ * to an ArrayList for gameboard to use and run.
  * @author Zhan Zhang
+ * @version 1.0
  */
 public class PickPlayerController {
 
@@ -39,151 +39,151 @@ public class PickPlayerController {
     @FXML
     public Label hint;
 
-    @FXML
-    private Button backButton;
+	@FXML
+	private Button backButton;
 
-    ArrayList<Profile> profiles = new ArrayList<>();
+	ArrayList<Profile> profiles = new ArrayList<>();
 
-    /**
-     * show numbers of choice box, load player saved in the SaveData folder to each box and try to get the selection
-     * when this page is running.
-     */
-    public void initialize() {
+	/**
+	 * This method shows numbers of the choice box, load player saved in the SaveData folder to each box and try to get the selection
+	 * when this page is running.
+	 */
+	public void initialize() {
 
-        File playerLocation = new File("SaveData\\UserData\\");
+		File playerLocation = new File("SaveData\\UserData\\");
 
-        String[] players = playerLocation.list();
+		String[] players = playerLocation.list();
 
-        label.setText("You decide to start a game with " + Main.getNumberOfPlayers() + " players");
+		label.setText("You decide to start a game with " + Main.getNumberOfPlayers() + " players");
 
-        ChoiceBox<String>[] playerLists = new ChoiceBox[]{playerList1, playerList2, playerList3, playerList4};
-        for (ChoiceBox<String> playerList : playerLists) {
+		ChoiceBox<String>[] playerLists = new ChoiceBox[]{playerList1, playerList2, playerList3, playerList4};
+		for (ChoiceBox<String> playerList : playerLists) {
 
-            playerList.setVisible(false);
-            playerList.getSelectionModel().selectFirst();
-            assert players != null;
-            for (String player : players) {
-                playerList.getItems().addAll(player.substring(0, player.length() - 4));
-            }
+			playerList.setVisible(false);
+			playerList.getSelectionModel().selectFirst();
+			assert players != null;
+			for (String player : players){
+				playerList.getItems().addAll(player.substring(0, player.length() - 4));
+			}
 
-        }
+		}
 
-        for (String player : players) {
-            String playerName = player.substring(0, player.length() - 4);
-            playerList1.setVisible(true);
-            if (Main.getNumberOfPlayers() >= 2) {
-                playerList2.setVisible(true);
-            }
-            if (Main.getNumberOfPlayers() >= 3) {
-                playerList3.setVisible(true);
-            }
-            if (Main.getNumberOfPlayers() >= 4) {
-                playerList4.setVisible(true);
-            }
-        }
-    }
-
-
-    /**
-     * @param profileFile read files with name chose from UserData folder and turns them into profiles.
-     * @return get the profile output.
-     * @throws IOException when FileReader get wrong input.
-     */
-    public Profile readProfile(File profileFile) throws IOException {
-        String name = profileFile.getName();
-        String playerIcon = null;
-        String line;
-        int wins = 0;
-        int losses = 0;
-        BufferedReader reader = new BufferedReader(new FileReader(profileFile));
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(" ", 3);
-
-            if (parts.length >= 1) {
-                wins = Integer.parseInt(parts[0]);
-                losses = Integer.parseInt(parts[1]);
-            }
-        }
-        return new Profile(name, playerIcon, wins, losses);
-
-    }
+		for (String player : players) {
+			String playerName = player.substring(0, player.length() - 4);
+			playerList1.setVisible(true);
+			if (Main.getNumberOfPlayers() >= 2) {
+				playerList2.setVisible(true);
+			}
+			if (Main.getNumberOfPlayers() >= 3) {
+				playerList3.setVisible(true);
+			}
+			if (Main.getNumberOfPlayers() >= 4) {
+				playerList4.setVisible(true);
+			}
+		}
+	}
 
 
-    /**
-     * identify the player chose is right in number and style. Then use readProfile to turn these files to profiles and
-     * send them to game board profile class. Then run the game board class.
-     */
-    public void savePlayersAndStart() {
-        WindowLoader wl = new WindowLoader(backButton);
-        try {
+	/**
+	 * This method reads in the user data and converts them into profiles.
+	 * @param profileFile read files with name chose from UserData folder.
+	 * @return get the profile output.
+	 * @throws IOException when FileReader get wrong input.
+	 */
+	public Profile readProfile(File profileFile) throws IOException {
+		String name = profileFile.getName();
+		String playerIcon = null;
+		String line;
+		int wins = 0;
+		int losses = 0;
+		BufferedReader reader = new BufferedReader(new FileReader(profileFile));
+		while ((line = reader.readLine()) != null) {
+			String[] parts = line.split(" ", 3);
 
-            if (Main.getNumberOfPlayers() == 2) {
+			if (parts.length >= 1) {
+				wins = Integer.parseInt(parts[0]);
+				losses = Integer.parseInt(parts[1]);
+			}
+		}
+		return new Profile(name, playerIcon, wins, losses);
 
-                if (!playerList1.getValue().equals(playerList2.getValue())) {
-
-                    profiles.add(Profile.readProfile(playerList1.getValue()));
-                    profiles.add(Profile.readProfile(playerList2.getValue()));
-                    Main.setProfiles(profiles.toArray(new Profile[0]));
-
-                    wl.load("GameScreen");
-
-                } else {
-                    hint.setText("You have to select different players in each box.");
-                }
-
-            } else if (Main.getNumberOfPlayers() == 3) {
-
-                if (!playerList1.getValue().equals(playerList2.getValue()) &&
-                        !playerList1.getValue().equals(playerList3.getValue()) &&
-                        !playerList2.getValue().equals(playerList3.getValue())
-                ) {
-                    profiles.add(Profile.readProfile(playerList1.getValue()));
-                    profiles.add(Profile.readProfile(playerList2.getValue()));
-                    profiles.add(Profile.readProfile(playerList3.getValue()));
-                    Main.setProfiles(profiles.toArray(new Profile[0]));
-                    wl.load("GameScreen");
-
-                } else {
-                    hint.setText("You have to select different players in each box.");
-                }
-
-            } else if (Main.getNumberOfPlayers() == 4) {
-
-                if (!playerList1.getValue().equals(playerList2.getValue()) &&
-                        !playerList1.getValue().equals(playerList3.getValue()) &&
-                        !playerList1.getValue().equals(playerList4.getValue()) &&
-                        !playerList2.getValue().equals(playerList3.getValue()) &&
-                        !playerList2.getValue().equals(playerList4.getValue()) &&
-                        !playerList3.getValue().equals(playerList4.getValue())
-                ) {
-
-                    profiles.add(Profile.readProfile(playerList1.getValue()));
-                    profiles.add(Profile.readProfile(playerList2.getValue()));
-                    profiles.add(Profile.readProfile(playerList3.getValue()));
-                    profiles.add(Profile.readProfile(playerList4.getValue()));
-                    Main.setProfiles(profiles.toArray(new Profile[0]));
-
-                    wl.load("GameScreen");
-
-                } else {
-                    hint.setText("You have to select different players in each box.");
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+	}
 
 
-    /**
-     * return to previous page
-     */
 
-    public void onBackButton() {
-        WindowLoader wl = new WindowLoader(backButton);
-        wl.load("GameSetup");
-    }
+	/**
+	 * Identifies the player chosen has the right number and style. Then uses readProfile to turn these files to profiles and
+	 * send them to the gameboard profile class. Then run the gameboard class.
+	 */
+	public void savePlayersAndStart() {
+		WindowLoader wl = new WindowLoader(backButton);
+		try {
+
+			if (Main.getNumberOfPlayers() == 2) {
+
+				if (!playerList1.getValue().equals(playerList2.getValue())) {
+
+					profiles.add(Profile.readProfile(playerList1.getValue()));
+					profiles.add(Profile.readProfile(playerList2.getValue()));
+					Main.setProfiles(profiles.toArray(new Profile[0]));
+
+					wl.load("GameScreen");
+
+				} else {
+					hint.setText("You have to select different players in each box.");
+				}
+
+			} else if (Main.getNumberOfPlayers() == 3) {
+
+				if (!playerList1.getValue().equals(playerList2.getValue()) &&
+						!playerList1.getValue().equals(playerList3.getValue()) &&
+						!playerList2.getValue().equals(playerList3.getValue())
+				) {
+					profiles.add(Profile.readProfile(playerList1.getValue()));
+					profiles.add(Profile.readProfile(playerList2.getValue()));
+					profiles.add(Profile.readProfile(playerList3.getValue()));
+					Main.setProfiles(profiles.toArray(new Profile[0]));
+					wl.load("GameScreen");
+
+				} else {
+					hint.setText("You have to select different players in each box.");
+				}
+
+			} else if (Main.getNumberOfPlayers() == 4) {
+
+				if (!playerList1.getValue().equals(playerList2.getValue()) &&
+						!playerList1.getValue().equals(playerList3.getValue()) &&
+						!playerList1.getValue().equals(playerList4.getValue()) &&
+						!playerList2.getValue().equals(playerList3.getValue()) &&
+						!playerList2.getValue().equals(playerList4.getValue()) &&
+						!playerList3.getValue().equals(playerList4.getValue())
+				) {
+
+					profiles.add(Profile.readProfile(playerList1.getValue()));
+					profiles.add(Profile.readProfile(playerList2.getValue()));
+					profiles.add(Profile.readProfile(playerList3.getValue()));
+					profiles.add(Profile.readProfile(playerList4.getValue()));
+					Main.setProfiles(profiles.toArray(new Profile[0]));
+
+					wl.load("GameScreen");
+
+				} else {
+					hint.setText("You have to select different players in each box.");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+	/**
+	 * This method if called returns to the previous window.
+	 */
+	public void onBackButton() {
+		WindowLoader wl = new WindowLoader(backButton);
+		wl.load("GameSetup");
+	}
 }
-
