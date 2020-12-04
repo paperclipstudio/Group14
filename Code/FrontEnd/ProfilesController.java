@@ -56,9 +56,9 @@ public class ProfilesController extends StateLoad {
 
 	/**
 	 * try to create a user file with name typed, create one in UserData if there is not a file with
-	 * initialized data and send alert if there is one.
+	 * initialized data and turn text field to red if there is one.
 	 *
-	 * @throws IOException Wrong input
+	 * @throws IOException when FileWriter failed to write the file.
 	 */
 	public void createFile() throws IOException {
 		String newName = input.getText();
@@ -74,19 +74,20 @@ public class ProfilesController extends StateLoad {
 		}
 	}
 
-	/**
-	 * delete the file with name entered and send alert when there is no file with same name.
-	 */
-	public void deleteFile() {
-		String newName = playerList.getSelectionModel().getSelectedItem();
-		File user = new File("SaveData\\UserData\\" + newName + ".txt");
-		if (user.delete()) {
-			input.setStyle("-fx-background-color: white");
-			playerList.getItems().remove(newName);
-		} else {
-			input.setStyle("-fx-background-color: white");
-		}
-	}
+    /**
+     * Delete the file choose in view list, turn the text field back to white if it is not.
+     */
+    public void deleteFile() {
+        String newName = playerList.getSelectionModel().getSelectedItem();
+        File user = new File("SaveData\\UserData\\" + newName + ".txt");
+        if (user.delete()) {
+            input.setStyle("-fx-border-color: default");
+            playerList.getItems().remove(newName);
+
+        } else {
+            input.setStyle("-fx-border-color: default");
+        }
+    }
 
     /**
      * View the data saved in the file with same name as choose in the view list, no response when there is no such a file.
@@ -94,6 +95,7 @@ public class ProfilesController extends StateLoad {
     public void viewData() {
         String playerPicked = playerList.getSelectionModel().getSelectedItem();
         String line;
+        input.setStyle("-fx-border-color: default");
         try {
             BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + playerPicked + ".txt"));
             int getWin = 0;

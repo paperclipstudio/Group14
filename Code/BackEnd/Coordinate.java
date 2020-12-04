@@ -7,6 +7,7 @@ package BackEnd;
  */
 
 public class Coordinate {
+
     /*
      * These are variables to represent the x and y coordinate pairs.
      */
@@ -18,7 +19,7 @@ public class Coordinate {
      * @param xCoor the X coordinate
      * @param yCoor the Y coordinate
      */
-    public Coordinate(int xCoor, int yCoor){
+    public Coordinate(int xCoor, int yCoor) {
         x = xCoor;
         y = yCoor;
     }
@@ -35,7 +36,7 @@ public class Coordinate {
      * This method sets the x Coordinate.
      * @param xCoor This parameter would be set as the x Coordinate.
      */
-    public void setX(int xCoor){
+    public void setX(int xCoor) {
         this.x = xCoor;
     }
 
@@ -51,8 +52,8 @@ public class Coordinate {
      * This method sets the y Coordinate.
      * @param yCoor This parameter would be set as the y Coordinate.
      */
-    public void setY(int yCoor){
-        y = yCoor;
+    public void setY(int yCoor) {
+        this.y = yCoor;
     }
 
     /**
@@ -60,7 +61,7 @@ public class Coordinate {
      * @param x This parameter would be set as the x Coordinate.
      * @param y This parameter would be set as the y Coordinate.
      */
-    public void setCoordinate(int x, int y){
+    public void setCoordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }

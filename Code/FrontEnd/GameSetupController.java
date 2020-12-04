@@ -11,9 +11,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
- * Use to control the GameSetup scene.
- *
- * @author Chrisitan Sanger
+ * This class is used to control the GameSetup scene.
+ * @author Christian Sanger.
+ * @version 1.0
  */
 
 public class GameSetupController extends StateLoad {
@@ -29,6 +29,12 @@ public class GameSetupController extends StateLoad {
 	@FXML
 	private ToggleGroup playerCount;
 
+	/**
+	 * Populates the choice box with the available gameboards when the page is initialized.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String[] gameBoards;
 		File gameBoardLocation = new File("Gameboards"); // TODO move to folder //saveData//
@@ -50,7 +56,7 @@ public class GameSetupController extends StateLoad {
 	}
 
 	/***
-	 * This copys the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
+	 * This copies the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);

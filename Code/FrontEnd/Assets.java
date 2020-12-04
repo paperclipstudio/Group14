@@ -18,10 +18,11 @@ import java.util.Objects;
 import static BackEnd.TileType.*;
 
 /**
- * Used to cache assets and control reading image files.
+ * This class is used to cache assets and control reading image files.
  * improves loading times as images are loaded only when they
  * are first needed.
  * @author Christian Sanger
+ * @version 1.0
  */
 public class Assets {
 	private static final String EXT = ".png";
@@ -29,8 +30,6 @@ public class Assets {
 	private static final int FLOOR_HEIGHT = 0;
 	private static final int PLAYER_HEIGHT = 20;
 	private static final int EFFECTS_HEIGHT = 40;
-
-
 	/**
 	 * Gets a Image with the matching name.
 	 * @param name name of image needed.
@@ -44,13 +43,12 @@ public class Assets {
 		}
 		return image;
 	}
-
 	/**
 	 * Creates an ImageView of this tile.
-	 * @param tile to create ImageView of
-	 * @param x the X coordinate of this tile
-	 * @param y the Y coordinate of this tile
-	 * @return view of that tile.
+	 * @param tile to create ImageView of.
+	 * @param x the X coordinate of this tile.
+	 * @param y the Y coordinate of this tile.
+	 * @return The view of that tile.
 	 */
 	public static Pane getFloorTileImage(FloorTile tile, int x, int y) {
 		Pane tileView = new Pane();
@@ -77,7 +75,7 @@ public class Assets {
 			lockImage.setFitWidth(GameScreenController.tileWidth);
 			lockImage.setFitHeight(GameScreenController.tileWidth);
 			tileView.getChildren().add(lockImage);
-		};
+		}
 
 		switch (tile.getRotation()) {
 			case UP:
@@ -93,6 +91,7 @@ public class Assets {
 				tileView.setRotate(270);
 				break;
 		}
+
 		if (tile.getType() == TileType.GOAL) {
 			tileView.setRotate(0);
 		}
@@ -118,7 +117,8 @@ public class Assets {
 		return getFloorTileImage(tile, 0,0);
 	}
 	/**
-	 * @return Image view of arrow.
+	 * Creates an imageView of an arrow.
+	 * @return the imageView of the arrow.
 	 */
 	public static ImageView makeArrow() {
 		ImageView arrow = new ImageView(get("slide_arrow"));
@@ -129,18 +129,16 @@ public class Assets {
 		arrow.setOnMouseExited(e  -> arrow.setEffect(new Bloom(999)));
 		return arrow;
 	}
-
 	/**
-	 * Creates a Card which the user is holding
-	 * @param tile the tile that should be on the card
-	 * @return Card.fxml Object
+	 * Creates the Card which the user is holding.
+	 * @param tile The tile that should be on the card.
+	 * @return Card.fxml Object.
 	 */
 	public static Node createCard(Tile tile) throws IOException {
 		final Node newCard;
 		if (tile == null) {
 			throw new NullPointerException("Cannot create null tile");
 		}
-
 		HashMap<TileType, String> labels = new HashMap<>();
 		labels.put(FIRE, "Police Lookout");
 		labels.put(FROZEN, "Police Block");
@@ -164,9 +162,9 @@ public class Assets {
 	}
 
 	/**
-	 * Get a imageView of that player
-	 * @param playerNumber which player is needed
-	 * @return
+	 * Get an imageView of that player.
+	 * @param playerNumber The number of the player whose imageView is required.
+	 * @return the imageView of the specified player.
 	 */
 	public static ImageView getPlayer(int playerNumber) {
 		Image playerModel = get("player" + (playerNumber+1));
@@ -176,7 +174,10 @@ public class Assets {
 		player.setId("player " + playerNumber);
 		return player;
 	}
-
+	/**
+	 * Get an imageView of a location arrow, that matches the size of the tiles.
+	 * @return the imageView of the location arrow.
+	 */
 	public static ImageView getLocationArrow() {
 		Image arrow = get("location_arrow");
 		ImageView locationArrow = new ImageView(arrow);
@@ -185,7 +186,10 @@ public class Assets {
 		locationArrow.setId("locationarrow");
 		return locationArrow;
 	}
-
+	/**
+	 * Get an imageView of a fire effect, that matches the size of a square of 3 by 3 tiles.
+	 * @return the imageView of the fire effect.
+	 */
 	public static Node getFireEffect() {
 		Image fire = get("fireEffect");
 		ImageView fireEffect = new ImageView(fire);
@@ -193,7 +197,10 @@ public class Assets {
 		fireEffect.setFitHeight(GameScreenController.tileWidth * 3);
 		return fireEffect;
 	}
-
+	/**
+	 * Get an imageView of a freeze effect, that matches the size of a square of 3 by 3 tiles.
+	 * @return the imageView of the freeze effect.
+	 */
 	public static Node getFrozenEffect() {
 		Image frozen = get("frozenEffect");
 		ImageView frozenEffect = new ImageView(frozen);
@@ -202,6 +209,11 @@ public class Assets {
 		return frozenEffect;
 	}
 
+	/**
+	 * Get an imageView of a player's profile.
+	 * @param profile of the player whose profile is required.
+	 * @return The specified player's profile.
+	 */
 	public static Node getProfile(Profile profile) {
 		ImageView profileView = new ImageView(get(profile.getIcon()));
 		profileView.setFitWidth(100);

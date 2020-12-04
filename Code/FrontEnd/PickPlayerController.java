@@ -16,9 +16,10 @@ import javafx.scene.image.Image;
 
 
 /**
- * After game setup, show numbers of choiceBox to let players select player profile for different player, set these files
- * to a array list for game board to use and run the game board.
- * @author zhan zhang
+ * After game setup, show numbers of choiceBox to let players select a player profile for different players, set these files
+ * to an ArrayList for gameBoard to use and run.
+ * @author Zhan Zhang
+ * @version 1.0
  */
 public class PickPlayerController extends StateLoad {
 
@@ -46,7 +47,7 @@ public class PickPlayerController extends StateLoad {
 	ChoiceBox<String>[] playerLists;
 
 	/**
-	 * show numbers of choice box, load player saved in the SaveData folder to each box and try to get the selection
+	 * This method shows numbers of the choice box, load player saved in the SaveData folder to each box and try to get the selection
 	 * when this page is running.
 	 */
 	public void initialize(URL url, ResourceBundle rb) {
@@ -85,7 +86,8 @@ public class PickPlayerController extends StateLoad {
 
 
 	/**
-	 * add the chosen player's file to the arraylist and go to the game screen.
+	 * Identifies the player chosen has the right number and style. Then uses readProfile to turn these files to profiles and
+	 * send them to the gameboard profile class. Then run the gameboard class.
 	 */
 	public void savePlayersAndStart() {
 		WindowLoader wl = new WindowLoader(backButton);
@@ -123,7 +125,7 @@ public class PickPlayerController extends StateLoad {
 	}
 
 	/**
-	 * return to previous page
+	 * This method if called returns to the previous window.
 	 */
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);

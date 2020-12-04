@@ -630,6 +630,7 @@ public class GameScreenController extends StateLoad {
 				} catch (Exception exception) {
 					exception.printStackTrace();
 				}
+				controls.getChildren().clear();
 				TranslateTransition walk = new TranslateTransition();
 				walk.setToX(coordinate.getX() * tileWidth);
 				walk.setToY(coordinate.getY() * tileWidth);
@@ -646,7 +647,6 @@ public class GameScreenController extends StateLoad {
 				});
 			});
 			controls.getChildren().add(pointer);
-
 		}
 	}
 

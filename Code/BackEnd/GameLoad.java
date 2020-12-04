@@ -1,25 +1,21 @@
 package BackEnd;
 
-import FrontEnd.Main;
-import FrontEnd.PickPlayerController;
 import javafx.util.Pair;
-
-import javax.swing.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.cert.CertPathParameters;
 import java.util.HashMap;
 import java.util.Scanner;
 
 import static BackEnd.TileType.FIRE;
 import static BackEnd.TileType.FROZEN;
 
+/**
+ * Class used to load games from file
+ */
 public class GameLoad {
-
 	/**
-	 * @param fileName
-	 * @return
+	 * @param initData information about the gameState
+	 * @return pair where key is gameLogic for new game and value is all profiles
 	 * @throws IOException
 	 */
 	public static Pair<GameLogic, Profile[]> loader(HashMap<String, String> initData) throws Exception {
