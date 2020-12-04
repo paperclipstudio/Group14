@@ -13,9 +13,8 @@ import javafx.scene.image.Image;
 
 
 /**
- * When game start, show numbers of choiceBox to let players select player profile for different player, set these files
- * to a array list for game board to use.
- *
+ * After game setup, show numbers of choiceBox to let players select player profile for different player, set these files
+ * to a array list for game board to use and run the game board.
  * @author zhan zhang
  */
 public class PickPlayerController {
@@ -31,7 +30,12 @@ public class PickPlayerController {
 
 	@FXML
 	public ChoiceBox<String> playerList4;
+
+	@FXML
 	public Label label;
+
+	@FXML
+	public Label hint;
 
 	@FXML
 	private Button backButton;
@@ -39,7 +43,8 @@ public class PickPlayerController {
 	ArrayList<Profile> profiles = new ArrayList<>();
 
 	/**
-	 * show player select scene
+	 * show numbers of choice box, load player saved in the SaveData folder to each box and try to get the selection
+	 * when this page is running.
 	 */
 	public void initialize() {
 
@@ -61,7 +66,6 @@ public class PickPlayerController {
 
 		}
 
-		assert players != null;
 		for (String player : players) {
 			String playerName = player.substring(0, player.length() - 4);
 			playerList1.setVisible(true);
@@ -78,16 +82,13 @@ public class PickPlayerController {
 	}
 
 	/**
-	 * @param profileFile read files from UserData and turns them into profiles
-	 * @return get the profile output
-	 * @throws IOException Wrong input
+	 * @param profileFile read files with name chose from UserData folder and turns them into profiles.
+	 * @return get the profile output.
+	 * @throws IOException when FileReader get wrong input.
 	 */
 	public Profile readProfile(File profileFile) throws IOException {
-
 		String name = profileFile.getName();
-
 		String playerIcon = null;
-
 		String line;
 		int wins = 0;
 		int losses = 0;
@@ -100,15 +101,14 @@ public class PickPlayerController {
 				losses = Integer.parseInt(parts[1]);
 			}
 		}
-
-
 		return new Profile(name, playerIcon, wins, losses);
 
 	}
 
 
 	/**
-	 * add the chosen player's file to the arraylist and go to the game screen.
+	 * identify the player chose is right in number and style. Then use readProfile to turn these files to profiles and
+	 * send them to game board profile class. Then run the game board class.
 	 */
 	public void savePlayersAndStart() {
 		WindowLoader wl = new WindowLoader(backButton);
@@ -128,11 +128,7 @@ public class PickPlayerController {
 					wl.load("GameScreen");
 
 				} else {
-					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setTitle("ERROR");
-					alert.setContentText("You can not select same players more than once.");
-					alert.setHeaderText(null);
-					alert.showAndWait();
+					hint.setText("You have to select different players in each box.");
 				}
 
 			} else if (Main.getNumberOfPlayers() == 3) {
@@ -151,11 +147,7 @@ public class PickPlayerController {
 					wl.load("GameScreen");
 
 				} else {
-					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setTitle("ERROR");
-					alert.setContentText("You can not select same players more than once.");
-					alert.setHeaderText(null);
-					alert.showAndWait();
+					hint.setText("You have to select different players in each box.");
 				}
 
 			} else if (Main.getNumberOfPlayers() == 4) {
@@ -180,11 +172,7 @@ public class PickPlayerController {
 					wl.load("GameScreen");
 
 				} else {
-					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setTitle("ERROR");
-					alert.setContentText("You can not select same players more than once.");
-					alert.setHeaderText(null);
-					alert.showAndWait();
+					hint.setText("You have to select different players in each box.");
 				}
 			}
 
