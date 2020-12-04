@@ -122,23 +122,16 @@ public class Main extends Application {
             resolution = DEFAULT_RESOLUTION;
         }
 
-        Leaderboard test1 = new Leaderboard("example1");
-        test1.update("George", 100, 0);
-        test1.update("Daniel", 90, 10);
-        test1.update("Mathew", 50, 50);
-        test1.saveFile();
-
-
         Main.setVolume(soundLevel);
         Main.setFullScreen(fullscreen);
         Main.setResolution(RESOLUTION.values()[resolution]);
         primaryStage.setWidth(SettingsController.getWidth(RESOLUTION.values()[resolution]));
         primaryStage.setHeight(SettingsController.getHeight(RESOLUTION.values()[resolution]));
-        primaryStage.setFullScreen(fullScreen);
+        primaryStage.setFullScreen(false    );
         primaryStage.setTitle("Covid Game?");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.DECORATED);
         String musicFile = "Assets\\music.mp3";     // For example
 
         Media sound = new Media(new File(musicFile).toURI().toString());

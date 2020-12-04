@@ -1,0 +1,17 @@
+actionsonly.txt
+2
+92076843
+-669880771
+draw
+action null  0
+move 1 5
+draw
+action null  0
+move 5 3
+draw
+action null  0
+move 1 7
+draw
+action null  0
+move 5 5
+draw

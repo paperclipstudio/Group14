@@ -54,20 +54,6 @@ public class FileReader {
             players[i] = new Player(i, silkBag, gameboard);
         }
 
-        //// Fixed tiles
-        currentLine = new Scanner(in.nextLine());
-        int numberOfFixedTiles = currentLine.nextInt();
-        for (int i= 0; i < numberOfFixedTiles; i++) {
-           currentLine = new Scanner(in.nextLine());
-           TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
-           int x = currentLine.nextInt();
-           int y = currentLine.nextInt();
-           int rotationInt = currentLine.nextInt();
-           Rotation rotation = Rotation.values()[rotationInt];
-           FloorTile tile = new FloorTile(tileType, rotation);
-           gameboard.placeFixedTile(tile, x, y);
-        }
-
         //// Filling SilkBag
         int[] tileTypeCount = new int[NUM_OF_TILE_TYPES];
         // Reading how many of each tile
@@ -85,24 +71,47 @@ public class FileReader {
                 silkBag.insertTile(newTile);
             }
         }
+
         //// Fill with random tiles
         Random r = new Random(silkBagSeed);
         ArrayList<Coordinate> slideLocations = gameboard.getSlideLocations();
         int count = 0;
-        while (count != slideLocations.size()) {
-            FloorTile tile = silkBag.getFloorTile();
-            tile.setRotation(Rotation.values()[r.nextInt(4)]);
+
+        while (gameboard.isBoardNotFull()) {
+            count++;
             Coordinate toSlide = null;
             if (slideLocations.size() == 0) {
                 throw new Exception("No slide locations");
             }
-            toSlide = slideLocations.get(count);
-            if (toSlide == null) {
-                throw new Exception("Null Slide location");
+
+            for(int i = 0; i < slideLocations.size(); i++){
+                FloorTile tile = silkBag.getFloorTile();
+                tile.setRotation(Rotation.values()[r.nextInt(4)]);
+                toSlide = slideLocations.get(r.nextInt(slideLocations.size()));
+                if (toSlide == null) {
+                    throw new Exception("Null Slide location");
+                }
+                gameboard.playFloorTile(toSlide, tile);
             }
             gameboard.playFloorTile(toSlide, tile);
             count++;
         }
+        //// Fixed tiles
+        currentLine = new Scanner(in.nextLine());
+        int numberOfFixedTiles = currentLine.nextInt();
+        for (int i= 0; i < numberOfFixedTiles; i++) {
+           currentLine = new Scanner(in.nextLine());
+           TileType tileType = TileType.valueOf(currentLine.next().toUpperCase());
+           int x = currentLine.nextInt();
+           int y = currentLine.nextInt();
+           Coordinate location = new Coordinate(x, y);
+           int rotationInt = currentLine.nextInt();
+           Rotation rotation = Rotation.values()[rotationInt];
+           FloorTile tile = new FloorTile(tileType, rotation);
+           gameboard.placeFixedTile(tile, location);
+        }
+
+
 
         return new Pair<>(gameboard, players);
     }

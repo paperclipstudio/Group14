@@ -14,18 +14,17 @@ public class FloorTile extends Tile {
 	 * These attributes hold information about the floor tile. Information such as if the tile is on fire in the form
 	 * of a boolean and information such as TileType which is in the form of an enum.
 	 */
-	private boolean	isFixed;
 	TileType type;
 	Rotation rotation;
-	private boolean isOnFire;
-	private boolean isFrozen;
+	private Coordinate location;
 
 	/*
 	 * These static attributes, will be used for the action tiles freeze and fire and tick down after every players
 	 * turn.
 	 */
-	private static int ticFire;
-	private static int ticFrozen;
+	private int ticFire;
+	private int ticFrozen;
+	private boolean isFixed;
 
 	/**
 	 * This constructor of FloorTile initiates all the attributes apart from the static attributes, takes in a
@@ -35,9 +34,12 @@ public class FloorTile extends Tile {
 	public FloorTile (TileType type) {
 		this.type = type;
 		this.rotation = Rotation.UP;
-		this.isOnFire = false;
-		this.isFrozen = false;
+		this.location = null;
+		this.ticFrozen = 0;
+		this.ticFire = 0;
+
 	}
+
 
 	/**
 	 * This constructor of FloorTile initiates all attributes apart from the static ones. Takes in a TileType and
@@ -48,8 +50,25 @@ public class FloorTile extends Tile {
 	public FloorTile (TileType type, Rotation rotation) {
 		this.rotation = rotation;
 		this.type = type;
-		this.isOnFire = false;
-		this.isFrozen = false;
+	}
+
+	/**
+	 * @param location setTheCurrentLocationOfTile;
+	 */
+	public void setLocation(Coordinate location) {
+		this.location = location;
+	}
+
+	/**
+	 * @return The current location of this tile.
+	 */
+	public Coordinate getLocation() {
+		return this.location;
+	}
+
+	public void notOnBoard() {
+		location = null;
+		clearTic();
 	}
 
 	/**
@@ -73,7 +92,8 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is on fire, else false otherwise.
 	 */
 	public Boolean onFire () {
-		return this.isOnFire;
+		System.out.println("tile has fire of" + ticFire);
+		return ticFire != 0;
 	}
 
 	/**
@@ -81,7 +101,7 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is frozen, else false otherwise.
 	 */
 	public Boolean isFrozen () {
-		return this.isFrozen;
+		return ticFrozen != 0;
 	}
 
 	/**
@@ -99,9 +119,13 @@ public class FloorTile extends Tile {
 	 * @param numOfPlayers This lets us know how many ticks are in one cycle. Each player is one tick.
 	 */
 	public void setFireTic (int numOfPlayers) {
-		this.isOnFire = true;
 		ticFire = numOfPlayers * 2; //Fire tiles last for 2 cycles.
 		System.out.println("Fire Tiles: " + numOfPlayers * 2);
+	}
+
+	private void clearTic() {
+		ticFire = 0;
+		ticFrozen = 0;
 	}
 
 	/**
@@ -109,9 +133,6 @@ public class FloorTile extends Tile {
 	 */
 	public void ticFire () {
 		ticFire --;
-		if (ticFire == 0){
-			isOnFire = false;
-		}
 	}
 
 	/**
@@ -121,9 +142,7 @@ public class FloorTile extends Tile {
 	 * @param numOfPlayers This lets us know how many ticks are in one cycle. Each player is one tick.
 	 */
 	public void setFrozenTic (int numOfPlayers) {
-		this.isFrozen = true;
 		ticFrozen = numOfPlayers; //Frozen tiles last for 1 cycle.
-		System.out.println("Frozen Tiles: " + numOfPlayers);
 	}
 
 	/**
@@ -131,9 +150,6 @@ public class FloorTile extends Tile {
 	 */
 	public void ticFrozen () {
 		ticFrozen --;
-		if (ticFrozen == 0){
-			isFrozen = false;
-		}
 	}
 	/**
 	 * This method checks whether a given floorTile is fixed or not, it returns true if it is, and false if it isn't.

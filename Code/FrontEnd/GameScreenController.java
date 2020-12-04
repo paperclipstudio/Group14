@@ -5,7 +5,6 @@ import BackEnd.FloorTile;
 import BackEnd.GameLogic;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +18,6 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -130,9 +128,13 @@ public class GameScreenController implements Initializable {
 		profile.getChildren().add(Assets.getProfile(gameLogic.getPlayersTurn()));
 
 		//tiles.setRotate(tiles.getRotate() + 10);
-		updateBoard();
+		try {
+			updateBoard();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 		phase = gameLogic.getGamePhase();
-		//phase = Phase.FLOOR;
 		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug");
 		hideAllControls();
 		switch (phase) {
@@ -144,6 +146,8 @@ public class GameScreenController implements Initializable {
 					setupFloorPhase();
 				} catch (IOException e) {
 					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				break;
 			case ACTION:
@@ -151,29 +155,40 @@ public class GameScreenController implements Initializable {
 					setupActionPhase();
 				} catch (IOException e) {
 					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				break;
 			case MOVE:
-				setupMovePhase();
+				try {
+					setupMovePhase();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case WIN:
 				try {
 					setupWinScreen();
 				} catch (IOException e) {
 					phaseText.setText(e.getMessage());
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 		}
 	}
 
-	private void setupWinScreen() throws IOException {
+	private void setupWinScreen() throws Exception {
 		WindowLoader wl = new WindowLoader(drawButton);
 		Main.setWinner(gameLogic.getWinner());
 		wl.load("WinScreen");
 		phaseText.setText("Game has been won");
 	}
 
-	private void setupFloorPhase() throws IOException {
+	private void setupFloorPhase() throws Exception {
 		ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
+		if (locations.size() == 0) {
+			throw new Exception("No slide locations");
+		}
 		for (Coordinate coordinate : locations) {
 			ImageView arrow = Assets.makeArrow();
 			final Rotation direction;
@@ -367,7 +382,7 @@ public class GameScreenController implements Initializable {
 		});
 	}
 
-	private void updateBoard() {
+	private void updateBoard() throws Exception {
 		tiles.setPrefWidth((width + 4) * tileWidth);
 		tiles.setPrefHeight((height + 4) * tileWidth);
 		controls.setPrefWidth((width + 4) * tileWidth);
@@ -395,14 +410,6 @@ public class GameScreenController implements Initializable {
 				tiles.getChildren().add(tileView);
 
 			}
-
-		}
-
-		// Adding fixed tiles overLay
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-			}
-
 
 		}
 		// showing the player locations
@@ -449,27 +456,35 @@ public class GameScreenController implements Initializable {
 		controls.getChildren().clear();
 	}
 
-	private void setupActionPhase() throws IOException {
+	private void setupActionPhase() throws Exception {
 		cards.getChildren().clear();
 		ActionTile[] tiles = gameLogic.getActionCards();
 		// Add a skip button
 		Button skip = new Button();
 		skip.setText("skip");
 		cards.getChildren().add(skip);
-		skip.setOnMouseClicked((e) -> {
-					gameLogic.action(null, null, 0);
-					mainLoop();
+		skip.setOnMouseClicked(e1 -> {
+					try {
+						skipActionOnCLick(e1);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 		);
-		Node drawnCard = Assets.createCard(gameLogic.drawnCard());
-		ColorAdjust dim = new ColorAdjust();
-		dim.setBrightness(0.6);
-		dim.setSaturation(0.5);
-		drawnCard.setEffect(dim);
-		drawnCard.setOnMouseClicked((e) -> {});
-		drawnCard.setOnMouseEntered((e) -> {});
-		drawnCard.setOnMouseExited((e) -> {});
-		cards.getChildren().add(drawnCard);
+		if (gameLogic.drawnCard() != null) {
+			Node drawnCard = Assets.createCard(gameLogic.drawnCard());
+			ColorAdjust dim = new ColorAdjust();
+			dim.setBrightness(0.6);
+			dim.setSaturation(0.5);
+			drawnCard.setEffect(dim);
+			drawnCard.setOnMouseClicked((e) -> {
+			});
+			drawnCard.setOnMouseEntered((e) -> {
+			});
+			drawnCard.setOnMouseExited((e) -> {
+			});
+			cards.getChildren().add(drawnCard);
+		}
 
 
 
@@ -482,14 +497,12 @@ public class GameScreenController implements Initializable {
 				case DOUBLE_MOVE:
 					vCard.setOnMouseClicked((e) -> {
 						vCard.setEffect(new Bloom(0.03));
-						vCard.setOnMouseClicked((e2) -> {
-							gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
-							for (Node player : players.getChildren()) {
-								player.setEffect(new Bloom(999));
-								player.setOnMouseClicked(e3 -> {
-								});
+						vCard.setOnMouseClicked(e2 -> {
+							try {
+								doubleMoveActoon(e2);
+							} catch (Exception exception) {
+								exception.printStackTrace();
 							}
-							mainLoop();
 						});
 					});
 					break;
@@ -512,8 +525,16 @@ public class GameScreenController implements Initializable {
 								// Set them into an active button
 								fakePlayer.setOnMouseClicked(e2 -> {
 									hideAllControls();
-									gameLogic.action(new ActionTile(BACKTRACK), null, playerNumber);
-									updateBoard();
+									try {
+										gameLogic.action(new ActionTile(BACKTRACK), null, playerNumber);
+									} catch (Exception exception) {
+										exception.printStackTrace();
+									}
+									try {
+										updateBoard();
+									} catch (Exception exception) {
+										exception.printStackTrace();
+									}
 									mainLoop();
 								});
 							}
@@ -577,12 +598,16 @@ public class GameScreenController implements Initializable {
 		card.setTranslateX((getX - 1) * tileWidth);
 		card.setTranslateY((getY - 1) * tileWidth);
 		card.setOnMouseClicked((e3) -> {
-			gameLogic.action(new ActionTile(tileType), new Coordinate(x, y), -1);
+			try {
+				gameLogic.action(new ActionTile(tileType), new Coordinate(x, y), -1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			mainLoop();
 		});
 	}
 
-	private void setupMovePhase() {
+	private void setupMovePhase() throws Exception {
 		Coordinate[] validLocations = gameLogic.getMoveLocations();
 		if (validLocations.length == 0) {
 			// No where to move;
@@ -597,7 +622,11 @@ public class GameScreenController implements Initializable {
 			pointer.setTranslateY(coordinate.getY() * tileWidth);
 			pointer.setOnMouseClicked(e -> {
 				Node currentPlayer = players.getChildren().get(gameLogic.getPlayersTurn());
-				gameLogic.move(coordinate);
+				try {
+					gameLogic.move(coordinate);
+				} catch (Exception exception) {
+					exception.printStackTrace();
+				}
 				TranslateTransition walk = new TranslateTransition();
 				walk.setToX(coordinate.getX() * tileWidth);
 				walk.setToY(coordinate.getY() * tileWidth);
@@ -747,5 +776,20 @@ public class GameScreenController implements Initializable {
 				return n.getId().contains(id);
 			}
 		});
+	}
+
+	private void skipActionOnCLick(MouseEvent e) throws Exception {
+		gameLogic.action(null, null, 0);
+		mainLoop();
+	}
+
+	private void doubleMoveActoon(MouseEvent e2) throws Exception {
+		gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
+		for (Node player : players.getChildren()) {
+			player.setEffect(new Bloom(999));
+			player.setOnMouseClicked(e3 -> {
+			});
+		}
+		mainLoop();
 	}
 }

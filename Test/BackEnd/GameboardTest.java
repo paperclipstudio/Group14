@@ -242,7 +242,7 @@ class GameboardTest {
 
 
 	@Test
-	void playFloorTile() {
+	void playFloorTile() throws Exception {
 		ArrayList<Coordinate> locations = gb.getSlideLocations();
 
         // Testing inserting from the left.
@@ -288,7 +288,7 @@ class GameboardTest {
 	}
 
 	@Test
-	void placeFixedTile() {
+	void placeFixedTile() throws Exception {
 		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 1, 2);
 		assertEquals(CORNER, gb.tileAt(new Coordinate(1, 2)).getType());
 		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 2, 2);
@@ -320,7 +320,7 @@ class GameboardTest {
 	}
 
 	@Test
-	void getMoveDirections() {
+	void getMoveDirections() throws Exception {
 		gb.getMoveDirections(0);
 		gb.getMoveDirections(1);
 		gb.getMoveDirections(2);
@@ -329,7 +329,7 @@ class GameboardTest {
 	}
 
 	@Test
-	void getSlideLocations() {
+	void getSlideLocations() throws Exception {
 		/*
 		//gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 0, 0);
 		//gb.getSlideLocations();
@@ -394,7 +394,7 @@ class GameboardTest {
 
 
 	@Test
-	void setGoalCoor() {
+	void setGoalCoor() throws Exception {
 		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
 		Coordinate goalPos = new Coordinate(2, 1);
 		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
@@ -402,11 +402,11 @@ class GameboardTest {
 	}
 
 	@Test
-	void isPlayerOnGoal() {
+	void isPlayerOnGoal() throws Exception {
 
 		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
 		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
-		assertEquals(true, gb.isPlayerOnGoal());
+		assertEquals(1, gb.isPlayerOnGoal());
 
 	}
 
