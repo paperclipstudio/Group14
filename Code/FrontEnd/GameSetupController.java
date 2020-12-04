@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import BackEnd.SilkBag;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,9 +12,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
- * Use to control the GameSetup scene.
- *
- * @author Chrisitan Sanger
+ * This class is used to control the GameSetup scene.
+ * @author Christian Sanger.
+ * @version 1.0
  */
 
 public class GameSetupController implements Initializable {
@@ -37,7 +36,9 @@ public class GameSetupController implements Initializable {
 	private String gameSaveName;
 
 	/**
-	 * Populates the choice box with available gameboards when the page is initialized.
+	 * Populates the choice box with the available gameboards when the page is initialized.
+	 * @param location
+	 * @param resources
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -59,7 +60,7 @@ public class GameSetupController implements Initializable {
 	}
 
 	/***
-	 * This copys the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
+	 * This copies the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);

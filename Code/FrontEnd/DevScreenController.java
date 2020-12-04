@@ -8,8 +8,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /***
- * Use to control the devScreen scene.
- * @author Chrisitan Sanger
+ * This class is used to control the devScreen scene.
+ * @author Christian Sanger
  */
 public class DevScreenController implements Initializable {
 
@@ -30,6 +30,5 @@ public class DevScreenController implements Initializable {
 			number++;
 			counterButton.setText(Integer.toString(number));
 		}
-
 	}
 }

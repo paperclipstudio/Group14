@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
 /**
  * After game setup, show numbers of choiceBox to let players select player profile for different player, set these files
  * to a array list for game board to use and run the game board.
- * @author zhan zhang
+ * @author Zhan Zhang
  */
 public class PickPlayerController {
 
@@ -180,6 +180,7 @@ public class PickPlayerController {
 	/**
 	 * return to previous page
 	 */
+
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameSetup");

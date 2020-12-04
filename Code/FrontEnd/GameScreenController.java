@@ -420,7 +420,6 @@ public class GameScreenController implements Initializable {
 	/**
 	 * Clears the game and starts a new one with given starting board
 	 *
-	 * @param board path to board file
 	 * @throws Exception if issue with board file.
 	 */
 	public void startNewGame() throws Exception {
