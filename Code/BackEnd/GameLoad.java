@@ -32,11 +32,14 @@ public class GameLoad {
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		int playerCount = Integer.parseInt(in.nextLine());
 
+		initData.put("PlayerCount", playerCount + "");
+
 		Profile[] profiles = new Profile[playerCount];
 		for (int i = 0; i < playerCount; i++) {
 			Scanner profileLine = new Scanner(in.nextLine());
 			String name = profileLine.next();
 			profiles[i] = Profile.readProfile(name);
+			initData.put("Profile" + i, name);
 		}
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
 		GameSave gameSave = new GameSave(initData);

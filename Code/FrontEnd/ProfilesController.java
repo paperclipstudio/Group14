@@ -8,8 +8,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /***
- * Screen used to create edit and delete profiles.
- * @author zhan zhang
+ * A controller class for profiles.fxml which shows player profiles saved, create new player profiles, delete player profiles
+ * and view player profiles.
+ * Load by actions from MenuScreen and return to MenuScreen with an action.
+ * @author Zhan Zhang
+ * @version 1.0
  */
 public class ProfilesController extends StateLoad {
 	@FXML
@@ -85,54 +88,28 @@ public class ProfilesController extends StateLoad {
 		}
 	}
 
-	/**
-	 * view the data saved in the file with same name as typed, send alert when there is
-	 * no such a file.
-	 *
-	 * @throws FileNotFoundException File is not in the path
-	 */
-//public void viewData() throws FileNotFoundException {
-//String newName = input.getText();
-
-//File user = new File("SaveData\\UserData\\" + newName + ".txt");
-
-//if(user.exists() && !user.isDirectory()){
-
-//Scanner scan = new Scanner(user);
-
-//while (scan.hasNextLine()){
-//Alert alert7 = new Alert(Alert.AlertType.INFORMATION);
-//alert7.setTitle("Player Profile");
-//alert7.setContentText("Player " + newName + " has winning losing record and Icon ID with " + scan.nextLine());
-//alert7.setHeaderText(null);
-//alert7.showAndWait();
-//}
-
-//}else{
-//Alert alert8 = new Alert(Alert.AlertType.INFORMATION);
-//alert8.setTitle("Player Profile");
-//alert8.setContentText("Player information for " + newName +" is not found");
-//alert8.setHeaderText(null);
-//alert8.showAndWait();
-
-//}
-
-//}
-	public void viewData() throws IOException {
-		String playerPicked = playerList.getSelectionModel().getSelectedItem();
-		String line;
-		BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + playerPicked + ".txt"));
-		int getWin = 0;
-		int getLoss = 0;
-		while ((line = reader.readLine()) != null) {
-			String[] parts = line.split(" ", 3);
-			if (parts.length >= 1) {
-				getWin = Integer.parseInt(parts[0]);
-				getLoss = Integer.parseInt(parts[1]);
-			}
-		}
-		reader.close();
-		playerRecord.setText("This player has record with winning " + getWin + " times and losing " + getLoss + " times");
-	}
+    /**
+     * View the data saved in the file with same name as choose in the view list, no response when there is no such a file.
+     */
+    public void viewData() {
+        String playerPicked = playerList.getSelectionModel().getSelectedItem();
+        String line;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + playerPicked + ".txt"));
+            int getWin = 0;
+            int getLoss = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ", 3);
+                if (parts.length >= 1) {
+                    getWin = Integer.parseInt(parts[0]);
+                    getLoss = Integer.parseInt(parts[1]);
+                }
+            }
+            reader.close();
+            playerRecord.setText("This player has " + getWin + " wins and " + getLoss + " losses.");
+        } catch (IOException noPlayerFound) {
+            playerRecord.setText("Please select a player.");
+        }
+    }
 }
 

@@ -16,9 +16,8 @@ import javafx.scene.image.Image;
 
 
 /**
- * When game start, show numbers of choiceBox to let players select player profile for different player, set these files
- * to a array list for game board to use.
- *
+ * After game setup, show numbers of choiceBox to let players select player profile for different player, set these files
+ * to a array list for game board to use and run the game board.
  * @author zhan zhang
  */
 public class PickPlayerController extends StateLoad {
@@ -38,13 +37,17 @@ public class PickPlayerController extends StateLoad {
 	public Label label;
 
 	@FXML
+	public Label hint;
+
+	@FXML
 	private Button backButton;
 
 	ArrayList<Profile> profiles = new ArrayList<>();
 	ChoiceBox<String>[] playerLists;
 
 	/**
-	 * show player select scene
+	 * show numbers of choice box, load player saved in the SaveData folder to each box and try to get the selection
+	 * when this page is running.
 	 */
 	public void initialize(URL url, ResourceBundle rb) {
 		if (getInitData() != null) {
@@ -94,11 +97,7 @@ public class PickPlayerController extends StateLoad {
 
 		if (playerCount == 2) {
 			if (playerList1.getValue().equals(playerList2.getValue())) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("ERROR");
-				alert.setContentText("You can not select same players more than once.");
-				alert.setHeaderText(null);
-				alert.showAndWait();
+				hint.setText("You have to select different players in each box.");
 			}
 
 		} else if (playerCount == 3) {
@@ -106,11 +105,7 @@ public class PickPlayerController extends StateLoad {
 					playerList1.getValue().equals(playerList3.getValue()) ||
 					playerList2.getValue().equals(playerList3.getValue())
 			) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("ERROR");
-				alert.setContentText("You can not select same players more than once.");
-				alert.setHeaderText(null);
-				alert.showAndWait();
+				hint.setText("You have to select different players in each box.");
 			}
 
 		} else if (playerCount == 4) {
@@ -121,11 +116,7 @@ public class PickPlayerController extends StateLoad {
 					playerList2.getValue().equals(playerList4.getValue()) ||
 					playerList3.getValue().equals(playerList4.getValue())
 			) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("ERROR");
-				alert.setContentText("You can not select same players more than once.");
-				alert.setHeaderText(null);
-				alert.showAndWait();
+				hint.setText("You have to select different players in each box.");
 			}
 		}
 		wl.load("GameScreen", getInitData());

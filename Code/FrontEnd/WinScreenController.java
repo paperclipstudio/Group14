@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,8 @@ public class WinScreenController extends StateLoad {
     @FXML
     private Text winner;
 
+    private WindowLoader wl;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         winner.setText("Congratulations Player " + getInitData().get("Winner") + "!");
@@ -27,7 +30,14 @@ public class WinScreenController extends StateLoad {
      * Returns to main menu
      */
     public void onReturnButton() {
-        WindowLoader wl = new WindowLoader(returnButton);
+        wl = new WindowLoader(returnButton);
         wl.load("MenuScreen", getInitData());
+    }
+
+
+
+    public void onPlayAgainButton() {
+        wl = new WindowLoader(returnButton);
+        wl.load("GameSetup", getInitData());
     }
 }

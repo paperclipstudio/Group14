@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.GameLoad;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -64,8 +65,13 @@ public class LoadGameController extends StateLoad {
 	public void onPlayButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		getInitData().put("isLoadedFile", "true");
-		getInitData().put("loadFile", selectGame.getValue());
-		wl.load("GameScreen", getInitData());
+		getInitData().put("LoadFile", selectGame.getValue());
+		try {
+			GameLoad.loader(getInitData());
+			wl.load("GameScreen", getInitData());
+		} catch (Exception e) {
+			confirm.setText("File Corrupted due too: " + e.getMessage());
+		}
 	}
 
 	/**

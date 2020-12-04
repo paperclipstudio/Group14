@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import com.sun.xml.internal.bind.v2.model.core.EnumConstant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 /***
@@ -32,11 +34,13 @@ public class SettingsController extends StateLoad {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		for (String setting : RESOLUTIONS) {
-			resolution.getItems().add(setting);
+		if (getInitData() != null) {
+			for (String setting : RESOLUTIONS) {
+				resolution.getItems().add(setting);
+			}
+			resolution.setValue(String.valueOf(getInitData().get("Resolution")));
+			resolution.getSelectionModel().selectFirst();
 		}
-		resolution.setValue(String.valueOf(getInitData().get("Resolution")));
-		resolution.getSelectionModel().selectFirst();
 	}
 
 	/**
@@ -45,13 +49,15 @@ public class SettingsController extends StateLoad {
 	 */
 	public void updateResolution() {
 		String newResolution = resolution.getValue();
-		getInitData().put("Resolution", resolution + "");
 		if (newResolution.equals(RESOLUTIONS[0])) {
 			WindowLoader.updateResolution(600, 400);
+			getInitData().put("Resolution", "0");
 		} else if (newResolution.equals(RESOLUTIONS[1])) {
 			WindowLoader.updateResolution(900, 600);
+			getInitData().put("Resolution", "1");
 		} else if (newResolution.equals(RESOLUTIONS[2])) {
 			WindowLoader.updateResolution(1200, 800);
+			getInitData().put("Resolution", "2");
 		}
 	}
 
@@ -60,6 +66,7 @@ public class SettingsController extends StateLoad {
 	 */
 	public void onSoundChange() {
 		Main.setVolume(sound.getValue() / 200.0);
+		getInitData().put("Volume", ((int) sound.getValue()) + "");
 
 	}
 
@@ -79,8 +86,8 @@ public class SettingsController extends StateLoad {
 	 */
 	public void onBackButton() throws IOException {
 		String config = "";
-		config += getInitData().get("Volume");
-		config += getInitData().get("Fullscreen");
+		config += getInitData().get("Volume") + " ";
+		config += getInitData().get("Fullscreen") + " ";
 		config += getInitData().get("Resolution");
 		File configFile = new File("SaveData\\config.txt");
 		if (!configFile.createNewFile()) {

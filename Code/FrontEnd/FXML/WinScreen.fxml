@@ -36,7 +36,8 @@
               </RadialGradient>
           </fill>
       </Text>
-      <Button fx:id="returnButton" mnemonicParsing="false" onAction="#onReturnButton" text="Return to Main Menu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Button fx:id="returnButton" mnemonicParsing="false" onAction="#onReturnButton" text="Return to Main Menu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <Button fx:id="playAgainButton" mnemonicParsing="false" onAction="#onPlayAgainButton" text="Play Again" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You Win" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <font>
             <Font name="lazer84" size="31.0" />
