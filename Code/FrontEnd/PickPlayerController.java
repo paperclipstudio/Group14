@@ -14,9 +14,10 @@ import javafx.scene.image.Image;
 
 
 /**
- * After game setup, show numbers of choiceBox to let players select player profile for different player, set these files
- * to a array list for game board to use and run the game board.
+ * After game setup, show numbers of choiceBox to let players select a player profile for different players, set these files
+ * to an ArrayList for gameboard to use and run.
  * @author Zhan Zhang
+ * @version 1.0
  */
 public class PickPlayerController {
 
@@ -44,7 +45,7 @@ public class PickPlayerController {
 	ArrayList<Profile> profiles = new ArrayList<>();
 
 	/**
-	 * show numbers of choice box, load player saved in the SaveData folder to each box and try to get the selection
+	 * This method shows numbers of the choice box, load player saved in the SaveData folder to each box and try to get the selection
 	 * when this page is running.
 	 */
 	public void initialize() {
@@ -61,7 +62,7 @@ public class PickPlayerController {
 			playerList.setVisible(false);
 			playerList.getSelectionModel().selectFirst();
 			assert players != null;
-			for(String player : players){
+			for (String player : players){
 				playerList.getItems().addAll(player.substring(0, player.length() - 4));
 			}
 
@@ -84,7 +85,8 @@ public class PickPlayerController {
 
 
 	/**
-	 * @param profileFile read files with name chose from UserData folder and turns them into profiles.
+	 * This method reads in the user data and converts them into profiles.
+	 * @param profileFile read files with name chose from UserData folder.
 	 * @return get the profile output.
 	 * @throws IOException when FileReader get wrong input.
 	 */
@@ -110,8 +112,8 @@ public class PickPlayerController {
 
 
 	/**
-	 * identify the player chose is right in number and style. Then use readProfile to turn these files to profiles and
-	 * send them to game board profile class. Then run the game board class.
+	 * Identifies the player chosen has the right number and style. Then uses readProfile to turn these files to profiles and
+	 * send them to the gameboard profile class. Then run the gameboard class.
 	 */
 	public void savePlayersAndStart() {
 		WindowLoader wl = new WindowLoader(backButton);
@@ -178,9 +180,8 @@ public class PickPlayerController {
 
 
 	/**
-	 * return to previous page
+	 * This method if called returns to the previous window.
 	 */
-
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameSetup");

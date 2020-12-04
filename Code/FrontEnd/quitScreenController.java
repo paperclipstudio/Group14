@@ -8,8 +8,9 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 /**
- * Use to control the QuitScreen scene.
+ * Used to control the QuitScreen scene.
  * @author David Langmaid
  */
 public class quitScreenController implements Initializable {
@@ -22,14 +23,14 @@ public class quitScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {}
 
     /**
-     * Closes the application
+     * This method closes the application.
      */
     public void onYes() {
         Platform.exit();
     }
 
     /**
-     * Returns you to previous scene
+     * This method returns you to previous scene.
      */
     public void onNo() throws IOException {
         wl = new WindowLoader(noButton);
