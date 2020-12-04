@@ -1,6 +1,7 @@
 package BackEnd;
 
 
+import FrontEnd.Main;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -38,15 +39,15 @@ public class GameLogic {
 	 * @throws Exception if issue with board file.
 	 */
 	public void newGame(String boardFile) throws Exception {
-		gameSaver = new GameSave(seed);
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;
+		numberOfPlayers = 4;
 		Pair<Gameboard, Player[]> gameItems = FileReader.gameSetup(boardFile, seed);
 		gameboard = gameItems.getKey();
 		players = gameItems.getValue();
-		numberOfPlayers = players.length;
 		currentPlayer = players[currentPlayerNo];
+		gameSaver = new GameSave(seed);
 	}
 
 	/**
@@ -125,8 +126,8 @@ public class GameLogic {
 	 * @return the current locations of the players
 	 */
 	public Coordinate[] getPlayerLocations() {
-		Coordinate[] result = new Coordinate[numberOfPlayers];
-		for (int i = 0; i < numberOfPlayers; i++) {
+		Coordinate[] result = new Coordinate[getNumberOfPlayers()];
+		for (int i = 0; i < getNumberOfPlayers(); i++) {
 			result[i] = gameboard.getPlayerPos(i);
 		}
 		return result;
@@ -175,7 +176,7 @@ public class GameLogic {
 			doubleMove = false;
 		} else {
 			phase = DRAW;
-			currentPlayerNo = (currentPlayerNo + 1) % numberOfPlayers;
+			currentPlayerNo = (currentPlayerNo + 1) % getNumberOfPlayers();
 			currentPlayer = players[currentPlayerNo];
 		}
 	}
@@ -218,8 +219,15 @@ public class GameLogic {
 	 * @return number of players
 	 */
 	public int getNumberOfPlayers() {
-		//TODO create working version.
-		return numberOfPlayers;
+		return gameboard.getNumOfPlayers();
+	}
+
+	/**
+	 * Updates the game to how many players are currently playing
+	 * @param numberOfPlayers how many are playing
+	 */
+	public void setNumberOfPlayers(int numberOfPlayers) {
+		gameboard.setNumOfPlayers(numberOfPlayers);
 	}
 
 

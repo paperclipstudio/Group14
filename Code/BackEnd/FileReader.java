@@ -44,6 +44,7 @@ public class FileReader {
 
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];
+        gameboard.setNumOfPlayers(MAX_NUM_OF_PLAYERS);
         for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
             String nextLine = in.nextLine();
             currentLine = new Scanner(nextLine);

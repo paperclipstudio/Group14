@@ -595,7 +595,6 @@ public class Gameboard {
 	}
 
 	public void setNumOfPlayers(int numOfPlayers) {
-		playerLocations = Arrays.copyOf(playerLocations, numOfPlayers);
 		this.numOfPlayers = numOfPlayers;
 	}
 

@@ -81,17 +81,11 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// TODO just for testing
-		Profile[] profiles = new Profile[4];
-		for (int i = 0; i < 4; i++) {
-			profiles[i] = new Profile("player " + i, "icon" + i, 2, 2);
-		}
-		Main.setProfiles(profiles);
 		try {
 			if (Main.isLoadedGameFile()) {
-				loadGame(Main.getLoadFile());
+				loadGame();
 			} else {
-				startNewGame(Main.getBoardFile());
+				startNewGame();
 			}
 			int rotate = 0;
 			tiles.setRotationAxis(new Point3D(10, 0, 10));
@@ -429,19 +423,21 @@ public class GameScreenController implements Initializable {
 	 * @param board path to board file
 	 * @throws Exception if issue with board file.
 	 */
-	public void startNewGame(String board) throws Exception {
-		gameLogic = new GameLogic((new Random()).nextInt());
-		gameLogic.newGame(board);
-		//gameLogic.setPlayerCount(Main.getNumberOfPlayers());
+	public void startNewGame() throws Exception {
+		gameLogic = new GameLogic(Main.getSeed());
+		gameLogic.newGame(Main.getBoardFile());
+		gameLogic.setNumberOfPlayers(Main.getNumberOfPlayers());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
 		mainLoop();
 	}
 
-	private void loadGame(String loadFile) throws Exception {
+	private void loadGame() throws Exception {
 		gameLogic = GameLoad.loader(Main.getLoadFile());
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
+		gameLogic.setNumberOfPlayers(Main.getNumberOfPlayers());
+		Main boop = new Main();
 		gameLogic.emptyGameSaver();
 		mainLoop();
 	}
@@ -499,7 +495,7 @@ public class GameScreenController implements Initializable {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked(e2 -> {
 							try {
-								doubleMoveActoon(e2);
+								doubleMoveAction(e2);
 							} catch (Exception exception) {
 								exception.printStackTrace();
 							}
@@ -768,7 +764,7 @@ public class GameScreenController implements Initializable {
 	}
 
 	private void removeAll(String id) {
-		tiles.getChildren().removeIf(n -> n == null);
+		tiles.getChildren().removeIf(Objects::isNull);
 		tiles.getChildren().removeIf(n -> {
 			if (n.getId() == null) {
 				return false;
@@ -783,7 +779,7 @@ public class GameScreenController implements Initializable {
 		mainLoop();
 	}
 
-	private void doubleMoveActoon(MouseEvent e2) throws Exception {
+	private void doubleMoveAction(MouseEvent e2) throws Exception {
 		gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
 		for (Node player : players.getChildren()) {
 			player.setEffect(new Bloom(999));

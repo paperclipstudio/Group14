@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
 import javax.annotation.Generated;
@@ -35,7 +36,6 @@ public class LoadGameController implements Initializable {
 
 	@FXML
 	private Text confirm;
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
