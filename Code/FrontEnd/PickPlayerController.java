@@ -93,13 +93,14 @@ public class PickPlayerController {
 		int losses = 0;
 		BufferedReader reader = new BufferedReader(new FileReader(profileFile));
 		while ((line = reader.readLine()) != null) {
-			String[] parts = line.split(":", 2);
+			String[] parts = line.split(" ", 3);
 
-			if (parts.length >= 2) {
+			if (parts.length >= 1) {
 				wins = Integer.parseInt(parts[0]);
 				losses = Integer.parseInt(parts[1]);
 			}
 		}
+
 
 		return new Profile(name, playerIcon, wins, losses);
 

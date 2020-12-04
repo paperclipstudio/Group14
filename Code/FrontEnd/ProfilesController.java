@@ -1,10 +1,7 @@
 package FrontEnd;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.*;
 import java.util.Scanner;
@@ -14,6 +11,13 @@ import java.util.Scanner;
  * @author zhan zhang
  */
 public class ProfilesController {
+
+	@FXML
+	public Button viewButton;
+
+	@FXML
+	public Label playerRecord;
+
 	@FXML
 	private Button backButton;
 
@@ -36,21 +40,18 @@ public class ProfilesController {
 		File file = new File("SaveData\\UserData\\");
 		String[] children = file.list();
 
-		if(children == null){
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("New Player");
-			alert.setContentText("There is no player yet! Go and create one.");
-			alert.setHeaderText(null);
-			alert.showAndWait();
 
-		} else {
 			for (String filename : children) {
 
 				playerList.getItems().addAll(filename.substring(0, filename.length() - 4));
+
+
 			}
+
+
 		}
 
-	}
+
 
 	/**
 	 * the action on the button back, back to the menus screen.
@@ -72,19 +73,12 @@ public class ProfilesController {
 
 		if(user.exists() && !user.isDirectory()){
 
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("error");
-			alert.setContentText("Player already exists. Please use another name.");
-			alert.setHeaderText(null);
-			alert.showAndWait();
+			input.setStyle("-fx-background-color: red");
 
 		} else {
 
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Welcome");
-			alert.setContentText("Welcome " + newName + ", have fun!");
-			alert.setHeaderText(null);
-			alert.showAndWait();
+			input.setStyle("-fx-background-color: white");
+
 			playerList.getItems().addAll(newName);
 
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
@@ -99,27 +93,20 @@ public class ProfilesController {
 	 * delete the file with name entered and send alert when there is no file with same name.
 	 */
 	public void deleteFile() {
-		String newName = input.getText();
+		String newName = playerList.getSelectionModel().getSelectedItem();
 
 		File user = new File("SaveData\\UserData\\" + newName + ".txt");
 
 		if(user.delete()){
 
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Delete File");
-			alert.setContentText("File successful delete.");
-			alert.setHeaderText(null);
-			alert.showAndWait();
+			input.setStyle("-fx-background-color: white");
+
 			playerList.getItems().remove(newName);
 
 		}else{
 
 
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("Delete File");
-			alert.setContentText("File can not be found, please try another name.");
-			alert.setHeaderText(null);
-			alert.showAndWait();
+			input.setStyle("-fx-background-color: white");
 
 		}
 
@@ -130,30 +117,59 @@ public class ProfilesController {
 	 * no such a file.
 	 * @throws FileNotFoundException File is not in the path
 	 */
-	public void viewData() throws FileNotFoundException {
-		String newName = input.getText();
-		File user = new File("SaveData\\UserData\\" + newName + ".txt");
+	//public void viewData() throws FileNotFoundException {
+		//String newName = input.getText();
 
-		if(user.exists() && !user.isDirectory()){
+		//File user = new File("SaveData\\UserData\\" + newName + ".txt");
 
-			Scanner scan = new Scanner(user);
+		//if(user.exists() && !user.isDirectory()){
 
-			while (scan.hasNextLine()){
-				Alert alert7 = new Alert(Alert.AlertType.INFORMATION);
-				alert7.setTitle("Player Profile");
-				alert7.setContentText("Player " + newName + " has winning losing record and Icon ID with " + scan.nextLine());
-				alert7.setHeaderText(null);
-				alert7.showAndWait();
+			//Scanner scan = new Scanner(user);
+
+			//while (scan.hasNextLine()){
+				//Alert alert7 = new Alert(Alert.AlertType.INFORMATION);
+				//alert7.setTitle("Player Profile");
+				//alert7.setContentText("Player " + newName + " has winning losing record and Icon ID with " + scan.nextLine());
+				//alert7.setHeaderText(null);
+				//alert7.showAndWait();
+			//}
+
+		//}else{
+			//Alert alert8 = new Alert(Alert.AlertType.INFORMATION);
+			//alert8.setTitle("Player Profile");
+			//alert8.setContentText("Player information for " + newName +" is not found");
+			//alert8.setHeaderText(null);
+			//alert8.showAndWait();
+
+		//}
+
+	//}
+
+	public void viewData() throws IOException{
+
+
+		String playerPicked = playerList.getSelectionModel().getSelectedItem();
+
+
+
+			String line;
+			BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + playerPicked + ".txt"));
+			int getWin = 0;
+			int getLoss = 0;
+			while ((line = reader.readLine()) != null) {
+			String[] parts = line.split(" ", 3);
+			if (parts.length >= 1) {
+				getWin = Integer.parseInt(parts[0]);
+				getLoss = Integer.parseInt(parts[1]);
+
 			}
 
-		}else{
-			Alert alert8 = new Alert(Alert.AlertType.INFORMATION);
-			alert8.setTitle("Player Profile");
-			alert8.setContentText("Player information for " + newName +" is not found");
-			alert8.setHeaderText(null);
-			alert8.showAndWait();
+		}  reader.close();
 
-		}
+		playerRecord.setText("This player has record with winning " + getWin + " times and losing " + getLoss + " times");
+
+
+
 
 	}
 }
