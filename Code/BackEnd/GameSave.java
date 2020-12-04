@@ -3,6 +3,7 @@ package BackEnd;
 import FrontEnd.GameSetupController;
 import FrontEnd.Main;
 import FrontEnd.StateLoad;
+import javafx.util.Pair;
 import jdk.nashorn.internal.runtime.ECMAException;
 
 import java.io.File;
@@ -103,9 +104,6 @@ public class GameSave {
      */
     public void saveToFile() throws IOException {
         FileWriter writer = new FileWriter(gameSaveFile, true);
-        if (!gameSaveFile.createNewFile()) {
-            throw new IOException("Failed to save Game");
-        }
         writer.write(gameSaveString);
         writer.flush();
         writer.close();
