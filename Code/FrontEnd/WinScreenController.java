@@ -16,13 +16,20 @@ public class WinScreenController implements Initializable {
     @FXML
     private Text winner;
 
+    private WindowLoader wl;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         winner.setText("Congratulations Player " + (Main.getWinner() + 1) + "!");
     }
 
     public void onReturnButton() throws IOException {
-        WindowLoader wl = new WindowLoader(returnButton);
+        wl = new WindowLoader(returnButton);
         wl.load("MenuScreen");
+    }
+
+    public void onPlayAgainButton() throws IOException {
+        wl = new WindowLoader(returnButton);
+        wl.load("GameSetup");
     }
 }
