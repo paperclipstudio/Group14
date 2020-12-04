@@ -20,17 +20,17 @@ public class LoadGameController extends StateLoad {
 	@FXML
 	private Button backButton;
 
-	@FXML
-	private ChoiceBox<String> selectGame;
+    @FXML
+    private ChoiceBox<String> selectGame;
 
-	@FXML
-	private Button yesButton;
+    @FXML
+    private Button yesButton;
 
-	@FXML
-	private Button noButton;
+    @FXML
+    private Button noButton;
 
-	@FXML
-	private Text confirm;
+    @FXML
+    private Text confirm;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,7 +47,7 @@ public class LoadGameController extends StateLoad {
 		noButton.setVisible(false);
 		confirm.setText("");
 
-	}
+    }
 
 	/***
 	 * Returns to menu screen

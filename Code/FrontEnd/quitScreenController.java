@@ -19,7 +19,8 @@ public class quitScreenController extends StateLoad{
     private WindowLoader wl;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
     /**
      * This method closes the application.

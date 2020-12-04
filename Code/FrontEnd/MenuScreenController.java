@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 /**
  * Use to control the GameScreen scene.
+ *
  * @author David Langmaid
  */
 public class MenuScreenController extends StateLoad {

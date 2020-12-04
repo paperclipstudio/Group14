@@ -102,7 +102,7 @@ public class GameLogic {
      * Used to tell the game where the user would like to slide
      * a tile in.
      *
-     * @param tile tile to be played
+     * @param tile     tile to be played
      * @param location where the tile should be played.
      * @throws Exception if silkbag is empty
      */

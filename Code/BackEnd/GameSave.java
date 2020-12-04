@@ -1,21 +1,14 @@
 package BackEnd;
 
-import FrontEnd.GameSetupController;
-import FrontEnd.Main;
-import FrontEnd.StateLoad;
-import javafx.util.Pair;
-import jdk.nashorn.internal.runtime.ECMAException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 /**
  * This class records each players decisions.
  * We can then read this file and put it into gameLogic to load the game.
+ *
  * @author David Langmaid
  * @version 1.0
  */
@@ -31,7 +24,7 @@ public class GameSave {
 
     /**
      * Constructs a GameSave that tracks all player choices for saving state of the game
-     * @param seed what seed this game used
+     * @param initData data about the game state to save with
      * @throws IOException if unable to read/save from/to file.
      */
     public GameSave(HashMap<String, String> initData) throws IOException {

@@ -1,13 +1,10 @@
 package BackEnd;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-
-import static BackEnd.TileType.FIRE;
-import static BackEnd.TileType.FROZEN;
 
 /**
  * Stores details about the player while they are in-game, for example their inventory or player number.
+ *
  * @author Brandon Chan
  * @version 1.0
  */
@@ -23,17 +20,18 @@ public class Player {
      */
     private Coordinate location;
     private Tile lastDrawnTile;
-    private ArrayList<ActionTile> inventory;
-    private SilkBag silkBag;
-    private int playerNumber;
-    private boolean backTracked;
-    private Gameboard gameboard;
+    private final ArrayList<ActionTile> inventory;
+    private final SilkBag silkBag;
+    private final int playerNumber;
+    private final boolean backTracked;
+    private final Gameboard gameboard;
 
     /**
      * Create a player and give them the silk bag and gameboard references.
+     *
      * @param playerNumber The player's number, used to distinguish who's turn it is.
-     * @param silkBag Reference to the game's silk bag object.
-     * @param gameboard Reference to the game's gameboard object.
+     * @param silkBag      Reference to the game's silk bag object.
+     * @param gameboard    Reference to the game's gameboard object.
      */
     public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
@@ -46,6 +44,7 @@ public class Player {
 
     /**
      * Method to get the action tiles in the player's inventory.
+     *
      * @return inventory The action tiles in the player's inventory.
      */
     public ArrayList<ActionTile> getInventory() {
@@ -70,8 +69,9 @@ public class Player {
 
     /**
      * Play a floor tile in a given location and rotation.
+     *
      * @param slideLocations Where the player wants to slide a tile in from
-     * @param tile What tile the player wants to play
+     * @param tile           What tile the player wants to play
      */
     public void playFloorTile(Coordinate slideLocations, FloorTile tile) throws Exception {
         gameboard.playFloorTile(slideLocations, tile);
@@ -81,8 +81,9 @@ public class Player {
 
     /**
      * Method for playing a freeze or fire tile
-     * @param location The center of the freeze/fire location null if action doesn't has a location
-     * @param tile The freeze or fire action tile
+     *
+     * @param location     The center of the freeze/fire location null if action doesn't has a location
+     * @param tile         The freeze or fire action tile
      * @param playerNumber the player that this is played on. ignored if action isn't played on a player.
      */
     public void playActionTile(Coordinate location, ActionTile tile, int playerNumber) throws Exception {
@@ -93,6 +94,7 @@ public class Player {
 
     /**
      * Returns the player's last drawn tile
+     *
      * @return lastDrawnTile The player's last drawn tile
      */
     public Tile isHolding() {
@@ -103,6 +105,7 @@ public class Player {
     /**
      * Gets whether the player has had the backtrack action used on them in
      * the history of the current game.
+     *
      * @return backTracked Record of if backtrack action has been used on this player
      */
     public boolean hasBeenBacktracked() {
@@ -111,6 +114,7 @@ public class Player {
 
     /**
      * Takes an action tile out of the inventory
+     *
      * @param tile The Action Tile to be removed
      */
     private void removeFromInventory(ActionTile tile) {

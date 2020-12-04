@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 /**
  * This class is used to control the GameSetup scene.
+ *
  * @author Christian Sanger.
  * @version 1.0
  */
@@ -20,14 +21,14 @@ public class GameSetupController extends StateLoad {
 	@FXML
 	private Button backButton;
 
-	@FXML
-	private TextField saveName;
+    @FXML
+    private TextField saveName;
 
 	@FXML
 	private ChoiceBox<String> selectGameBoard;
 
-	@FXML
-	private ToggleGroup playerCount;
+    @FXML
+    private ToggleGroup playerCount;
 
 	/**
 	 * Populates the choice box with the available gameboards when the page is initialized.

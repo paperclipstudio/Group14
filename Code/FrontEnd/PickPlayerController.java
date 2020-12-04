@@ -10,7 +10,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import BackEnd.Profile;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
@@ -23,22 +25,23 @@ import javafx.scene.image.Image;
  */
 public class PickPlayerController extends StateLoad {
 
-	@FXML
-	public ChoiceBox<String> playerList1;
+    @FXML
+    public ChoiceBox<String> playerList1;
 
-	@FXML
-	public ChoiceBox<String> playerList2;
+    @FXML
+    public ChoiceBox<String> playerList2;
 
-	@FXML
-	public ChoiceBox<String> playerList3;
+    @FXML
+    public ChoiceBox<String> playerList3;
 
 	@FXML
 	public ChoiceBox<String> playerList4;
+
 	@FXML
 	public Label label;
 
-	@FXML
-	public Label hint;
+    @FXML
+    public Label hint;
 
 	@FXML
 	private Button backButton;
@@ -132,4 +135,3 @@ public class PickPlayerController extends StateLoad {
 		wl.load("GameSetup", getInitData());
 	}
 }
-

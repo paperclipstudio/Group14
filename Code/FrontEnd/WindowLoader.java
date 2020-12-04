@@ -10,22 +10,22 @@ import java.io.IOException;
 import java.util.*;
 
 /***
- * Used to load new windows
+ * This class is used to load new windows.
  * @author Christian Sanger
  */
 public class WindowLoader {
-	private static final String fileLocation = "FrontEnd\\FXML\\";
-	// Reference to the primary stage
-	private static Stage w;
-	private static boolean isFullscreen;
+    private static final String fileLocation = "FrontEnd\\FXML\\";
+    // Reference to the primary stage
+    private static Stage w;
+    private static boolean isFullscreen;
 
-	/***
-	 * Creates a window loader that changes the scene shown to the user.
-	 * @param window any Node object on the stage that you wish control.
-	 */
-	public WindowLoader(Node window) {
-		w = (Stage) window.getScene().getWindow();
-	}
+    /***
+     * Creates a window loader that changes the scene shown to the user.
+     * @param window any Node object on the stage that you wish control.
+     */
+    public WindowLoader(Node window) {
+        w = (Stage) window.getScene().getWindow();
+    }
 
 	public WindowLoader(Stage primaryStage) {
 		w = primaryStage;
@@ -41,14 +41,14 @@ public class WindowLoader {
 		w.setFullScreen(isFullscreen);
 	}
 
-	/**
-	 * Returns if the screen is set to be fullscreen
-	 *
-	 * @return true for fullscreen false for not
-	 */
-	public static boolean getIsFullScreen() {
-		return isFullscreen;
-	}
+    /**
+     * Returns if the screen is set to be fullscreen.
+     *
+     * @return true for fullscreen false for not
+     */
+    public static boolean getIsFullScreen() {
+        return isFullscreen;
+    }
 
 	/***
 	 * swaps the scene for the given scene. Window should be the scene file name
@@ -83,15 +83,15 @@ public class WindowLoader {
 		}
 	}
 
-	/**
-	 * Set a new resolution for the window
-	 *
-	 * @param width  the new width the window should be in pixels
-	 * @param height the new height the window should be in pixels
-	 */
-	public static void updateResolution(int width, int height) {
-		w.setWidth(width);
-		w.setHeight(height);
-		w.centerOnScreen();
-	}
+    /**
+     * Set a new resolution for the window.
+     *
+     * @param width  the new width the window should be in pixels.
+     * @param height the new height the window should be in pixels.
+     */
+    public static void updateResolution(int width, int height) {
+        w.setWidth(width);
+        w.setHeight(height);
+        w.centerOnScreen();
+    }
 }

@@ -18,15 +18,7 @@ import java.util.Scanner;
  */
 
 public class Main extends Application {
-    //private static Profile[] profiles;
-    //private static boolean fullScreen;
-	//private static String boardFile;
-    //private static int numberOfPlayers;
-    //private static String saveFile;
-    //private static String loadFile;
-    //private static boolean loadedGameFile = false;
-    //private static int winner;
-    //private static int seed;
+
     private HashMap<String, String> initData;
     private static MediaPlayer mediaPlayer;
     private static final double DEFAULT_SOUND_LEVEL = 0.0;

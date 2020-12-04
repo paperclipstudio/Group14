@@ -13,22 +13,22 @@ import java.util.ResourceBundle;
  */
 public class DevScreenController implements Initializable {
 
-	@FXML
-	private Button counterButton;
+    @FXML
+    private Button counterButton;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Dev Screen created");
-	}
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Dev Screen created");
+    }
 
-	public void incCounter() {
-		String text = counterButton.getText();
-		if (text.equals("Add one to count")) {
-			counterButton.setText("1");
-		} else {
-			int number = Integer.parseInt(text);
-			number++;
-			counterButton.setText(Integer.toString(number));
-		}
-	}
+    public void incCounter() {
+        String text = counterButton.getText();
+        if (text.equals("Add one to count")) {
+            counterButton.setText("1");
+        } else {
+            int number = Integer.parseInt(text);
+            number++;
+            counterButton.setText(Integer.toString(number));
+        }
+    }
 }

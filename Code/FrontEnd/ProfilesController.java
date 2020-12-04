@@ -1,16 +1,19 @@
 package FrontEnd;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /***
- * A controller class for profiles.fxml which shows player profiles saved, create new player profiles, delete player profiles
- * and view player profiles.
- * Load by actions from MenuScreen and return to MenuScreen with an action.
+ * A controller class for profiles.fxml which allows a user to show the player profiles saved, create new player
+ * profiles, delete player profiles and view player profiles.
+ * It is loaded by clicking from it in the MenuScreen and allows the user to return to the MenuScreen with an action.
  * @author Zhan Zhang
  * @version 1.0
  */
@@ -75,7 +78,7 @@ public class ProfilesController extends StateLoad {
 	}
 
     /**
-     * Delete the file choose in view list, turn the text field back to white if it is not.
+     * Deletes the file selected in the list, and turns the text field back to white if it is not.
      */
     public void deleteFile() {
         String newName = playerList.getSelectionModel().getSelectedItem();
@@ -90,7 +93,8 @@ public class ProfilesController extends StateLoad {
     }
 
     /**
-     * View the data saved in the file with same name as choose in the view list, no response when there is no such a file.
+     * View the data saved in the file with same name as selected in the view list, when that file doesn't exist,
+     * print an error message.
      */
     public void viewData() {
         String playerPicked = playerList.getSelectionModel().getSelectedItem();
