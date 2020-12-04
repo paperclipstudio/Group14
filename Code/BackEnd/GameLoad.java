@@ -1,24 +1,27 @@
 package BackEnd;
 
-import FrontEnd.Main;
-import FrontEnd.PickPlayerController;
-
-import javax.swing.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.cert.CertPathParameters;
 import java.util.Scanner;
 
+import FrontEnd.Main;
 import static BackEnd.TileType.FIRE;
 import static BackEnd.TileType.FROZEN;
 
+/**
+ * This class loads a game by reading the save file and running the inputs of the save file
+ * through the gameLogic to re-create the game.
+ * @author David Langmaid & George Sanger
+ * @version 1.0
+ */
 public class GameLoad {
 
 	/**
-	 * @param fileName
-	 * @return
-	 * @throws IOException
+	 * This is the only method in the class, it handles the file reading and loading each player choice
+	 * into the game logic to get it to its loaded state.
+	 * @param fileName - The name of the save file.
+	 * @return The loaded game logic so it can continue to be played.
+	 * @throws IOException if the save file cannot be found.
 	 */
 	public static GameLogic loader(String fileName) throws Exception {
 		File loadFile = new File("SaveData\\GameSave\\" + fileName);
