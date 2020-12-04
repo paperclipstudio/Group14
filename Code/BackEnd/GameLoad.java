@@ -1,6 +1,7 @@
 package BackEnd;
 
 import FrontEnd.Main;
+import FrontEnd.PickPlayerController;
 
 import javax.swing.*;
 import java.io.File;
@@ -21,19 +22,25 @@ public class GameLoad {
 	 */
 	public static GameLogic loader(String fileName) throws Exception {
 		File loadFile = new File("SaveData\\GameSave\\" + fileName);
-		System.out.println("Loading:" + fileName);
 		Scanner in = new Scanner(loadFile);
 		if (!in.hasNextLine()) {
 			throw new IOException("Invalid file format, no game board file");
 		}
 		String gameBoard = in.nextLine();
-		System.out.println("Loading board " + gameBoard);
-		int playerCount = Integer.parseInt(in.nextLine());
 		int silkBagSeed = Integer.parseInt(in.nextLine());
+		int playerCount = Integer.parseInt(in.nextLine());
+
+		Profile[] profiles = new Profile[playerCount];
+		for (int i = 0; i < playerCount; i++) {
+			Scanner profileLine = new Scanner(in.nextLine());
+			String name = profileLine.next();
+			profiles[i] = Profile.readProfile(name);
+		}
+		Main.setProfiles(profiles);
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
+		Main.setNumberOfPlayers(playerCount);
 		gameLogic.newGame(gameBoard);
-
-
+		gameLogic.setNumberOfPlayers(playerCount);
 		while (in.hasNextLine()) {
 			int x;
 			int y;
@@ -41,11 +48,9 @@ public class GameLoad {
 			String choiceType = lineReader.next();
 			switch (choiceType) {
 				case "draw":
-					System.out.println("Draw action");
 					gameLogic.draw();
 					break;
 				case "floor":
-					System.out.println("Floor Action");
 					FloorTile tile = new FloorTile(TileType.valueOf(lineReader.next()));
 					tile.setRotation(Rotation.valueOf(lineReader.next()));
 					x = lineReader.nextInt();
@@ -53,7 +58,6 @@ public class GameLoad {
 					gameLogic.floor(tile, new Coordinate(x, y));
 					break;
 				case "action":
-					System.out.println("Action Card");
 					String type = lineReader.next();
 					if (type.equals("null")) {
 						gameLogic.action(null, null, -1);
@@ -71,7 +75,6 @@ public class GameLoad {
 					}
 					break;
 				case "move":
-					System.out.println("Move Action");
 					x = lineReader.nextInt();
 					y = lineReader.nextInt();
 					gameLogic.move(new Coordinate(x, y));

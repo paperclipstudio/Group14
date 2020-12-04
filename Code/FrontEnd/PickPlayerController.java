@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import BackEnd.Profile;
 import javafx.scene.control.Button;
@@ -81,6 +82,7 @@ public class PickPlayerController {
 		}
 	}
 
+
 	/**
 	 * @param profileFile read files with name chose from UserData folder and turns them into profiles.
 	 * @return get the profile output.
@@ -106,6 +108,7 @@ public class PickPlayerController {
 	}
 
 
+
 	/**
 	 * identify the player chose is right in number and style. Then use readProfile to turn these files to profiles and
 	 * send them to game board profile class. Then run the game board class.
@@ -114,16 +117,13 @@ public class PickPlayerController {
 		WindowLoader wl = new WindowLoader(backButton);
 		try {
 
-			Main.setProfiles(profiles.toArray(new Profile[0]));
 			if (Main.getNumberOfPlayers() == 2) {
 
 				if (!playerList1.getValue().equals(playerList2.getValue())) {
 
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
-
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
+					profiles.add(Profile.readProfile(playerList1.getValue()));
+					profiles.add(Profile.readProfile(playerList2.getValue()));
+					Main.setProfiles(profiles.toArray(new Profile[0]));
 
 					wl.load("GameScreen");
 
@@ -137,13 +137,10 @@ public class PickPlayerController {
 						!playerList1.getValue().equals(playerList3.getValue()) &&
 						!playerList2.getValue().equals(playerList3.getValue())
 				) {
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList3.getValue() + ".txt")));
-
+					profiles.add(Profile.readProfile(playerList1.getValue()));
+					profiles.add(Profile.readProfile(playerList2.getValue()));
+					profiles.add(Profile.readProfile(playerList3.getValue()));
+					Main.setProfiles(profiles.toArray(new Profile[0]));
 					wl.load("GameScreen");
 
 				} else {
@@ -160,14 +157,11 @@ public class PickPlayerController {
 						!playerList3.getValue().equals(playerList4.getValue())
 				) {
 
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList1.getValue() + ".txt")));
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList2.getValue() + ".txt")));
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList3.getValue() + ".txt")));
-					profiles.add(readProfile(
-							new File("SaveData\\UserData\\" + playerList4.getValue() + ".txt")));
+					profiles.add(Profile.readProfile(playerList1.getValue()));
+					profiles.add(Profile.readProfile(playerList2.getValue()));
+					profiles.add(Profile.readProfile(playerList3.getValue()));
+					profiles.add(Profile.readProfile(playerList4.getValue()));
+					Main.setProfiles(profiles.toArray(new Profile[0]));
 
 					wl.load("GameScreen");
 

@@ -2,7 +2,10 @@ package BackEnd;
 
 import javafx.scene.image.Image;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,10 +18,8 @@ public class Profile {
     /*
      * These attributes hold information about the player, such as, wins, losses and maps played.
      */
-    private Player player;
     private int wins;
     private int losses;
-    private int mapsPlayed;
     private String profileName;
     private String profileIcon;
 
@@ -113,4 +114,34 @@ public class Profile {
 	public String getIcon() {
         return this.profileIcon;
 	}
+
+
+    /**
+     * @param profileFile read files from UserData and turns them into profiles
+     * @return get the profile output
+     * @throws IOException Wrong input
+     */
+    public static Profile readProfile(String profileFile) throws IOException {
+
+        String name = profileFile;
+
+        String playerIcon = null;
+
+        String line;
+        int wins = 0;
+        int losses = 0;
+        BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + profileFile + ".txt"));
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(":", 2);
+
+            if (parts.length >= 2) {
+                wins = Integer.parseInt(parts[0]);
+                losses = Integer.parseInt(parts[1]);
+            }
+        }
+
+        playerIcon = "icon2";
+
+        return new Profile(name, playerIcon, wins, losses);
+    }
 }

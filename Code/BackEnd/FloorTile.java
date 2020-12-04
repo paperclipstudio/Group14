@@ -92,7 +92,6 @@ public class FloorTile extends Tile {
 	 * @return true if the tile is on fire, else false otherwise.
 	 */
 	public Boolean onFire () {
-		System.out.println("tile has fire of" + ticFire);
 		return ticFire != 0;
 	}
 
@@ -120,7 +119,6 @@ public class FloorTile extends Tile {
 	 */
 	public void setFireTic (int numOfPlayers) {
 		ticFire = numOfPlayers * 2; //Fire tiles last for 2 cycles.
-		System.out.println("Fire Tiles: " + numOfPlayers * 2);
 	}
 
 	private void clearTic() {

@@ -109,20 +109,6 @@ public class Gameboard {
 		playerLocations[player][0] = position;
 	}
 
-	public void printboard() {
-		for (int y = 0; y < height; y++) {
-			for ( int x = 0; x < width; x++) {
-				FloorTile tileHere = tileAt(new Coordinate(y, x));
-				if (tileHere == null) {
-					System.out.print("X");
-				} else {
-					System.out.print(tileHere.getType().toString().substring(0, 1));
-				}
-			}
-			System.out.print("\n");
-		}
-		System.out.print("--------------\n");
-	}
 	/**
 	 * This method plays a floorTile in a given row/column, and moves every floorTile in that direction, if it isn't
 	 * fixed or frozen. Once a floorTile is inserted, the tile that is on the end is placed into the SilkBag, and the
@@ -137,7 +123,6 @@ public class Gameboard {
 	 * @return removedTile The floorTile that was on the opposite edge and was pushed off of the Gameboard.
 	 */
 	public void playFloorTile(Coordinate location, FloorTile insertedTile) throws Exception {
-		printboard();
 		// Shifting the player.
 		Rotation direction;
 		Coordinate shiftAmount;
@@ -230,7 +215,7 @@ public class Gameboard {
 				locations.append(t.getLocation().toString());
 				locations.append(":");
 			}
-			//throw new Exception("Two tiles pushed off the board at" + locations );
+			throw new Exception("Two tiles pushed off the board at" + locations );
 		}
 
 		if (tilesToRemove.size() == 1) {
@@ -486,32 +471,6 @@ public class Gameboard {
 		return false;
 	}
 
-
-    /*
-    private int checkTileForPlayerInt(int x, int y) {
-        //This is 4, as the 4 players are listed as 0,1,2, and 3, if it returns 4, then there is no player on this tile.
-        int playerNumber = 4;
-        for (int i = 0; i < playerLocations.length; i++) {
-            Coordinate playerPos = getPlayerPos(i);
-            if (playerPos != null && playerPos.getX() == x && playerPos.getY() == y) {
-                playerNumber = i;
-                return playerNumber;
-            }
-        }
-        return playerNumber;
-    }
-     */
-
-	/**
-	 * This method returns the tile that the player is currently on.
-	 *
-	 * @param player the player to be checked
-	 * @return the tile that the player is on.
-	 */
-	public FloorTile getPlayerTile(int player) throws Exception {
-		return tileAt(getPlayerPos(player));
-	}
-
 	/**
 	 * This method sets fire in a 3x3 radius to the given coordinates. Making sure that the tiles
 	 * its setting fire to are on the board.
@@ -524,7 +483,6 @@ public class Gameboard {
 				Coordinate toSetOnFire = location.shift(i, j);
 				if (toSetOnFire.getX() >= 0 && toSetOnFire.getX() < width &&
 						toSetOnFire.getY() >= 0 && toSetOnFire.getY() < height) {
-					System.out.println("setting one tile on file:" + toSetOnFire.getX() + " " + toSetOnFire.getY());
 					tileAt(toSetOnFire).setFireTic(getNumOfPlayers());
 				}
 			}
@@ -637,7 +595,6 @@ public class Gameboard {
 	}
 
 	public void setNumOfPlayers(int numOfPlayers) {
-		playerLocations = Arrays.copyOf(playerLocations, numOfPlayers);
 		this.numOfPlayers = numOfPlayers;
 	}
 
