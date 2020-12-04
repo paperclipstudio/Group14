@@ -5,7 +5,7 @@ import static BackEnd.TileType.*;
 
 /**
  * This represents an abstract class, tile to be put on the which represent tiles to be put on to the Gameboard.
- * @author James Sam, Geroge Sanger, Atif Ishaq and Joshua Oladitan.
+ * @author James Sam, Christian Sanger, Atif Ishaq and Joshua Oladitan.
  * @version 1.0
  */
 public abstract class Tile {

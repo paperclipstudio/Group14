@@ -6,6 +6,10 @@ package BackEnd;
  * @author Christian Sanger
  */
 public class Score {
+
+	/*
+	 * These variables hold information about the player wins and losses.
+	 */
 	private final String name;
 	private final int wins;
 	private final int loss;

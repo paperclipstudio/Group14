@@ -13,27 +13,27 @@ import static BackEnd.TileType.GOAL;
  * project. It deals with the sliding of the floor tiles, the placement of the fixed tiles, the placement of action
  * tiles and their radii, the movement of player pieces, and the location of tiles on the gameboard.
  *
- * @author Joshua Oladitan & Atif Ishaq
+ * @author Joshua Oladitan, Atif Ishaq and Christian Sanger.
  * @version 1.0
  */
 
 public class Gameboard {
 
 	/*
-	 * These attributes store information about the gameboard, such as its' width and height, the number of players
+	 * These attributes store information about the gameboard, such as it's width and height, the number of players
 	 * and the SilkBag that it is connected to.
 	 */
 
 	private final int width;
 	private final int height;
-	private int numOfPlayers; //Currently initialized as 4 for testing. Can be set to another value.
+	private int numOfPlayers;
 	private final SilkBag silkbag;
 
 	/*
 	 * These arrays store information about tiles, and locations on the gameboard.
 	 * goalCoors stores the coordinates of every goal tile currently on the board.
-	 * playerLocations and slideLocations store the locations of every player and slide-able row/column respectively.
-	 * boardTiles and fixedTiles store the tiles on the board and which of those are fixed in their given indexes.
+	 * playerLocations store the locations of every player.
+	 * boardTiles store the tiles on the board.
 	 */
 
 	private ArrayList<Coordinate> goalCoors;
@@ -53,9 +53,9 @@ public class Gameboard {
 		this.width = width;
 		this.height = height;
 		this.silkbag = silkBag;
-		goalCoors = new ArrayList<>();
-		boardTiles = new ArrayList<>(width * height);
-		playerLocations = new Coordinate[4][3];
+		this.goalCoors = new ArrayList<>();
+		this.boardTiles = new ArrayList<>(width * height);
+		this.playerLocations = new Coordinate[4][3];
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Gameboard {
 	 * @return width The width of the gameboard.
 	 */
 	public int getWidth() {
-		return width;
+		return this.width;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Gameboard {
 	 * @return height The height of the gameboard.
 	 */
 	public int getHeight() {
-		return height;
+		return this.height;
 	}
 
 	/**
@@ -98,9 +98,10 @@ public class Gameboard {
 	}
 
 	/**
-	 * This method sets the position of the specified player.
+	 * This method sets the position of the specified player to the
+	 * given coordinate.
 	 *
-	 * @param player   The player whose position we want to set.
+	 * @param player The player whose position we want to set.
 	 * @param position The position to set.
 	 */
 	public void setPlayerPos(int player, Coordinate position) {
@@ -118,7 +119,7 @@ public class Gameboard {
 	 * of the width of the board, and inserting from the top is denoted as selecting a location with a y-coordinate
 	 * of the height of the board.
 	 *
-	 * @param location     The location of the given side to slide in the floorTile from.
+	 * @param location The location of the given side to slide in the floorTile from.
 	 * @param insertedTile The floorTile to slide into that location.
 	 * @return removedTile The floorTile that was on the opposite edge and was pushed off of the Gameboard.
 	 */
@@ -304,7 +305,6 @@ public class Gameboard {
 		return moveLocations;
 	}
 
-	//Method checks to see if its possible for the player to move in that direction.
 
 	/**
 	 * This method checks to see if it is possible for a player to move in a given direction, and returns a
@@ -403,10 +403,9 @@ public class Gameboard {
 	}
 
     /**
-     * places a fixed floor tile and board tile in the coordinates specified.
+     * Places a fixed floor tile and board tile in the coordinates specified.
      * @param tile to be placed
-     * @param x co-ordinate
-     * @param y co-ordinate
+     * @param location this is the coordinate for the location.
      */
     public void placeFixedTile(FloorTile tile, Coordinate location) {
     	if (tileAt(location) != null) {
@@ -441,8 +440,6 @@ public class Gameboard {
 	 *
 	 * @return if a player coordinate matches a goal coordinate, return true, else false.
 	 */
-	//checks to see if a player is on goal by going through all the players' locations to see
-	//if they match any of the goal coordinates.
 	public int isPlayerOnGoal() throws Exception {
 		int players = getNumOfPlayers();
 		goalCoors = checkGoalTiles();
@@ -514,7 +511,6 @@ public class Gameboard {
 	 *
 	 * @return the ArrayList of slide locations.
 	 */
-
 	public ArrayList<Coordinate> getSlideLocations() throws Exception {
 
 		ArrayList<Coordinate> allSlideLocations = new ArrayList<>();
@@ -608,6 +604,10 @@ public class Gameboard {
 		return numOfPlayers;
 	}
 
+	/**
+	 * This method ticks all the given tiles, to remove their affect.
+	 * @throws Exception An exception if null.
+	 */
 	public void ticTiles() throws Exception {
 		forAllFloorTiles((t) -> {
 			if (t != null) {
@@ -618,6 +618,12 @@ public class Gameboard {
 		});
 	}
 
+	/**
+	 * This method places a fixed tile to the given location.
+	 * @param floorTile The tile to be fixed.
+	 * @param x x coordinate.
+	 * @param y y coordinate.
+	 */
 	public void placeFixedTile(FloorTile floorTile, int x, int y) {
 		placeFixedTile(floorTile, new Coordinate(x,y));
 	}

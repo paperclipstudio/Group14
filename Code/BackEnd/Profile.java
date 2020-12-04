@@ -30,7 +30,7 @@ public class Profile {
      * @param wins the amount of wins a player has.
      * @param losses the amount of losses a player has.
      */
-    public Profile (String name, String playerIcon, int wins, int losses) {
+    public Profile(String name, String playerIcon, int wins, int losses) {
         setName (name);
         setIcon (playerIcon);
         setWins (wins);
@@ -41,7 +41,7 @@ public class Profile {
      * This method sets the name of the player.
      * @param name name of the player.
      */
-    public void setName (String name) {
+    public void setName(String name) {
         profileName = name;
     }
 
@@ -49,7 +49,7 @@ public class Profile {
      * This method sets the players icon.
      * @param playerIcon player's icon.
      */
-    public void setIcon (String playerIcon) {
+    public void setIcon(String playerIcon) {
         profileIcon = playerIcon;
     }
 
@@ -57,7 +57,7 @@ public class Profile {
      * This method sets the number of wins for the player.
      * @param wins number of wins of the player
      */
-    public void setWins (int wins){
+    public void setWins(int wins){
         this.wins = wins;
     }
 
@@ -65,7 +65,7 @@ public class Profile {
      * This method sets the number of losses for the player.
      * @param losses number of losses of the player.
      */
-    public void setlosses (int losses){
+    public void setlosses(int losses){
         this.losses = losses;
     }
 
@@ -73,7 +73,7 @@ public class Profile {
      * This method gets the name of the player.
      * @return the name of the player.
      */
-    public String getName () {
+    public String getName() {
         return profileName;
     }
 
@@ -81,7 +81,7 @@ public class Profile {
      * This method gets the wins of the player.
      * @return the wins of the player.
      */
-    public int getWins () {
+    public int getWins() {
         return wins;
     }
 
@@ -89,21 +89,21 @@ public class Profile {
      * This method gets the losses of the player.
      * @return the losses of the player.
      */
-    public int getLosses () {
+    public int getLosses() {
         return losses;
     }
 
     /**
      * This method increments the number of wins.
      */
-    public void incWins () {
+    public void incWins() {
         wins = wins + 1;
     }
 
     /**
      * This method increments the number of losses.
      */
-    public void incLosses () {
+    public void incLosses() {
         losses = losses + 1;
     }
 

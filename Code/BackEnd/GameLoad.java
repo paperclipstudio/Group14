@@ -1,13 +1,12 @@
 package BackEnd;
 
-import FrontEnd.Main;
-import FrontEnd.PickPlayerController;
+/**
+ *
+ */
 
-import javax.swing.*;
+import FrontEnd.Main;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.cert.CertPathParameters;
 import java.util.Scanner;
 
 import static BackEnd.TileType.FIRE;

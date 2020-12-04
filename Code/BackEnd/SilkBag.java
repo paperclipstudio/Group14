@@ -54,14 +54,14 @@ public class SilkBag {
      * This method gets a floor tile, for the game setup of the board.
      * @return tile, A random floor tile.
      */
-    public FloorTile getFloorTile () throws Exception {
+    public FloorTile getFloorTile() throws Exception {
         // Create a random index.
         int index = randomGenerator.nextInt(allTiles.size());
         // Note the index we started at.
         int startIndex = index;
         Tile tile = allTiles.get(index);
         // Loop though from starting index until we have a floor tile
-        while(!Tile.isFloorTile(tile)) {
+        while (!Tile.isFloorTile(tile)) {
             tile = allTiles.get(index);
             index = (index + 1) % allTiles.size();
             if (index == startIndex) {
@@ -77,7 +77,7 @@ public class SilkBag {
      * This method inserts a tile into the bag.
      * @param tile, tile to be inserted into the bag.
      */
-    public void insertTile (Tile tile) {
+    public void insertTile(Tile tile) {
         allTiles.add(tile);
     }
 }
