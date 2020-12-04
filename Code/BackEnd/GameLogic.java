@@ -38,7 +38,7 @@ public class GameLogic {
 	 * @param boardFile Paths to board file
 	 * @throws Exception if issue with board file.
 	 */
-	public void newGame(String boardFile) throws Exception {
+	public void newGame(String boardFile, GameSave gameSaver) throws Exception {
 		doubleMove = false;
 		currentPlayerNo = 0;
 		phase = DRAW;
@@ -47,7 +47,7 @@ public class GameLogic {
 		gameboard = gameItems.getKey();
 		players = gameItems.getValue();
 		currentPlayer = players[currentPlayerNo];
-		gameSaver = new GameSave(seed);
+		this.gameSaver = gameSaver;
 	}
 
 	/**

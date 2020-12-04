@@ -1,47 +1,53 @@
 package FrontEnd;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class StartScreenController implements Initializable {
+/**
+ * Controller for the "Press any button screen"
+ * lets you open the main menu screen.
+ * @author Christian
+ */
+public class StartScreenController extends StateLoad {
     @FXML
     private Button newGameButton;
-
     private WindowLoader wl;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 
-    public void onQuitButton() {
-        Platform.exit();;
-    }
-
-    public void onNewGame() throws IOException {
+    /**
+     * Called when new Game button is pressed
+     */
+    public void onNewGame(){ //TODO REMOVE
         wl = new WindowLoader(newGameButton);
-        wl.load("GameSetup");
-    }
+        wl.load("GameSetup", getInitData());
+}
 
-    public void OnKeyPressed(KeyEvent keyEvent) throws IOException {
+    /**
+     * Called when a keyboard button has been pressed
+     * loads main menu
+     * @param keyEvent event of that keypress
+     */
+    public void OnKeyPressed(KeyEvent keyEvent){
         wl = new WindowLoader(newGameButton);
-        wl.load("MenuScreen");
+        wl.load("MenuScreen", getInitData());
     }
 
-    public void onMousePress(MouseEvent m) throws IOException {
+    /**
+     * Called when a user clicks the mouse
+     * @param m the mouse event of this click
+     */
+    public void onMousePress(MouseEvent m){
         wl = new WindowLoader(newGameButton);
-        wl.load("MenuScreen");
+        wl.load("MenuScreen", getInitData());
 
     }
-
 }

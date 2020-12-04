@@ -2,12 +2,14 @@ package BackEnd;
 
 import FrontEnd.Main;
 import FrontEnd.PickPlayerController;
+import javafx.util.Pair;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.cert.CertPathParameters;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static BackEnd.TileType.FIRE;
@@ -20,8 +22,8 @@ public class GameLoad {
 	 * @return
 	 * @throws IOException
 	 */
-	public static GameLogic loader(String fileName) throws Exception {
-		File loadFile = new File("SaveData\\GameSave\\" + fileName);
+	public static Pair<GameLogic, Profile[]> loader(HashMap<String, String> initData) throws Exception {
+		File loadFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile"));
 		Scanner in = new Scanner(loadFile);
 		if (!in.hasNextLine()) {
 			throw new IOException("Invalid file format, no game board file");
@@ -36,10 +38,9 @@ public class GameLoad {
 			String name = profileLine.next();
 			profiles[i] = Profile.readProfile(name);
 		}
-		Main.setProfiles(profiles);
 		GameLogic gameLogic = new GameLogic(silkBagSeed);
-		Main.setNumberOfPlayers(playerCount);
-		gameLogic.newGame(gameBoard);
+		GameSave gameSave = new GameSave(initData);
+		gameLogic.newGame(gameBoard, gameSave);
 		gameLogic.setNumberOfPlayers(playerCount);
 		while (in.hasNextLine()) {
 			int x;
@@ -81,6 +82,6 @@ public class GameLoad {
 
 			}
 		}
-		return gameLogic;
+		return new Pair<>(gameLogic, profiles);
 	}
 }

@@ -3,10 +3,11 @@ package FrontEnd;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.*;
 
 /***
  * Used to load new windows
@@ -24,6 +25,10 @@ public class WindowLoader {
 	 */
 	public WindowLoader(Node window) {
 		w = (Stage) window.getScene().getWindow();
+	}
+
+	public WindowLoader(Stage primaryStage) {
+		w = primaryStage;
 	}
 
 	/**
@@ -50,21 +55,32 @@ public class WindowLoader {
 	 * i.e. to swap to MenuScreen.fxml use "MenuScreen"
 	 *
 	 * @param window scene name
+	 * @param initData state of application
 	 */
-	public void load(String window) {
+	public void load(String window, HashMap<String, String> initData) {
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(fileLocation + window + ".fxml")));
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Objects.requireNonNull(getClass().getClassLoader().getResource(fileLocation + window + ".fxml")));
+			root = loader.load();
+			StateLoad controller = loader.getController();
+			controller.setInitData(initData);
+			controller.initialize(null, null);
 		} catch (IOException e) {
 			System.out.println(window + " Failed to load due to " + e.getMessage());
 			e.printStackTrace();
+			System.exit(1);
 		}
 		if (root == null) {
 			System.out.print("Scene loading failed, " + window + " could not be loaded");
+			System.exit(1);
 		} else {
-			w.getScene().setRoot(root);
+			if (w.getScene() == null) {
+				w.setScene(new Scene(root));
+			} else {
+				w.getScene().setRoot(root);
+			}
 		}
-		w.setFullScreen(Main.isFullScreen());
 	}
 
 	/**

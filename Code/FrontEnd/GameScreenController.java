@@ -7,7 +7,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -23,7 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -32,6 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import static BackEnd.Rotation.*;
 import static BackEnd.TileType.*;
@@ -40,7 +39,7 @@ import static BackEnd.TileType.*;
  * Use to control the GameScreen scene.
  * @author Chrisitan Sanger
  */
-public class GameScreenController implements Initializable {
+public class GameScreenController extends StateLoad {
 	@FXML
 	private VBox cards;
 	@FXML
@@ -53,8 +52,6 @@ public class GameScreenController implements Initializable {
 	private Button drawButton;
 	@FXML
 	private Label phaseText;
-	@FXML
-	private MenuItem saveButton;
 	@FXML
 	private Pane fixed;
 	@FXML
@@ -70,10 +67,6 @@ public class GameScreenController implements Initializable {
 	private GameLogic gameLogic;
 	public static int tileWidth = 50;
 
-	public GameScreenController() {
-	}
-	//private ImageView[] players;
-
 	/***
 	 * Gets all resources for gameScreen
 	 * @param url Url for resources
@@ -81,30 +74,32 @@ public class GameScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		try {
-			if (Main.isLoadedGameFile()) {
-				loadGame();
-			} else {
-				startNewGame();
+		if (getInitData() != null) {
+			try {
+				if (getInitData().get("isLoadedFile").equals("true")) {
+					loadGame();
+				} else {
+					startNewGame();
+				}
+				int rotate = 0;
+				tiles.setRotationAxis(new Point3D(10, 0, 10));
+				tiles.setRotate(rotate);
+				players.setRotationAxis(new Point3D(10, 0, 10));
+				players.setRotate(rotate);
+				controls.setRotationAxis(new Point3D(10, 0, 10));
+				controls.setRotate(rotate);
+				tileWidth = 30;//(int) (ps.getHeight() / gameLogic.getHeight()) + 50;
+				updateBoard();
+				mainLoop();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			int rotate = 0;
-			tiles.setRotationAxis(new Point3D(10, 0, 10));
-			tiles.setRotate(rotate);
-			players.setRotationAxis(new Point3D(10, 0, 10));
-			players.setRotate(rotate);
-			controls.setRotationAxis(new Point3D(10, 0, 10));
-			controls.setRotate(rotate);
-			tileWidth = 30;//(int) (ps.getHeight() / gameLogic.getHeight()) + 50;
-			updateBoard();
-			mainLoop();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			confirmation.setVisible(false);
 		}
-		confirmation.setVisible(false);
 	}
 
 	/*
@@ -116,12 +111,13 @@ public class GameScreenController implements Initializable {
 		call back to mainLoop.
 	mainLoop() -> show buttons -> wait for call back from button -> mainLoop()
 	 */
-	private void mainLoop() {
+	private void mainLoop() throws IOException {
 		// Update current player
-
-		profile.getChildren().add(Assets.getProfile(gameLogic.getPlayersTurn()));
-
-		//tiles.setRotate(tiles.getRotate() + 10);
+		Profile[] profiles = new Profile[4];
+		for (int i=0; i < gameLogic.getNumberOfPlayers(); i++) {
+			profiles[i] = Profile.readProfile(getInitData().get("Profile" + (i)));
+		}
+		profile.getChildren().add(Assets.getProfile(profiles[gameLogic.getPlayersTurn()]));
 		try {
 			updateBoard();
 		} catch (Exception e) {
@@ -173,9 +169,8 @@ public class GameScreenController implements Initializable {
 
 	private void setupWinScreen() throws Exception {
 		WindowLoader wl = new WindowLoader(drawButton);
-		Main.setWinner(gameLogic.getWinner());
-		wl.load("WinScreen");
-		phaseText.setText("Game has been won");
+		getInitData().put("Winner", gameLogic.getWinner() + "");
+		wl.load("WinScreen", getInitData());
 	}
 
 	private void setupFloorPhase() throws Exception {
@@ -420,24 +415,28 @@ public class GameScreenController implements Initializable {
 	/**
 	 * Clears the game and starts a new one with given starting board
 	 *
-	 * @param board path to board file
 	 * @throws Exception if issue with board file.
 	 */
 	public void startNewGame() throws Exception {
-		gameLogic = new GameLogic(Main.getSeed());
-		gameLogic.newGame(Main.getBoardFile());
-		gameLogic.setNumberOfPlayers(Main.getNumberOfPlayers());
+		gameLogic = new GameLogic(Integer.parseInt(getInitData().get("Seed")));
+		GameSave gameSave = new GameSave(getInitData());
+		gameLogic.newGame(getInitData().get("Board"), gameSave);
+		gameLogic.setNumberOfPlayers(Integer.parseInt(getInitData().get("PlayerCount")));
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
 		mainLoop();
 	}
 
 	private void loadGame() throws Exception {
-		gameLogic = GameLoad.loader(Main.getLoadFile());
+		Pair<GameLogic, Profile[]> result = GameLoad.loader(getInitData());
+		gameLogic = result.getKey();
+		Profile[] profiles = result.getValue();
+		for (int i = 0; i < profiles.length; i++) {
+			getInitData().put("Profile" + i, profiles[i].getName());
+		}
 		width = gameLogic.getWidth();
 		height = gameLogic.getHeight();
-		gameLogic.setNumberOfPlayers(Main.getNumberOfPlayers());
-		Main boop = new Main();
+		gameLogic.setNumberOfPlayers(Integer.parseInt(getInitData().get("PlayerCount")));
 		gameLogic.emptyGameSaver();
 		mainLoop();
 	}
@@ -531,7 +530,11 @@ public class GameScreenController implements Initializable {
 									} catch (Exception exception) {
 										exception.printStackTrace();
 									}
-									mainLoop();
+									try {
+										mainLoop();
+									} catch (IOException ioException) {
+										ioException.printStackTrace();
+									}
 								});
 							}
 
@@ -599,7 +602,11 @@ public class GameScreenController implements Initializable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			mainLoop();
+			try {
+				mainLoop();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 	}
 
@@ -630,7 +637,13 @@ public class GameScreenController implements Initializable {
 				walk.setDuration(new Duration(500));
 				walk.play();
 				removeAll("locationarrow");
-				walk.setOnFinished((e2) -> mainLoop());
+				walk.setOnFinished((e2) -> {
+					try {
+						mainLoop();
+					} catch (IOException ioException) {
+						ioException.printStackTrace();
+					}
+				});
 			});
 			controls.getChildren().add(pointer);
 
@@ -665,7 +678,7 @@ public class GameScreenController implements Initializable {
 	public void onQuitButton() {
 		if(gameLogic.isGameSaved()) {
 			WindowLoader wl = new WindowLoader(drawButton);
-			wl.load("MenuScreen");
+			wl.load("MenuScreen", getInitData());
 		} else {
 			confirmation.setVisible(true);
 		}
@@ -683,7 +696,7 @@ public class GameScreenController implements Initializable {
 		}
 		System.out.println("Game Saved");
 		WindowLoader wl = new WindowLoader(drawButton);
-		wl.load("MenuScreen");
+		wl.load("MenuScreen", getInitData());
 	}
 
 	/**
@@ -691,7 +704,7 @@ public class GameScreenController implements Initializable {
 	 */
 	public void onNo() {
 		WindowLoader wl = new WindowLoader(drawButton);
-		wl.load("MenuScreen");
+		wl.load("MenuScreen", getInitData());
 	}
 	/***
 	 * Starts save game window.

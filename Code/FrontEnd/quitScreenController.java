@@ -2,7 +2,6 @@ package FrontEnd;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -12,7 +11,7 @@ import java.util.ResourceBundle;
  * Use to control the QuitScreen scene.
  * @author David Langmaid
  */
-public class quitScreenController implements Initializable {
+public class quitScreenController extends StateLoad{
     @FXML
     private Button noButton;
 
@@ -32,8 +31,8 @@ public class quitScreenController implements Initializable {
     /**
      * Returns you to previous scene
      */
-    public void onNo() throws IOException {
+    public void onNo() {
         wl = new WindowLoader(noButton);
-        wl.load("MenuScreen");
+        wl.load("MenuScreen", getInitData());
     }
 }

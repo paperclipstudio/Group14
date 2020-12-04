@@ -1,9 +1,6 @@
 package FrontEnd;
 
-import BackEnd.Coordinate;
-import BackEnd.FloorTile;
-import BackEnd.Tile;
-import BackEnd.TileType;
+import BackEnd.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -205,10 +202,10 @@ public class Assets {
 		return frozenEffect;
 	}
 
-	public static Node getProfile(int i) {
-		ImageView profile = new ImageView(get(Main.getProfiles()[i].getIcon()));
-		profile.setFitWidth(100);
-		profile.setFitHeight(100);
-		return (Node) profile;
+	public static Node getProfile(Profile profile) {
+		ImageView profileView = new ImageView(get(profile.getIcon()));
+		profileView.setFitWidth(100);
+		profileView.setFitHeight(100);
+		return (Node) profileView;
 	}
 }

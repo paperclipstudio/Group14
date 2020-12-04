@@ -1,8 +1,6 @@
 package FrontEnd;
 
-import BackEnd.SilkBag;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.io.File;
@@ -18,7 +16,7 @@ import java.util.ResourceBundle;
  * @author Chrisitan Sanger
  */
 
-public class GameSetupController implements Initializable {
+public class GameSetupController extends StateLoad {
 	@FXML
 	private Button backButton;
 
@@ -26,28 +24,21 @@ public class GameSetupController implements Initializable {
 	private TextField saveName;
 
 	@FXML
-	private ChoiceBox<String> selectGameboard;
+	private ChoiceBox<String> selectGameBoard;
 
 	@FXML
 	private ToggleGroup playerCount;
 
-	@FXML
-	private RadioButton selectedToggle;
-
-	private String gameSaveName;
-
-	/**
-	 * Populates the choice box with available gameboards when the page is initialized.
-	 */
-	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		String[] gameboards;
-		File gameboardLocation = new File("Gameboards");
-		gameboards = gameboardLocation.list();
-		for (String gameboard : gameboards) {
-			selectGameboard.getItems().add(gameboard);
+		String[] gameBoards;
+		File gameBoardLocation = new File("Gameboards"); // TODO move to folder //saveData//
+		gameBoards = gameBoardLocation.list();
+		if (gameBoards != null) {
+			for (String gameBoard : gameBoards) {
+				selectGameBoard.getItems().add(gameBoard);
+			}
 		}
-		selectGameboard.getSelectionModel().selectFirst();
+		selectGameBoard.getSelectionModel().selectFirst();
 	}
 
 	/***
@@ -55,7 +46,7 @@ public class GameSetupController implements Initializable {
 	 */
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
-		wl.load("MenuScreen");
+		wl.load("MenuScreen", getInitData());
 	}
 
 	/***
@@ -63,29 +54,33 @@ public class GameSetupController implements Initializable {
 	 */
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
-		Main.setSeed((new Random()).nextInt());
-		Main.setBoardFile( selectGameboard.getValue());
-		selectedToggle = (RadioButton) playerCount.getSelectedToggle();
+		getInitData().put("Seed", "" + ((new Random()).nextInt()));
+		getInitData().put("Board", selectGameBoard.getValue());
+		getInitData().put("PlayerCount", ((RadioButton) playerCount.getSelectedToggle()).getText());
+		getInitData().put("LoadFile", saveName.getText());
+		getInitData().put("isLoadedFile", "false");
+		RadioButton selectedToggle = (RadioButton) playerCount.getSelectedToggle();
 		int numOfPlayers = Integer.parseInt(selectedToggle.getText());
-		Main.setNumberOfPlayers(numOfPlayers);
+		String gameSaveName = saveName.getText();
+		getInitData().put("SaveFile", gameSaveName);
+		if ((gameSaveName.equals(""))) {
+			saveName.setText("Must Enter game name");
+			return;
+		}
+		File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
+		if (gameSaveFile.exists()) {
+			saveName.setText("Game already exists - Please enter new name");
+			return;
+		}
 		try {
-			this.gameSaveName = (saveName.getText());
-			Main.setSaveFile(gameSaveName);
-			if (!(gameSaveName.equals(""))) {
-				File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
-				if(!(gameSaveFile.exists())){
-					FileWriter writer = new FileWriter(gameSaveFile, true);
-					writer.write(selectGameboard.getValue() + "\n" + numOfPlayers);
-					writer.flush();
-					writer.close();
-					//wl.load("PickPlayer");
-				} else {
-					saveName.setText("Game already exists - Please enter new name");
-				}
-			}
+			FileWriter writer = new FileWriter(gameSaveFile, true);
+			writer.write(selectGameBoard.getValue() + "\n" + numOfPlayers);
+			writer.flush();
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			saveName.setText("Failed to make game please try again");
 		}
-		wl.load("PickPlayer"); // here for testing
+		wl.load("PickPlayer", getInitData());
 	}
 }

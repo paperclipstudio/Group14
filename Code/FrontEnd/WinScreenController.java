@@ -1,15 +1,17 @@
 package FrontEnd;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WinScreenController implements Initializable {
+/**
+ * Screen that shows once someone has won the game.
+ * @author David Landmaid
+ */
+public class WinScreenController extends StateLoad {
     @FXML
     private Button returnButton;
 
@@ -18,11 +20,14 @@ public class WinScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        winner.setText("Congratulations Player " + (Main.getWinner() + 1) + "!");
+        winner.setText("Congratulations Player " + getInitData().get("Winner") + "!");
     }
 
-    public void onReturnButton() throws IOException {
+    /**
+     * Returns to main menu
+     */
+    public void onReturnButton() {
         WindowLoader wl = new WindowLoader(returnButton);
-        wl.load("MenuScreen");
+        wl.load("MenuScreen", getInitData());
     }
 }
