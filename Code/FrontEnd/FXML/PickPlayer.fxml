@@ -39,7 +39,7 @@
             <ChoiceBox fx:id="playerList3" layoutX="120.0" layoutY="210.0" prefWidth="150.0" />
             <ChoiceBox fx:id="playerList4" layoutX="350.0" layoutY="210.0" prefWidth="150.0" />
             <Label fx:id="label" layoutX="185.0" layoutY="276.0" prefHeight="20.0" prefWidth="229.0" text="player number" textAlignment="CENTER" textFill="#009e05" />
-            <Label fx:id="hint" layoutX="75.0" layoutY="252.0" prefHeight="17.0" prefWidth="469.0" textAlignment="CENTER" textFill="#009e05" />
+            <Label fx:id="hint" layoutX="164.0" layoutY="251.0" prefHeight="17.0" prefWidth="272.0" textAlignment="CENTER" textFill="#009e05" />
             <VBox.margin>
                <Insets />
             </VBox.margin>
