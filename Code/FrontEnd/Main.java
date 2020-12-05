@@ -24,7 +24,7 @@ public class Main extends Application {
     private static final double DEFAULT_SOUND_LEVEL = 0.0;
     private static final boolean DEFAULT_FULLSCREEN = false;
     private static final int DEFAULT_RESOLUTION = 0;
-    int track = 0;
+    private int track = 0;
 
 
     private static RESOLUTION resolution = RESOLUTION.SIX_BY_FOUR;
