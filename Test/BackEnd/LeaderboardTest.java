@@ -37,7 +37,7 @@ class LeaderboardTest {
 	}
 
 	@Test
-	void update() {
+	void update() throws IOException {
 		lb.update("george", 30, 5);
 		String result = "george 30 5\n";
 		assertEquals(result, lb.toString());
