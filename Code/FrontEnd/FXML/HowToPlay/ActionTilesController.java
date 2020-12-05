@@ -1,7 +1,7 @@
-package FrontEnd;
+package FrontEnd.FXML.HowToPlay;
 
-import MessageOfTheDay.MessageOfTheDay;
-import javafx.application.Platform;
+import FrontEnd.StateLoad;
+import FrontEnd.WindowLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  *
  * @author David Langmaid
  */
-public class MenuScreenController extends StateLoad {
+public class ActionTilesController extends StateLoad {
 
     @FXML
     private Button newGameButton;
@@ -23,26 +23,14 @@ public class MenuScreenController extends StateLoad {
     private Label MoTD;
     private WindowLoader wl;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String message;
-        try {
-            message = MessageOfTheDay.puzzle();
-        } catch (Exception e) {
-            message = "Error with Server" + e.getCause();
-        }
-        MoTD.setText(message);
-    }
+
 
     /**
      * Used to exit the application
      */
-    public void onQuitButton() {
-        Platform.exit();
-    }
 
     /**
-	 * Called when new game is clicked
+     * Called when new game is clicked
      * opens game setup
      */
     public void onNewGame() {
@@ -54,40 +42,60 @@ public class MenuScreenController extends StateLoad {
      * called when load game is clicked
      * opens load game screen
      */
-    public void onLoadGame() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("LoadGame", getInitData());
-    }
+
 
     /**
      * called when settings button is clicked
      * opens settings window
      */
-    public void onSettings() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Settings", getInitData());
-    }
+
 
     /**
      * called when profiles button is clicked
      * opens profile window
      */
-    public void onPlayerProfiles() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Profiles", getInitData());
-    }
+
 
     /**
      * called when leaderboard button is clicked
      * opens leaderboard window
      */
-    public void onLeaderBoard() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("/Leaderboards/FXMLDocument", getInitData());
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void onHowToPlay(ActionEvent actionEvent) {
+    public void onIce(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Ice", getInitData());
+    }
+
+    public void onFire(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Fire", getInitData());
+    }
+
+    public void onDoubleMove(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Double Move", getInitData());
+    }
+
+    public void onBack(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/ActionTiles", getInitData());
+
+    }
+
+    public void onBacktrack(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Backtrack", getInitData());
+
+    }
+
+    public void onBackToMenu(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());
     }

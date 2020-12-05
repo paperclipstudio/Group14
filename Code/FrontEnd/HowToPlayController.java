@@ -1,7 +1,5 @@
 package FrontEnd;
 
-import MessageOfTheDay.MessageOfTheDay;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,7 +13,7 @@ import java.util.ResourceBundle;
  *
  * @author David Langmaid
  */
-public class MenuScreenController extends StateLoad {
+public class HowToPlayController extends StateLoad {
 
     @FXML
     private Button newGameButton;
@@ -23,26 +21,13 @@ public class MenuScreenController extends StateLoad {
     private Label MoTD;
     private WindowLoader wl;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String message;
-        try {
-            message = MessageOfTheDay.puzzle();
-        } catch (Exception e) {
-            message = "Error with Server" + e.getCause();
-        }
-        MoTD.setText(message);
-    }
 
     /**
      * Used to exit the application
      */
-    public void onQuitButton() {
-        Platform.exit();
-    }
 
     /**
-	 * Called when new game is clicked
+     * Called when new game is clicked
      * opens game setup
      */
     public void onNewGame() {
@@ -54,41 +39,64 @@ public class MenuScreenController extends StateLoad {
      * called when load game is clicked
      * opens load game screen
      */
-    public void onLoadGame() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("LoadGame", getInitData());
-    }
+
 
     /**
      * called when settings button is clicked
      * opens settings window
      */
-    public void onSettings() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Settings", getInitData());
-    }
+
 
     /**
      * called when profiles button is clicked
      * opens profile window
      */
-    public void onPlayerProfiles() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("Profiles", getInitData());
-    }
+
 
     /**
      * called when leaderboard button is clicked
      * opens leaderboard window
      */
-    public void onLeaderBoard() {
-        wl = new WindowLoader(newGameButton);
-        wl.load("/Leaderboards/FXMLDocument", getInitData());
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void onHowToPlay(ActionEvent actionEvent) {
+    public void onTiles() {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Tiles", getInitData());
+    }
+
+    public void onTurns() {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Turns", getInitData());
+    }
+
+    public void onMovement() {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Movement", getInitData());
+    }
+
+    public void onActionTiles() {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/ActionTiles", getInitData());
+    }
+
+    public void onBackTo(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());
     }
+
+    public void onBackToMenu(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("MenuScreen", getInitData());
+    }
+
+    public void onBasics(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/Basics", getInitData());
+    }
+
 }
