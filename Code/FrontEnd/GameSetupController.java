@@ -37,8 +37,9 @@ public class GameSetupController extends StateLoad {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		String[] gameBoards;
-		File gameBoardLocation = new File("SaveData\\Gameboards");
+		File gameBoardLocation = new File("Gameboards");
 		gameBoards = gameBoardLocation.list();
 		if (gameBoards != null) {
 			for (String gameBoard : gameBoards) {
@@ -63,11 +64,11 @@ public class GameSetupController extends StateLoad {
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		getInitData().put("Seed", "" + ((new Random()).nextInt()));
-		getInitData().put("Board", selectGameBoard.getValue());
+		String gameBoard = selectGameBoard.getValue() + ".txt";
+		getInitData().put("Board", gameBoard);
 		getInitData().put("PlayerCount", ((RadioButton) playerCount.getSelectedToggle()).getText());
 		getInitData().put("LoadFile", saveName.getText());
 		getInitData().put("isLoadedFile", "false");
-		RadioButton selectedToggle = (RadioButton) playerCount.getSelectedToggle();
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
 		if ((gameSaveName.equals(""))) {
@@ -78,15 +79,6 @@ public class GameSetupController extends StateLoad {
 		if (gameSaveFile.exists()) {
 			saveName.setText("Game already exists - Please enter new name");
 			return;
-		}
-		try {
-			FileWriter writer = new FileWriter(gameSaveFile, true);
-			writer.write(selectGameBoard.getValue());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			saveName.setText("Failed to make game please try again");
 		}
 		wl.load("PickPlayer", getInitData());
 	}
