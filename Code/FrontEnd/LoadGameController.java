@@ -110,5 +110,4 @@ public class LoadGameController extends StateLoad {
 		noButton.setVisible(false);
 		confirm.setText("");
 	}
-
 }
