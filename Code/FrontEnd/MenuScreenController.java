@@ -83,7 +83,7 @@ public class MenuScreenController extends StateLoad {
      */
     public void onLeaderBoard() {
         wl = new WindowLoader(newGameButton);
-        wl.load("FXMLDocument", getInitData());
+        wl.load("Leaderboard", getInitData());
 
     }
 
