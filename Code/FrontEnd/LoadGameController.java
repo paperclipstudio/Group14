@@ -34,16 +34,18 @@ public class LoadGameController extends StateLoad {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		String[] games;
-		File gameSaveLocation = new File("SaveData\\GameSave");
-		games = gameSaveLocation.list();
-		if (games != null) {
-			for (String game : games) {
-				game = game.substring(0, game.length() -4);
-				selectGame.getItems().add(game);
+		if (selectGame.getValue() == null) {
+			String[] games;
+			File gameSaveLocation = new File("SaveData\\GameSave");
+			games = gameSaveLocation.list();
+			if (games != null) {
+				for (String game : games) {
+					game = game.substring(0, game.length() - 4);
+					selectGame.getItems().add(game);
+				}
 			}
+			selectGame.getSelectionModel().selectFirst();
 		}
-		selectGame.getSelectionModel().selectFirst();
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		confirm.setText("");
@@ -108,5 +110,4 @@ public class LoadGameController extends StateLoad {
 		noButton.setVisible(false);
 		confirm.setText("");
 	}
-
 }

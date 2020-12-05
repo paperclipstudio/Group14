@@ -145,7 +145,7 @@ public class FloorTile extends Tile {
      * This method decrements the ticFire after every players turn. If it reaches zero, sets isOnFire to false.
      */
     public void ticFire() {
-        ticFire--;
+        ticFire = ticFire <= 0 ? 0 : ticFire - 1;
     }
 
     /**
@@ -163,7 +163,7 @@ public class FloorTile extends Tile {
      * This method decrements the ticFrozen after every players turn. If it reaches zero, sets isFrozen to false.
      */
     public void ticFrozen() {
-        ticFrozen--;
+        ticFrozen = ticFrozen <= 0 ? 0 : ticFrozen - 1;
     }
 
     /**

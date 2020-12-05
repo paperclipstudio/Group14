@@ -37,17 +37,18 @@ public class GameSetupController extends StateLoad {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		String[] gameBoards;
-		File gameBoardLocation = new File("Gameboards");
-		gameBoards = gameBoardLocation.list();
-		if (gameBoards != null) {
-			for (String gameBoard : gameBoards) {
-				gameBoard = gameBoard.substring(0, gameBoard.length() -4);
-				selectGameBoard.getItems().add(gameBoard);
+		if (selectGameBoard.getValue() == null) {
+			String[] gameBoards;
+			File gameBoardLocation = new File("Gameboards");
+			gameBoards = gameBoardLocation.list();
+			if (gameBoards != null) {
+				for (String gameBoard : gameBoards) {
+					gameBoard = gameBoard.substring(0, gameBoard.length() - 4);
+					selectGameBoard.getItems().add(gameBoard);
+				}
 			}
+			selectGameBoard.getSelectionModel().selectFirst();
 		}
-		selectGameBoard.getSelectionModel().selectFirst();
 	}
 
 	/***
