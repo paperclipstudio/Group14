@@ -29,14 +29,14 @@ public class GameSave {
     public GameSave(HashMap<String, String> initData) throws IOException {
         gameSaveFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile") + ".sav");
         gameSaveString = "\n" + initData.get("Seed");
-        gameSaveString = "\n" + initData.get("PlayerCount");
+        gameSaveString += "\n" + initData.get("PlayerCount");
         int playerCount = Integer.parseInt(initData.get("PlayerCount"));
         Profile[] profiles = new Profile[playerCount];
         for(int i = 0; i < playerCount; i++) {
             profiles[i] = Profile.readProfile(initData.get("Profile" + i));
         }
         for (Profile profile: profiles) {
-            gameSaveString = "\n" + profile.getName();
+            gameSaveString += "\n" + profile.getName();
         }
     }
     /**

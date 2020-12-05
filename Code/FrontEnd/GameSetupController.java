@@ -67,7 +67,6 @@ public class GameSetupController extends StateLoad {
 		getInitData().put("LoadFile", saveName.getText());
 		getInitData().put("isLoadedFile", "false");
 		RadioButton selectedToggle = (RadioButton) playerCount.getSelectedToggle();
-		int numOfPlayers = Integer.parseInt(selectedToggle.getText());
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
 		if ((gameSaveName.equals(""))) {
@@ -81,7 +80,7 @@ public class GameSetupController extends StateLoad {
 		}
 		try {
 			FileWriter writer = new FileWriter(gameSaveFile, true);
-			writer.write(selectGameBoard.getValue() + "\n" + numOfPlayers);
+			writer.write(selectGameBoard.getValue());
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
