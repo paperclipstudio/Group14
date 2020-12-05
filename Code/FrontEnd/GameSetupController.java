@@ -39,7 +39,7 @@ public class GameSetupController extends StateLoad {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		String[] gameBoards;
-		File gameBoardLocation = new File("SaveData\\Gameboards");
+		File gameBoardLocation = new File("Gameboards");
 		gameBoards = gameBoardLocation.list();
 		if (gameBoards != null) {
 			for (String gameBoard : gameBoards) {
