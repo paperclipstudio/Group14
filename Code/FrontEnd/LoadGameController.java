@@ -39,6 +39,7 @@ public class LoadGameController extends StateLoad {
 		games = gameSaveLocation.list();
 		if (games != null) {
 			for (String game : games) {
+				game = game.substring(0, game.length() -4);
 				selectGame.getItems().add(game);
 			}
 		}
@@ -46,7 +47,6 @@ public class LoadGameController extends StateLoad {
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		confirm.setText("");
-
     }
 
 	/***
