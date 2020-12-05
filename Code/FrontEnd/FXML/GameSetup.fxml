@@ -14,50 +14,57 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ToggleGroup?>
 
-<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameSetupController" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+<GridPane prefHeight="400.0" stylesheets="menuStyle.css" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameSetupController"
+          style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0"/>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0"/>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0"/>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0"/>
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="ALWAYS" />
-      <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="15.0" vgrow="ALWAYS" />
-      <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" percentHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="ALWAYS"/>
+      <RowConstraints fillHeight="false" minHeight="10.0" percentHeight="15.0" vgrow="ALWAYS"/>
+      <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES"/>
    </rowConstraints>
-   <children>
-      <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Setup" textAlignment="CENTER" wrappingWidth="469.33154296875" GridPane.columnSpan="4" GridPane.halignment="CENTER">
-         <font>
-            <Font name="lazer84" size="65.0" />
-         </font>
-         <fill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-               <stops>
-                  <Stop color="#009e05" />
-                  <Stop color="#024300" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Text>
-      <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStartButton" prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <ChoiceBox fx:id="selectGameBoard" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gameboard" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Players" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="saveName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <children>
-            <fx:define>
-                    <ToggleGroup fx:id="playerCount" />
-            </fx:define>
-            <RadioButton fx:id="twoPlayer" mnemonicParsing="false" text="2" toggleGroup="$playerCount" />
-            <RadioButton fx:id="threePlayer" mnemonicParsing="false" text="3" toggleGroup="$playerCount" />
-            <RadioButton fx:id="fourPlayer" mnemonicParsing="false" selected="true" text="4" toggleGroup="$playerCount" />
-         </children>
-      </HBox>
-   </children>
+   <Text styleClass="WindowName" lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Setup"
+         textAlignment="CENTER" wrappingWidth="469.33154296875" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+      <font>
+         <Font name="lazer84" size="65.0"/>
+      </font>
+      <fill>
+         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+            <stops>
+               <Stop color="#009e05"/>
+               <Stop color="#024300" offset="1.0"/>
+            </stops>
+         </RadialGradient>
+      </fill>
+   </Text>
+   <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStartButton"
+           prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05"
+           GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+   <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+           onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER"
+           textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+   <ChoiceBox fx:id="selectGameBoard" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+   <Text styleClass="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Gameboard" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+   <Text styleClass="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Players" GridPane.columnIndex="1"
+         GridPane.rowIndex="2"/>
+   <Text styleClass="label" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+   <TextField fx:id="saveName" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2"
+         GridPane.rowIndex="2">
+      <children>
+         <fx:define>
+            <ToggleGroup fx:id="playerCount"/>
+         </fx:define>
+         <RadioButton fx:id="twoPlayer" mnemonicParsing="false" text="2" toggleGroup="$playerCount"/>
+         <RadioButton fx:id="threePlayer" mnemonicParsing="false" text="3" toggleGroup="$playerCount"/>
+         <RadioButton fx:id="fourPlayer" mnemonicParsing="false" selected="true" text="4" toggleGroup="$playerCount"/>
+      </children>
+   </HBox>
 </GridPane>
