@@ -64,7 +64,8 @@ public class GameSetupController extends StateLoad {
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		getInitData().put("Seed", "" + ((new Random()).nextInt()));
-		getInitData().put("Board", selectGameBoard.getValue());
+		String gameBoard = selectGameBoard.getValue() + ".txt";
+		getInitData().put("Board", gameBoard);
 		getInitData().put("PlayerCount", ((RadioButton) playerCount.getSelectedToggle()).getText());
 		getInitData().put("LoadFile", saveName.getText());
 		getInitData().put("isLoadedFile", "false");
