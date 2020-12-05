@@ -75,6 +75,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         String musicFile = "Assets\\music.mp3";     // For example
+        String [] musicFiles = {"Assets\\music.mp3","Assets\\music.mp3"};
 
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
