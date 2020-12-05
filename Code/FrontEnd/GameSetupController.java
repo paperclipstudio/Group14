@@ -37,8 +37,9 @@ public class GameSetupController extends StateLoad {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		String[] gameBoards;
-		File gameBoardLocation = new File("SaveData\\Gameboards");
+		File gameBoardLocation = new File("SaveData\\Gameboards\\");
 		gameBoards = gameBoardLocation.list();
 		if (gameBoards != null) {
 			for (String gameBoard : gameBoards) {
@@ -67,7 +68,6 @@ public class GameSetupController extends StateLoad {
 		getInitData().put("PlayerCount", ((RadioButton) playerCount.getSelectedToggle()).getText());
 		getInitData().put("LoadFile", saveName.getText());
 		getInitData().put("isLoadedFile", "false");
-		RadioButton selectedToggle = (RadioButton) playerCount.getSelectedToggle();
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
 		if ((gameSaveName.equals(""))) {

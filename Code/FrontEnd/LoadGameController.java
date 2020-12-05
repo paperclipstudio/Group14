@@ -65,7 +65,8 @@ public class LoadGameController extends StateLoad {
 	public void onPlayButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		getInitData().put("isLoadedFile", "true");
-		getInitData().put("LoadFile", selectGame.getValue());
+		String loadFile = selectGame.getValue() + ".sav";
+		getInitData().put("LoadFile", loadFile);
 		try {
 			GameLoad.loader(getInitData());
 			wl.load("GameScreen", getInitData());
