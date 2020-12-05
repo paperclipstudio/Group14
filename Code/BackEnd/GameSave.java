@@ -1,62 +1,67 @@
 package BackEnd;
 
-import FrontEnd.Main;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 
 /**
  * This class records each players decisions.
  * We can then read this file and put it into gameLogic to load the game.
+ *
  * @author David Langmaid
  * @version 1.0
  */
 public class GameSave {
-
-    private static File gameSaveFile = new File("SaveData\\GameSave\\" + Main.getSaveFile() + ".sav");
+    // Tracks if a change has happened that hasn't been saved to file
     private boolean isGameSaved = false;
+    // All information needed to restore game
     private String gameSaveString;
+    // File that game will be saved too.
+    private final File gameSaveFile;
 
     /**
-     * This is the constructor for the game save instance, it adds the seed, the number of players and each player
-     * profile to gameSaveString.
-     * @param seed - takes the seed for silk bag
+     * Constructs a GameSave that tracks all player choices for saving state of the game
+     *
+     * @param initData - data about the game state to save with
      */
-    public GameSave(int seed) {
-        gameSaveString = "\n" + seed;
-        gameSaveString +=  "\n" + Main.getNumberOfPlayers();
-        for (Profile profile: Main.getProfiles()) {
-            gameSaveString += "\n" + profile.getName();
+    public GameSave(HashMap<String, String> initData) throws IOException {
+        gameSaveFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile") + ".sav");
+        gameSaveString = "\n" + initData.get("Seed");
+        gameSaveString = "\n" + initData.get("PlayerCount");
+        int playerCount = Integer.parseInt(initData.get("PlayerCount"));
+        Profile[] profiles = new Profile[playerCount];
+        for(int i = 0; i < playerCount; i++) {
+            profiles[i] = Profile.readProfile(initData.get("Profile" + i));
+        }
+        for (Profile profile: profiles) {
+            gameSaveString = "\n" + profile.getName();
         }
     }
-
     /**
-     * This saves the draw sate and sets isGameSaved to false.
+     * Keeps note that a player has drawn a card.
      */
     public void draw() {
         gameSaveString += "\ndraw";
         isGameSaved = false;
     }
-
     /**
-     * This method saves the tile type and the slide locations for the played floor tile.
-     * It also sets isGameSaved to false.
-     * @param slideLocations - The coordinates of the slide location.
-     * @param tile - The floor tile that was played.
+     * Keeps not that a player has played a floor tile.
+     *
+     * @param slideLocations where it was slid
+     * @param tile what tile was played
      */
-    public void playFloorTile(Coordinate slideLocations, FloorTile tile) {
-        gameSaveString += "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
+    public void playFloorTile(Coordinate slideLocations, FloorTile tile){
+        gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
         isGameSaved = false;
     }
-
     /**
-     * This method saves the tile type and the slide locations for the played action tile.
-     * It also sets isGameSaved to false.
-     * @param location - The coordinates of the location the action tile was played.
-     * @param tile - The action tile that was played.
-     * @param playerNo - The player number the card effects (if it does).
+     * Keeps note that a player has played a action card.
+     *
+     * @param location where the card was played (null if NA)
+     * @param tile what tile was played
+     * @param playerNo what player the tile was played on (unimportant if NA)
      */
     public void playActionTile(Coordinate location, ActionTile tile, int playerNo) {
         String type = tile == null ? "null " : tile.getType().toString();
@@ -66,29 +71,26 @@ public class GameSave {
         }
         isGameSaved = false;
     }
-
     /**
-     * This methods saves the location the player moved to.
-     * It also sets isGameSaved to false.
-     * @param location - The coordinates of the location the player moved to.
+     * Keeps note that player moved.
+     *
+     * @param location where a player moved to.
      */
     public void playerMove(Coordinate location) {
-        gameSaveString += "\nmove " + location.getX() + " " + location.getY();
+        gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
         isGameSaved = false;
     }
-
     /**
-     * This method checks whether the game is saved or not.
-     * @return returns true or false from the local variable isGameSaved
+     * Checks if latest changes has been saved to file.
+     *
+     * @return true is every change is saved to file
      */
     public boolean isGameSaved() {
         return isGameSaved;
     }
-
     /**
-     * This saves the game by appending the gameSaveString to the end of the save file.
-     * It also sets the game saved state to true.
-     * @throws IOException if the gameSaveFile cannot be found.
+     * Saves user choices to file.
+     * @throws IOException if error with file.
      */
     public void saveToFile() throws IOException {
         FileWriter writer = new FileWriter(gameSaveFile, true);
@@ -97,9 +99,8 @@ public class GameSave {
         writer.close();
         isGameSaved = true;
     }
-
     /**
-     * This emptys the game save string. It also sets the game saved state to true.
+     * Clears the game save string.
      */
     public void emptyGameSaveString() {
         gameSaveString = "";
