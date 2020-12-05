@@ -1,11 +1,6 @@
 package FrontEnd;
 
-import BackEnd.Leaderboard;
-import BackEnd.Profile;
 import  javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -13,7 +8,7 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Objects;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /***
@@ -23,16 +18,8 @@ import java.util.Scanner;
  */
 
 public class Main extends Application {
-    private static Profile[] profiles;
-    private static boolean fullScreen;
-	private static String boardFile;
-    private static int numberOfPlayers;
-    private static String saveFile;
-    private static String loadFile;
-    private static boolean loadedGameFile = false;
-    private static int winner;
-    private static int seed;
-    private static double volume = 10;
+
+    private HashMap<String, String> initData;
     private static MediaPlayer mediaPlayer;
     private static final double DEFAULT_SOUND_LEVEL = 0.0;
     private static final boolean DEFAULT_FULLSCREEN = false;
@@ -40,56 +27,14 @@ public class Main extends Application {
 
     private static RESOLUTION resolution = RESOLUTION.SIX_BY_FOUR;
 
-    public static int getSeed() {
-        return seed;
-    }
-
-    public static void setSeed(int seed) {
-        Main.seed = seed;
-    }
-
-    public static boolean isFullScreen() {
-        return fullScreen;
-    }
-
-    public static void setFullScreen(boolean fullScreen) {
-
-        Main.fullScreen = fullScreen;
-    }
-
-    public static RESOLUTION getResolution() {
-        return Main.resolution;
-    }
-
-    public static void setResolution(RESOLUTION res) {
-        Main.resolution = res;
-    }
-
-    public static Profile[] getProfiles() {
-        return profiles;
-    }
-
-    public static void setProfiles(Profile[] profiles) {
-        Main.profiles = profiles;
-    }
-
-    public static int getWinner() {
-        return winner;
-    }
-
-    public static void setWinner(int winner) {
-        Main.winner = winner;
-    }
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        System.out.println("Hello World");
-        //Parent root = null;
-        // You can use the line below to test out your own screens
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FrontEnd\\FXML\\StartScreen.fxml")));
-        Scene scene = new Scene(root);
-        Scanner in = null;
+    public void start(Stage primaryStage) {
+        WindowLoader wl = new WindowLoader(primaryStage);
+        initData = new HashMap<>();
+
+        Scanner in;
         //  Default settings if no config file.
         double soundLevel;
         boolean fullscreen;
@@ -123,36 +68,36 @@ public class Main extends Application {
         }
 
         Main.setVolume(soundLevel);
-        Main.setFullScreen(fullscreen);
-        Main.setResolution(RESOLUTION.values()[resolution]);
         primaryStage.setWidth(SettingsController.getWidth(RESOLUTION.values()[resolution]));
         primaryStage.setHeight(SettingsController.getHeight(RESOLUTION.values()[resolution]));
-        primaryStage.setFullScreen(false    );
+        primaryStage.setFullScreen(fullscreen);
         primaryStage.setTitle("Covid Game?");
         primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.DECORATED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         String musicFile = "Assets\\music.mp3";     // For example
 
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setCycleCount(100);
+        mediaPlayer.setCycleCount(Integer.MAX_VALUE);
 
-        mediaPlayer.setVolume(volume/100.0);
+        mediaPlayer.setVolume(soundLevel);
         mediaPlayer.play();
+
+        initData.put("Volume", String.valueOf(soundLevel));
+        initData.put("FullScreen", "true");
+        initData.put("Resolution", resolution + "");
         primaryStage.show();
+        wl.load("startScreen", initData);
     }
 
     public static void setVolume(double volume) {
-        System.out.println("Volume Changed");
-        Main.volume = volume;
         if (mediaPlayer != null) {
-            mediaPlayer.setVolume(volume);
+            mediaPlayer.setVolume(volume/200);
         }
     }
 
     public static double getVolume() {
-        return Main.volume;
+        return mediaPlayer.getVolume() * 200;
     }
 
     /***
@@ -162,46 +107,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public static String getBoardFile() {
-        return boardFile;
-    }
-
-    public static void setBoardFile(String boardFile) {
-        Main.boardFile = boardFile;
-    }
-
-    public static int getNumberOfPlayers() {
-        return numberOfPlayers;
-    }
-
-    public static void setNumberOfPlayers(int numberOfPlayers) {
-        Main.numberOfPlayers = numberOfPlayers;
-    }
-
-    public static String getLoadFile() {
-        return loadFile;
-    }
-
-    public static void setLoadFile(String loadFile) {
-        Main.loadFile = loadFile;
-    }
-
-    public static boolean isLoadedGameFile() {
-        return loadedGameFile;
-    }
-
-    public static void setLoadedGameFile(boolean loadedGameFile) {
-        Main.loadedGameFile = loadedGameFile;
-    }
-
-    public static void setSaveFile(String fileName) {
-        saveFile = fileName;
-    }
-
-    public static String getSaveFile() {
-        return saveFile;
     }
 
 }

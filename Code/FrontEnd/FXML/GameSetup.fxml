@@ -44,7 +44,7 @@
       </Text>
       <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStartButton" prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <ChoiceBox fx:id="selectGameboard" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <ChoiceBox fx:id="selectGameBoard" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gameboard" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Players" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />

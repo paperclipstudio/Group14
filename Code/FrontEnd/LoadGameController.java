@@ -1,90 +1,106 @@
 package FrontEnd;
 
 import BackEnd.GameLoad;
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
-import javax.annotation.Generated;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /***
  * Screen to load a previously saved game.
  * @author Christian Sanger
  */
-public class LoadGameController implements Initializable {
+public class LoadGameController extends StateLoad {
 	@FXML
 	private Button backButton;
 
-	@FXML
-	private ChoiceBox<String> selectGame;
+    @FXML
+    private ChoiceBox<String> selectGame;
 
-	@FXML
-	private Button yesButton;
+    @FXML
+    private Button yesButton;
 
-	@FXML
-	private Button noButton;
+    @FXML
+    private Button noButton;
 
-	@FXML
-	private Text confirm;
+    @FXML
+    private Text confirm;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String[] games;
 		File gameSaveLocation = new File("SaveData\\GameSave");
 		games = gameSaveLocation.list();
-		for (String game : games) {
-			selectGame.getItems().add(game);
+		if (games != null) {
+			for (String game : games) {
+				selectGame.getItems().add(game);
+			}
 		}
 		selectGame.getSelectionModel().selectFirst();
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		confirm.setText("");
 
-	}
+    }
 
 	/***
 	 * Returns to menu screen
 	 * Called my backButton
 	 */
-	public void onBackButton() throws IOException {
+	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
-		wl.load("MenuScreen");
+		wl.load("MenuScreen", getInitData());
 	}
 
 	/***
 	 * Continues to load game.
 	 * Called by start button.
 	 */
-	public void onPlayButton() throws IOException {
-		Main.setLoadedGameFile(true);
-		Main.setLoadFile(selectGame.getValue());
-		Main.setSaveFile(selectGame.getValue());
+	public void onPlayButton() {
 		WindowLoader wl = new WindowLoader(backButton);
-		wl.load("GameScreen");
+		getInitData().put("isLoadedFile", "true");
+		getInitData().put("LoadFile", selectGame.getValue());
+		try {
+			GameLoad.loader(getInitData());
+			wl.load("GameScreen", getInitData());
+		} catch (Exception e) {
+			confirm.setText("File Corrupted due too: " + e.getMessage());
+		}
 	}
-	public  void onDeleteButton() {
+
+	/**
+	 * Double checks that user wants to delete file
+	 */
+	public void onDeleteButton() {
 		yesButton.setVisible(true);
 		noButton.setVisible(true);
 		confirm.setText("Are you sure?");
 	}
-	public  void onNoButton() {
+
+	/**
+	 * End deleting game save mode without deleting game
+	 */
+	public void onNoButton() {
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		confirm.setText("");
 	}
-	public void onYesButton() {
+
+	/**
+	 * Deletes the selected game
+	 * @throws IOException if game failed to delete
+	 */
+	public void onYesButton() throws IOException {
 		File saveFile = new File("SaveData\\GameSave\\" + selectGame.getValue());
-		saveFile.delete();
+		if (!saveFile.delete()) {
+			throw new IOException("Failed to delete file" + saveFile.toString());
+		}
 		selectGame.getItems().remove(selectGame.getValue());
 		selectGame.getSelectionModel().selectFirst();
 		yesButton.setVisible(false);

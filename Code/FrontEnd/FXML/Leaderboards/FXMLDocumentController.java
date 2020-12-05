@@ -2,6 +2,7 @@ package FrontEnd.FXML.Leaderboards;
 
 import BackEnd.Leaderboard;
 import BackEnd.Score;
+import FrontEnd.StateLoad;
 import FrontEnd.WindowLoader;
 import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class FXMLDocumentController {
+public class FXMLDocumentController extends StateLoad {
 
     private Label label;
     @FXML
@@ -46,11 +47,11 @@ public class FXMLDocumentController {
         example1.loadFile();
         highScore.setItems(example1.getObservableList());
         TableColumn<Score, String> nameColumn = new TableColumn<Score, String>("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         TableColumn<Score, String> winsColumn = new TableColumn<Score, String>("Wins");
-        winsColumn.setCellValueFactory(new PropertyValueFactory("wins"));
+        winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
         TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
-        lossesColumn.setCellValueFactory(new PropertyValueFactory("loss"));
+        lossesColumn.setCellValueFactory(new PropertyValueFactory<>("loss"));
 
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
@@ -86,7 +87,7 @@ public class FXMLDocumentController {
 
     public void onNewGame(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
-        wl.load("MenuScreen");
+        wl.load("MenuScreen", getInitData());
     }
 
 
@@ -96,6 +97,16 @@ public class FXMLDocumentController {
     }
 
 
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-
+    }
 }
