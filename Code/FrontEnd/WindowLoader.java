@@ -31,16 +31,6 @@ public class WindowLoader {
 		w = primaryStage;
 	}
 
-	/**
-	 * Set if the window should be fullscreen or not
-	 *
-	 * @param fullscreen true for fullscreen, false for not
-	 */
-	public static void setFullScreen(boolean fullscreen) {
-		isFullscreen = fullscreen;
-		w.setFullScreen(isFullscreen);
-	}
-
     /**
      * Returns if the screen is set to be fullscreen.
      *
@@ -76,8 +66,10 @@ public class WindowLoader {
 			System.exit(1);
 		} else {
 			if (w.getScene() == null) {
+				w.setFullScreen(true);
 				w.setScene(new Scene(root));
 			} else {
+				w.setFullScreen(true);
 				w.getScene().setRoot(root);
 			}
 		}

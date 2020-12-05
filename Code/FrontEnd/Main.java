@@ -68,9 +68,9 @@ public class Main extends Application {
         }
 
         Main.setVolume(soundLevel);
-        primaryStage.setWidth(SettingsController.getWidth(RESOLUTION.values()[resolution]));
-        primaryStage.setHeight(SettingsController.getHeight(RESOLUTION.values()[resolution]));
-        primaryStage.setFullScreen(fullscreen);
+       // primaryStage.setWidth(SettingsController.getWidth(RESOLUTION.values()[resolution]));
+       // primaryStage.setHeight(SettingsController.getHeight(RESOLUTION.values()[resolution]));
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Covid Game?");
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -86,8 +86,8 @@ public class Main extends Application {
         initData.put("Volume", String.valueOf(soundLevel));
         initData.put("FullScreen", "true");
         initData.put("Resolution", resolution + "");
-        primaryStage.show();
         wl.load("startScreen", initData);
+        primaryStage.show();
     }
 
     public static void setVolume(double volume) {
