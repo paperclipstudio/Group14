@@ -37,15 +37,18 @@ public class GameSetupController extends StateLoad {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		String[] gameBoards;
-		File gameBoardLocation = new File("Gameboards"); // TODO move to folder //saveData//
-		gameBoards = gameBoardLocation.list();
-		if (gameBoards != null) {
-			for (String gameBoard : gameBoards) {
-				selectGameBoard.getItems().add(gameBoard);
+		if (selectGameBoard.getValue() == null) {
+			String[] gameBoards;
+			File gameBoardLocation = new File("Gameboards");
+			gameBoards = gameBoardLocation.list();
+			if (gameBoards != null) {
+				for (String gameBoard : gameBoards) {
+					gameBoard = gameBoard.substring(0, gameBoard.length() - 4);
+					selectGameBoard.getItems().add(gameBoard);
+				}
 			}
+			selectGameBoard.getSelectionModel().selectFirst();
 		}
-		selectGameBoard.getSelectionModel().selectFirst();
 	}
 
 	/***
@@ -62,11 +65,11 @@ public class GameSetupController extends StateLoad {
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		getInitData().put("Seed", "" + ((new Random()).nextInt()));
-		getInitData().put("Board", selectGameBoard.getValue());
+		String gameBoard = selectGameBoard.getValue() + ".txt";
+		getInitData().put("Board", gameBoard);
 		getInitData().put("PlayerCount", ((RadioButton) playerCount.getSelectedToggle()).getText());
 		getInitData().put("LoadFile", saveName.getText());
 		getInitData().put("isLoadedFile", "false");
-		RadioButton selectedToggle = (RadioButton) playerCount.getSelectedToggle();
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
 		if ((gameSaveName.equals(""))) {
