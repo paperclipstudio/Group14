@@ -24,6 +24,8 @@ public class Main extends Application {
     private static final double DEFAULT_SOUND_LEVEL = 0.0;
     private static final boolean DEFAULT_FULLSCREEN = false;
     private static final int DEFAULT_RESOLUTION = 0;
+    int track = 0;
+
 
     private static RESOLUTION resolution = RESOLUTION.SIX_BY_FOUR;
 
@@ -75,14 +77,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         String musicFile = "Assets\\music.mp3";     // For example
-        String [] musicFiles = {"Assets\\music.mp3","Assets\\music.mp3"};
 
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setCycleCount(Integer.MAX_VALUE);
-
-        mediaPlayer.setVolume(soundLevel);
-        mediaPlayer.play();
+        playMusic(soundLevel);
 
         initData.put("Volume", String.valueOf(soundLevel));
         initData.put("FullScreen", "true");
@@ -99,6 +95,32 @@ public class Main extends Application {
 
     public static double getVolume() {
         return mediaPlayer.getVolume() * 200;
+    }
+
+    public void playMusic(double soundLevel) {
+        String [] musicFiles = {"Assets\\music.mp3","Assets\\music2.mp3","Assets\\music3.mp3", "Assets\\music4.mp3","Assets\\music5.mp3"};
+        Media sound = new Media(new File(musicFiles[track]).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(0);
+
+        mediaPlayer.setVolume(soundLevel);
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.stop();
+                track = (track +1) % musicFiles.length ;
+                playMusic(soundLevel);
+
+                if (track > musicFiles.length){
+                    track = 0;
+                    playMusic(soundLevel);
+                    }
+                }
+
+
+
+        });
     }
 
     /***
