@@ -10,13 +10,21 @@ import static BackEnd.TileType.FIRE;
 import static BackEnd.TileType.FROZEN;
 
 /**
- * Class used to load games from file
+ * This class loads a game by reading the save file and running the inputs of the save file
+ * through the gameLogic to re-create the game.
+ *
+ * @author David Langmaid & George Sanger
+ * @version 1.0
  */
 public class GameLoad {
+
 	/**
+	 * This is the only method in the class, it handles the file reading and loading each player choice
+	 * into the game logic to get it to its loaded state.
+	 *
 	 * @param initData information about the gameState
 	 * @return pair where key is gameLogic for new game and value is all profiles
-	 * @throws IOException
+	 * @throws IOException if the save file cannot be found.
 	 */
 	public static Pair<GameLogic, Profile[]> loader(HashMap<String, String> initData) throws Exception {
 		File loadFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile"));
@@ -78,7 +86,6 @@ public class GameLoad {
 					x = lineReader.nextInt();
 					y = lineReader.nextInt();
 					gameLogic.move(new Coordinate(x, y));
-
 			}
 		}
 		return new Pair<>(gameLogic, profiles);
