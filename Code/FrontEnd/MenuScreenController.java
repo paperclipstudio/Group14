@@ -2,11 +2,12 @@ package FrontEnd;
 
 import MessageOfTheDay.MessageOfTheDay;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.AudioClip;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,10 +18,15 @@ import java.util.ResourceBundle;
  */
 public class MenuScreenController extends StateLoad {
 
+    private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
+    private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
+    private final double SFX_VOLUME = 0.2;
+
     @FXML
     private Button newGameButton;
     @FXML
     private Label MoTD;
+
     private WindowLoader wl;
 
     @Override
@@ -48,6 +54,7 @@ public class MenuScreenController extends StateLoad {
     public void onNewGame() {
         wl = new WindowLoader(newGameButton);
         wl.load("GameSetup", getInitData());
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
     }
 
     /**
@@ -57,6 +64,7 @@ public class MenuScreenController extends StateLoad {
     public void onLoadGame() {
         wl = new WindowLoader(newGameButton);
         wl.load("LoadGame", getInitData());
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
     }
 
     /**
@@ -66,6 +74,7 @@ public class MenuScreenController extends StateLoad {
     public void onSettings() {
         wl = new WindowLoader(newGameButton);
         wl.load("Settings", getInitData());
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
     }
 
     /**
@@ -75,6 +84,7 @@ public class MenuScreenController extends StateLoad {
     public void onPlayerProfiles() {
         wl = new WindowLoader(newGameButton);
         wl.load("Profiles", getInitData());
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
     }
 
     /**
@@ -84,11 +94,12 @@ public class MenuScreenController extends StateLoad {
     public void onLeaderBoard() {
         wl = new WindowLoader(newGameButton);
         wl.load("/Leaderboards/FXMLDocument", getInitData());
-
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
     }
 
-    public void onHowToPlay(ActionEvent actionEvent) {
+    public void onHowToPlay() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
     }
 }
