@@ -128,18 +128,15 @@ public class Profile {
      * @throws IOException Wrong input
      */
     public static Profile readProfile(String profileFile) throws IOException {
-
         String name = profileFile;
-
-        String playerIcon = null;
-
+        String playerIcon;
         String line;
         int wins = 0;
         int losses = 0;
         BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + profileFile + ".txt"));
+
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(":", 2);
-
             if (parts.length >= 2) {
                 wins = Integer.parseInt(parts[0]);
                 losses = Integer.parseInt(parts[1]);
@@ -147,7 +144,6 @@ public class Profile {
         }
 
         playerIcon = "icon2";
-
         return new Profile(name, playerIcon, wins, losses);
     }
 }

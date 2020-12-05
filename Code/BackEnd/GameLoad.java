@@ -33,6 +33,7 @@ public class GameLoad {
 			throw new IOException("Invalid file format, no game board file");
 		}
 		String gameBoard = in.nextLine();
+		initData.put("Board", gameBoard);
 		int silkBagSeed = Integer.parseInt(in.nextLine());
 		int playerCount = Integer.parseInt(in.nextLine());
 
