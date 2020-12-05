@@ -107,6 +107,5 @@ public class FXMLDocumentController extends StateLoad {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
