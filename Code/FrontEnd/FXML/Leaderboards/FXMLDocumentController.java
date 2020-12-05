@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -21,12 +22,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class FXMLDocumentController extends StateLoad {
+
+    private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+    private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+    private final String BOARD_SFX = "Assets\\SFX\\board.mp3";
+    private final AudioClip BOARD_AUDIO = new AudioClip(new File(BOARD_SFX).toURI().toString());
+    private final double SFX_VOLUME = 0.2;
 
     private Label label;
     @FXML
@@ -42,7 +50,8 @@ public class FXMLDocumentController extends StateLoad {
     private BorderPane mainPane;
 
 
-    public void handleButton1Action(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void handleButton1Action() throws IOException {
+        BOARD_AUDIO.play(SFX_VOLUME);
         Leaderboard example1 = new Leaderboard("example1");
         example1.loadFile();
         highScore.setItems(example1.getObservableList());
@@ -52,11 +61,11 @@ public class FXMLDocumentController extends StateLoad {
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
         TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
         lossesColumn.setCellValueFactory(new PropertyValueFactory<>("loss"));
-
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
-    public void handleButton2Action(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void handleButton2Action() throws IOException {
+        BOARD_AUDIO.play(SFX_VOLUME);
         Leaderboard example2 = new Leaderboard("example2");
         example2.loadFile();
         highScore.setItems(example2.getObservableList());
@@ -66,11 +75,11 @@ public class FXMLDocumentController extends StateLoad {
         winsColumn.setCellValueFactory(new PropertyValueFactory("wins"));
         TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
         lossesColumn.setCellValueFactory(new PropertyValueFactory("loss"));
-
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
-    public void handleButton3Action(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void handleButton3Action() throws IOException {
+        BOARD_AUDIO.play(SFX_VOLUME);
         Leaderboard example3 = new Leaderboard("example3");
         example3.loadFile();
         highScore.setItems(example3.getObservableList());
@@ -80,22 +89,20 @@ public class FXMLDocumentController extends StateLoad {
         winsColumn.setCellValueFactory(new PropertyValueFactory("wins"));
         TableColumn<Score, String> lossesColumn = new TableColumn<Score, String>("Losses");
         lossesColumn.setCellValueFactory(new PropertyValueFactory("loss"));
-
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
 
-    public void onNewGame(ActionEvent actionEvent) {
+    public void onNewGame() {
+        RETURN_AUDIO.play(SFX_VOLUME);
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
     }
 
 
-    public void onQuitButton(ActionEvent actionEvent) {
+    public void onQuitButton() {
         Platform.exit();
-        ;
     }
-
 
     /**
      * Called to initialize a controller after its root element has been

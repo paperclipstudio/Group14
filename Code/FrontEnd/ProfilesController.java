@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.media.AudioClip;
 
 import java.io.*;
 import java.net.URL;
@@ -18,6 +19,15 @@ import java.util.ResourceBundle;
  * @version 1.0
  */
 public class ProfilesController extends StateLoad {
+
+	private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
+	private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
+	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+	private final String ERROR_SFX = "Assets\\SFX\\error.mp3";
+	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
+	private final double SFX_VOLUME = 0.2;
+
 	@FXML
 	public Button viewButton;
 	@FXML
@@ -55,6 +65,7 @@ public class ProfilesController extends StateLoad {
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen", getInitData());
+		RETURN_AUDIO.play(SFX_VOLUME);
 	}
 
 	/**
@@ -66,14 +77,16 @@ public class ProfilesController extends StateLoad {
 	public void createFile() throws IOException {
 		String newName = input.getText();
 		File user = new File("SaveData\\UserData\\" + newName + ".txt");
-		if (user.exists() && !user.isDirectory()) {
-			input.setStyle("-fx-background-color: red");
+		if (user.exists() && !user.isDirectory() || newName.isEmpty()) {
+			input.setStyle("-fx-border-color: red");
+			ERROR_AUDIO.play(SFX_VOLUME);
 		} else {
 			input.setStyle("-fx-background-color: white");
 			playerList.getItems().addAll(newName);
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
 			newUser.write("0 0 icon0");
 			newUser.close();
+			MAIN_MENU_AUDIO.play(SFX_VOLUME);
 		}
 	}
 
@@ -86,9 +99,10 @@ public class ProfilesController extends StateLoad {
         if (user.delete()) {
             input.setStyle("-fx-border-color: default");
             playerList.getItems().remove(newName);
-
+			MAIN_MENU_AUDIO.play(SFX_VOLUME);
         } else {
-            input.setStyle("-fx-border-color: default");
+			ERROR_AUDIO.play(SFX_VOLUME);
+            input.setStyle("-fx-border-color: red");
         }
     }
 
@@ -113,7 +127,9 @@ public class ProfilesController extends StateLoad {
             }
             reader.close();
             playerRecord.setText("This player has " + getWin + " wins and " + getLoss + " losses.");
+			MAIN_MENU_AUDIO.play(SFX_VOLUME);
         } catch (IOException noPlayerFound) {
+			ERROR_AUDIO.play(SFX_VOLUME);
             playerRecord.setText("Please select a player.");
         }
     }
