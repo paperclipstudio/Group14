@@ -2,6 +2,7 @@ package FrontEnd;
 
 import MessageOfTheDay.MessageOfTheDay;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -84,5 +85,10 @@ public class MenuScreenController extends StateLoad {
         wl = new WindowLoader(newGameButton);
         wl.load("/Leaderboards/FXMLDocument", getInitData());
 
+    }
+
+    public void onHowToPlay(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/HowToPlay", getInitData());
     }
 }

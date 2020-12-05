@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 
 public class Leaderboard {
-    private static final String FOLDER = "SaveData\\Leaderboards\\";
+    private static final String boardFolder = "SaveData\\Leaderboards\\";
     private static final String EXT = ".lb";
     private final File file;
     private final String gameBoard;
@@ -29,14 +29,16 @@ public class Leaderboard {
      * Creates leaderboard for a board and attempts to load it from file.
      *
      * @param gameBoard name of the game board that this leaderboard is for
-     * @throws IOException if file can't be found
+     * @throws IOException if file can't be created
      */
     public Leaderboard(String gameBoard) throws IOException {
-        file = new File(FOLDER + gameBoard + EXT);
-        boolean failed;
+        file = new File(boardFolder + gameBoard + EXT);
         this.gameBoard = gameBoard;
-        failed = file.createNewFile();
-        // File is already there
+        if (!file.exists()) {
+            if(!file.createNewFile()) {
+                throw new IOException("Leaderboard " + gameBoard + " couldn't be read to");
+            }
+        }
         loadFile();
     }
 
@@ -47,11 +49,40 @@ public class Leaderboard {
      * @param wins number of wins.
      * @param loss number of losses.
      */
-    public void update(String name, int wins, int loss) {
+    public void update(String name, int wins, int loss) throws IOException {
         Score newScore = new Score(name, wins, loss);
         remove(name);
         scores.add(newScore);
+        saveFile();
     }
+
+    private Score find(String name) {
+        for(Score score: getAllScores()) {
+            if (score.getName().equals(name)) {
+                return score;
+            }
+        }
+        return null;
+    }
+
+    public void addWin(String name) throws IOException {
+        Score toUpdate = find(name);
+        if (toUpdate == null) {
+            update(name, 1 ,0);
+        } else {
+            update(toUpdate.getName(), toUpdate.getWins() + 1, toUpdate.getLoss());
+        }
+    }
+
+    public void addLoss(String name) throws IOException {
+        Score toUpdate = find(name);
+        if (toUpdate == null) {
+            update(name,  0, 1);
+        } else {
+            update(toUpdate.getName(), toUpdate.getWins(), toUpdate.getLoss() + 1);
+        }
+    }
+
 
     /**
      * Removes a profile from the leaderboard.

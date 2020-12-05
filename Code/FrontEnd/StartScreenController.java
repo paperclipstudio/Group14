@@ -28,7 +28,7 @@ public class StartScreenController extends StateLoad {
      */
     public void onNewGame(){ //TODO REMOVE
         wl = new WindowLoader(newGameButton);
-        wl.load("GameSetup", getInitData());
+        wl.load("MenuScreen", getInitData());
 }
 
     /**

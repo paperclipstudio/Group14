@@ -1,0 +1,17 @@
+@font-face {
+    src: url('Sketch.ttf');
+}
+
+.button {
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+    -fx-font-size: 19px;
+    -fx-pref-width: 200;
+}
+
+
+.WindowName {
+    -fx-font-family: "Sketch ";
+    -fx-font-size: 90px;
+    -fx-fill: #AAAA33;
+}

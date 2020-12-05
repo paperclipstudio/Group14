@@ -1,0 +1,39 @@
+ExampleInput.txt
+-1392516306
+4
+Adam
+George
+hello
+Olivia
+draw 
+floor T_SHAPE UP 8 4
+action null  0 null 
+move 2 4
+draw 
+action null  0 null 
+move 7 0
+draw 
+action null  0 null 
+move 7 4
+draw 
+action null  0 null 
+move 5 0
+draw 
+action null  0 null 
+move 3 4
+draw 
+floor T_SHAPE UP 3 10
+action null  0 null 
+move 7 1
+draw 
+action null  0 null 
+move 7 5
+draw 
+floor T_SHAPE UP 6 10
+action null  0 null 
+move 6 0
+draw 
+action DOUBLE_MOVE 0 null 
+move 4 3
+move 3 3
+draw 
