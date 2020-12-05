@@ -1,0 +1,37 @@
+@font-face {
+    src: url('Sketch.ttf');
+}
+
+.button{
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+    -fx-font-size: 19px;
+    -fx-pref-width: 200;
+}
+
+.text {
+    -fx-text-fill: whitesmoke;
+    -fx-fill: white;
+    -fx-font-family: Consolas;
+    -fx-font-size: 16;
+}
+
+.label {
+    -fx-text-fill: whitesmoke;
+    -fx-fill: white;
+    -fx-font-family: Impact;
+    -fx-font-size: 20;
+}
+
+.WindowName {
+    -fx-font-family: "Sketch ";
+    -fx-font-size: 90px;
+    -fx-fill: #AAAA33;
+}
+
+.MessageOfTheDay {
+    -fx-text-fill: whitesmoke;
+    -fx-fill: white;
+    -fx-font-family: Consolas;
+    -fx-font-size: 10;
+}

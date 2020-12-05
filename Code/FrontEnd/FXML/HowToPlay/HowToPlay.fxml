@@ -5,43 +5,25 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;" stylesheets="menuStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController">
     <center>
         <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
-               <children>
-                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to play" textAlignment="CENTER" translateY="30.0" wrappingWidth="417.33154296875">
-                            <font>
-                                <Font name="lazer84" size="65.0" />
-                            </font>
-                            <fill>
-                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                                    <stops>
-                                        <Stop color="#009e05" />
-                                        <Stop color="#024300" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </fill>
-                        </Text>
-               </children>
-                </HBox>
-            <Button fx:id="tilesButton1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBasics" prefHeight="25.0" prefWidth="100.0" text="Basics" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
-                <Button fx:id="tilesButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onTiles" prefHeight="25.0" prefWidth="100.0" text="Tiles" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
-                <Button fx:id="turnsButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onTurns" prefHeight="25.0" prefWidth="100.0" text="Turns" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
-                <Button fx:id="movementButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMovement" prefHeight="25.0" prefWidth="100.0" text="Movement" textAlignment="CENTER" textFill="#009e05" translateY="30.0" />
-                <Button fx:id="actionTilesButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionTiles" prefHeight="25.0" prefWidth="100.0" text="Action Tiles" textAlignment="CENTER" textFill="#009e05" translateY="30.0" />
-                <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackToMenu" prefHeight="25.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
-            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
-            </children>
+            <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
+                <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="How to play" textAlignment="CENTER" translateY="30.0" wrappingWidth="417.33154296875">
+                </Text>
+            </HBox>
+            <Button fx:id="tilesButton1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBasics" prefHeight="25.0" prefWidth="100.0" text="Basics" textAlignment="CENTER" translateY="30.0" />
+            <Button fx:id="tilesButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onTiles" prefHeight="25.0" prefWidth="100.0" text="Tiles" textAlignment="CENTER" translateY="30.0" />
+            <Button fx:id="turnsButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onTurns" prefHeight="25.0" prefWidth="100.0" text="Turns" textAlignment="CENTER" translateY="30.0" />
+            <Button fx:id="movementButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMovement" prefHeight="25.0" prefWidth="100.0" text="Movement" textAlignment="CENTER" translateY="30.0" />
+            <Button fx:id="actionTilesButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionTiles" prefHeight="25.0" prefWidth="100.0" text="Action Tiles" textAlignment="CENTER" translateY="30.0" />
+            <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackToMenu" prefHeight="25.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER" translateY="30.0" />
+            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" translateY="30.0" />
         </VBox>
     </center>
-   <bottom>
-      <Label BorderPane.alignment="CENTER" />
-   </bottom>
+    <bottom>
+        <Label BorderPane.alignment="CENTER" />
+    </bottom>
 </BorderPane>

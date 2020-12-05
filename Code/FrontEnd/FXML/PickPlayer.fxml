@@ -11,23 +11,14 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.PickPlayerController">
+
+<BorderPane prefHeight="400.0"  stylesheets="menuStyle.css" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.PickPlayerController" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
    <center>
       <VBox alignment="CENTER" layoutY="200.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
             <Label fx:id="player3Text" layoutX="70.0" layoutY="210.0" prefHeight="25.0" prefWidth="49.0" text="player3" textFill="#009e05" visible="false" />
-            <Label layoutX="60.0" layoutY="14.0" prefHeight="94.0" prefWidth="480.0" text="Player Selection">
-               <font>
-                  <Font size="65.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop color="#009e05" />
-                        <Stop color="#024300" offset="1.0" />
-                     </stops>
-                  </RadialGradient>
-               </textFill>
+            <Label styleClass="WindowName" layoutX="60.0" layoutY="14.0" prefHeight="94.0" prefWidth="480.0" text="Player Selection">
+
             </Label>
             <Label layoutX="70.0" layoutY="150.0" prefHeight="25.0" prefWidth="49.0" text="player1" textFill="#009e05" />
             <ChoiceBox fx:id="playerList1" layoutX="120.0" layoutY="150.0" prefWidth="150.0" />
