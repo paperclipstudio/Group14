@@ -15,7 +15,7 @@
    <center>
         <VBox alignment="CENTER" onKeyPressed="#OnKeyPressed" onMouseClicked="#onMousePress" prefHeight="352.0" prefWidth="485.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="0" prefWidth="0" text="New Game" textAlignment="CENTER" textFill="#009c05" />
+                <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="0" prefWidth="0" text="New Game" textAlignment="CENTER" textFill="#009c05" />
                 <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
                <children>
                   <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Name" textAlignment="CENTER" translateY="10.0" underline="true" wrappingWidth="628.33154296875">
