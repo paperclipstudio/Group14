@@ -6,8 +6,8 @@
 0 Corner
 0 Straight
 70 T-Shape
-6000 Fire
-0 Ice
+0 Fire
+6000 Ice
 5 Backtrack
 5 DoubleMove
 0 Goal
