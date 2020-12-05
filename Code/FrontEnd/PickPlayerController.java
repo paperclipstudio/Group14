@@ -44,6 +44,15 @@ public class PickPlayerController extends StateLoad {
     public Label hint;
 
 	@FXML
+	public Label player2Text;
+
+	@FXML
+	public Label player3Text;
+
+	@FXML
+	public Label player4Text;
+
+	@FXML
 	private Button backButton;
 
 	ArrayList<Profile> profiles = new ArrayList<>();
@@ -76,12 +85,15 @@ public class PickPlayerController extends StateLoad {
 				int playerCount = Integer.parseInt(getInitData().get("PlayerCount"));
 				if (playerCount >= 2) {
 					playerList2.setVisible(true);
+					player2Text.setVisible(true);
 				}
 				if (playerCount >= 3) {
 					playerList3.setVisible(true);
+					player3Text.setVisible(true);
 				}
 				if (playerCount >= 4) {
 					playerList4.setVisible(true);
+					player4Text.setVisible(true);
 				}
 			}
 		}
