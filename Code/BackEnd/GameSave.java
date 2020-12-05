@@ -17,7 +17,7 @@ public class GameSave {
     // Tracks if a change has happened that hasn't been saved to file
     private boolean isGameSaved = false;
     // All information needed to restore game
-    private String gameSaveString;
+    private StringBuilder gameState;
     // File that game will be saved too.
     private final File gameSaveFile;
 
@@ -28,22 +28,24 @@ public class GameSave {
      */
     public GameSave(HashMap<String, String> initData) throws IOException {
         gameSaveFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile") + ".sav");
-        gameSaveString = "\n" + initData.get("Seed");
-        gameSaveString += "\n" + initData.get("PlayerCount");
+        gameState = new StringBuilder();
+        gameState.append(initData.get("Board")).append("\n");
+        gameState.append(initData.get("Seed")).append("\n");
+        gameState.append(initData.get("PlayerCount")).append("\n");
         int playerCount = Integer.parseInt(initData.get("PlayerCount"));
         Profile[] profiles = new Profile[playerCount];
         for(int i = 0; i < playerCount; i++) {
             profiles[i] = Profile.readProfile(initData.get("Profile" + i));
         }
         for (Profile profile: profiles) {
-            gameSaveString += "\n" + profile.getName();
+            gameState.append(profile.getName()).append("\n");
         }
     }
     /**
      * Keeps note that a player has drawn a card.
      */
     public void draw() {
-        gameSaveString += "\ndraw";
+        gameState.append("draw \n");
         isGameSaved = false;
     }
     /**
@@ -53,9 +55,14 @@ public class GameSave {
      * @param tile what tile was played
      */
     public void playFloorTile(Coordinate slideLocations, FloorTile tile){
-        gameSaveString = gameSaveString + "\nfloor " + tile.getType() + " " + tile.getRotation() + " " + slideLocations.getX() + " " + slideLocations.getY();
+        String floor = String.format("floor %s %s %s\n",
+                tile.getType().toString(),
+                tile.getRotation().toString(),
+                slideLocations.toString());
+        gameState.append(floor);
         isGameSaved = false;
     }
+
     /**
      * Keeps note that a player has played a action card.
      *
@@ -65,10 +72,9 @@ public class GameSave {
      */
     public void playActionTile(Coordinate location, ActionTile tile, int playerNo) {
         String type = tile == null ? "null " : tile.getType().toString();
-        gameSaveString += "\naction " + type + " " + playerNo;
-        if (location != null) {
-            gameSaveString += " " + location.toString();
-        }
+        String locationAsString = location == null ? "null" : location.toString();
+        String action = String.format("action %s %d %s \n", type, playerNo, locationAsString);
+        gameState.append(action);
         isGameSaved = false;
     }
     /**
@@ -77,7 +83,8 @@ public class GameSave {
      * @param location where a player moved to.
      */
     public void playerMove(Coordinate location) {
-        gameSaveString = gameSaveString + "\nmove " + location.getX() + " " + location.getY();
+        String move = String.format("move %s\n", location.toString());
+        gameState.append(move);
         isGameSaved = false;
     }
     /**
@@ -94,7 +101,7 @@ public class GameSave {
      */
     public void saveToFile() throws IOException {
         FileWriter writer = new FileWriter(gameSaveFile, true);
-        writer.write(gameSaveString);
+        writer.write(gameState.toString());
         writer.flush();
         writer.close();
         isGameSaved = true;
@@ -103,7 +110,7 @@ public class GameSave {
      * Clears the game save string.
      */
     public void emptyGameSaveString() {
-        gameSaveString = "";
+        gameState = new StringBuilder();
         isGameSaved = true;
     }
 }

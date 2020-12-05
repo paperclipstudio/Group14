@@ -1,0 +1,21 @@
+actionsonly.txt
+2Olivia
+draw 
+action null  0
+move 2 1
+draw 
+action null  0
+move 2 3
+draw 
+action FIRE -1
+ 6 3move 3 1
+draw 
+action FIRE -1
+ 6 6move 3 3
+draw 
+action FIRE -1
+ 6 1move 4 1
+draw 
+action FIRE -1
+ 3 1move 2 3
+draw 

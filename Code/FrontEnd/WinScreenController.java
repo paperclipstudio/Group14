@@ -23,7 +23,9 @@ public class WinScreenController extends StateLoad {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        winner.setText("Congratulations Player " + getInitData().get("Winner") + "!");
+        if (getInitData() != null) {
+            winner.setText("Congratulations Player " + getInitData().get("Winner") + "!");
+        }
     }
 
     /**

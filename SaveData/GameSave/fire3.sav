@@ -1,0 +1,25 @@
+actionsonly.txt
+2
+Olivia
+draw
+action null  0
+move 2 5
+draw
+action null  0
+move 1 5
+draw
+action FROZEN -1 5 2
+move 2 4
+draw
+action FROZEN -1 6 2
+move 0 5
+draw
+action FROZEN -1 4 1
+move 2 5
+draw
+action FROZEN -1 6 2
+move 1 5
+draw
+action FROZEN -1 6 6
+move 2 4
+draw

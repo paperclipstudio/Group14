@@ -188,6 +188,7 @@ public class GameLogic {
             currentPlayerNo = (currentPlayerNo + 1) % getNumberOfPlayers();
             currentPlayer = players[currentPlayerNo];
         }
+        gameboard.ticTiles();
     }
 
     /**
