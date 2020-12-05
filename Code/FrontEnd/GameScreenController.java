@@ -476,8 +476,6 @@ public class GameScreenController extends StateLoad {
             cards.getChildren().add(drawnCard);
         }
 
-
-
 		for (ActionTile tile : tiles) {
 			final Node vCard = Assets.createCard(tile);
 			vCard.setOnMouseClicked((e) -> {
@@ -586,6 +584,19 @@ public class GameScreenController extends StateLoad {
 		}
 		if (getY > height - 2) {
 			getY = height - 2;
+		}
+		if (tileType == FIRE) {
+			// If person on location end method
+			for (int shiftX = -1; shiftX <= 1; shiftX++) {
+				for (int shiftY = -1; shiftY <= 1; shiftY++) {
+					Coordinate locationToCheck = new Coordinate(getX + shiftX, getY + shiftY);
+					for (Coordinate person : gameLogic.getPlayerLocations()) {
+						if (person.equals(locationToCheck)) {
+							return;
+						}
+					}
+				}
+			}
 		}
 		final int x = getX;
 		final int y = getY;
