@@ -48,7 +48,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gameboard" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Players" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="saveName" text="Input Game Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <TextField fx:id="saveName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <fx:define>

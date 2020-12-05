@@ -49,6 +49,7 @@ public class GameSetupController extends StateLoad {
 			}
 			selectGameBoard.getSelectionModel().selectFirst();
 		}
+		saveName.setPromptText("Enter game name");
 	}
 
 	/***
@@ -73,12 +74,14 @@ public class GameSetupController extends StateLoad {
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
 		if ((gameSaveName.equals(""))) {
-			saveName.setText("Must Enter game name");
+			saveName.setStyle("-fx-prompt-text-fill:red;");
 			return;
 		}
 		File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
 		if (gameSaveFile.exists()) {
-			saveName.setText("Game already exists - Please enter new name");
+			saveName.clear();
+			saveName.setPromptText("Game already exists");
+			saveName.setStyle("-fx-prompt-text-fill:red;");
 			return;
 		}
 		wl.load("PickPlayer", getInitData());
