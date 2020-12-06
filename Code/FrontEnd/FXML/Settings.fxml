@@ -26,15 +26,20 @@
             <RowConstraints minHeight="10.0" percentHeight="12.5" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <Text fill="#aaaa33" lineSpacing="60.0" strokeType="OUTSIDE" styleClass="WindowName" strokeWidth="0.0" text="Settings" textAlignment="CENTER" wrappingWidth="417.33154296875" GridPane.columnSpan="4" GridPane.halignment="CENTER">
-            <font>
-               <Font name="Sketch " size="90.0" />
-            </font></Text>
-         <Slider fx:id="background" onMouseClicked="#onBackgroundChange" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-         <Slider fx:id="sfx" onMouseClicked="#onSFXChange" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-         <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER" textFill="#009e05" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Music sound level" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Sound FX level" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <Text lineSpacing="60.0" strokeType="OUTSIDE" styleClass="WindowName" strokeWidth="0.0" text="Settings" textAlignment="CENTER"
+               wrappingWidth="417.33154296875" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+         </Text>
+         <Slider fx:id="background" onMouseClicked="#onBackgroundChange" GridPane.columnIndex="2"
+                 GridPane.rowIndex="1"/>
+         <Slider fx:id="sfx" onMouseClicked="#onSFXChange" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+         <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                 onAction="#onBackButton" prefHeight="25.0" prefWidth="100.0" text="Back" textAlignment="CENTER"
+                 textFill="#009e05" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
+                 text="Background sound level" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
+                 text="Sound FX level" textAlignment="CENTER" textFill="#009c05" GridPane.columnIndex="1"
+                 GridPane.rowIndex="2"/>
       </GridPane>
    </center>
 </BorderPane>
