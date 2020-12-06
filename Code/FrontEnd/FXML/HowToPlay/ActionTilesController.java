@@ -6,16 +6,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.AudioClip;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Use to control the GameScreen scene.
+ * This class is used to display the different action tiles and their uses.
  *
- * @author David Langmaid
+ * @author Daniel Jones Ortega
  */
 public class ActionTilesController extends StateLoad {
+
+    private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
+    private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
+    private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+    private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+    private final double SFX_VOLUME = 0.2;
 
     @FXML
     private Button newGameButton;
@@ -23,45 +31,15 @@ public class ActionTilesController extends StateLoad {
     private Label MoTD;
     private WindowLoader wl;
 
-
-
-    /**
-     * Used to exit the application
-     */
-
     /**
      * Called when new game is clicked
      * opens game setup
      */
+
     public void onNewGame() {
         wl = new WindowLoader(newGameButton);
         wl.load("GameSetup", getInitData());
     }
-
-    /**
-     * called when load game is clicked
-     * opens load game screen
-     */
-
-
-    /**
-     * called when settings button is clicked
-     * opens settings window
-     */
-
-
-    /**
-     * called when profiles button is clicked
-     * opens profile window
-     */
-
-
-    /**
-     * called when leaderboard button is clicked
-     * opens leaderboard window
-     */
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,34 +47,39 @@ public class ActionTilesController extends StateLoad {
     }
 
     public void onIce(ActionEvent actionEvent) {
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Ice", getInitData());
     }
 
     public void onFire(ActionEvent actionEvent) {
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Fire", getInitData());
     }
 
     public void onDoubleMove(ActionEvent actionEvent) {
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Double Move", getInitData());
     }
 
-    public void onBack(ActionEvent actionEvent) {
-        wl = new WindowLoader(newGameButton);
-        wl.load("/HowToPlay/ActionTiles", getInitData());
-
-    }
-
     public void onBacktrack(ActionEvent actionEvent) {
+        MAIN_MENU_AUDIO.play(SFX_VOLUME);
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Backtrack", getInitData());
 
     }
 
+    public void onBack(ActionEvent actionEvent) {
+        wl = new WindowLoader(newGameButton);
+        wl.load("/HowToPlay/ActionTiles", getInitData());
+        RETURN_AUDIO.play(SFX_VOLUME);
+    }
+
     public void onBackToMenu(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());
+        RETURN_AUDIO.play(SFX_VOLUME);
     }
 }
