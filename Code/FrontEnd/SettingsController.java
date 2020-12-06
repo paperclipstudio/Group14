@@ -33,8 +33,6 @@ public class SettingsController extends StateLoad {
 	@FXML
 	private Button backButton;
 	@FXML
-	private CheckBox fullscreen;
-	@FXML
 	private Slider background;
 	@FXML
 	private Slider sfx;
