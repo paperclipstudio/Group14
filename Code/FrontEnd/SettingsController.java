@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
  */
 public class SettingsController extends StateLoad {
 
+	/* These final variables are used for the game's Sound Effects (SFX) */
+
 	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
 	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
 	private final String TEST_SFX = "Assets\\SFX\\skip.mp3";

@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
  */
 public class LoadGameController extends StateLoad {
 
+	/* These final variables are used for the game's Sound Effects (SFX) */
+
 	private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
 	private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
 	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
