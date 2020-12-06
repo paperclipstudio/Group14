@@ -35,3 +35,16 @@
     -fx-font-family: Consolas;
     -fx-font-size: 10;
 }
+
+.choice-box{
+    -fx-background-color: #333;
+    -fx-mark-color: white ;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #333;
+}
+
+.cb .menu-item:focused {
+    -fx-background-color: black ;
+}
