@@ -77,7 +77,10 @@ public class Main extends Application {
         }
     }
 
-
+    /**
+     * This method goes through a playlist and and plays each song after the previous ones finished.
+     * @param soundLevel the starting volume of the music.
+     */
     public void playMusic(double soundLevel) {
         String [] musicFiles = {"Assets\\music.mp3","Assets\\music2.mp3","Assets\\music3.mp3", "Assets\\music4.mp3","Assets\\music5.mp3"};
         Media sound = new Media(new File(musicFiles[track]).toURI().toString());
