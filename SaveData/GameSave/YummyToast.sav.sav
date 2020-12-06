@@ -40,30 +40,3 @@ move 3 2
 draw 
 action null  0 null 
 move 4 5
-draw 
-floor T_SHAPE UP -1 2
-draw 
-draw 
-floor T_SHAPE UP -1 4
-draw 
-draw 
-floor T_SHAPE RIGHT 8 4
-draw 
-floor T_SHAPE UP 8 4
-action BACKTRACK 0 null 
-move 4 3
-draw 
-action null  0 null 
-move 5 3
-draw 
-action null  0 null 
-move 4 2
-draw 
-action null  0 null 
-move 5 4
-draw 
-action null  0 null 
-move 4 3
-draw 
-floor STRAIGHT UP 6 -1
-action null  0 null 

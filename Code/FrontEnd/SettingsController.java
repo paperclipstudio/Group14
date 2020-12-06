@@ -43,8 +43,6 @@ public class SettingsController extends StateLoad {
 			sfx.setValue(Double.parseDouble(getInitData().get("SFXVol")));
 			background.setValue(Double.parseDouble(getInitData().get("BackgroundVol")));
 		}
-
-
 	}
 	/**
 	 * updated the current sound level
