@@ -110,8 +110,6 @@ public class GameScreenController extends StateLoad {
 				} else {
 					startNewGame();
 				}
-				int width = (int) root.getHeight();
-				int height = gameLogic.getHeight();
 				tileWidth = (int) (0.6 * Screen.getPrimary().getBounds().getHeight() / gameLogic.getHeight());
 				updateBoard();
 				mainLoop();
