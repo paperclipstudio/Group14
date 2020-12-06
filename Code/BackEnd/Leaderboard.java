@@ -57,6 +57,11 @@ public class Leaderboard {
         saveFile();
     }
 
+    /**
+     * This method takes in a name and finds that players score.
+     * @param name the player to get the score
+     * @return The score of the player.
+     */
     private Score find(String name) {
         for(Score score: getAllScores()) {
             if (score.getName().equals(name)) {
@@ -66,6 +71,11 @@ public class Leaderboard {
         return null;
     }
 
+    /**
+     * This method increments the win of a player.
+     * @param name the name of the player to add a win.
+     * @throws IOException
+     */
     public void addWin(String name) throws IOException {
         Score toUpdate = find(name);
         if (toUpdate == null) {
@@ -75,6 +85,11 @@ public class Leaderboard {
         }
     }
 
+    /**
+     * This method increments a loss of the player.
+     * @param name the player to increment the loss.
+     * @throws IOException
+     */
     public void addLoss(String name) throws IOException {
         Score toUpdate = find(name);
         if (toUpdate == null) {
@@ -128,7 +143,7 @@ public class Leaderboard {
     }
 
     /**
-     * Returns all scores as array.
+     * This method returns all scores as array.
      *
      * @return array of scores
      */
@@ -147,10 +162,18 @@ public class Leaderboard {
     }
 
 
+    /**
+     * This method returns the gameboard.
+     * @return the gameboard to be returned.
+     */
     public String getGameBoard() {
         return gameBoard;
     }
 
+    /**
+     * This method gets all the scores of the players.
+     * @return the scores of the players.
+     */
     public ObservableList<Score> getObservableList() {
         return FXCollections.observableArrayList(scores);
     }
