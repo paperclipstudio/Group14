@@ -7,4 +7,39 @@ draw
 action null  0 null 
 move 4 3
 draw 
-action null  0 null 
+action null  0 null
+move 4 7
+draw
+floor T_SHAPE UP -1 4
+move 4 7
+draw
+floor T_SHAPE UP 8 2
+action FROZEN -1 2 2
+move 4 2
+draw
+floor T_SHAPE UP 8 4
+action BACKTRACK 0 null
+move 4 6
+draw
+floor STRAIGHT UP 8 4
+move 7 0
+draw
+floor T_SHAPE UP 6 -1
+action FROZEN -1 1 1
+move 5 3
+draw
+floor T_SHAPE RIGHT 8 7
+action null  0 null
+move 6 0
+draw
+floor STRAIGHT UP 6 -1
+action null  0 null
+move 5 4
+draw
+floor T_SHAPE UP 8 1
+action null  0 null
+move 5 2
+draw
+floor T_SHAPE UP 8 2
+action null  0 null
+move 4 4

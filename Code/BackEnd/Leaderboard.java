@@ -103,11 +103,13 @@ public class Leaderboard {
         scores.clear();
         while (in.hasNext()) {
             Scanner highScore = new Scanner(in.nextLine());
-            String name = highScore.next();
-            int wins = highScore.nextInt();
-            int loss = highScore.nextInt();
-            Score score = new Score(name, wins, loss);
-            scores.add(score);
+            if (highScore.hasNext()) {
+                String name = highScore.next();
+                int wins = highScore.nextInt();
+                int loss = highScore.nextInt();
+                Score score = new Score(name, wins, loss);
+                scores.add(score);
+            }
         }
     }
 
