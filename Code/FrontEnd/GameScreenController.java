@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -14,9 +16,13 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
@@ -36,6 +42,8 @@ import static BackEnd.TileType.*;
  * @author Chrisitan Sanger
  */
 public class GameScreenController extends StateLoad {
+	@FXML
+	private GridPane root;
 	@FXML
 	private VBox cards;
 	@FXML
@@ -60,7 +68,7 @@ public class GameScreenController extends StateLoad {
     private int height;
     public Phase phase;
     private GameLogic gameLogic;
-    public static int tileWidth = 50;
+    public static int tileWidth = 200;
 
 	/***
 	 * Gets all resources for gameScreen
@@ -76,16 +84,11 @@ public class GameScreenController extends StateLoad {
 				} else {
 					startNewGame();
 				}
-				int rotate = 0;
-				tiles.setRotationAxis(new Point3D(10, 0, 10));
-				tiles.setRotate(rotate);
-				players.setRotationAxis(new Point3D(10, 0, 10));
-				players.setRotate(rotate);
-				controls.setRotationAxis(new Point3D(10, 0, 10));
-				controls.setRotate(rotate);
-				tileWidth = 30;//(int) (ps.getHeight() / gameLogic.getHeight()) + 50;
+				int width = (int) root.getHeight();
+				int height = gameLogic.getHeight();
+				tileWidth = (int) (0.6 * Screen.getPrimary().getBounds().getHeight() / gameLogic.getHeight());
 				updateBoard();
-				mainLoop();
+				//mainLoop();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
