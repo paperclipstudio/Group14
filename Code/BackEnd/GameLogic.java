@@ -109,7 +109,9 @@ public class GameLogic {
     public void floor(FloorTile tile, Coordinate location) throws Exception {
         gameSaver.playFloorTile(location, tile);
         assert (tile.getType().equals(currentPlayer.isHolding().getType()));
-        players[currentPlayerNo].playFloorTile(location, tile);
+        if (tile != null) {
+            players[currentPlayerNo].playFloorTile(location, tile);
+        }
         phase = ACTION;
     }
 

@@ -108,7 +108,7 @@ public class ProfilesController extends StateLoad {
 			input.setStyle("-fx-border-color: default");
 			playerList.getItems().addAll(newName);
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
-			newUser.write("0 0 icon" + currentIndex);
+			newUser.write("0 0 0 icon" + currentIndex);
 			newUser.close();
 			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		}
@@ -145,9 +145,11 @@ public class ProfilesController extends StateLoad {
             playerRecord.setText(
 							"This player has " +
 							profile.getWins() +
-							" wins and " +
+							" wins, " +
 							profile.getLosses() +
-							" losses.");
+							" losses and a win streak of " +
+							profile.getWinStreak() +
+							".");
 			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         } catch (IOException noPlayerFound) {
 			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
