@@ -41,12 +41,8 @@ public class SettingsController extends StateLoad {
 	public void initialize(URL location, ResourceBundle resources) {
 		if (getInitData() != null) {
 			sfx.setValue(Double.parseDouble(getInitData().get("SFXVol")));
-			sfx.setMin(0.0);
-			sfx.setMax(1.0);
 			background.setValue(Double.parseDouble(getInitData().get("BackgroundVol")));
 		}
-
-
 	}
 	/**
 	 * updated the current sound level
