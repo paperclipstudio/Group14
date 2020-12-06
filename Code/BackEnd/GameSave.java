@@ -27,7 +27,7 @@ public class GameSave {
      * @param initData - data about the game state to save with
      */
     public GameSave(HashMap<String, String> initData) throws IOException {
-        gameSaveFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile") + ".sav");
+        gameSaveFile = new File("SaveData\\GameSave\\" + initData.get("LoadFile"));
         gameState = new StringBuilder();
         gameState.append(initData.get("Board")).append("\n");
         gameState.append(initData.get("Seed")).append("\n");

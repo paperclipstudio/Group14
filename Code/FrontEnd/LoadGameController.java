@@ -119,7 +119,7 @@ public class LoadGameController extends StateLoad {
 	 */
 	public void onYesButton() throws IOException {
 		MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-		File saveFile = new File("SaveData\\GameSave\\" + selectGame.getValue());
+		File saveFile = new File("SaveData\\GameSave\\" + selectGame.getValue() + ".sav");
 		if (!saveFile.delete()) {
 			throw new IOException("Failed to delete file" + saveFile.toString());
 		}

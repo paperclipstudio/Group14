@@ -80,7 +80,7 @@ public class GameSetupController extends StateLoad {
 		String gameBoard = selectGameBoard.getValue() + ".txt";
 		getInitData().put("Board", gameBoard);
 		getInitData().put("PlayerCount", ((RadioButton) playerCount.getSelectedToggle()).getText());
-		getInitData().put("LoadFile", saveName.getText());
+		getInitData().put("LoadFile", saveName.getText() + ".sav");
 		getInitData().put("isLoadedFile", "false");
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
