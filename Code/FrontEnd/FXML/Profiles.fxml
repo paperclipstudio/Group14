@@ -24,10 +24,10 @@
       <RowConstraints />
    </rowConstraints>
    <AnchorPane prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
-      <Button layoutX="450.0" layoutY="211.0" mnemonicParsing="false" onAction="#createFile" prefHeight="25.0" prefWidth="200.0" text="Create New Player" textFill="#009c05" />
-      <Button layoutX="451.0" layoutY="254.0" mnemonicParsing="false" onAction="#deleteFile" prefHeight="25.0" prefWidth="200.0" text="Delete The Player" textFill="#9c0018" />
-      <TextField fx:id="input" layoutX="435.0" layoutY="155.0" prefHeight="34.0" prefWidth="200.0" promptText="type a name to start" AnchorPane.bottomAnchor="211.0" AnchorPane.leftAnchor="435.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="155.0" />
-      <Button fx:id="viewButton" layoutX="451.0" layoutY="292.0" mnemonicParsing="false" onAction="#viewData" prefHeight="25.0" prefWidth="200.0" text="View Player profile" textFill="#009c05" />
+      <Button layoutX="451.0" layoutY="220.0" mnemonicParsing="false" onAction="#createFile" prefHeight="25.0" prefWidth="200.0" text="Create New Player" textFill="#009c05" />
+      <Button layoutX="451.0" layoutY="259.0" mnemonicParsing="false" onAction="#deleteFile" prefHeight="25.0" prefWidth="200.0" text="Delete The Player" textFill="#9c0018" />
+      <TextField fx:id="input" layoutX="46.0" layoutY="78.0" prefHeight="34.0" prefWidth="200.0" promptText="type a name to start" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="78.0" />
+      <Button fx:id="viewButton" layoutX="451.0" layoutY="297.0" mnemonicParsing="false" onAction="#viewData" prefHeight="25.0" prefWidth="200.0" text="View Player profile" textFill="#009c05" />
       <Accordion layoutX="61.0" layoutY="129.0" />
       <GridPane layoutX="133.0" layoutY="155.0">
          <rowConstraints>
@@ -37,18 +37,14 @@
          </rowConstraints>
       </GridPane>
       <ListView fx:id="playerList" layoutX="46.0" layoutY="120.0" prefHeight="248.0" prefWidth="352.0" />
-      <Button fx:id="backButton" layoutX="450.0" layoutY="334.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="200.0" text="Back" textFill="#009c05" />
-      <Label layoutX="46.0" layoutY="92.0" text="Saved Players" textAlignment="CENTER" textFill="#009e05">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <Button fx:id="backButton" layoutX="451.0" layoutY="337.0" mnemonicParsing="false" onAction="#onBackButton" prefHeight="25.0" prefWidth="200.0" text="Back" textFill="#009c05" />
       <Label fx:id="playerRecord" layoutX="46.0" layoutY="378.0" prefHeight="17.0" prefWidth="536.0" />
-      <ImageView fx:id="playerIcon" fitHeight="34.0" fitWidth="30.0" layoutX="508.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="570.0" layoutY="113.0" mnemonicParsing="false" onAction="#nextIcon" prefHeight="32.0" prefWidth="30.0" styleClass="button2" stylesheets="@../../../Assets/menuStyle.css" text="&gt;" textFill="#009c05">
+      <ImageView fx:id="playerIcon" fitHeight="83.0" fitWidth="86.0" layoutX="451.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="564.0" layoutY="146.0" mnemonicParsing="false" onAction="#nextIcon" prefHeight="32.0" prefWidth="30.0" styleClass="button2" stylesheets="@../../../Assets/menuStyle.css" text="&gt;" textFill="#009c05">
          <font>
             <Font size="10.0" />
          </font></Button>
+      <Label layoutX="47.0" layoutY="53.0" prefHeight="17.0" prefWidth="166.0" text="New Profile Name:" />
    </AnchorPane>
    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Player Profiles" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
       </Text>
