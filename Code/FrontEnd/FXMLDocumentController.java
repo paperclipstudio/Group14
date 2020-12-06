@@ -90,7 +90,7 @@ public class FXMLDocumentController extends StateLoad {
             Button newButton = new Button(boardName);
             newButton.setOnAction((e) -> {
                 try {
-                    changeLeaderboard(boardName);
+                    changeLeaderboard(boardFile);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
