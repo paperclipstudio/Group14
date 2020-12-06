@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Profile {
 
 	/*
-	 * These attributes hold information about the player, such as, wins, losses and maps played.
+	 * These attributes hold information about the player, such as, wins, losses and win streak.
 	 */
 	private int wins;
 	private int losses;
@@ -32,7 +32,7 @@ public class Profile {
 		setName(name);
 		setIcon(playerIcon);
 		setWins(wins);
-		setlosses(losses);
+		setLosses(losses);
 	}
 
 	/**
@@ -40,8 +40,8 @@ public class Profile {
 	 *
 	 * @param name name of the player.
 	 */
-	public void setName(String name) {
-		profileName = name;
+	private void setName(String name) {
+		this.profileName = name;
 	}
 
 	/**
@@ -49,8 +49,8 @@ public class Profile {
 	 *
 	 * @param playerIcon player's icon.
 	 */
-	public void setIcon(String playerIcon) {
-		profileIcon = playerIcon;
+	private void setIcon(String playerIcon) {
+		this.profileIcon = playerIcon;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Profile {
 	 *
 	 * @param wins number of wins of the player
 	 */
-	public void setWins(int wins) {
+	private void setWins(int wins) {
 		this.wins = wins;
 	}
 
@@ -67,7 +67,7 @@ public class Profile {
 	 *
 	 * @param losses number of losses of the player.
 	 */
-	public void setlosses(int losses) {
+	private void setLosses(int losses) {
 		this.losses = losses;
 	}
 
@@ -123,6 +123,8 @@ public class Profile {
 
 
 	/**
+	 * This method reads in a profile text file and creates a profile object instance of it.
+	 *
 	 * @param profileFile read files from UserData and turns them into profiles
 	 * @return get the profile output
 	 * @throws IOException Wrong input
@@ -138,6 +140,12 @@ public class Profile {
 		return new Profile(name, playerIcon, wins, losses);
 	}
 
+	/**
+	 * This method creates a profile text file out of a profile object.
+	 *
+	 * @param profile profile to convert into a text file in UserData
+	 * @throws IOException Wrong save file format
+	 */
 	public static void writeProfile(Profile profile) throws IOException {
 		String name = profile.getName();
 		int wins = profile.getWins();
@@ -155,6 +163,12 @@ public class Profile {
 		writer.close();
 	}
 
+	/**
+	 * This method causes all profile object instances to save into text files.
+	 *
+	 * @param profiles profile object instances
+	 * @throws IOException Wrong input
+	 */
 	public static void saveAllProfiles(Profile[] profiles) throws IOException {
 		for (Profile profile : profiles) {
 			writeProfile(profile);
