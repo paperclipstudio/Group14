@@ -42,7 +42,7 @@
            </MenuBar>
          <HBox fx:id="confirmation" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <children>
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The game is unsaved, would you like to save before quitting?" />
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="QuitScreen" text="The game is unsaved, would you like to save before quitting?" />
                <Button mnemonicParsing="false" onAction="#onYes" text="Yes" />
                <Button mnemonicParsing="false" onAction="#onNo" text="No" />
             </children>

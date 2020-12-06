@@ -9,13 +9,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController"  stylesheets="@../../../../Assets/menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController"  stylesheets="menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
     <center>
         <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basics" textAlignment="CENTER" translateY="50.0" wrappingWidth="417.33154296875">
+                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Basics" textAlignment="CENTER" translateY="50.0" wrappingWidth="417.33154296875">
                             <font>
                                 <Font name="lazer84" size="65.0" />
                             </font>
@@ -30,16 +30,16 @@
                         </Text>
                </children>
                 </HBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•Each player has their own corresponting player piece." textAlignment="CENTER" translateY="40.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•The aim of the game is to reach the Goal tile before your opponents." textAlignment="CENTER" translateY="40.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• The first player to move their player piece onto the Goal tile is declared the winner." textAlignment="CENTER" translateY="40.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• On each turn, a player is able to move to a board tile as long as they are connected with a path." textAlignment="CENTER" translateY="40.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• A Silkbag contains gameboard tiles, which will be used by the players to alter with the gameboard." textAlignment="CENTER" translateY="40.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•Players can draw different boardtiles from the silkbag and slide them into the gameboard from the boards edge." translateY="40.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•This may allow players to alter with the gameboard and the available paths each player can make." translateY="40.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•There are certain tiles that affect the moves a player may make." translateY="40.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•The Board has Fixed tiles which positions cannot be changed." translateY="40.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="•When you end your turn, the play continues with the player to your left." translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•Each player has their own corresponting player piece." textAlignment="CENTER" translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•The aim of the game is to reach the Goal tile before your opponents." textAlignment="CENTER" translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• The first player to move their player piece onto the Goal tile is declared the winner." textAlignment="CENTER" translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• On each turn, a player is able to move to a board tile as long as they are connected with a path." textAlignment="CENTER" translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• A Silkbag contains gameboard tiles, which will be used by the players to alter with the gameboard." textAlignment="CENTER" translateY="40.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•Players can draw different boardtiles from the silkbag and slide them into the gameboard from the boards edge." translateY="40.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•This may allow players to alter with the gameboard and the available paths each player can make." translateY="40.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•There are certain tiles that affect the moves a player may make." translateY="40.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•The Board has Fixed tiles which positions cannot be changed." translateY="40.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="•When you end your turn, the play continues with the player to your left." translateY="40.0" />
                 <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackTo" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER" textFill="#009e05" translateY="50.0" />
                 <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="80.0" />
             </children>

@@ -36,6 +36,20 @@
     -fx-font-size: 10;
 }
 
+.QuitScreen {
+    -fx-text-fill: whitesmoke;
+    -fx-fill: white;
+    -fx-font-family: Consolas;
+    -fx-font-size: 15;
+}
+
+.HowToPlay {
+    -fx-text-fill: whitesmoke;
+    -fx-fill: white;
+    -fx-font-family: Consolas;
+    -fx-font-size: 15;
+}
+
 .choice-box{
     -fx-background-color: #333;
     -fx-mark-color: white ;
