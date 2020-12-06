@@ -26,13 +26,14 @@ import javafx.scene.media.AudioClip;
  */
 public class PickPlayerController extends StateLoad {
 
+	/* These final variables are used for the game's Sound Effects (SFX) */
+
 	private final String START_SFX = "Assets\\SFX\\start.mp3";
 	private final AudioClip START_AUDIO = new AudioClip(new File(START_SFX).toURI().toString());
 	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
 	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
 	private final String ERROR_SFX = "Assets\\SFX\\error.mp3";
 	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
-
 
     @FXML
     public ChoiceBox<String> playerList1;

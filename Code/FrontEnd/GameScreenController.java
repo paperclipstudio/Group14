@@ -41,9 +41,11 @@ import static BackEnd.TileType.*;
 
 /***
  * Use to control the GameScreen scene.
- * @author Chrisitan Sanger
+ * @author Christian Sanger
  */
 public class GameScreenController extends StateLoad {
+
+    /* These final variables are used for the game's Sound Effects (SFX) */
 
     private final String DRAW_SFX = "Assets\\SFX\\draw.mp3";
     private final AudioClip DRAW_AUDIO = new AudioClip(new File(DRAW_SFX).toURI().toString());

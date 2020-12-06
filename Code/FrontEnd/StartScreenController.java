@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 
 public class StartScreenController extends StateLoad {
 
+    /* These final variables are used for the game's Sound Effects (SFX) */
+
     private final String START_SFX = "Assets\\SFX\\start.mp3";
     private final AudioClip START_AUDIO = new AudioClip(new File(START_SFX).toURI().toString());
 
