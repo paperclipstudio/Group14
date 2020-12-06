@@ -51,13 +51,14 @@ public class FileReader {
 
         //// Creating players
         Player[] players = new Player[MAX_NUM_OF_PLAYERS];
+        Coordinate[] playerPos = new Coordinate[MAX_NUM_OF_PLAYERS];
         gameboard.setNumOfPlayers(MAX_NUM_OF_PLAYERS);
         for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
             String nextLine = in.nextLine();
             currentLine = new Scanner(nextLine);
-            System.out.println(nextLine);
             int x = currentLine.nextInt();
             int y = currentLine.nextInt();
+            playerPos[i] = new Coordinate(x, y);
             gameboard.setPlayerPos(i, new Coordinate(x, y));
             players[i] = new Player(i, silkBag, gameboard);
         }
@@ -113,6 +114,13 @@ public class FileReader {
             Rotation rotation = Rotation.values()[rotationInt];
             FloorTile tile = new FloorTile(tileType, rotation);
             gameboard.placeFixedTile(tile, location);
+        }
+
+        // Place players back in correct location as they would have been shifted when tiles have been placed
+        for (int i = 0; i < MAX_NUM_OF_PLAYERS; i++) {
+            for (int j = 0; j < 4; j++) {
+                gameboard.setPlayerPos(i, playerPos[i]);
+            }
         }
 
 

@@ -66,11 +66,13 @@ public class ProfilesController extends StateLoad {
 		File userDataFolder = new File("SaveData\\UserData\\");
 		String[] children = userDataFolder.list();
 		playerIcon.setImage(icon0);
-
-		if (children != null) {
-			for (String filename : children) {
-				playerList.getItems().addAll(filename.substring(0, filename.length() - 4));
+		if(playerList.getSelectionModel().getSelectedItem() == null) {
+			if (children != null) {
+				for (String filename : children) {
+					playerList.getItems().addAll(filename.substring(0, filename.length() - 4));
 				}
+				playerList.getSelectionModel().selectFirst();
+			}
 		}
 	}
 

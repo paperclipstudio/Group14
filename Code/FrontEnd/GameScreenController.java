@@ -88,7 +88,7 @@ public class GameScreenController extends StateLoad {
 	@FXML
 	private Pane profile;
 	@FXML
-	private HBox confirmation;
+	private VBox confirmation;
 
 
     private int width;
