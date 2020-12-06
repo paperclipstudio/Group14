@@ -45,6 +45,6 @@
     -fx-background-color: #333;
 }
 
-.cb .menu-item:focused {
+.choice-box .menu-item:focused {
     -fx-background-color: black ;
 }
