@@ -16,6 +16,7 @@ public class Profile {
 	 * These attributes hold information about the player, such as, wins, losses and maps played.
 	 */
 	private int wins;
+	private int winStreak;
 	private int losses;
 	private String profileName;
 	private String profileIcon;
@@ -28,11 +29,12 @@ public class Profile {
 	 * @param wins       the amount of wins a player has.
 	 * @param losses     the amount of losses a player has.
 	 */
-	public Profile(String name, String playerIcon, int wins, int losses) {
+	public Profile(String name, String playerIcon, int wins, int losses, int winStreak) {
 		setName(name);
 		setIcon(playerIcon);
 		setWins(wins);
-		setlosses(losses);
+		setLosses(losses);
+		setWinStreak(winStreak);
 	}
 
 	/**
@@ -41,7 +43,7 @@ public class Profile {
 	 * @param name name of the player.
 	 */
 	public void setName(String name) {
-		profileName = name;
+		this.profileName = name;
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class Profile {
 	 * @param playerIcon player's icon.
 	 */
 	public void setIcon(String playerIcon) {
-		profileIcon = playerIcon;
+		this.profileIcon = playerIcon;
 	}
 
 	/**
@@ -67,8 +69,17 @@ public class Profile {
 	 *
 	 * @param losses number of losses of the player.
 	 */
-	public void setlosses(int losses) {
+	public void setLosses(int losses) {
 		this.losses = losses;
+	}
+
+	/**
+	 * This method sets the current win streak of the player.
+	 *
+	 * @param winStreak number of games won in a row
+	 */
+	private void setWinStreak(int winStreak) {
+		this.winStreak = winStreak;
 	}
 
 	/**
@@ -77,7 +88,7 @@ public class Profile {
 	 * @return the name of the player.
 	 */
 	public String getName() {
-		return profileName;
+		return this.profileName;
 	}
 
 	/**
@@ -86,7 +97,7 @@ public class Profile {
 	 * @return the wins of the player.
 	 */
 	public int getWins() {
-		return wins;
+		return this.wins;
 	}
 
 	/**
@@ -95,21 +106,37 @@ public class Profile {
 	 * @return the losses of the player.
 	 */
 	public int getLosses() {
-		return losses;
+		return this.losses;
+	}
+
+	/**
+	 * This method gets the win streak of the player.
+	 *
+	 * @return the win streak of the player
+	 */
+	public int getWinStreak() {
+		return this.winStreak;
 	}
 
 	/**
 	 * This method increments the number of wins.
 	 */
 	public void incWins() {
-		wins = wins + 1;
+		this.wins = this.wins + 1;
 	}
 
 	/**
 	 * This method increments the number of losses.
 	 */
 	public void incLosses() {
-		losses = losses + 1;
+		this.losses = this.losses + 1;
+	}
+
+	/**
+	 * This method increases the win streak by 1.
+	 */
+	public void incWinStreak() {
+		this.winStreak = this.winStreak + 1;
 	}
 
 	/**
@@ -121,6 +148,12 @@ public class Profile {
 		return this.profileIcon;
 	}
 
+	/**
+	 * This method resets the player's current win streak to 0.
+	 */
+	public void resetWinStreak() {
+		this.winStreak = 0;
+	}
 
 	/**
 	 * @param profileFile read files from UserData and turns them into profiles
@@ -133,21 +166,24 @@ public class Profile {
 
 		int wins = reader.nextInt();
 		int losses = reader.nextInt();
+		int winStreak = reader.nextInt();
 		String playerIcon = reader.next();
 
-		return new Profile(name, playerIcon, wins, losses);
+		return new Profile(name, playerIcon, wins, losses, winStreak);
 	}
 
 	public static void writeProfile(Profile profile) throws IOException {
 		String name = profile.getName();
 		int wins = profile.getWins();
 		int loss = profile.getLosses();
+		int winStreak = profile.getWinStreak();
 		String playerIcon = profile.getIcon();
 		FileWriter writer = new FileWriter("SaveData\\UserData\\" + name + ".txt");
 
-		String information = String.format("%d %d %s",
+		String information = String.format("%d %d %d %s",
 				wins,
 				loss,
+				winStreak,
 				playerIcon);
 		System.out.println(information);
 		writer.write(information);
