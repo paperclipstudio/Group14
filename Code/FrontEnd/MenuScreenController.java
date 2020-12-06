@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Use to control the GameScreen scene.
+ * Use to control the Menu screen scene.
  *
  * @author David Langmaid
  */
@@ -99,6 +99,11 @@ public class MenuScreenController extends StateLoad {
         MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
+
+    /**
+     * called when the how to play button is clicked
+     * opens the how to play window
+     */
     public void onHowToPlay() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());

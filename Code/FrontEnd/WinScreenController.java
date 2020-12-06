@@ -25,6 +25,9 @@ public class WinScreenController extends StateLoad {
 
 	private WindowLoader wl;
 
+	/**
+	 * This initialises the page, displays the winners message and updates the leaderboards and profiles.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (getInitData() != null) {

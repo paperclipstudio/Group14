@@ -72,7 +72,7 @@ public class GameSetupController extends StateLoad {
 	}
 
 	/***
-	 * This copies the gameboard file, appends the seed for the silk bag and Continues to GameScreen.
+	 * This copies the game board file, appends the seed for the silk bag and Continues to GameScreen.
 	 */
 	public void onStartButton() {
 		WindowLoader wl = new WindowLoader(backButton);
