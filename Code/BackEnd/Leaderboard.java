@@ -31,7 +31,8 @@ public class Leaderboard {
      * @param gameBoard name of the game board that this leaderboard is for
      * @throws IOException if file can't be created
      */
-    public Leaderboard(String gameBoard) throws IOException {
+    public Leaderboard(String gameBoardFile) throws IOException {
+        String gameBoard = gameBoardFile.substring(0, gameBoardFile.length()-4);
         file = new File(boardFolder + gameBoard + EXT);
         this.gameBoard = gameBoard;
         if (!file.exists()) {

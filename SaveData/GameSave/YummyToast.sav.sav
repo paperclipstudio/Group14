@@ -40,3 +40,19 @@ move 3 2
 draw 
 action null  0 null 
 move 4 5
+draw 
+floor T_SHAPE UP 8 4
+action null  0 null 
+move 4 3
+draw 
+action null  0 null 
+move 2 4
+draw 
+action null  0 null 
+move 5 3
+draw 
+action FROZEN -1 6 5 
+move 2 5
+draw 
+action BACKTRACK 1 null 
+move 4 3
