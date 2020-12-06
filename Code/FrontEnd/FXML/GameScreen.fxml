@@ -40,19 +40,30 @@
                    <MenuItem mnemonicParsing="false" text="About" />
                </Menu>
            </MenuBar>
-         <HBox fx:id="confirmation" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <VBox fx:id="confirmation" prefHeight="200.0" prefWidth="100.0">
             <children>
                <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="The game is unsaved, would you like to save before quitting?">
                   <font>
-                     <Font name="Consolas" size="22.0" />
-                  </font></Text>
-               <Button mnemonicParsing="false" onAction="#onYes" text="Yes" />
-               <Button mnemonicParsing="false" onAction="#onNo" text="No" />
+                     <Font name="Consolas" size="18.0" />
+                  </font>
+               </Text>
+               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#onYes" text="Yes" />
+                     <Button mnemonicParsing="false" onAction="#onNo" text="No" />
+                  </children>
+                  <VBox.margin>
+                     <Insets left="90.0" />
+                  </VBox.margin>
+               </HBox>
             </children>
             <VBox.margin>
-               <Insets left="100.0" />
+               <Insets left="100.0" top="10.0" />
             </VBox.margin>
-         </HBox>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
+         </VBox>
            <Label fx:id="phaseText" alignment="CENTER" contentDisplay="RIGHT" layoutX="150.0" rotate="9.5" text="Phase" textAlignment="RIGHT" textFill="#a7c3a7" translateX="150.0">
               <font>
                   <Font name="Book Antiqua" size="22.0" />
