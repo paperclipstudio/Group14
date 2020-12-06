@@ -41,6 +41,7 @@ public class WinScreenController extends StateLoad {
 				profiles[i] = current;
 			}
 
+
 			int winnerNum = Integer.parseInt(getInitData().get("Winner"));
 			winner.setText("Congratulations " + profiles[winnerNum].getName() + "!");
 			Leaderboard leaderboard = null;
@@ -56,18 +57,24 @@ public class WinScreenController extends StateLoad {
 				if (i == winnerNum) {
 					try {
 						leaderboard.addWin(profiles[i].getName());
+						profiles[i].incWins();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else {
 					try {
 						leaderboard.addLoss(profiles[i].getName());
+						profiles[i].incLosses();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-
+			try {
+				Profile.saveAllProfiles(profiles);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
