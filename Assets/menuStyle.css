@@ -9,6 +9,13 @@
     -fx-pref-width: 200;
 }
 
+.button2{
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+    -fx-font-size: 19px;
+    -fx-pref-width: 50;
+}
+
 .text {
     -fx-text-fill: whitesmoke;
     -fx-fill: white;
