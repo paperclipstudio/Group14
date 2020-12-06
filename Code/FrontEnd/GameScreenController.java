@@ -109,9 +109,10 @@ public class GameScreenController extends StateLoad {
 				}
 				int width = (int) Screen.getPrimary().getBounds().getHeight();
 				int height = (int) Screen.getPrimary().getBounds().getHeight();
-				int maxTileWidth = width / (gameLogic.getWidth() + 2) ;
-				int maxTileHeight = height / (gameLogic.getHeight() + 2);
+				int maxTileWidth = width / (gameLogic.getWidth() + 3) ;
+				int maxTileHeight = height / (gameLogic.getHeight() + 3);
 				tileWidth = Math.min(maxTileHeight, maxTileWidth);
+				boardArea.setTranslateY(tileWidth);
 				updateBoard();
 				mainLoop();
 			} catch (FileNotFoundException e) {
@@ -209,7 +210,7 @@ public class GameScreenController extends StateLoad {
 	private void setupFloorPhase() throws Exception {
 		ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
 		if (locations.size() == 0) {
-			throw new Exception("No slide locations");
+			gameLogic.floor(null,null);
 		}
 
 		for (Coordinate coordinate : locations) {
