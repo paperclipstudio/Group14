@@ -60,17 +60,11 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("player2.png"));
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
-//        String musicFile = "Assets\\music.mp3";     // For example
-//
-//        Media sound = new Media(new File(musicFile).toURI().toString());
-//        mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.setCycleCount(Integer.MAX_VALUE);
+
         playMusic(backgroundVol);
+
         initData.put("BackgroundVol", String.valueOf(backgroundVol));
         initData.put("SFXVol", String.valueOf(sfxVol));
-        //setVolume(backgroundVol);
-
-
 
         wl.load("startScreen", initData);
         primaryStage.show();
