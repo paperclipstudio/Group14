@@ -42,7 +42,7 @@
            </MenuBar>
          <VBox fx:id="confirmation" prefHeight="200.0" prefWidth="100.0">
             <children>
-               <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="The game is unsaved, would you like to save before quitting?">
+               <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="The game is unsaved, would you like to save before quitting?">
                   <font>
                      <Font name="Consolas" size="18.0" />
                   </font>
