@@ -12,7 +12,8 @@ import java.util.ResourceBundle;
  * Used to control the QuitScreen scene.
  * @author David Langmaid
  */
-public class quitScreenController extends StateLoad{
+public class quitScreenController extends StateLoad {
+
     @FXML
     private Button noButton;
 

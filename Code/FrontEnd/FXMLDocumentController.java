@@ -32,6 +32,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class FXMLDocumentController extends StateLoad {
+
+    /* These final variables are used for the game's Sound Effects (SFX) */
+
     private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
     private final String BOARD_SFX = "Assets\\SFX\\board.mp3";
@@ -63,12 +66,12 @@ public class FXMLDocumentController extends StateLoad {
     public void onNewGame(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
+        RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
 
     public void onQuitButton(ActionEvent actionEvent) {
         Platform.exit();
-        ;
     }
 
 
@@ -96,7 +99,6 @@ public class FXMLDocumentController extends StateLoad {
                 }
             });
             boardButtons.getChildren().add(newButton);
-
         }
     }
 }
