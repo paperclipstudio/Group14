@@ -111,7 +111,7 @@ public class GameScreenController extends StateLoad {
 				int height = (int) Screen.getPrimary().getBounds().getHeight();
 				int maxTileWidth = width / (gameLogic.getWidth() + 2) ;
 				int maxTileHeight = height / (gameLogic.getHeight() + 2);
-				tileWidth = (int) (1 * Math.min(maxTileHeight, maxTileWidth));
+				tileWidth = Math.min(maxTileHeight, maxTileWidth);
 				updateBoard();
 				mainLoop();
 			} catch (FileNotFoundException e) {
