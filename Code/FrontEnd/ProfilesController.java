@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
  */
 public class ProfilesController extends StateLoad {
 
+	/* These final variables are used for the game's Sound Effects (SFX) */
+
 	private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
 	private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
 	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
@@ -106,52 +108,54 @@ public class ProfilesController extends StateLoad {
 			input.setStyle("-fx-border-color: default");
 			playerList.getItems().addAll(newName);
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
-			newUser.write("0 0 icon" + currentIndex);
+			newUser.write("0 0 0 icon" + currentIndex);
 			newUser.close();
 			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		}
 	}
 
-    /**
-     * Deletes the file selected in the list, and turns the text field back to white if it is not.
-     */
-    public void deleteFile() {
-        String newName = playerList.getSelectionModel().getSelectedItem();
-        File user = new File("SaveData\\UserData\\" + newName + ".txt");
-        if (user.delete()) {
-            input.setStyle("-fx-border-color: default");
-            playerList.getItems().remove(newName);
+	/**
+	 * Deletes the file selected in the list, and turns the text field back to white if it is not.
+	 */
+	public void deleteFile() {
+		String newName = playerList.getSelectionModel().getSelectedItem();
+		File user = new File("SaveData\\UserData\\" + newName + ".txt");
+		if (user.delete()) {
+			input.setStyle("-fx-border-color: default");
+			playerList.getItems().remove(newName);
 
 			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 
-        } else {
+		} else {
 			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-            input.setStyle("-fx-border-color: red");
-        }
-    }
+			input.setStyle("-fx-border-color: red");
+		}
+	}
 
-    /**
-     * View the data saved in the file with same name as selected in the view list, when that file doesn't exist,
-     * print an error message.
-     */
-    public void viewData() {
-        String playerPicked = playerList.getSelectionModel().getSelectedItem();
-        String line;
-        input.setStyle("-fx-border-color: default");
-        try {
+	/**
+	 * View the data saved in the file with same name as selected in the view list, when that file doesn't exist,
+	 * print an error message.
+	 */
+	public void viewData() {
+		String playerPicked = playerList.getSelectionModel().getSelectedItem();
+		String line;
+		input.setStyle("-fx-border-color: default");
+		try {
 			Profile profile = Profile.readProfile(playerPicked);
-            playerRecord.setText(
-							"This player has " +
+			playerRecord.setText(
+					"This player has " +
 							profile.getWins() +
-							" wins and " +
+							" wins, " +
 							profile.getLosses() +
-							" losses.");
+							" losses and a win streak of " +
+							profile.getWinStreak() +
+							".");
 			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-        } catch (IOException noPlayerFound) {
+		} catch (IOException noPlayerFound) {
 			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-            playerRecord.setText("Please select a player.");
-        }
-    }
+			playerRecord.setText("Please select a player.");
+		}
+	}
 
 	/**
 	 * This button switch the player icon which will save in player profile created.

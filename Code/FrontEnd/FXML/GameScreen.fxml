@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane stylesheets="@../../../Assets/menuStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameScreenController">
+<BorderPane stylesheets="@../../../Assets/menuStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameScreenController" style="-fx-background-image: url('//Assets/board.png'); -fx-background-size: cover; -fx-background-position: center;">
     <center>
         <StackPane fx:id="boardArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
             <BorderPane.margin>
