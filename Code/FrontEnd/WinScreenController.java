@@ -58,7 +58,6 @@ public class WinScreenController extends StateLoad {
 					try {
 						leaderboard.addWin(profiles[i].getName());
 						profiles[i].incWins();
-						profiles[i].incWinStreak();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -66,7 +65,6 @@ public class WinScreenController extends StateLoad {
 					try {
 						leaderboard.addLoss(profiles[i].getName());
 						profiles[i].incLosses();
-						profiles[i].resetWinStreak();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
