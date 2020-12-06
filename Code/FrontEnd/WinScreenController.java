@@ -88,7 +88,9 @@ public class WinScreenController extends StateLoad {
 		wl.load("MenuScreen", getInitData());
 	}
 
-
+	/**
+	 * Returns to game setup
+	 */
 	public void onPlayAgainButton() {
 		wl = new WindowLoader(returnButton);
 		wl.load("GameSetup", getInitData());

@@ -88,6 +88,7 @@ public class FXMLDocumentController extends StateLoad {
             String boardName = boardFile.substring(0, boardFile.length()-4);
             System.out.println(boardName);
             Button newButton = new Button(boardName);
+            newButton.setMinWidth(150);
             newButton.setOnAction((e) -> {
                 try {
                     changeLeaderboard(boardFile);
@@ -100,3 +101,4 @@ public class FXMLDocumentController extends StateLoad {
         }
     }
 }
+

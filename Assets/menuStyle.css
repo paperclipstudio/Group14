@@ -101,3 +101,19 @@
 .list-cell:odd {
     -fx-background-color: #222;
 }
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #222;
+    -fx-table-cell-border-color: white;
+}
+
+.table-row-cell:even{
+    -fx-background-color: #333;
+    -fx-table-cell-border-color: white;
+}
+.table-view .column-header {
+    -fx-background-color: #222;
+}
