@@ -4,7 +4,7 @@
 0 9 Player3
 7 9 Player4
 40 Corner
-20 Straight
+40 Straight
 40 T-Shape
 10 Fire
 10 Ice

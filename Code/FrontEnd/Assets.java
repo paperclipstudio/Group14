@@ -57,12 +57,18 @@ public class Assets {
      */
     public static Pane getFloorTileImage(FloorTile tile, int x, int y) {
         Pane tileView = new Pane();
-        ImageView tileImage = new ImageView(get(tile.getType().toString()));
-        tileImage.setFitWidth(GameScreenController.tileWidth);
-        tileImage.setFitHeight(GameScreenController.tileWidth);
-        tileView.getChildren().add(tileImage);
-        tileView.setTranslateX(x * GameScreenController.tileWidth);
-        tileView.setTranslateY(y * GameScreenController.tileWidth);
+        ImageView tileImage;
+        try {
+            tileImage = new ImageView(get(tile.getType().toString()));
+            tileImage.setFitWidth(GameScreenController.tileWidth);
+            tileImage.setFitHeight(GameScreenController.tileWidth);
+            tileView.getChildren().add(tileImage);
+            tileView.setTranslateX(x * GameScreenController.tileWidth);
+            tileView.setTranslateY(y * GameScreenController.tileWidth);
+        }
+        catch (NullPointerException e) {
+            tileImage = new ImageView(get(tile.getType().toString()));
+        }
         if (tile.onFire()) {
             ImageView fireImage = new ImageView(get("tilefire"));
             fireImage.setFitHeight(GameScreenController.tileWidth);

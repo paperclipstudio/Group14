@@ -1,0 +1,17 @@
+5 5
+0 0 Player1
+4 0 Player2
+0 4 Player3
+4 4 Player4
+100 Corner
+100 Straight
+100 T-Shape
+0 Fire
+50 Ice
+50 Backtrack
+50 DoubleMove
+0 Goal
+1
+Goal 2 2 2
+
+
