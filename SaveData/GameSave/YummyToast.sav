@@ -13,6 +13,7 @@ draw
 floor T_SHAPE UP -1 4
 move 4 7
 draw
+floor T_SHAPE UP 8 2
 action FROZEN -1 2 2
 move 4 2
 draw

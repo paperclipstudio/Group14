@@ -520,7 +520,7 @@ public class Gameboard {
             allSlideLocations.add(new Coordinate(x, height));
         }
 
-        for (int y = 0; y < height; y++) {
+        for (int y = 0; y < width; y++) {
             allSlideLocations.add(new Coordinate(-1, y));
             allSlideLocations.add(new Coordinate(width, y));
         }

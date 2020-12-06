@@ -16,9 +16,11 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -43,29 +45,31 @@ import static BackEnd.TileType.*;
  */
 public class GameScreenController extends StateLoad {
 
-	private final String DRAW_SFX = "Assets\\SFX\\draw.mp3";
-	private final AudioClip DRAW_AUDIO = new AudioClip(new File(DRAW_SFX).toURI().toString());
-	private final String SKIP_SFX = "Assets\\SFX\\skip.mp3";
-	private final AudioClip SKIP_AUDIO = new AudioClip(new File(SKIP_SFX).toURI().toString());
-	private final String WIN_SFX = "Assets\\SFX\\gamewin.mp3";
-	private final AudioClip WIN_AUDIO = new AudioClip(new File(WIN_SFX).toURI().toString());
-	private final String MOVEMENT_SFX = "Assets\\SFX\\movement.mp3";
-	private final AudioClip MOVEMENT_AUDIO = new AudioClip(new File(MOVEMENT_SFX).toURI().toString());
-	private final String FLOOR_SFX = "Assets\\SFX\\floor.mp3";
-	private final AudioClip FLOOR_AUDIO = new AudioClip(new File(FLOOR_SFX).toURI().toString());
-	private final String BACKTRACK_SFX = "Assets\\SFX\\backtrack.mp3";
-	private final AudioClip BACKTRACK_AUDIO = new AudioClip(new File(BACKTRACK_SFX).toURI().toString());
-	private final String FIRE_SFX = "Assets\\SFX\\fire.mp3";
-	private final AudioClip FIRE_AUDIO = new AudioClip(new File(FIRE_SFX).toURI().toString());
-	private final String DOUBLEMOVE_SFX = "Assets\\SFX\\doublemove.mp3";
-	private final AudioClip DOUBLEMOVE_AUDIO = new AudioClip(new File(DOUBLEMOVE_SFX).toURI().toString());
-	private final String ICE_SFX = "Assets\\SFX\\ice.mp3";
-	private final AudioClip ICE_AUDIO = new AudioClip(new File(ICE_SFX).toURI().toString());
-	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
-	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
-	private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
-	private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
+    private final String DRAW_SFX = "Assets\\SFX\\draw.mp3";
+    private final AudioClip DRAW_AUDIO = new AudioClip(new File(DRAW_SFX).toURI().toString());
+    private final String SKIP_SFX = "Assets\\SFX\\skip.mp3";
+    private final AudioClip SKIP_AUDIO = new AudioClip(new File(SKIP_SFX).toURI().toString());
+    private final String WIN_SFX = "Assets\\SFX\\gamewin.mp3";
+    private final AudioClip WIN_AUDIO = new AudioClip(new File(WIN_SFX).toURI().toString());
+    private final String MOVEMENT_SFX = "Assets\\SFX\\movement.mp3";
+    private final AudioClip MOVEMENT_AUDIO = new AudioClip(new File(MOVEMENT_SFX).toURI().toString());
+    private final String FLOOR_SFX = "Assets\\SFX\\floor.mp3";
+    private final AudioClip FLOOR_AUDIO = new AudioClip(new File(FLOOR_SFX).toURI().toString());
+    private final String BACKTRACK_SFX = "Assets\\SFX\\backtrack.mp3";
+    private final AudioClip BACKTRACK_AUDIO = new AudioClip(new File(BACKTRACK_SFX).toURI().toString());
+    private final String FIRE_SFX = "Assets\\SFX\\fire.mp3";
+    private final AudioClip FIRE_AUDIO = new AudioClip(new File(FIRE_SFX).toURI().toString());
+    private final String DOUBLEMOVE_SFX = "Assets\\SFX\\doublemove.mp3";
+    private final AudioClip DOUBLEMOVE_AUDIO = new AudioClip(new File(DOUBLEMOVE_SFX).toURI().toString());
+    private final String ICE_SFX = "Assets\\SFX\\ice.mp3";
+    private final AudioClip ICE_AUDIO = new AudioClip(new File(ICE_SFX).toURI().toString());
+    private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+    private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+    private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
+    private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
 
+	@FXML
+	private GridPane root;
 	@FXML
 	private VBox cards;
 	@FXML
@@ -77,21 +81,20 @@ public class GameScreenController extends StateLoad {
 	@FXML
 	private Button drawButton;
 	@FXML
+	private Label phaseText;
+	@FXML
 	private Pane fixed;
 	@FXML
 	private Pane profile;
 	@FXML
 	private VBox confirmation;
-	@FXML
-	private StackPane boardArea;
-	@FXML
-	private Text profileName;
 
-	private int width;
-	private int height;
-	public Phase phase;
-	private GameLogic gameLogic;
-	public static int tileWidth;
+
+    private int width;
+    private int height;
+    public Phase phase;
+    private GameLogic gameLogic;
+    public static int tileWidth = 200;
 
 	/***
 	 * Gets all resources for gameScreen
@@ -117,6 +120,7 @@ public class GameScreenController extends StateLoad {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			confirmation.setVisible(false);
 		}
 	}
 
@@ -132,11 +136,10 @@ public class GameScreenController extends StateLoad {
 	private void mainLoop() throws IOException {
 		// Update current player
 		Profile[] profiles = new Profile[4];
-		for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
+		for (int i=0; i < gameLogic.getNumberOfPlayers(); i++) {
 			profiles[i] = Profile.readProfile(getInitData().get("Profile" + (i)));
 		}
 		profile.getChildren().add(Assets.getProfile(profiles[gameLogic.getPlayersTurn()]));
-		profileName.setText(profiles[gameLogic.getPlayersTurn()].getName());
 		try {
 			updateBoard();
 		} catch (Exception e) {
@@ -144,18 +147,10 @@ public class GameScreenController extends StateLoad {
 			System.exit(1);
 		}
 		phase = gameLogic.getGamePhase();
+		phaseText.setText(phase.toString() + ":" + gameLogic.getPlayersTurn() + ":Debug");
 		hideAllControls();
 		switch (phase) {
 			case DRAW:
-				drawButton.setOnAction((e2) -> {
-					try {
-						onDrawButton();
-						e2.consume();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				});
-				drawButton.setText("Draw");
 				drawButton.setVisible(true);
 				break;
 			case FLOOR:
@@ -186,12 +181,11 @@ public class GameScreenController extends StateLoad {
 			case WIN:
 				try {
 					setupWinScreen();
+				} catch (IOException e) {
+					phaseText.setText(e.getMessage());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				break;
-			default:
-				System.out.print("Invalid game State");
 		}
 	}
 
@@ -202,245 +196,246 @@ public class GameScreenController extends StateLoad {
 		WIN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 
-	private void setupFloorPhase() throws Exception {
-		ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
-		if (locations.size() == 0) {
-			gameLogic.floor(null,null);
-		}
+    private void setupFloorPhase() throws Exception {
+        ArrayList<Coordinate> locations = gameLogic.getSlideLocations();
+        if (locations.size() == 0) {
+            throw new Exception("No slide locations");
+        }
 
-		for (Coordinate coordinate : locations) {
-			ImageView arrow = Assets.makeArrow();
-			final Rotation direction;
-			final int where;
-			if (coordinate.getX() == -1) {
-				arrow.setRotate(0);
-				direction = Rotation.RIGHT;
-				where = coordinate.getY();
-			} else if (coordinate.getY() == -1) {
-				arrow.setRotate(90);
-				direction = Rotation.DOWN;
-				where = coordinate.getX();
-			} else if (coordinate.getX() == width) {
-				arrow.setRotate(180);
-				direction = Rotation.LEFT;
-				where = coordinate.getY();
-			} else if (coordinate.getY() == height) {
-				arrow.setRotate(270);
-				direction = UP;
-				where = coordinate.getX();
-			} else {
-				direction = Rotation.DOWN;
-				where = 2;
-				// Invalid Push location
-				assert (false);
-			}
-			arrow.setFitWidth(tileWidth);
-			arrow.setFitHeight(tileWidth);
-			arrow.setTranslateX(coordinate.getX() * tileWidth);
-			arrow.setTranslateY(coordinate.getY() * tileWidth);
+        for (Coordinate coordinate : locations) {
+            ImageView arrow = Assets.makeArrow();
+            final Rotation direction;
+            final int where;
+            if (coordinate.getX() == -1) {
+                arrow.setRotate(0);
+                direction = Rotation.RIGHT;
+                where = coordinate.getY();
+            } else if (coordinate.getY() == -1) {
+                arrow.setRotate(90);
+                direction = Rotation.DOWN;
+                where = coordinate.getX();
+            } else if (coordinate.getX() == width) {
+                arrow.setRotate(180);
+                direction = Rotation.LEFT;
+                where = coordinate.getY();
+            } else if (coordinate.getY() == height) {
+                arrow.setRotate(270);
+                direction = UP;
+                where = coordinate.getX();
+            } else {
+                direction = Rotation.DOWN;
+                where = 2;
+                // Invalid Push location
+                assert (false);
+            }
+            arrow.setFitWidth(tileWidth);
+            arrow.setFitHeight(tileWidth);
+            arrow.setTranslateX(coordinate.getX() * tileWidth);
+            arrow.setTranslateY(coordinate.getY() * tileWidth);
 
-			arrow.setOnMouseClicked((e) -> {
-				FloorTile playerTileChoice = (FloorTile) gameLogic.drawnCard();
-				Node choiceCard = cards.getChildren().get(0).lookup("#image");
-				double rotation = choiceCard.getRotate();
-				if (rotation >= 0) {
-					playerTileChoice.setRotation(UP);
-				}
-				if (rotation >= 90) {
-					playerTileChoice.setRotation(RIGHT);
-				}
-				if (rotation >= 180) {
-					playerTileChoice.setRotation(DOWN);
-				}
-				if (rotation >= 270) {
-					playerTileChoice.setRotation(LEFT);
-				}
-				shiftTiles(direction, where, playerTileChoice);
-				try {
-					FLOOR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-					gameLogic.floor(playerTileChoice, coordinate);
-					mainLoop();
-				} catch (Exception exception) {
-					exception.printStackTrace();
-				}
+            arrow.setOnMouseClicked((e) -> {
+                FloorTile playerTileChoice = (FloorTile) gameLogic.drawnCard();
+                Node choiceCard = cards.getChildren().get(0).lookup("#image");
+                double rotation = choiceCard.getRotate();
+                if (rotation >= 0) {
+                    playerTileChoice.setRotation(UP);
+                }
+                if (rotation >= 90) {
+                    playerTileChoice.setRotation(RIGHT);
+                }
+                if (rotation >= 180) {
+                    playerTileChoice.setRotation(DOWN);
+                }
+                if (rotation >= 270) {
+                    playerTileChoice.setRotation(LEFT);
+                }
+                shiftTiles(direction, where, playerTileChoice);
+                try {
+                    FLOOR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+                    gameLogic.floor(playerTileChoice, coordinate);
+                    mainLoop();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
-			});
-			controls.getChildren().add(arrow);
-		}
-		cards.getChildren().removeIf(Objects::isNull);
-		if (gameLogic.drawnCard() != null) {
-			cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
-		}
-	}
+            });
+            controls.getChildren().add(arrow);
+        }
+        cards.getChildren().removeIf(Objects::isNull);
+        if (gameLogic.drawnCard() != null) {
+            // TODO  remove this as its for testing.
+            cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
+        }
+    }
 
-	private void shiftTiles(Rotation direction, int location, FloorTile newTile) {
-		// Add in new tile.
-		Coordinate newTileLocation;
-		switch (direction) {
-			case UP:
-				newTileLocation = new Coordinate(location, height);
-				break;
-			case LEFT:
-				newTileLocation = new Coordinate(width, location);
-				break;
-			case DOWN:
-				newTileLocation = new Coordinate(location, -1);
-				break;
-			case RIGHT:
-				newTileLocation = new Coordinate(-1, location);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + direction);
-		}
-		Pane tileView = Assets.getFloorTileImage(newTile, newTileLocation);
-		tiles.getChildren().add(tileView);
+    private void shiftTiles(Rotation direction, int location, FloorTile newTile) {
+        // Add in new tile.
+        Coordinate newTileLocation;
+        switch (direction) {
+            case UP:
+                newTileLocation = new Coordinate(location, height);
+                break;
+            case LEFT:
+                newTileLocation = new Coordinate(width, location);
+                break;
+            case DOWN:
+                newTileLocation = new Coordinate(location, -1);
+                break;
+            case RIGHT:
+                newTileLocation = new Coordinate(-1, location);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + direction);
+        }
+        Pane tileView = Assets.getFloorTileImage(newTile, newTileLocation);
+        tiles.getChildren().add(tileView);
 
-		// Shift players
-		applyToAll(players, player -> {
-			int x = ((int) player.getTranslateX()) / tileWidth;
-			int y = ((int) player.getTranslateY()) / tileWidth;
-			TranslateTransition smooth = new TranslateTransition();
-			smooth.setNode(player);
-			smooth.setDuration(new Duration(200));
-			switch (direction) {
-				case RIGHT:
-					if (y == location) {
-						if (x >= width - 1) {
-							smooth.setToX(0);
-							smooth.setDuration(new Duration(600));
-							//tiles.getChildren().remove(player);
-							//tiles.getChildren().add(player);
-						} else {
-							smooth.setByX(tileWidth);
-						}
-					}
-					break;
-				case LEFT:
-					if (y == location) {
-						if (x <= 0) {
-							smooth.setToX(tileWidth * (width - 1));
-							smooth.setDuration(new Duration(600));
-						} else {
-							smooth.setByX(-tileWidth);
-						}
-					}
-					break;
-				case DOWN:
-					if (x == location) {
-						if (y == height - 1) {
-							smooth.setToY(0);
-							smooth.setDuration(new Duration(600));
+        // Shift players
+        applyToAll(players, player -> {
+            int x = ((int) player.getTranslateX()) / tileWidth;
+            int y = ((int) player.getTranslateY()) / tileWidth;
+            TranslateTransition smooth = new TranslateTransition();
+            smooth.setNode(player);
+            smooth.setDuration(new Duration(200));
+            switch (direction) {
+                case RIGHT:
+                    if (y == location) {
+                        if (x >= width - 1) {
+                            smooth.setToX(0);
+                            smooth.setDuration(new Duration(600));
+                            //tiles.getChildren().remove(player);
+                            //tiles.getChildren().add(player);
+                        } else {
+                            smooth.setByX(tileWidth);
+                        }
+                    }
+                    break;
+                case LEFT:
+                    if (y == location) {
+                        if (x <= 0) {
+                            smooth.setToX(tileWidth * (width - 1));
+                            smooth.setDuration(new Duration(600));
+                        } else {
+                            smooth.setByX(-tileWidth);
+                        }
+                    }
+                    break;
+                case DOWN:
+                    if (x == location) {
+                        if (y == height - 1) {
+                            smooth.setToY(0);
+                            smooth.setDuration(new Duration(600));
 
-						} else {
-							smooth.setByY(tileWidth);
-						}
-					}
-					break;
-				case UP:
-					if (x == location) {
-						if (y == 0) {
-							smooth.setToY(tileWidth * (height - 1));
-							smooth.setDuration(new Duration(600));
-						} else {
-							smooth.setByY(-tileWidth);
-						}
-					}
-			}
-			smooth.play();
-			return 0;
-		});
-		// Shift all tiles
+                        } else {
+                            smooth.setByY(tileWidth);
+                        }
+                    }
+                    break;
+                case UP:
+                    if (x == location) {
+                        if (y == 0) {
+                            smooth.setToY(tileWidth * (height - 1));
+                            smooth.setDuration(new Duration(600));
+                        } else {
+                            smooth.setByY(-tileWidth);
+                        }
+                    }
+            }
+            smooth.play();
+            return 0;
+        });
+        // Shift all tiles
 
-		applyToAll(tiles, tile -> {
-			int x = ((int) tile.getTranslateX()) / tileWidth;
-			int y = ((int) tile.getTranslateY()) / tileWidth;
-			TranslateTransition smooth = new TranslateTransition();
-			smooth.setNode(tile);
-			smooth.setDuration(new Duration(200));
-			FadeTransition smoothVanish = new FadeTransition(new Duration(200));
-			smoothVanish.setFromValue(100);
-			smoothVanish.setToValue(0);
-			switch (direction) {
-				case RIGHT:
-					if (y == location) {
-						smooth.setByX(tileWidth);
-						if (x >= width - 1) {
-							smoothVanish.setNode(tile);
-						}
-					}
-					break;
-				case DOWN:
-					if (x == location) {
-						smooth.setByY(tileWidth);
-						if (y == height - 1) {
-							smoothVanish.setNode(tile);
-						}
-					}
-					break;
-				case LEFT:
-					if (y == location) {
-						smooth.setByX(-tileWidth);
-						if (x <= 0) {
-							smoothVanish.setNode(tile);
-						}
-					}
-					break;
-				case UP:
-					if (x == location) {
-						smooth.setByY(-tileWidth);
-						if (y <= 0) {
-							smoothVanish.setNode(tile);
-						}
-					}
-			}
+        applyToAll(tiles, tile -> {
+            int x = ((int) tile.getTranslateX()) / tileWidth;
+            int y = ((int) tile.getTranslateY()) / tileWidth;
+            TranslateTransition smooth = new TranslateTransition();
+            smooth.setNode(tile);
+            smooth.setDuration(new Duration(200));
+            FadeTransition smoothVanish = new FadeTransition(new Duration(200));
+            smoothVanish.setFromValue(100);
+            smoothVanish.setToValue(0);
+            switch (direction) {
+                case RIGHT:
+                    if (y == location) {
+                        smooth.setByX(tileWidth);
+                        if (x >= width - 1) {
+                            smoothVanish.setNode(tile);
+                        }
+                    }
+                    break;
+                case DOWN:
+                    if (x == location) {
+                        smooth.setByY(tileWidth);
+                        if (y == height - 1) {
+                            smoothVanish.setNode(tile);
+                        }
+                    }
+                    break;
+                case LEFT:
+                    if (y == location) {
+                        smooth.setByX(-tileWidth);
+                        if (x <= 0) {
+                            smoothVanish.setNode(tile);
+                        }
+                    }
+                    break;
+                case UP:
+                    if (x == location) {
+                        smooth.setByY(-tileWidth);
+                        if (y <= 0) {
+                            smoothVanish.setNode(tile);
+                        }
+                    }
+            }
 
-			smooth.play();
-			smoothVanish.play();
-			return 0;
+            smooth.play();
+            smoothVanish.play();
+            return 0;
 
-		});
-	}
+        });
+    }
 
-	private void updateBoard() throws Exception {
-		tiles.setPrefWidth((width + 4) * tileWidth);
-		tiles.setPrefHeight((height + 4) * tileWidth);
-		controls.setPrefWidth((width + 4) * tileWidth);
-		controls.setPrefHeight((height + 4) * tileWidth);
-		players.setPrefHeight((height + 4) * tileWidth);
-		players.setPrefWidth((width + 4) * tileWidth);
-		fixed.setPrefWidth((width + 4) * tileWidth);
-		fixed.setPrefHeight((width + 4) * tileWidth);
+    private void updateBoard() throws Exception {
+        tiles.setPrefWidth((width + 4) * tileWidth);
+        tiles.setPrefHeight((height + 4) * tileWidth);
+        controls.setPrefWidth((width + 4) * tileWidth);
+        controls.setPrefHeight((height + 4) * tileWidth);
+        players.setPrefHeight((height + 4) * tileWidth);
+        players.setPrefWidth((width + 4) * tileWidth);
+        fixed.setPrefWidth((width + 4) * tileWidth);
+        fixed.setPrefHeight((width + 4) * tileWidth);
 
-		tiles.getChildren().clear();
-		fixed.getChildren().clear();
-		players.getChildren().clear();
-		controls.getChildren().clear();
+        tiles.getChildren().clear();
+        fixed.getChildren().clear();
+        players.getChildren().clear();
+        controls.getChildren().clear();
 
-		// showing the tiles
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
+        // showing the tiles
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
 
-				// Tile from the game board.
-				FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
+                // Tile from the game board.
+                FloorTile tile = gameLogic.getTileAt(new Coordinate(x, y));
 
-				// What is going to be shown on screen
-				// Get correct image
-				Node tileView = Assets.getFloorTileImage(tile, x, y);
-				tiles.getChildren().add(tileView);
+                // What is going to be shown on screen
+                // Get correct image
+                Node tileView = Assets.getFloorTileImage(tile, x, y);
+                tiles.getChildren().add(tileView);
 
-			}
+            }
 
-		}
-		// showing the player locations
-		//players = new ImageView[gameLogic.getNumberOfPlayers()];
-		for (int i = 0; i < gameLogic.getPlayerLocations().length; i++) {
-			Coordinate location = gameLogic.getPlayerLocations()[i];
-			ImageView playerView = Assets.getPlayer(i);
-			playerView.setTranslateX(location.getX() * tileWidth);
-			playerView.setTranslateY(location.getY() * tileWidth);
-			players.getChildren().add(playerView);
-		}
-	}
+        }
+        // showing the player locations
+        //players = new ImageView[gameLogic.getNumberOfPlayers()];
+        for (int i = 0; i < gameLogic.getPlayerLocations().length; i++) {
+            Coordinate location = gameLogic.getPlayerLocations()[i];
+            ImageView playerView = Assets.getPlayer(i);
+            playerView.setTranslateX(location.getX() * tileWidth);
+            playerView.setTranslateY(location.getY() * tileWidth);
+            players.getChildren().add(playerView);
+        }
+    }
 
 	/**
 	 * Clears the game and starts a new one with given starting board
@@ -471,44 +466,45 @@ public class GameScreenController extends StateLoad {
 		mainLoop();
 	}
 
-	/**
-	 * hides all controls ready for when mainloop shows the correct ones.
-	 */
-	private void hideAllControls() {
-		// Draw controls
-		drawButton.setVisible(false);
-		cards.getChildren().clear();
-		controls.getChildren().clear();
-	}
+    /**
+     * hides all controls ready for when mainloop shows the correct ones.
+     */
+    private void hideAllControls() {
+        // Draw controls
+        drawButton.setVisible(false);
+        cards.getChildren().clear();
+        controls.getChildren().clear();
+    }
 
-	private void setupActionPhase() throws Exception {
-		cards.getChildren().clear();
-		ActionTile[] tiles = gameLogic.getActionCards();
-		// Add a skip button
-		drawButton.setText("Skip");
-		drawButton.setVisible(true);
-		drawButton.setOnAction(e1 -> {
-			try {
-				skipActionOnCLick();
-				e1.consume();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		if (gameLogic.drawnCard() != null) {
-			Node drawnCard = Assets.createCard(gameLogic.drawnCard());
-			ColorAdjust dim = new ColorAdjust();
-			dim.setBrightness(0.6);
-			dim.setSaturation(0.5);
-			drawnCard.setEffect(dim);
-			drawnCard.setOnMouseClicked((e) -> {
-			});
-			drawnCard.setOnMouseEntered((e) -> {
-			});
-			drawnCard.setOnMouseExited((e) -> {
-			});
-			cards.getChildren().add(drawnCard);
-		}
+    private void setupActionPhase() throws Exception {
+        cards.getChildren().clear();
+        ActionTile[] tiles = gameLogic.getActionCards();
+        // Add a skip button
+        Button skip = new Button();
+        skip.setText("skip");
+        cards.getChildren().add(skip);
+        skip.setOnMouseClicked(e1 -> {
+                    try {
+                        skipActionOnCLick(e1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+        if (gameLogic.drawnCard() != null) {
+            Node drawnCard = Assets.createCard(gameLogic.drawnCard());
+            ColorAdjust dim = new ColorAdjust();
+            dim.setBrightness(0.6);
+            dim.setSaturation(0.5);
+            drawnCard.setEffect(dim);
+            drawnCard.setOnMouseClicked((e) -> {
+            });
+            drawnCard.setOnMouseEntered((e) -> {
+            });
+            drawnCard.setOnMouseExited((e) -> {
+            });
+            cards.getChildren().add(drawnCard);
+        }
 
 		for (ActionTile tile : tiles) {
 			final Node vCard = Assets.createCard(tile);
@@ -534,6 +530,7 @@ public class GameScreenController extends StateLoad {
 						hideAllControls();
 						// Get all players that can be back tracked
 						boolean[] validPlayers = gameLogic.getPlayersThatCanBeBacktracked();
+						Node[] playerSelectControls = new Node[validPlayers.length];
 						for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
 							if (validPlayers[i]) {
 								// For each valid player
@@ -566,36 +563,36 @@ public class GameScreenController extends StateLoad {
 								});
 							}
 
-						}
-					});
+                        }
+                    });
 
-					break;
-				case FIRE:
-					vCard.setOnMouseClicked((e) -> {
-						hideAllControls();
-						Node fire = Assets.getFireEffect();
-						controls.getChildren().add(fire);
-						FIRE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-						controls.setOnMouseMoved((e2) -> {
-							LocationSelectOnClick(fire, e2, FIRE);
-						});
+                    break;
+                case FIRE:
+                    vCard.setOnMouseClicked((e) -> {
+                        hideAllControls();
+                        Node fire = Assets.getFireEffect();
+                        controls.getChildren().add(fire);
+                        FIRE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+                        controls.setOnMouseMoved((e2) -> {
+                            LocationSelectOnClick(fire, e2, FIRE);
+                        });
 
-					});
-					break;
-				case FROZEN:
-					vCard.setOnMouseClicked((e) -> {
-						hideAllControls();
-						Node frozen = Assets.getFrozenEffect();
-						controls.getChildren().add(frozen);
-						ICE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-						controls.setOnMouseMoved((e2) -> {
-							LocationSelectOnClick(frozen, e2, FROZEN);
-						});
-					});
-					break;
-			}
-		}
-	}
+                    });
+                    break;
+                case FROZEN:
+                    vCard.setOnMouseClicked((e) -> {
+                        hideAllControls();
+                        Node frozen = Assets.getFrozenEffect();
+                        controls.getChildren().add(frozen);
+                        ICE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+                        controls.setOnMouseMoved((e2) -> {
+                            LocationSelectOnClick(frozen, e2, FROZEN);
+                        });
+                    });
+                    break;
+            }
+        }
+    }
 
 	/**
 	 * Sets up what happens when a fire / frozen card is clicked
@@ -681,7 +678,7 @@ public class GameScreenController extends StateLoad {
 				removeAll("locationarrow");
 				walk.setOnFinished((e2) -> {
 					try {
-						MOVEMENT_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+                        MOVEMENT_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 						mainLoop();
 					} catch (IOException ioException) {
 						ioException.printStackTrace();
@@ -692,14 +689,27 @@ public class GameScreenController extends StateLoad {
 		}
 	}
 
-	/**
-	 * Called when Draw button is pressed
-	 */
-	public void onDrawButton() throws IOException {
-		gameLogic.draw();
-		DRAW_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-		mainLoop();
-	}
+    /**
+     * Called when Draw button is pressed
+     */
+    public void onDrawButton() throws IOException {
+        gameLogic.draw();
+        //TODO just show drawn card.
+        cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
+        DRAW_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+        mainLoop();
+    }
+
+    /***
+     * Used for testing, called when test button is pushed, puts card into players hand.
+     */
+    public void onButtonPressed() {
+        System.out.println("Test Button");
+        applyToAll(tiles, (v) -> {
+            v.setRotate(v.getRotate() + 20);
+            return 0;
+        });
+    }
 
 	/***
 	 * Quits to main menu unless the game is unsaved.
@@ -711,7 +721,6 @@ public class GameScreenController extends StateLoad {
 			RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} else {
 			confirmation.setVisible(true);
-			confirmation.setMouseTransparent(false);
 		}
 	}
 
@@ -721,7 +730,7 @@ public class GameScreenController extends StateLoad {
 	public void onYes() {
 		try {
 			gameLogic.saveGame();
-			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+            MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Game NOT saved");
@@ -737,16 +746,15 @@ public class GameScreenController extends StateLoad {
 	public void onNo() {
 		WindowLoader wl = new WindowLoader(drawButton);
 		wl.load("MenuScreen", getInitData());
-		MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
-
 	/***
 	 * Starts save game window.
 	 */
 	public void onSaveButton() {
 		try {
 			gameLogic.saveGame();
-			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+            MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Game NOT saved");
@@ -755,43 +763,86 @@ public class GameScreenController extends StateLoad {
 	}
 
 
-	private void applyToAll(Pane group, Function<Node, Integer> f) {
-		for (Object o : group.getChildren()) {
-			if (o == null) {
-				continue;
-			}
-			Node n = (Node) o;
-			if (n.getId() == null) {
-				continue;
-			}
-			f.apply(n);
-		}
-	}
+    private void applyToAll(Pane group, Function<Node, Integer> f) {
+        for (Object o : group.getChildren()) {
+            if (o == null) {
+                continue;
+            }
+            Node n = (Node) o;
+            if (n.getId() == null) {
+                continue;
+            }
+            f.apply(n);
+        }
+    }
 
-	private void removeAll(String id) {
-		tiles.getChildren().removeIf(Objects::isNull);
-		tiles.getChildren().removeIf(n -> {
-			if (n.getId() == null) {
-				return false;
-			} else {
-				return n.getId().contains(id);
-			}
-		});
-	}
+    /**
+     * Takes an id to match and a onClickFunction
+     * puts that on all matching node with id starting with 'id'
+     *
+     * @param group node to look for
+     * @param func  function to apply to onClick
+     */
+    private void applyOnClick(Pane group, EventHandler<MouseEvent> func) {
+        applyToAll(group, v -> {
+            v.setOnMouseClicked(func);
+            return 0;
+        });
+    }
 
-	private void skipActionOnCLick() throws Exception {
-		gameLogic.action(null, null, 0);
-		mainLoop();
-		SKIP_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
-	}
+    /**
+     * Takes an id to match and a function
+     * puts that on all matching node with id starting with 'id'
+     *
+     * @param group node to look for
+     * @param func  function to apply to onHover
+     */
+    private void applyOnHover(Pane group, EventHandler<MouseEvent> func) {
+        applyToAll(group, (n) -> {
+            n.setOnMouseEntered(func);
+            return 0;
+        });
+    }
 
-	private void doubleMoveAction(MouseEvent e2) throws Exception {
-		gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
-		for (Node player : players.getChildren()) {
-			player.setEffect(new Bloom(999));
-			player.setOnMouseClicked(e3 -> {
-			});
-		}
-		mainLoop();
-	}
+    /**
+     * Takes an id to match and a function
+     * puts that on all matching node with id starting with 'id'
+     *
+     * @param group node to look for
+     * @param func  function to apply to offHover
+     */
+    private void applyOffHover(Pane group, EventHandler<MouseEvent> func) {
+        applyToAll(group, n -> {
+            n.setOnMouseExited(func);
+            return 0;
+        });
+
+    }
+
+    private void removeAll(String id) {
+        tiles.getChildren().removeIf(Objects::isNull);
+        tiles.getChildren().removeIf(n -> {
+            if (n.getId() == null) {
+                return false;
+            } else {
+                return n.getId().contains(id);
+            }
+        });
+    }
+
+    private void skipActionOnCLick(MouseEvent e) throws Exception {
+        gameLogic.action(null, null, 0);
+        mainLoop();
+        SKIP_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
+    }
+
+    private void doubleMoveAction(MouseEvent e2) throws Exception {
+        gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
+        for (Node player : players.getChildren()) {
+            player.setEffect(new Bloom(999));
+            player.setOnMouseClicked(e3 -> {
+            });
+        }
+        mainLoop();
+    }
 }
