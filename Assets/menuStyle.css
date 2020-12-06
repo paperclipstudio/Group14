@@ -66,3 +66,17 @@
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-background-color: #333;
 }
+.list-cell:even:filled:selected:focused, .list-cell:even:filled:selected {
+    -fx-background-color: linear-gradient(#333 0%, #AAAA33 100%);
+    -fx-text-fill: white;
+}
+.list-cell:even {
+    -fx-background-color: #333;
+}
+.list-cell:odd:filled:selected:focused, .list-cell:odd:filled:selected {
+    -fx-background-color: linear-gradient(#222 0%, #AAAA33 100%);
+    -fx-text-fill: white;
+}
+.list-cell:odd {
+    -fx-background-color: #222;
+}
