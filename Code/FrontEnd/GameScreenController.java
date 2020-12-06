@@ -67,7 +67,6 @@ public class GameScreenController extends StateLoad {
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
     private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
     private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
-    private final double SFX_VOLUME = 0.05;
 
 	@FXML
 	private GridPane root;
@@ -196,7 +195,7 @@ public class GameScreenController extends StateLoad {
 		WindowLoader wl = new WindowLoader(drawButton);
 		getInitData().put("Winner", gameLogic.getWinner() + "");
 		wl.load("WinScreen", getInitData());
-		WIN_AUDIO.play(SFX_VOLUME);
+		WIN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 
     private void setupFloorPhase() throws Exception {
@@ -254,7 +253,7 @@ public class GameScreenController extends StateLoad {
                 }
                 shiftTiles(direction, where, playerTileChoice);
                 try {
-                    FLOOR_AUDIO.play(SFX_VOLUME);
+                    FLOOR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
                     gameLogic.floor(playerTileChoice, coordinate);
                     mainLoop();
                 } catch (Exception exception) {
@@ -521,7 +520,7 @@ public class GameScreenController extends StateLoad {
 						vCard.setOnMouseClicked(e2 -> {
 							try {
 								doubleMoveAction(e2);
-								DOUBLEMOVE_AUDIO.play(SFX_VOLUME);
+								DOUBLEMOVE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 							} catch (Exception exception) {
 								exception.printStackTrace();
 							}
@@ -559,7 +558,7 @@ public class GameScreenController extends StateLoad {
 									}
 									try {
 										mainLoop();
-										BACKTRACK_AUDIO.play(SFX_VOLUME);
+										BACKTRACK_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 									} catch (IOException ioException) {
 										ioException.printStackTrace();
 									}
@@ -575,7 +574,7 @@ public class GameScreenController extends StateLoad {
                         hideAllControls();
                         Node fire = Assets.getFireEffect();
                         controls.getChildren().add(fire);
-                        FIRE_AUDIO.play(SFX_VOLUME);
+                        FIRE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
                         controls.setOnMouseMoved((e2) -> {
                             LocationSelectOnClick(fire, e2, FIRE);
                         });
@@ -587,7 +586,7 @@ public class GameScreenController extends StateLoad {
                         hideAllControls();
                         Node frozen = Assets.getFrozenEffect();
                         controls.getChildren().add(frozen);
-                        ICE_AUDIO.play(SFX_VOLUME);
+                        ICE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
                         controls.setOnMouseMoved((e2) -> {
                             LocationSelectOnClick(frozen, e2, FROZEN);
                         });
@@ -681,7 +680,7 @@ public class GameScreenController extends StateLoad {
 				removeAll("locationarrow");
 				walk.setOnFinished((e2) -> {
 					try {
-                        MOVEMENT_AUDIO.play(SFX_VOLUME);
+                        MOVEMENT_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 						mainLoop();
 					} catch (IOException ioException) {
 						ioException.printStackTrace();
@@ -699,7 +698,7 @@ public class GameScreenController extends StateLoad {
         gameLogic.draw();
         //TODO just show drawn card.
         cards.getChildren().add(Assets.createCard(gameLogic.drawnCard()));
-        DRAW_AUDIO.play(SFX_VOLUME);
+        DRAW_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         mainLoop();
     }
 
@@ -721,7 +720,7 @@ public class GameScreenController extends StateLoad {
 		if (gameLogic.isGameSaved()) {
 			WindowLoader wl = new WindowLoader(drawButton);
 			wl.load("MenuScreen", getInitData());
-			RETURN_AUDIO.play(SFX_VOLUME);
+			RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} else {
 			confirmation.setVisible(true);
 		}
@@ -733,7 +732,7 @@ public class GameScreenController extends StateLoad {
 	public void onYes() {
 		try {
 			gameLogic.saveGame();
-            MAIN_MENU_AUDIO.play(SFX_VOLUME);
+            MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Game NOT saved");
@@ -749,7 +748,7 @@ public class GameScreenController extends StateLoad {
 	public void onNo() {
 		WindowLoader wl = new WindowLoader(drawButton);
 		wl.load("MenuScreen", getInitData());
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 	/***
 	 * Starts save game window.
@@ -757,7 +756,7 @@ public class GameScreenController extends StateLoad {
 	public void onSaveButton() {
 		try {
 			gameLogic.saveGame();
-            MAIN_MENU_AUDIO.play(SFX_VOLUME);
+            MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Game NOT saved");
@@ -836,7 +835,7 @@ public class GameScreenController extends StateLoad {
     private void skipActionOnCLick(MouseEvent e) throws Exception {
         gameLogic.action(null, null, 0);
         mainLoop();
-        SKIP_AUDIO.play(SFX_VOLUME);
+        SKIP_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     private void doubleMoveAction(MouseEvent e2) throws Exception {

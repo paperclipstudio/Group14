@@ -26,7 +26,7 @@ public class SettingsController extends StateLoad {
 	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
 	private final String TEST_SFX = "Assets\\SFX\\skip.mp3";
 	private final AudioClip TEST_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
-	private final double SFX_VOLUME = 0.2;
+
 
 	@FXML
 	private Button backButton;
@@ -59,7 +59,7 @@ public class SettingsController extends StateLoad {
 	 * updated the current SFX sound level
 	 */
 	public void onSFXChange() {
-		TEST_AUDIO.setVolume(sfx.getValue() / 200.0);
+		TEST_AUDIO.setVolume(sfx.getValue());
 		if (!TEST_AUDIO.isPlaying()) {
 			TEST_AUDIO.play();
 		}
@@ -81,7 +81,7 @@ public class SettingsController extends StateLoad {
 		configWriter.close();
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen", getInitData());
-		RETURN_AUDIO.play(SFX_VOLUME);
+		RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 }
 

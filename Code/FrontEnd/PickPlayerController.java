@@ -32,7 +32,7 @@ public class PickPlayerController extends StateLoad {
 	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
 	private final String ERROR_SFX = "Assets\\SFX\\error.mp3";
 	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
-	private final double SFX_VOLUME = 0.2;
+
 
     @FXML
     public ChoiceBox<String> playerList1;
@@ -123,10 +123,10 @@ public class PickPlayerController extends StateLoad {
 
 		if (playerCount == 2) {
 			if (playerList1.getValue().equals(playerList2.getValue())) {
-				ERROR_AUDIO.play(SFX_VOLUME);
+				ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 				hint.setText("Please select different players in each box.");
 			} else {
-				START_AUDIO.play(SFX_VOLUME);
+				START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 				wl.load("GameScreen", getInitData());
 			}
 
@@ -135,10 +135,10 @@ public class PickPlayerController extends StateLoad {
 					playerList1.getValue().equals(playerList3.getValue()) ||
 					playerList2.getValue().equals(playerList3.getValue())
 			) {
-				ERROR_AUDIO.play(SFX_VOLUME);
+				ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 				hint.setText("Please select different players in each box.");
 			} else {
-				START_AUDIO.play(SFX_VOLUME);
+				START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 				wl.load("GameScreen", getInitData());
 			}
 
@@ -150,10 +150,10 @@ public class PickPlayerController extends StateLoad {
 					playerList2.getValue().equals(playerList4.getValue()) ||
 					playerList3.getValue().equals(playerList4.getValue())
 			) {
-				ERROR_AUDIO.play(SFX_VOLUME);
+				ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 				hint.setText("Please select different players in each box.");
 			} else {
-				START_AUDIO.play(SFX_VOLUME);
+				START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 				wl.load("GameScreen", getInitData());
 			}
 		}
@@ -165,6 +165,6 @@ public class PickPlayerController extends StateLoad {
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameSetup", getInitData());
-		RETURN_AUDIO.play(SFX_VOLUME);
+		RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 }

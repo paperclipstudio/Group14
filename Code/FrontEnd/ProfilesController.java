@@ -1,5 +1,6 @@
 package FrontEnd;
 
+import BackEnd.Profile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,7 +29,6 @@ public class ProfilesController extends StateLoad {
 	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
 	private final String ERROR_SFX = "Assets\\SFX\\error.mp3";
 	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
-	private final double SFX_VOLUME = 0.2;
 
 	@FXML
 	public Button viewButton;
@@ -82,7 +82,7 @@ public class ProfilesController extends StateLoad {
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen", getInitData());
-		RETURN_AUDIO.play(SFX_VOLUME);
+		RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class ProfilesController extends StateLoad {
 		}
 		if (user.exists() && !user.isDirectory() || newName.isEmpty()) {
 			input.setStyle("-fx-border-color: red");
-			ERROR_AUDIO.play(SFX_VOLUME);
+			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 
 		} else {
 			input.setStyle("-fx-border-color: default");
@@ -108,7 +108,7 @@ public class ProfilesController extends StateLoad {
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
 			newUser.write("0 0 icon" + currentIndex);
 			newUser.close();
-			MAIN_MENU_AUDIO.play(SFX_VOLUME);
+			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		}
 	}
 
@@ -122,10 +122,10 @@ public class ProfilesController extends StateLoad {
             input.setStyle("-fx-border-color: default");
             playerList.getItems().remove(newName);
 
-			MAIN_MENU_AUDIO.play(SFX_VOLUME);
+			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 
         } else {
-			ERROR_AUDIO.play(SFX_VOLUME);
+			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
             input.setStyle("-fx-border-color: red");
         }
     }
@@ -139,21 +139,16 @@ public class ProfilesController extends StateLoad {
         String line;
         input.setStyle("-fx-border-color: default");
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("SaveData\\UserData\\" + playerPicked + ".txt"));
-            int getWin = 0;
-            int getLoss = 0;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" ", 3);
-                if (parts.length >= 1) {
-                    getWin = Integer.parseInt(parts[0]);
-                    getLoss = Integer.parseInt(parts[1]);
-                }
-            }
-            reader.close();
-            playerRecord.setText("This player has " + getWin + " wins and " + getLoss + " losses.");
-			MAIN_MENU_AUDIO.play(SFX_VOLUME);
+			Profile profile = Profile.readProfile(playerPicked);
+            playerRecord.setText(
+							"This player has " +
+							profile.getWins() +
+							" wins and " +
+							profile.getLosses() +
+							" losses.");
+			MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         } catch (IOException noPlayerFound) {
-			ERROR_AUDIO.play(SFX_VOLUME);
+			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
             playerRecord.setText("Please select a player.");
         }
     }

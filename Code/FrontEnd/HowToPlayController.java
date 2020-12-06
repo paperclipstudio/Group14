@@ -21,7 +21,7 @@ public class HowToPlayController extends StateLoad {
     private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
     private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
-    private final double SFX_VOLUME = 0.2;
+
 
     @FXML
     private Button newGameButton;
@@ -41,42 +41,42 @@ public class HowToPlayController extends StateLoad {
     public void onTiles() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Tiles", getInitData());
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onTurns() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Turns", getInitData());
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onMovement() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Movement", getInitData());
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onActionTiles() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/ActionTiles", getInitData());
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onBackTo() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());
-        RETURN_AUDIO.play(SFX_VOLUME);
+        RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onBasics() {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Basics", getInitData());
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onBackToMenu() {
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
-        RETURN_AUDIO.play(SFX_VOLUME);
+        RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 }

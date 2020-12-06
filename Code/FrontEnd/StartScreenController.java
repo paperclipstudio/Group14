@@ -20,7 +20,6 @@ public class StartScreenController extends StateLoad {
 
     private final String START_SFX = "Assets\\SFX\\start.mp3";
     private final AudioClip START_AUDIO = new AudioClip(new File(START_SFX).toURI().toString());
-    private final double SFX_VOLUME = 0.1;
 
     @FXML
     private Button newGameButton;
@@ -45,7 +44,7 @@ public class StartScreenController extends StateLoad {
      * @param keyEvent event of that keypress
      */
     public void OnKeyPressed(KeyEvent keyEvent){
-        START_AUDIO.play(SFX_VOLUME);
+        START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
     }
@@ -55,7 +54,7 @@ public class StartScreenController extends StateLoad {
      * @param m the mouse event of this click
      */
     public void onMousePress(MouseEvent m){
-        START_AUDIO.play(SFX_VOLUME);
+        START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
     }

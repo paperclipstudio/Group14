@@ -26,7 +26,7 @@ public class LoadGameController extends StateLoad {
 	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
 	private final String START_SFX = "Assets\\SFX\\start.mp3";
 	private final AudioClip START_AUDIO = new AudioClip(new File(START_SFX).toURI().toString());
-	private final double SFX_VOLUME = 0.2;
+
 
 	@FXML
 	private Button backButton;
@@ -67,7 +67,7 @@ public class LoadGameController extends StateLoad {
 	 * Called my backButton
 	 */
 	public void onBackButton() {
-		RETURN_AUDIO.play(SFX_VOLUME);
+		RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen", getInitData());
 	}
@@ -84,9 +84,9 @@ public class LoadGameController extends StateLoad {
 		try {
 			GameLoad.loader(getInitData());
 			wl.load("GameScreen", getInitData());
-			START_AUDIO.play(SFX_VOLUME);
+			START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} catch (Exception e) {
-			ERROR_AUDIO.play(SFX_VOLUME);
+			ERROR_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 			confirm.setText("File Corrupted due too: " + e.getMessage());
 		}
 	}
@@ -95,7 +95,7 @@ public class LoadGameController extends StateLoad {
 	 * Double checks that user wants to delete file.
 	 */
 	public void onDeleteButton() {
-		MAIN_MENU_AUDIO.play(SFX_VOLUME);
+		MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		yesButton.setVisible(true);
 		noButton.setVisible(true);
 		confirm.setText("Are you sure?");
@@ -105,7 +105,7 @@ public class LoadGameController extends StateLoad {
 	 * End deleting game save mode without deleting game.
 	 */
 	public void onNoButton() {
-		MAIN_MENU_AUDIO.play(SFX_VOLUME);
+		MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		yesButton.setVisible(false);
 		noButton.setVisible(false);
 		confirm.setText("");
@@ -116,7 +116,7 @@ public class LoadGameController extends StateLoad {
 	 * @throws IOException if game failed to delete.
 	 */
 	public void onYesButton() throws IOException {
-		MAIN_MENU_AUDIO.play(SFX_VOLUME);
+		MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		File saveFile = new File("SaveData\\GameSave\\" + selectGame.getValue());
 		if (!saveFile.delete()) {
 			throw new IOException("Failed to delete file" + saveFile.toString());

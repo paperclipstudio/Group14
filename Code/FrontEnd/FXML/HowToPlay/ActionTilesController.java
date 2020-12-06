@@ -23,7 +23,6 @@ public class ActionTilesController extends StateLoad {
     private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
     private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
-    private final double SFX_VOLUME = 0.2;
 
     @FXML
     private Button newGameButton;
@@ -47,25 +46,25 @@ public class ActionTilesController extends StateLoad {
     }
 
     public void onIce(ActionEvent actionEvent) {
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Ice", getInitData());
     }
 
     public void onFire(ActionEvent actionEvent) {
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Fire", getInitData());
     }
 
     public void onDoubleMove(ActionEvent actionEvent) {
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Double Move", getInitData());
     }
 
     public void onBacktrack(ActionEvent actionEvent) {
-        MAIN_MENU_AUDIO.play(SFX_VOLUME);
+        MAIN_MENU_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/Backtrack", getInitData());
 
@@ -74,12 +73,12 @@ public class ActionTilesController extends StateLoad {
     public void onBack(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/ActionTiles", getInitData());
-        RETURN_AUDIO.play(SFX_VOLUME);
+        RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 
     public void onBackToMenu(ActionEvent actionEvent) {
         wl = new WindowLoader(newGameButton);
         wl.load("/HowToPlay/HowToPlay", getInitData());
-        RETURN_AUDIO.play(SFX_VOLUME);
+        RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
     }
 }
