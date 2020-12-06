@@ -10,13 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FXML.HowToPlay.ActionTilesController" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FXML.HowToPlay.ActionTilesController" stylesheets="menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
     <center>
         <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
             <children>
                 <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
                <children>
-                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Action Tiles" textAlignment="CENTER" translateY="30.0" wrappingWidth="417.33154296875">
+                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Action Tiles" textAlignment="CENTER" translateY="30.0" wrappingWidth="417.33154296875">
                             <font>
                                 <Font name="lazer84" size="65.0" />
                             </font>

@@ -9,13 +9,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FXML.HowToPlay.ActionTilesController" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FXML.HowToPlay.ActionTilesController" stylesheets="menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
     <center>
         <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
             <children>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fire Action Tile" textAlignment="CENTER" translateY="16.0" wrappingWidth="482.33154296875">
+                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Fire Tile" textAlignment="CENTER" translateY="16.0" wrappingWidth="482.33154296875">
                             <font>
                                 <Font name="lazer84" size="65.0" />
                             </font>
@@ -30,12 +30,12 @@
                         </Text>
                     </children>
                 </HBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• Choose a tile on the board, the 3 by 3 area around the chosen tile will then be set as as Fire tiles." textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• You cannot choose a tile such that a player piece would end up being on a tile that is set as a Fire tile." textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• Players cannot move to any tiles set as Fire tiles." textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• The fire effect on these tiles wear off." textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• The effect of Fire tiles is not extinguished at the start of your next turn, but at the start of your turn after that." textAlignment="CENTER" translateY="20.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="• After the effect has worn off, the fire tiles would return back to normal." translateY="20.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• Choose a tile on the board, the 3 by 3 area around the chosen tile will then be set as as Fire tiles." textAlignment="CENTER" translateY="20.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• You cannot choose a tile such that a player piece would end up being on a tile that is set as a Fire tile." textAlignment="CENTER" translateY="20.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• Players cannot move to any tiles set as Fire tiles." textAlignment="CENTER" translateY="20.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• The fire effect on these tiles wear off." textAlignment="CENTER" translateY="20.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• The effect of Fire tiles is not extinguished at the start of your next turn, but at the start of your turn after that." textAlignment="CENTER" translateY="20.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• After the effect has worn off, the fire tiles would return back to normal." translateY="20.0" />
                 <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER" textFill="#009e05" translateY="60.0" />
                 <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
             </children>
