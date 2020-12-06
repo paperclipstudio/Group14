@@ -1,10 +1,13 @@
 package FrontEnd;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.*;
 import java.net.URL;
@@ -23,11 +26,23 @@ public class ProfilesController extends StateLoad {
 	@FXML
 	public Label playerRecord;
 	@FXML
+	public ImageView playerIcon;
+	@FXML
 	private Button backButton;
 	@FXML
 	private TextField input;
 	@FXML
 	private ListView<String> playerList;
+
+	int currentIndex = 0;
+	File iconImage0 = new File("Assets\\icon0.png");
+	Image icon0 = new Image(iconImage0.toURI().toString());
+	File iconImage1 = new File("Assets\\icon1.png");
+	Image icon1 = new Image(iconImage1.toURI().toString());
+	File iconImage2 = new File("Assets\\icon2.png");
+	Image icon2 = new Image(iconImage2.toURI().toString());
+	File iconImage3 = new File("Assets\\icon3.png");
+	Image icon3 = new Image(iconImage3.toURI().toString());
 
 	/**
 	 * Called to initialize a controller after its root element has been
@@ -41,11 +56,12 @@ public class ProfilesController extends StateLoad {
 	public void initialize(URL location, ResourceBundle resources) {
 		File userDataFolder = new File("SaveData\\UserData\\");
 		String[] children = userDataFolder.list();
+		playerIcon.setImage(icon0);
 
 		if (children != null) {
 			for (String filename : children) {
 				playerList.getItems().addAll(filename.substring(0, filename.length() - 4));
-			}
+				}
 		}
 	}
 
@@ -67,12 +83,12 @@ public class ProfilesController extends StateLoad {
 		String newName = input.getText();
 		File user = new File("SaveData\\UserData\\" + newName + ".txt");
 		if (user.exists() && !user.isDirectory()) {
-			input.setStyle("-fx-background-color: red");
+			input.setStyle("-fx-border-color: red");
 		} else {
-			input.setStyle("-fx-background-color: white");
+			input.setStyle("-fx-border-color: default");
 			playerList.getItems().addAll(newName);
 			PrintWriter newUser = new PrintWriter(new FileWriter("SaveData\\UserData\\" + newName + ".txt"));
-			newUser.write("0 0 icon0");
+			newUser.write("0 0 icon" + currentIndex);
 			newUser.close();
 		}
 	}
@@ -86,7 +102,6 @@ public class ProfilesController extends StateLoad {
         if (user.delete()) {
             input.setStyle("-fx-border-color: default");
             playerList.getItems().remove(newName);
-
         } else {
             input.setStyle("-fx-border-color: default");
         }
@@ -117,5 +132,24 @@ public class ProfilesController extends StateLoad {
             playerRecord.setText("Please select a player.");
         }
     }
+
+	/**
+	 * This button switch the player icon which will save in player profile created.
+	 */
+	public void nextIcon() {
+		currentIndex++;
+		if (currentIndex == 0) {
+			playerIcon.setImage(icon0);
+		} else if (currentIndex == 1) {
+			playerIcon.setImage(icon1);
+		} else if (currentIndex == 2) {
+			playerIcon.setImage(icon2);
+		} else if (currentIndex == 3) {
+			playerIcon.setImage(icon3);
+		} else if (currentIndex == 4) {
+			currentIndex =0;
+			playerIcon.setImage(icon0);
+		}
+	}
 }
 
