@@ -50,6 +50,6 @@
             <Font size="10.0" />
          </font></Button>
    </AnchorPane>
-   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Associates" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Player Profiles" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
       </Text>
 </GridPane>

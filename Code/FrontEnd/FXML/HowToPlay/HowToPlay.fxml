@@ -11,7 +11,7 @@
     <center>
         <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
-                <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="How to play" textAlignment="CENTER" translateY="30.0" wrappingWidth="417.33154296875">
+                <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="How to play" textAlignment="CENTER" translateY="30.0" wrappingWidth="649.33154296875">
                 </Text>
             </HBox>
             <Button fx:id="tilesButton1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBasics" prefHeight="25.0" prefWidth="100.0" text="Basics" textAlignment="CENTER" translateY="30.0" />

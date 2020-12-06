@@ -17,7 +17,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
                <children>
-                  <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="The Getaway" textAlignment="CENTER" translateY="30.0" wrappingWidth="417.33154296875">
+                  <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="The Getaway" textAlignment="CENTER" translateY="30.0" wrappingWidth="620.33154296875">
                      <font>
                         <Font name="lazer84" size="65.0" />
                      </font>
