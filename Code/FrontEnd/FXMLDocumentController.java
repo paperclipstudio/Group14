@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 import javafx.util.Pair;
 
 import java.net.URL;
@@ -31,7 +32,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class FXMLDocumentController extends StateLoad {
-
+    private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+    private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+    private final String BOARD_SFX = "Assets\\SFX\\board.mp3";
+    private final AudioClip BOARD_AUDIO = new AudioClip(new File(BOARD_SFX).toURI().toString());
+    private final double SFX_VOLUME = 0.2;
     @FXML
     private Button newGameButton;
     @FXML
@@ -42,6 +47,7 @@ public class FXMLDocumentController extends StateLoad {
     private WindowLoader wl;
 
     public void changeLeaderboard(String board) throws IOException {
+        BOARD_AUDIO.play(SFX_VOLUME);
         Leaderboard leaderboard = new Leaderboard(board);
         leaderboard.loadFile();
         highScore.setItems(leaderboard.getObservableList());

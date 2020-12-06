@@ -2,10 +2,9 @@ package FrontEnd;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.media.AudioClip;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -18,6 +17,15 @@ import java.util.ResourceBundle;
  */
 
 public class GameSetupController extends StateLoad {
+
+	private final String MAIN_MENU_SFX = "Assets\\SFX\\mainmenu.mp3";
+	private final AudioClip MAIN_MENU_AUDIO = new AudioClip(new File(MAIN_MENU_SFX).toURI().toString());
+	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+	private final String ERROR_SFX = "Assets\\SFX\\error.mp3";
+	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
+	private final double SFX_VOLUME = 0.2;
+
 	@FXML
 	private Button backButton;
 
@@ -58,6 +66,7 @@ public class GameSetupController extends StateLoad {
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen", getInitData());
+		RETURN_AUDIO.play(SFX_VOLUME);
 	}
 
 	/***
@@ -74,16 +83,19 @@ public class GameSetupController extends StateLoad {
 		String gameSaveName = saveName.getText();
 		getInitData().put("SaveFile", gameSaveName);
 		if ((gameSaveName.equals(""))) {
+			ERROR_AUDIO.play(SFX_VOLUME);
 			saveName.setStyle("-fx-prompt-text-fill:red;");
 			return;
 		}
 		File gameSaveFile = new File("SaveData\\GameSave\\" + gameSaveName + ".sav");
 		if (gameSaveFile.exists()) {
+			ERROR_AUDIO.play(SFX_VOLUME);
 			saveName.clear();
-			saveName.setPromptText("Game already exists");
+			saveName.setPromptText("Game already exists.");
 			saveName.setStyle("-fx-prompt-text-fill:red;");
 			return;
 		}
 		wl.load("PickPlayer", getInitData());
+		MAIN_MENU_AUDIO.play(SFX_VOLUME);
 	}
 }

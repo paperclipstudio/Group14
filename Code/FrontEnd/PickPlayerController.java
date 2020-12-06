@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 
 /**
@@ -24,6 +25,14 @@ import javafx.scene.image.Image;
  * @version 1.0
  */
 public class PickPlayerController extends StateLoad {
+
+	private final String START_SFX = "Assets\\SFX\\start.mp3";
+	private final AudioClip START_AUDIO = new AudioClip(new File(START_SFX).toURI().toString());
+	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+	private final String ERROR_SFX = "Assets\\SFX\\error.mp3";
+	private final AudioClip ERROR_AUDIO = new AudioClip(new File(ERROR_SFX).toURI().toString());
+	private final double SFX_VOLUME = 0.2;
 
     @FXML
     public ChoiceBox<String> playerList1;
@@ -99,11 +108,11 @@ public class PickPlayerController extends StateLoad {
 		}
 	}
 
-
 	/**
 	 * Identifies the player chosen has the right number and style. Then uses readProfile to turn these files to profiles and
 	 * send them to the gameboard profile class. Then run the gameboard class.
 	 */
+
 	public void savePlayersAndStart() {
 		WindowLoader wl = new WindowLoader(backButton);
 		int playerCount = Integer.parseInt(getInitData().get("PlayerCount"));
@@ -114,7 +123,11 @@ public class PickPlayerController extends StateLoad {
 
 		if (playerCount == 2) {
 			if (playerList1.getValue().equals(playerList2.getValue())) {
-				hint.setText("You have to select different players in each box.");
+				ERROR_AUDIO.play(SFX_VOLUME);
+				hint.setText("Please select different players in each box.");
+			} else {
+				START_AUDIO.play(SFX_VOLUME);
+				wl.load("GameScreen", getInitData());
 			}
 
 		} else if (playerCount == 3) {
@@ -122,7 +135,11 @@ public class PickPlayerController extends StateLoad {
 					playerList1.getValue().equals(playerList3.getValue()) ||
 					playerList2.getValue().equals(playerList3.getValue())
 			) {
-				hint.setText("You have to select different players in each box.");
+				ERROR_AUDIO.play(SFX_VOLUME);
+				hint.setText("Please select different players in each box.");
+			} else {
+				START_AUDIO.play(SFX_VOLUME);
+				wl.load("GameScreen", getInitData());
 			}
 
 		} else if (playerCount == 4) {
@@ -133,10 +150,13 @@ public class PickPlayerController extends StateLoad {
 					playerList2.getValue().equals(playerList4.getValue()) ||
 					playerList3.getValue().equals(playerList4.getValue())
 			) {
-				hint.setText("You have to select different players in each box.");
+				ERROR_AUDIO.play(SFX_VOLUME);
+				hint.setText("Please select different players in each box.");
+			} else {
+				START_AUDIO.play(SFX_VOLUME);
+				wl.load("GameScreen", getInitData());
 			}
 		}
-		wl.load("GameScreen", getInitData());
 	}
 
 	/**
@@ -145,5 +165,6 @@ public class PickPlayerController extends StateLoad {
 	public void onBackButton() {
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("GameSetup", getInitData());
+		RETURN_AUDIO.play(SFX_VOLUME);
 	}
 }

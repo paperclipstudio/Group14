@@ -1,17 +1,16 @@
 package FrontEnd;
 
-import com.sun.xml.internal.bind.v2.model.core.EnumConstant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.scene.media.AudioClip;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 /***
@@ -22,6 +21,11 @@ import java.util.ResourceBundle;
  * @author Christian Sanger
  */
 public class SettingsController extends StateLoad {
+
+	private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
+	private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
+	private final double SFX_VOLUME = 0.2;
+
 	@FXML
 	private Button backButton;
 	@FXML
@@ -67,7 +71,6 @@ public class SettingsController extends StateLoad {
 	public void onSoundChange() {
 		Main.setVolume(sound.getValue() / 200.0);
 		getInitData().put("Volume", ((int) sound.getValue()) + "");
-
 	}
 
 	/**
@@ -102,6 +105,7 @@ public class SettingsController extends StateLoad {
 		configWriter.close();
 		WindowLoader wl = new WindowLoader(backButton);
 		wl.load("MenuScreen", getInitData());
+		RETURN_AUDIO.play(SFX_VOLUME);
 	}
 
 	/**
