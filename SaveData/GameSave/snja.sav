@@ -1,0 +1,167 @@
+ExampleInput.txt
+1130723324
+4
+Adam
+George
+Olivia
+Zhan
+draw 
+floor T_SHAPE RIGHT 1 -1
+action null  0 null 
+move 0 1
+draw 
+floor CORNER UP -1 1
+action null  0 null 
+move 6 0
+draw 
+ExampleInput.txt
+1130723324
+4
+Adam
+George
+Olivia
+Zhan
+draw 
+floor T_SHAPE RIGHT 1 -1
+action null  0 null 
+move 0 1
+draw 
+floor CORNER UP -1 1
+action null  0 null 
+move 6 0
+draw 
+floor CORNER UP 1 -1
+action null  0 null 
+move 0 8
+draw 
+action null  0 null 
+move 7 8
+draw 
+floor CORNER UP 1 -1
+action null  0 null 
+move 1 2
+draw 
+floor T_SHAPE UP -1 2
+action null  0 null 
+move 7 0
+draw 
+floor CORNER UP -1 2
+action null  0 null 
+move 1 8
+draw 
+ExampleInput.txt
+1130723324
+4
+Adam
+George
+Olivia
+Zhan
+draw 
+floor T_SHAPE RIGHT 1 -1
+action null  0 null 
+move 0 1
+draw 
+floor CORNER UP -1 1
+action null  0 null 
+move 6 0
+draw 
+floor CORNER UP 1 -1
+action null  0 null 
+move 0 8
+draw 
+action null  0 null 
+move 7 8
+draw 
+floor CORNER UP 1 -1
+action null  0 null 
+move 1 2
+draw 
+floor T_SHAPE UP -1 2
+action null  0 null 
+move 7 0
+draw 
+floor CORNER UP -1 2
+action null  0 null 
+move 1 8
+draw 
+action BACKTRACK 3 null 
+move 7 8
+draw 
+floor CORNER UP 3 -1
+action null  0 null 
+move 2 3
+draw 
+floor CORNER UP -1 4
+action null  0 null 
+move 6 0
+draw 
+action null  0 null 
+move 1 7
+draw 
+action FROZEN -1 2 4 
+ExampleInput.txt
+1130723324
+4
+Adam
+George
+Olivia
+Zhan
+draw 
+floor T_SHAPE RIGHT 1 -1
+action null  0 null 
+move 0 1
+draw 
+floor CORNER UP -1 1
+action null  0 null 
+move 6 0
+draw 
+floor CORNER UP 1 -1
+action null  0 null 
+move 0 8
+draw 
+action null  0 null 
+move 7 8
+draw 
+floor CORNER UP 1 -1
+action null  0 null 
+move 1 2
+draw 
+floor T_SHAPE UP -1 2
+action null  0 null 
+move 7 0
+draw 
+floor CORNER UP -1 2
+action null  0 null 
+move 1 8
+draw 
+action BACKTRACK 3 null 
+move 7 8
+draw 
+floor CORNER UP 3 -1
+action null  0 null 
+move 2 3
+draw 
+floor CORNER UP -1 4
+action null  0 null 
+move 6 0
+draw 
+action null  0 null 
+move 1 7
+draw 
+action FROZEN -1 2 4 
+move 7 9
+draw 
+floor T_SHAPE UP -1 2
+action null  0 null 
+move 3 3
+draw 
+floor CORNER UP -1 7
+action null  0 null 
+move 7 0
+draw 
+action BACKTRACK 1 null 
+move 1 7
+draw 
+action null  0 null 
+move 7 8
+draw 
