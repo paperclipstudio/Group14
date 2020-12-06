@@ -3,9 +3,9 @@
 0 2 Player2
 2 2 Player3
 2 0 Player4
-0 Corner
-0 Straight
-1 T-Shape
+4 Corner
+4 Straight
+4 T-Shape
 0 Fire
 0 Ice
 0 Backtrack
