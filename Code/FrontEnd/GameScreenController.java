@@ -121,7 +121,6 @@ public class GameScreenController extends StateLoad {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			confirmation.setVisible(false);
 		}
 	}
 
@@ -135,7 +134,6 @@ public class GameScreenController extends StateLoad {
 	mainLoop() -> show buttons -> wait for call back from button -> mainLoop()
 	 */
 	private void mainLoop() throws IOException {
-		System.out.println(phase);
 		// Update current player
 		Profile[] profiles = new Profile[4];
 		for (int i = 0; i < gameLogic.getNumberOfPlayers(); i++) {
@@ -717,6 +715,7 @@ public class GameScreenController extends StateLoad {
 			RETURN_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 		} else {
 			confirmation.setVisible(true);
+			confirmation.setMouseTransparent(false);
 		}
 	}
 
@@ -771,49 +770,6 @@ public class GameScreenController extends StateLoad {
 			}
 			f.apply(n);
 		}
-	}
-
-	/**
-	 * Takes an id to match and a onClickFunction
-	 * puts that on all matching node with id starting with 'id'
-	 *
-	 * @param group node to look for
-	 * @param func  function to apply to onClick
-	 */
-	private void applyOnClick(Pane group, EventHandler<MouseEvent> func) {
-		applyToAll(group, v -> {
-			v.setOnMouseClicked(func);
-			return 0;
-		});
-	}
-
-	/**
-	 * Takes an id to match and a function
-	 * puts that on all matching node with id starting with 'id'
-	 *
-	 * @param group node to look for
-	 * @param func  function to apply to onHover
-	 */
-	private void applyOnHover(Pane group, EventHandler<MouseEvent> func) {
-		applyToAll(group, (n) -> {
-			n.setOnMouseEntered(func);
-			return 0;
-		});
-	}
-
-	/**
-	 * Takes an id to match and a function
-	 * puts that on all matching node with id starting with 'id'
-	 *
-	 * @param group node to look for
-	 * @param func  function to apply to offHover
-	 */
-	private void applyOffHover(Pane group, EventHandler<MouseEvent> func) {
-		applyToAll(group, n -> {
-			n.setOnMouseExited(func);
-			return 0;
-		});
-
 	}
 
 	private void removeAll(String id) {

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane stylesheets="@../../../Assets/menuStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.GameScreenController">
@@ -24,6 +24,23 @@
             <Pane fx:id="fixed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
             <Pane fx:id="players" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
             <Pane fx:id="controls" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+            <VBox fx:id="confirmation" alignment="CENTER" cache="true" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" spacing="5.0" style="-fx-background-color: indianred; -fx-border-radius: 50;" visible="false" StackPane.alignment="CENTER">
+                <children>
+               <Label alignment="CENTER" text="Some changes haven't been saved&#10;would you like the save now?" textAlignment="CENTER" />
+               <HBox alignment="CENTER">
+                  <children>
+                            <Button mnemonicParsing="false" onAction="#onNo" text="No" />
+                            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onYes" text="Yes" />
+                  </children>
+               </HBox>
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            </VBox>
         </StackPane>
     </center>
     <top>
@@ -37,30 +54,6 @@
                     <MenuItem mnemonicParsing="false" text="About" />
                 </Menu>
             </MenuBar>
-            <VBox fx:id="confirmation" disable="true">
-                <children>
-                    <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="The game is unsaved, would you like to save before quitting?">
-                        <font>
-                            <Font name="Consolas" size="18.0" />
-                        </font>
-                    </Text>
-                    <HBox spacing="10.0">
-                        <children>
-                            <Button mnemonicParsing="false" onAction="#onYes" text="Yes" />
-                            <Button mnemonicParsing="false" onAction="#onNo" text="No" />
-                        </children>
-                        <VBox.margin>
-                            <Insets left="90.0" />
-                        </VBox.margin>
-                    </HBox>
-                </children>
-                <VBox.margin>
-                    <Insets left="100.0" top="10.0" />
-                </VBox.margin>
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-            </VBox>
         </VBox>
     </top>
     <right>
