@@ -1,0 +1,20 @@
+Gameboard1.txt
+1087388997
+2
+David
+James
+draw 
+floor CORNER UP 9 2
+action null  0 null 
+move 0 0
+draw 
+action null  0 null 
+move 8 1
+draw 
+floor STRAIGHT UP 9 2
+action null  0 null 
+move 0 0
+draw 
+floor CORNER DOWN 9 2
+action null  0 null 
+move 8 2
