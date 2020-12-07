@@ -231,6 +231,6 @@ public class Assets {
 		ImageView profileView = new ImageView(get(profile.getIcon()));
 		profileView.setFitWidth(100);
 		profileView.setFitHeight(100);
-		return (Node) profileView;
+		return profileView;
 	}
 }
