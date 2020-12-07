@@ -1,0 +1,27 @@
+Gameboard3.txt
+-1245383364
+2
+Atif
+Joshua
+draw 
+floor T_SHAPE UP -1 0
+action null  0 null 
+move 1 1
+draw 
+floor STRAIGHT UP 7 3
+action null  0 null 
+move 6 1
+draw 
+action null  0 null 
+move 0 1
+draw 
+floor T_SHAPE UP 6 -1
+action null  0 null 
+move 6 2
+draw 
+floor STRAIGHT UP 9 2
+action FROZEN -1 2 1 
+move 1 1
+draw 
+action null  0 null 
+move 5 1
