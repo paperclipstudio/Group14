@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

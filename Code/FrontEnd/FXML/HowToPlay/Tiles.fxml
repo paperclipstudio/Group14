@@ -13,130 +13,100 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController" stylesheets="menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
     <center>
-        <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Tiles" textAlignment="CENTER" translateY="60.0" wrappingWidth="417.33154296875">
-                            <font>
-                                <Font name="lazer84" size="65.0" />
-                            </font>
-                            <fill>
-                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                                    <stops>
-                                        <Stop color="#009e05" />
-                                        <Stop color="#024300" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </fill>
-                        </Text>
-                    </children>
-                </HBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Floor Tiles: Straight, Corner, T-Shaped, Goal." textAlignment="CENTER" translateY="50.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Action Tiles: Ice, Fire, Double Move, Backtrack." textAlignment="CENTER" translateY="50.0" />
+        <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;"
+              BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Tiles"
+                      textAlignment="CENTER" translateY="60.0" wrappingWidth="417.33154296875">
+                    <font>
+                        <Font name="lazer84" size="65.0"/>
+                    </font>
+                    <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                            <stops>
+                                <Stop color="#009e05"/>
+                                <Stop color="#024300" offset="1.0"/>
+                            </stops>
+                        </RadialGradient>
+                    </fill>
+                </Text>
+            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
+                  text="Floor Tiles: Straight, Corner, T-Shaped, Goal." textAlignment="CENTER" translateY="50.0"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
+                  text="Action Tiles: Ice, Fire, Double Move, Backtrack." textAlignment="CENTER" translateY="50.0"/>
             <VBox prefHeight="200.0" prefWidth="100.0" translateY="50.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Straight:  " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="straight.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Ice:         " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="frozen.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Corner:   " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="corner.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Fire:         " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="tilefire.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="T-Shaped: " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="t_shape.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Double Move:  " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="double_move.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Goal:     " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="goal.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Backtrack:    " textAlignment="CENTER" />
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="backtrack.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-               </children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Straight:  "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="straight.png"/>
+                        </ImageView>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Ice:         "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="frozen.png"/>
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Corner:   "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="corner.png"/>
+                        </ImageView>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Fire:         "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="tilefire.png"/>
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="T-Shaped: "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="t_shape.png"/>
+                        </ImageView>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Double Move:  "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="double_move.png"/>
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Goal:     "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="goal.png"/>
+                        </ImageView>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="Backtrack:    "
+                              textAlignment="CENTER"/>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="backtrack.png"/>
+                        </ImageView>
+                    </HBox>
+                </HBox>
             </VBox>
-                <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" textFill="#009c05" />
-                <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackTo" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER" textFill="#009e05" translateY="10.0" />
-            </children>
+            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true"
+                    mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0"
+                    text="New Game" textAlignment="CENTER" textFill="#009c05"/>
+            <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    onAction="#onBackTo" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER"
+                    textFill="#009e05" translateY="10.0"/>
         </VBox>
     </center>
 </BorderPane>

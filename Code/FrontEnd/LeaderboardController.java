@@ -4,34 +4,22 @@ import BackEnd.Leaderboard;
 import BackEnd.Score;
 import FrontEnd.StateLoad;
 import FrontEnd.WindowLoader;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import javafx.beans.property.Property;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
-import javafx.util.Pair;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class HowToPlayControl extends StateLoad {
+public class LeaderboardController extends StateLoad {
     private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
     private final String BOARD_SFX = "Assets\\SFX\\board.mp3";
@@ -43,8 +31,6 @@ public class HowToPlayControl extends StateLoad {
     private TableView<Score> highScore;
     @FXML
     private HBox boardButtons;
-
-    private WindowLoader wl;
 
     public void changeLeaderboard(String board) throws IOException {
         BOARD_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
@@ -61,14 +47,13 @@ public class HowToPlayControl extends StateLoad {
     }
 
     public void onNewGame(ActionEvent actionEvent) {
-        wl = new WindowLoader(newGameButton);
+        WindowLoader wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
     }
 
 
     public void onQuitButton(ActionEvent actionEvent) {
         Platform.exit();
-        ;
     }
 
 

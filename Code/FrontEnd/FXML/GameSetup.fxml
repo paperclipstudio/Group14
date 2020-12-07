@@ -58,13 +58,11 @@
    <TextField fx:id="saveName" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2"
          GridPane.rowIndex="2">
-      <children>
-         <fx:define>
-            <ToggleGroup fx:id="playerCount"/>
-         </fx:define>
-         <RadioButton fx:id="twoPlayer" mnemonicParsing="false" text="2" toggleGroup="$playerCount"/>
-         <RadioButton fx:id="threePlayer" mnemonicParsing="false" text="3" toggleGroup="$playerCount"/>
-         <RadioButton fx:id="fourPlayer" mnemonicParsing="false" selected="true" text="4" toggleGroup="$playerCount"/>
-      </children>
+      <fx:define>
+         <ToggleGroup fx:id="playerCount"/>
+      </fx:define>
+      <RadioButton fx:id="twoPlayer" mnemonicParsing="false" text="2" toggleGroup="$playerCount"/>
+      <RadioButton fx:id="threePlayer" mnemonicParsing="false" text="3" toggleGroup="$playerCount"/>
+      <RadioButton fx:id="fourPlayer" mnemonicParsing="false" selected="true" text="4" toggleGroup="$playerCount"/>
    </HBox>
 </GridPane>

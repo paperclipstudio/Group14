@@ -11,33 +11,42 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FXML.HowToPlay.ActionTilesController" stylesheets="menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
     <center>
-        <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Double Move Tile" textAlignment="CENTER" translateY="2.0" wrappingWidth="718.33154296875">
-                            <font>
-                                <Font size="51.0" />
-                            </font>
-                            <fill>
-                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                                    <stops>
-                                        <Stop color="#009e05" />
-                                        <Stop color="#024300" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </fill>
-                        </Text>
-                    </children>
-                </HBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• You may move your player peice twice." textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• Check &quot;Movement&quot; to learn player movement." textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" textAlignment="CENTER" translateY="20.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" textAlignment="CENTER" translateY="20.0" />
-                <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER" textFill="#009e05" translateY="60.0" />
-                <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="30.0" />
-            </children>
+        <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;"
+              BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName"
+                      text="Double Move Tile" textAlignment="CENTER" translateY="2.0"
+                      wrappingWidth="718.33154296875">
+                    <font>
+                        <Font size="51.0"/>
+                    </font>
+                    <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                            <stops>
+                                <Stop color="#009e05"/>
+                                <Stop color="#024300" offset="1.0"/>
+                            </stops>
+                        </RadialGradient>
+                    </fill>
+                </Text>
+            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
+                  text="• You may move your player peice twice." textAlignment="CENTER" translateY="20.0"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
+                  text="• Check &quot;Movement&quot; to learn player movement." textAlignment="CENTER"
+                  translateY="20.0"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" textAlignment="CENTER"
+                  translateY="20.0"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" textAlignment="CENTER"
+                  translateY="20.0"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" textAlignment="CENTER"
+                  translateY="20.0"/>
+            <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    onAction="#onBack" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER"
+                    textFill="#009e05" translateY="60.0"/>
+            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true"
+                    mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0"
+                    text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="30.0"/>
         </VBox>
     </center>
 </BorderPane>

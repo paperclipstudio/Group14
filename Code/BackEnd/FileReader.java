@@ -33,6 +33,7 @@ public class FileReader {
      * @param filename    The name of the level file format text file.
      * @param silkBagSeed The seed used for this game.
      * @return pair where first element is the gameboard and second is the players.
+     * @throws   
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkBagSeed) throws Exception {
         File input = new File("Gameboards\\" + filename);
@@ -60,7 +61,7 @@ public class FileReader {
             int y = currentLine.nextInt();
             playerPos[i] = new Coordinate(x, y);
             gameboard.setPlayerPos(i, new Coordinate(x, y));
-            players[i] = new Player(i, silkBag, gameboard);
+            players[i] = new Player(silkBag, gameboard);
         }
 
         //// Filling SilkBag

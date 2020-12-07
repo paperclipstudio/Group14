@@ -1,20 +1,14 @@
 package FrontEnd;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import BackEnd.Profile;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
 

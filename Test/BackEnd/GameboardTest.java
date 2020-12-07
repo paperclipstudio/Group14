@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static BackEnd.Rotation.UP;
 import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
 

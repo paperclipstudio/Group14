@@ -22,20 +22,17 @@ public class Player {
     private Tile lastDrawnTile;
     private final ArrayList<ActionTile> inventory;
     private final SilkBag silkBag;
-    private final int playerNumber;
     private final boolean backTracked;
     private final Gameboard gameboard;
 
     /**
      * Create a player and give them the silk bag and gameboard references.
      *
-     * @param playerNumber The player's number, used to distinguish who's turn it is.
      * @param silkBag      Reference to the game's silk bag object.
      * @param gameboard    Reference to the game's gameboard object.
      */
-    public Player(int playerNumber, SilkBag silkBag, Gameboard gameboard) {
+    public Player(SilkBag silkBag, Gameboard gameboard) {
         this.silkBag = silkBag;
-        this.playerNumber = playerNumber;
         this.inventory = new ArrayList<>();
         this.gameboard = gameboard;
         this.backTracked = false;

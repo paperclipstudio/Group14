@@ -68,14 +68,16 @@ public class SilkBag {
         Tile tile = allTiles.get(index);
         // Loop though from starting index until we have a floor tile
         while (!Tile.isFloorTile(tile)) {
-            tile = allTiles.get(index);
             index = (index + 1) % allTiles.size();
+            tile = allTiles.get(index);
             if (index == startIndex) {
                 // We have looped and found no floor tile
                 throw new Exception("No FloorTile in Silk bag");
             }
         }
-        allTiles.remove(tile);
+        if (!allTiles.remove(tile)) {
+            System.out.println("dfg");
+        }
         return (FloorTile) tile;
     }
 

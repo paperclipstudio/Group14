@@ -1,7 +1,6 @@
 package BackEnd;
 
 import java.io.*;
-import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -163,7 +162,6 @@ public class Profile {
 	 * @throws IOException Wrong input
 	 */
 	public static Profile readProfile(String profileFile) throws IOException {
-		String name = profileFile;
 		Scanner reader = new Scanner(new File("SaveData\\UserData\\" + profileFile + ".txt"));
 
 		int wins = reader.nextInt();
@@ -171,7 +169,7 @@ public class Profile {
 		int winStreak = reader.nextInt();
 		String playerIcon = reader.next();
 
-		return new Profile(name, playerIcon, wins, losses, winStreak);
+		return new Profile(profileFile, playerIcon, wins, losses, winStreak);
 	}
 
 	/**

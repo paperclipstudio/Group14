@@ -410,7 +410,6 @@ public class Gameboard {
         if (tileAt(location) != null) {
             silkbag.insertTile(tileAt(location));
             removeTile(tileAt(location));
-
         }
         tile.setFixed();
         tile.setLocation(location);

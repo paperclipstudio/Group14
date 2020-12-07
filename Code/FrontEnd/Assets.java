@@ -145,6 +145,7 @@ public class Assets {
      *
      * @param tile The tile that should be on the card.
      * @return Card.fxml Object.
+	 * @throws IOException if null card is input
      */
     public static Node createCard(Tile tile) throws IOException {
         final Node newCard;

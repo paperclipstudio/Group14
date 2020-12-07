@@ -1,7 +1,6 @@
 package BackEnd;
 
 import javafx.util.Pair;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

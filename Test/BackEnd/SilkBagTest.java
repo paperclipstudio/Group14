@@ -2,7 +2,6 @@ package BackEnd;
 
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import BackEnd.TileType;
 
 import static BackEnd.TileType.*;
 import static org.junit.jupiter.api.Assertions.*;
