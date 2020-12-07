@@ -185,7 +185,6 @@ class GameboardTest {
 	@Test
 	void setPlayerPos() {
 		Coordinate coor1 = new Coordinate(2,2);
-		Coordinate coor2 = new Coordinate(0,1);
 		gb.setPlayerPos(2, coor1);
 	}
 
@@ -242,7 +241,6 @@ class GameboardTest {
 
 	@Test
 	void playFloorTile() throws Exception {
-		ArrayList<Coordinate> locations = gb.getSlideLocations();
 
         // Testing inserting from the left.
 		assertEquals(CORNER,  gb.tileAt(new Coordinate(0,0)).getType());
@@ -287,7 +285,7 @@ class GameboardTest {
 	}
 
 	@Test
-	void placeFixedTile() throws Exception {
+	void placeFixedTile() {
 		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT), 1, 2);
 		assertEquals(CORNER, gb.tileAt(new Coordinate(1, 2)).getType());
 		gb.placeFixedTile(new FloorTile(STRAIGHT, Rotation.RIGHT), 2, 2);
@@ -325,42 +323,6 @@ class GameboardTest {
 		gb.getMoveDirections(2);
 		gb.getMoveDirections(3);
 
-	}
-
-	@Test
-	void getSlideLocations() throws Exception {
-		/*
-		//gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 0, 0);
-		//gb.getSlideLocations();
-		//gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 0, 0);
-		//gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 2, 1);
-		//gb.getSlideLocations();
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 0, 0);
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 2, 1);
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 1, 2);
-		gb.placeFixedTile(new FloorTile(TileType.CORNER, Rotation.LEFT) , 0, 1);
-		gb.getSlideLocations();
-		 */
-
-		/*
-		gb = new Gameboard(3,3, sb);
-		ArrayList<Coordinate> slides = gb.getSlideLocations();
-		assertEquals(12, slides.size());
-		assertFalse(slides.contains(null));
-		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 0);
-		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 1);
-		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 0, 2);
-		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 0);
-		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 1);
-		gb.placeFixedTile(new FloorTile(TileType.T_SHAPE, Rotation.LEFT) , 1, 2);
-		slides = gb.getSlideLocations();
-		assertEquals(2, slides.size());
-		Coordinate[] expected = new Coordinate[]{new Coordinate(2, -1), new Coordinate(2,3)};
-		assertArrayEquals(expected, slides.toArray(new Coordinate[0]));
-		assertFalse(slides.contains(null));
-		*/
-
-		//gbSlide.getSlideLocations();
 	}
 
 	@Test
@@ -404,7 +366,6 @@ class GameboardTest {
 	void isPlayerOnGoal() throws Exception {
 
 		gb.placeFixedTile(new FloorTile(GOAL, Rotation.LEFT), 2, 1);
-		ArrayList<Coordinate> goalTiles = gb.checkGoalTiles();
 		assertEquals(1, gb.isPlayerOnGoal());
 
 	}

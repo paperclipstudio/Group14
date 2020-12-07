@@ -17,7 +17,7 @@
             </BorderPane.margin>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Leaderboards">
                 <VBox.margin>
-                    <Insets top="60.0" />
+                    <Insets top="100.0" />
                 </VBox.margin></Text>
             <HBox fx:id="boardButtons" alignment="CENTER" prefHeight="33.0" prefWidth="200.0" spacing="20.0">
             </HBox>
@@ -36,7 +36,7 @@
                 <TableColumn minWidth="75.0" prefWidth="85.0" text="Losses" />
             </columns>
             <BorderPane.margin>
-                <Insets top="100.0" />
+                <Insets top="140.0" />
             </BorderPane.margin>
         </TableView>
     </center>

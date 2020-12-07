@@ -31,8 +31,6 @@ public class ActionTilesController extends StateLoad {
      */
     @FXML
     private Button newGameButton;
-    @FXML
-    private Label MoTD;
     private WindowLoader wl;
 
     @Override

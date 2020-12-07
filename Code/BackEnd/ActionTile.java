@@ -13,7 +13,7 @@ public class ActionTile extends Tile {
     /*
      * This type relates to the enum TileType, which every floor and action tile has one of.
      */
-    TileType type;
+    final TileType type;
 
     /**
      * This constructor of ActionTile creates an action tile of a given type.

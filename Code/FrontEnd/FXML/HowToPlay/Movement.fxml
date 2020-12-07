@@ -9,51 +9,36 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController" stylesheets="menuStyle.css" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('//Assets/backgroundMenu.jpg'); -fx-background-size: cover; -fx-background-position: center;" stylesheets="menuStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.HowToPlayController">
     <center>
-        <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;"
-              BorderPane.alignment="CENTER">
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName"
-                      text="Player Movement" textAlignment="CENTER" translateY="33.0"
-                      wrappingWidth="600.33154296875">
-                    <font>
-                        <Font name="lazer84" size="65.0"/>
-                    </font>
-                    <fill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                            <stops>
-                                <Stop color="#009e05"/>
-                                <Stop color="#024300" offset="1.0"/>
-                            </stops>
-                        </RadialGradient>
-                    </fill>
-                </Text>
-            </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
-                  text="• A player peice can only be moved in any of the four cardinal directions."
-                  textAlignment="CENTER" translateY="40.0"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
-                  text="• This allows a player peice to have to option to potentially move to (up to) four adjactent tiles that neighbour your player peice current tile."
-                  textAlignment="CENTER" translateY="40.0" wrappingWidth="518.2578125"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
-                  text="• For a player to move to an adjacent tile, the tile paths must be connect between each other and the tile must not be occupied by any other player."
-                  textAlignment="CENTER" translateY="40.0" wrappingWidth="581.767578125"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
-                  text="• A floor tile is conneccted when the path between both tiles are connected as one."
-                  textAlignment="CENTER" translateY="40.0"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
-                  text="• You must move your player piece if you are able to." textAlignment="CENTER"
-                  translateY="40.0"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay"
-                  text="• If you are unable to move in any of the four cardinal directions then you must stay where you are."
-                  translateY="40.0"/>
-            <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                    onAction="#onBackTo" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER"
-                    textFill="#009e05" translateY="60.0"/>
-            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true"
-                    mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0"
-                    text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="80.0"/>
+        <VBox alignment="CENTER" prefHeight="366.0" prefWidth="600.0" spacing="10" style="-fx-padding: 0 0 100 0;" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Text lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="WindowName" text="Movement" textAlignment="CENTER" translateY="33.0" wrappingWidth="600.33154296875">
+                            <font>
+                                <Font name="lazer84" size="65.0" />
+                            </font>
+                            <fill>
+                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                    <stops>
+                                        <Stop color="#009e05" />
+                                        <Stop color="#024300" offset="1.0" />
+                                    </stops>
+                                </RadialGradient>
+                            </fill>
+                        </Text>
+                    </children>
+                </HBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• A player peice can only be moved in any of the four cardinal directions." textAlignment="CENTER" translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• This allows a player peice to have to option to potentially move to (up to) four adjactent tiles that neighbour your player peice current tile." textAlignment="CENTER" translateY="40.0" wrappingWidth="518.2578125" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• For a player to move to an adjacent tile, the tile paths must be connect between each other and the tile must not be occupied by any other player." textAlignment="CENTER" translateY="40.0" wrappingWidth="581.767578125" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• A floor tile is conneccted when the path between both tiles are connected as one." textAlignment="CENTER" translateY="40.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• You must move your player piece if you are able to." textAlignment="CENTER" translateY="40.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HowToPlay" text="• If you are unable to move in any of the four cardinal directions then you must stay where you are." translateY="40.0" />
+                <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBackTo" prefHeight="25.0" prefWidth="100.0" text="Back to Menu" textAlignment="CENTER" textFill="#009e05" translateY="60.0" />
+                <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onNewGame" opacity="0.0" prefHeight="25.0" prefWidth="100.0" text="New Game" textAlignment="CENTER" textFill="#009c05" translateY="80.0" />
+            </children>
         </VBox>
     </center>
 </BorderPane>

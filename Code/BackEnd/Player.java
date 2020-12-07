@@ -18,7 +18,6 @@ public class Player {
      * backTracked is used to check if the player has backtracked.
      * gameboard is an instance of the gameBoard class.
      */
-    private Coordinate location;
     private Tile lastDrawnTile;
     private final ArrayList<ActionTile> inventory;
     private final SilkBag silkBag;

@@ -2,7 +2,6 @@ package FrontEnd;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
 
@@ -43,9 +42,8 @@ public class StartScreenController extends StateLoad {
     /**
      * Called when a keyboard button has been pressed
      * loads main menu
-     * @param keyEvent event of that keypress
      */
-    public void OnKeyPressed(KeyEvent keyEvent){
+    public void OnKeyPressed(){
         START_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());

@@ -2,8 +2,6 @@ package FrontEnd;
 
 import BackEnd.Leaderboard;
 import BackEnd.Score;
-import FrontEnd.StateLoad;
-import FrontEnd.WindowLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -11,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
@@ -46,13 +43,13 @@ public class LeaderboardController extends StateLoad {
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
-    public void onNewGame(ActionEvent actionEvent) {
+    public void onNewGame() {
         WindowLoader wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
     }
 
 
-    public void onQuitButton(ActionEvent actionEvent) {
+    public void onQuitButton() {
         Platform.exit();
     }
 

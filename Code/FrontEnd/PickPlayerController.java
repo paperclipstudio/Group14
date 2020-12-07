@@ -85,8 +85,7 @@ public class PickPlayerController extends StateLoad {
 			}
 
 			for (String player : players) {
-				String playerName = player.substring(0, player.length() - 4);
-				playerList1.setVisible(true);
+			playerList1.setVisible(true);
 				int playerCount = Integer.parseInt(getInitData().get("PlayerCount"));
 				if (playerCount >= 2) {
 					playerList2.setVisible(true);

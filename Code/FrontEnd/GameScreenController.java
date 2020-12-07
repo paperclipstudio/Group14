@@ -524,7 +524,7 @@ public class GameScreenController extends StateLoad {
 						vCard.setEffect(new Bloom(0.03));
 						vCard.setOnMouseClicked(e2 -> {
 							try {
-								doubleMoveAction(e2);
+								doubleMoveAction();
 								DOUBLEMOVE_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 							} catch (Exception exception) {
 								exception.printStackTrace();
@@ -788,7 +788,7 @@ public class GameScreenController extends StateLoad {
 		SKIP_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
 	}
 
-	private void doubleMoveAction(MouseEvent e2) throws Exception {
+	private void doubleMoveAction() throws Exception {
 		gameLogic.action(new ActionTile(DOUBLE_MOVE), null, 0);
 		for (Node player : players.getChildren()) {
 			player.setEffect(new Bloom(999));

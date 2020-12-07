@@ -30,8 +30,6 @@ public class HowToPlayController extends StateLoad {
      */
     @FXML
     private Button newGameButton;
-    @FXML
-    private Label MoTD;
     private WindowLoader wl;
 
     @Override

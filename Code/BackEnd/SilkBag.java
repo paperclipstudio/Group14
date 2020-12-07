@@ -36,14 +36,6 @@ public class SilkBag {
         this.SEED = seed;
     }
 
-    /**
-     * This method returns the seed of the silk bag.
-     *
-     * @return the seed of the silk bag.
-     */
-    public int getSeed() {
-        return SEED;
-    }
 
     /**
      * This method gets a random tile from the bag, also removes it from the bag

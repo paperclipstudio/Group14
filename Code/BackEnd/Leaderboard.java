@@ -23,12 +23,12 @@ public class Leaderboard {
     private final File file;
     private final String gameBoard;
 
-    PriorityQueue<Score> scores = new PriorityQueue<>((o1, o2) -> o2.getWins() - o1.getWins());
+    final PriorityQueue<Score> scores = new PriorityQueue<>((o1, o2) -> o2.getWins() - o1.getWins());
 
     /**
      * Creates leaderboard for a board and attempts to load it from file.
      *
-     * @param gameBoard name of the game board that this leaderboard is for
+     * @param gameBoardFile name of the game board that this leaderboard is for
      * @throws IOException if file can't be created
      */
     public Leaderboard(String gameBoardFile) throws IOException {

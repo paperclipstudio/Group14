@@ -8,9 +8,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ToggleGroup?>
 
@@ -31,19 +28,7 @@
       <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES"/>
    </rowConstraints>
    <Text styleClass="WindowName" lineSpacing="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Setup"
-         textAlignment="CENTER" wrappingWidth="469.33154296875" GridPane.columnSpan="4" GridPane.halignment="CENTER">
-      <font>
-         <Font name="lazer84" size="65.0"/>
-      </font>
-      <fill>
-         <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-            <stops>
-               <Stop color="#009e05"/>
-               <Stop color="#024300" offset="1.0"/>
-            </stops>
-         </RadialGradient>
-      </fill>
-   </Text>
+         textAlignment="CENTER" wrappingWidth="469.33154296875" GridPane.columnSpan="4" GridPane.halignment="CENTER" />
    <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onStartButton"
            prefHeight="25.0" prefWidth="100.0" text="Start" textAlignment="CENTER" textFill="#009e05"
            GridPane.columnIndex="2" GridPane.rowIndex="4"/>

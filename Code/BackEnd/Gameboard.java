@@ -227,7 +227,7 @@ public class Gameboard {
         boardTiles.remove(floorTile);
     }
 
-    private void forAllFloorTiles(Function<FloorTile, Void> func) throws Exception {
+    private void forAllFloorTiles(Function<FloorTile, Void> func) {
         for (FloorTile tile : boardTiles) {
             func.apply(tile);
         }
@@ -260,7 +260,7 @@ public class Gameboard {
      * @param player The player whose move directions is to be obtained.
      * @return moveLocations The move directions for the specified player.
      */
-    public ArrayList<Coordinate> getMoveDirections(int player) throws Exception {
+    public ArrayList<Coordinate> getMoveDirections(int player) {
         Rotation[] directions = new Rotation[]{UP, DOWN, LEFT, RIGHT};
         ArrayList<Rotation> validDirections = new ArrayList<>();
         ArrayList<Coordinate> moveLocations = new ArrayList<>();
@@ -490,7 +490,7 @@ public class Gameboard {
      *
      * @param location the 3x3 area to freeze.
      */
-    public void setFreezeCoords(Coordinate location) throws Exception {
+    public void setFreezeCoords(Coordinate location) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 Coordinate toSetOnFire = location.shift(i, j);
@@ -545,7 +545,7 @@ public class Gameboard {
      *
      * @param player
      */
-    public void backtrack(int player) throws Exception {
+    public void backtrack(int player) {
         //gets the players current position.
         Coordinate posOneTurnAgo = getPrevPlayerPos(player, 1);
         FloorTile tileOneTurn = null;
@@ -577,7 +577,7 @@ public class Gameboard {
      *
      * @return true, if there is a null location on the board. Else false.
      */
-    public boolean isBoardNotFull() throws Exception {
+    public boolean isBoardNotFull() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (tileAt(new Coordinate(x, y)) == null) {

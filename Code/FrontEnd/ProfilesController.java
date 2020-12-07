@@ -45,14 +45,14 @@ public class ProfilesController extends StateLoad {
 	private ListView<String> playerList;
 
 	int currentIndex = 0;
-	File iconImage0 = new File("Assets\\icon0.png");
-	Image icon0 = new Image(iconImage0.toURI().toString());
-	File iconImage1 = new File("Assets\\icon1.png");
-	Image icon1 = new Image(iconImage1.toURI().toString());
-	File iconImage2 = new File("Assets\\icon2.png");
-	Image icon2 = new Image(iconImage2.toURI().toString());
-	File iconImage3 = new File("Assets\\icon3.png");
-	Image icon3 = new Image(iconImage3.toURI().toString());
+	final File iconImage0 = new File("Assets\\icon0.png");
+	final Image icon0 = new Image(iconImage0.toURI().toString());
+	final File iconImage1 = new File("Assets\\icon1.png");
+	final Image icon1 = new Image(iconImage1.toURI().toString());
+	final File iconImage2 = new File("Assets\\icon2.png");
+	final Image icon2 = new Image(iconImage2.toURI().toString());
+	final File iconImage3 = new File("Assets\\icon3.png");
+	final Image icon3 = new Image(iconImage3.toURI().toString());
 
 	/**
 	 * Called to initialize a controller after its root element has been
@@ -137,7 +137,6 @@ public class ProfilesController extends StateLoad {
 	 */
 	public void viewData() {
 		String playerPicked = playerList.getSelectionModel().getSelectedItem();
-		String line;
 		input.setStyle("-fx-border-color: default");
 		try {
 			Profile profile = Profile.readProfile(playerPicked);

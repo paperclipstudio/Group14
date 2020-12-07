@@ -1,5 +1,5 @@
 @font-face {
-    src: url('Sketch.ttf');
+    src: url('Skyfall.ttf');
 }
 
 .button{
@@ -31,9 +31,9 @@
 }
 
 .WindowName {
-    -fx-font-family: "Sketch ";
+    -fx-font-family: "Skyfall";
     -fx-font-size: 90px;
-    -fx-fill: #AAAA33;
+    -fx-fill: #b5b500;
 }
 
 .MessageOfTheDay {
@@ -88,14 +88,14 @@
     -fx-background-color: #333;
 }
 .list-cell:even:filled:selected:focused, .list-cell:even:filled:selected {
-    -fx-background-color: linear-gradient(#333 0%, #AAAA33 100%);
+    -fx-background-color: linear-gradient(#333 0%, #b5b500 100%);
     -fx-text-fill: white;
 }
 .list-cell:even {
     -fx-background-color: #333;
 }
 .list-cell:odd:filled:selected:focused, .list-cell:odd:filled:selected {
-    -fx-background-color: linear-gradient(#222 0%, #AAAA33 100%);
+    -fx-background-color: linear-gradient(#222 0%, #b5b500 100%);
     -fx-text-fill: white;
 }
 .list-cell:odd {

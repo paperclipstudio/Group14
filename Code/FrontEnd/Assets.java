@@ -28,9 +28,6 @@ import static BackEnd.TileType.*;
 public class Assets {
     private static final String EXT = ".png";
     private static final HashMap<String, Image> cache = new HashMap<>();
-    private static final int FLOOR_HEIGHT = 0;
-    private static final int PLAYER_HEIGHT = 20;
-    private static final int EFFECTS_HEIGHT = 40;
 
     /**
      * Gets a Image with the matching name.
@@ -57,12 +54,18 @@ public class Assets {
      */
     public static Pane getFloorTileImage(FloorTile tile, int x, int y) {
         Pane tileView = new Pane();
-        ImageView tileImage = new ImageView(get(tile.getType().toString()));
-        tileImage.setFitWidth(GameScreenController.tileWidth);
-        tileImage.setFitHeight(GameScreenController.tileWidth);
-        tileView.getChildren().add(tileImage);
-        tileView.setTranslateX(x * GameScreenController.tileWidth);
-        tileView.setTranslateY(y * GameScreenController.tileWidth);
+        ImageView tileImage;
+        try {
+            tileImage = new ImageView(get(tile.getType().toString()));
+            tileImage.setFitWidth(GameScreenController.tileWidth);
+            tileImage.setFitHeight(GameScreenController.tileWidth);
+            tileView.getChildren().add(tileImage);
+            tileView.setTranslateX(x * GameScreenController.tileWidth);
+            tileView.setTranslateY(y * GameScreenController.tileWidth);
+        }
+        catch (NullPointerException e) {
+            tileImage = new ImageView(get(tile.getType().toString()));
+        }
         if (tile.onFire()) {
             ImageView fireImage = new ImageView(get("tilefire"));
             fireImage.setFitHeight(GameScreenController.tileWidth);
@@ -113,16 +116,6 @@ public class Assets {
      */
     public static Pane getFloorTileImage(FloorTile tile, Coordinate coordinate) {
         return getFloorTileImage(tile, coordinate.getX(), coordinate.getY());
-    }
-
-    /**
-     * Creates an ImageView of this tile.
-     *
-     * @param tile to create ImageView of
-     * @return view of that tile.
-     */
-    public static Pane getFloorTileImage(FloorTile tile) {
-        return getFloorTileImage(tile, 0, 0);
     }
 
     /**

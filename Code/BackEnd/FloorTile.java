@@ -13,7 +13,7 @@ public class FloorTile extends Tile {
      * These attributes hold information about the floor tile. Information such as if the tile is on fire in the form
      * of a boolean and information such as TileType which is in the form of an enum.
      */
-    TileType type;
+    final TileType type;
     Rotation rotation;
     private Coordinate location;
 

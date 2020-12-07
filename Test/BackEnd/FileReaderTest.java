@@ -23,7 +23,6 @@ class FileReaderTest {
 
 
 		Gameboard gameboard = output.getKey();
-		Player[] players = output.getValue();
 		assertEquals(8, gameboard.getWidth());
 		assertEquals(10, gameboard.getHeight());
 

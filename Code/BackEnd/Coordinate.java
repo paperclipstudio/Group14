@@ -36,14 +36,6 @@ public class Coordinate {
         return this.x;
     }
 
-    /**
-     * This method sets the x Coordinate.
-     *
-     * @param xCoor This parameter would be set as the x Coordinate.
-     */
-    public void setX(int xCoor) {
-        this.x = xCoor;
-    }
 
     /**
      * This method gets the y Coordinate.
@@ -52,26 +44,6 @@ public class Coordinate {
      */
     public int getY() {
         return this.y;
-    }
-
-    /**
-     * This method sets the y Coordinate.
-     *
-     * @param yCoor This parameter would be set as the y Coordinate.
-     */
-    public void setY(int yCoor) {
-        this.y = yCoor;
-    }
-
-    /**
-     * This method sets both the x and y coordinate.
-     *
-     * @param x This parameter would be set as the x Coordinate.
-     * @param y This parameter would be set as the y Coordinate.
-     */
-    public void setCoordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 
     /**

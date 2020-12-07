@@ -79,10 +79,6 @@ class LeaderboardTest {
 	}
 
 	@Test
-	void remove() {
-	}
-
-	@Test
 	void getGameBoard() {
 		assertEquals("unitTest", lb.getGameBoard());
 	}

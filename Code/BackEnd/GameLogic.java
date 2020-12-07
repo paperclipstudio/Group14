@@ -209,7 +209,7 @@ public class GameLogic {
      * @param location which tile you want.
      * @return tile at location.
      */
-    public FloorTile getTileAt(Coordinate location) throws Exception {
+    public FloorTile getTileAt(Coordinate location) {
         return gameboard.tileAt(location);
     }
 
