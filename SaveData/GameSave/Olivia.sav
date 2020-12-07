@@ -1,9 +1,0 @@
-ExampleInput.txt
-3
-George
-draw
-floor T_SHAPE UP 8 4
-action null  0
-move 2 6
-draw
-action null  0
