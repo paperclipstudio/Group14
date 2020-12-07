@@ -60,7 +60,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        playMusic(backgroundVol);
+        playMusic();
 
         initData.put("BackgroundVol", String.valueOf(backgroundVol));
         initData.put("SFXVol", String.valueOf(sfxVol));
@@ -84,29 +84,25 @@ public class Main extends Application {
      * This method goes through a playlist and and plays each song after the previous ones finished.
      * @param soundLevel the starting volume of the music.
      */
-    public void playMusic(double soundLevel) {
+    public void playMusic() {
         String [] musicFiles = {"Assets\\music.mp3","Assets\\music2.mp3","Assets\\music3.mp3", "Assets\\music4.mp3","Assets\\music5.mp3"};
         Media sound = new Media(new File(musicFiles[track]).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setCycleCount(0);
 
-        mediaPlayer.setVolume(soundLevel);
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
                 mediaPlayer.stop();
                 track = (track + 1) % musicFiles.length ;
-                playMusic(soundLevel);
+                playMusic();
 
                 if (track > musicFiles.length){
                     track = 0;
-                    playMusic(soundLevel);
+                    playMusic();
                 }
             }
-
-
-
         });
     }
 
