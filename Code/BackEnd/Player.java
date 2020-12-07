@@ -21,7 +21,7 @@ public class Player {
     private Tile lastDrawnTile;
     private final ArrayList<ActionTile> inventory;
     private final SilkBag silkBag;
-    private final boolean backTracked;
+    private boolean backTracked;
     private final Gameboard gameboard;
 
     /**
@@ -97,6 +97,12 @@ public class Player {
         return lastDrawnTile;
     }
 
+    /**
+     * Set that this player cannot be backtracked again.
+     */
+    public void setBeenBackTracked() {
+        this.backTracked = true;
+    }
 
     /**
      * Gets whether the player has had the backtrack action used on them in

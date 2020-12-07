@@ -27,6 +27,7 @@ public class Profile {
 	 * @param playerIcon this is the player icon.
 	 * @param wins       the amount of wins a player has.
 	 * @param losses     the amount of losses a player has.
+	 * @param winStreak  the current win streak of this player
 	 */
 	public Profile(String name, String playerIcon, int wins, int losses, int winStreak) {
 		setName(name);

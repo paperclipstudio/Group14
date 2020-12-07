@@ -168,6 +168,7 @@ public class FloorTile extends Tile {
 
     /**
      * This method checks whether a given floorTile is fixed or not, it returns true if it is, and false if it isn't.
+     * @return if true if the tile is fixed
      */
     public boolean isFixed() {
         return isFixed;

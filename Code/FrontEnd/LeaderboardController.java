@@ -16,6 +16,10 @@ import javafx.scene.media.AudioClip;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the leaderboard window
+ * @author Christian Sanger
+ */
 public class LeaderboardController extends StateLoad {
     private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
@@ -29,6 +33,11 @@ public class LeaderboardController extends StateLoad {
     @FXML
     private HBox boardButtons;
 
+    /**
+     * Changes which leaderboard is being shown
+     * @param board the leaderboard to show
+     * @throws IOException
+     */
     public void changeLeaderboard(String board) throws IOException {
         BOARD_AUDIO.play(Double.parseDouble(getInitData().get("SFXVol")));
         Leaderboard leaderboard = new Leaderboard(board);
@@ -43,16 +52,13 @@ public class LeaderboardController extends StateLoad {
         highScore.getColumns().setAll(nameColumn, winsColumn, lossesColumn);
     }
 
+    /**
+     * Switches to menu screen
+     */
     public void onNewGame() {
         WindowLoader wl = new WindowLoader(newGameButton);
         wl.load("MenuScreen", getInitData());
     }
-
-
-    public void onQuitButton() {
-        Platform.exit();
-    }
-
 
     /**
      * Called to initialize a controller after its root element has been

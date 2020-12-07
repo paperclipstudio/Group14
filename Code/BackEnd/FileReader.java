@@ -33,7 +33,7 @@ public class FileReader {
      * @param filename    The name of the level file format text file.
      * @param silkBagSeed The seed used for this game.
      * @return pair where first element is the gameboard and second is the players.
-     * @throws
+     * @throws Exception issue with gameboard file
      */
     public static Pair<Gameboard, Player[]> gameSetup(String filename, int silkBagSeed) throws Exception {
         File input = new File("Gameboards\\" + filename);
@@ -133,6 +133,7 @@ public class FileReader {
      *
      * @param gameBoard The name of the level file format text file.
      * @return in The scanner that iterates through the file.
+     * @throws Exception if cannot create gameSetup
      */
     public static Pair<Gameboard, Player[]> gameSetup(String gameBoard) throws Exception {
         return gameSetup(gameBoard, (new Random()).nextInt());

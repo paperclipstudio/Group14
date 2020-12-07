@@ -119,7 +119,6 @@ public class Gameboard {
      *
      * @param location     The location of the given side to slide in the floorTile from.
      * @param insertedTile The floorTile to slide into that location.
-     * @return removedTile The floorTile that was on the opposite edge and was pushed off of the Gameboard.
      */
     public void playFloorTile(Coordinate location, FloorTile insertedTile) throws Exception {
         // Shifting the player.
@@ -588,6 +587,10 @@ public class Gameboard {
         return false;
     }
 
+    /**
+     * Sets the number of players in the game
+     * @param numOfPlayers the number of players
+     */
     public void setNumOfPlayers(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
     }

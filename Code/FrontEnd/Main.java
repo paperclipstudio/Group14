@@ -69,6 +69,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Set the volume of the background music
+     * @param volume the volume level of the music
+     */
     public static void setVolume(double volume) {
         if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume/200);

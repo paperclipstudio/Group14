@@ -51,6 +51,7 @@ public class SilkBag {
      * This method gets a floor tile, for the game setup of the board.
      *
      * @return tile, A random floor tile.
+     * @throws Exception
      */
     public FloorTile getFloorTile() throws Exception {
         // Create a random index.

@@ -42,8 +42,8 @@ public class GameSetupController extends StateLoad {
 
 	/**
 	 * Populates the choice box with the available gameboards when the page is initialized.
-	 * @param location
-	 * @param resources
+	 * @param location location of the resources
+	 * @param resources bundle of the resources for the method
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

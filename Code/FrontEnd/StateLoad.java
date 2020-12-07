@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 /**
  * Interface to set up each window when switching between scenes.
  * only one method initData to give setup information to that screen.
+ *
+ * @author Christian Sanger
  */
 public abstract class StateLoad implements Initializable {
 
@@ -26,10 +28,18 @@ public abstract class StateLoad implements Initializable {
 	@Override
 	public abstract void initialize(URL location, ResourceBundle resources);
 
+	/**
+	 * Return the initialising data for this controller
+	 * @return hashmap where key is a game state and the value is its value
+	 */
 	public HashMap<String, String> getInitData() {
 		return initData;
 	}
 
+	/**
+	 * Sets the initialising data for the controller
+	 * @param initData hashmap where key is a game state and the value is its value
+	 */
 	public void setInitData(HashMap<String, String> initData) {
 		this.initData = initData;
 	}

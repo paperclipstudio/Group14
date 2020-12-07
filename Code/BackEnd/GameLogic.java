@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static BackEnd.Phase.*;
+import static BackEnd.TileType.BACKTRACK;
 import static BackEnd.TileType.DOUBLE_MOVE;
 
 /**
@@ -155,6 +156,9 @@ public class GameLogic {
             if (tile.getType() == DOUBLE_MOVE) {
                 doubleMove = true;
             }
+            if (tile.getType() == BACKTRACK) {
+                players[playerNo].setBeenBackTracked();
+            }
             players[currentPlayerNo].playActionTile(coordinate, tile, playerNo);
         }
         if (gameboard.isPlayerOnGoal() != -1) {
@@ -293,6 +297,9 @@ public class GameLogic {
         return gameboard.isPlayerOnGoal();
     }
 
+    /**
+     * Clears the gameSaver of the history.
+     */
     public void emptyGameSaver() {
         gameSaver.emptyGameSaveString();
     }

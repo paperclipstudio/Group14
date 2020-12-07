@@ -26,6 +26,10 @@ public class WindowLoader {
         w = (Stage) window.getScene().getWindow();
     }
 
+	/**
+	 * Creates a new window loader that can change the current scene in this window
+	 * @param primaryStage primary stage as reference to which window to change
+	 */
 	public WindowLoader(Stage primaryStage) {
 		w = primaryStage;
 	}
