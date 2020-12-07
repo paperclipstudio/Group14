@@ -31,7 +31,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class FXMLDocumentController extends StateLoad {
+public class HowToPlayControl extends StateLoad {
     private final String RETURN_SFX = "Assets\\SFX\\return.mp3";
     private final AudioClip RETURN_AUDIO = new AudioClip(new File(RETURN_SFX).toURI().toString());
     private final String BOARD_SFX = "Assets\\SFX\\board.mp3";
