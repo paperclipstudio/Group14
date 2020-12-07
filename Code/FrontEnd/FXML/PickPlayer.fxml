@@ -25,7 +25,7 @@
             <ChoiceBox fx:id="playerList3" layoutX="116.0" layoutY="96.0" prefWidth="170.0" />
             <ChoiceBox fx:id="playerList4" layoutX="384.0" layoutY="96.0" prefWidth="170.0" />
             <Label fx:id="label" alignment="CENTER" layoutX="46.0" layoutY="131.0" prefHeight="59.0" prefWidth="508.0" text="player number" textAlignment="CENTER" textFill="#009e05" />
-            <Label fx:id="hint" layoutX="45.0" layoutY="197.0" prefHeight="17.0" prefWidth="510.0" textAlignment="CENTER" textFill="#009e05" />
+            <Label fx:id="hint" alignment="CENTER" layoutX="45.0" layoutY="197.0" prefHeight="17.0" prefWidth="510.0" textAlignment="CENTER" textFill="#009e05" />
             <VBox.margin>
                <Insets />
             </VBox.margin>
